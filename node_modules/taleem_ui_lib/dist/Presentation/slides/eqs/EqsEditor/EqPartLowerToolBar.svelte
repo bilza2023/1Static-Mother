@@ -1,0 +1,47 @@
+
+<script>
+//@ts-nocheck
+import Icons from '../../../icons.js';
+export let i;
+export let item;
+export let addEq;
+export let moveUpEq;
+export let moveDownEq;
+export let setEqType;
+export let delEq;
+export let toggleSP;
+export let toggleFS;
+</script>
+
+
+<div class="flex justify-start bg-stone-500 w-full p-1 m-1 mb-3 gap-1">
+
+<button on:click={()=>addEq(i)} class="bg-green-900 text-white p-1 text-xs rounded-md">Add</button>
+
+<button on:click={()=>toggleSP(i)} class="bg-green-700 text-white p-1 text-xs rounded-md">SideBar</button>
+
+
+<button on:click={()=>moveUpEq(i)} class="bg-gray-900 text-white p-1 text-xs rounded-md">Up</button>
+
+<button on:click={()=>moveDownEq(i)} class="bg-gray-900 text-white p-1 text-xs rounded-md">Down</button>
+
+<!-- //////////////////////////////////// -->
+<div  class="flex gap-1 bg-stone-800 text-white  text-xs p-1 rounded-sm">
+<button 
+ class= {`${item.extra.type == 'code' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
+on:click={()=>setEqType(i,'code')}>{Icons.ADD}</button>
+
+<button 
+class= {`${item.extra.type == 'text' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
+on:click={()=>setEqType(i,'text')}>{Icons.TEMPLATE}</button>
+
+<button 
+class= {`${item.extra.type == 'hdg' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
+on:click={()=>setEqType(i,'hdg')}>{Icons.BOOK}</button>
+</div>
+
+
+<button on:click={()=>delEq(i)} class="bg-red-900 text-white p-1 text-xs rounded-md">Del</button>
+</div>
+
+

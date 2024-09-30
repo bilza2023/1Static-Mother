@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  api:
+    # build: ./api
+    image : taleemhelp/api:0.16
+    restart: unless-stopped
+    environment:
+      MONGO_URI: 'mongodb+srv://bilza2023:bils32611@skillzaadb.fswow27.mongodb.net/skillzaaDb'
+      JWT_SECRET: '534cvdlsdhj2043985028sdvfri3749823jsv982734'
+      ALLOWEDOMINS: 'https://example.com,https://anotherdomain.com'
+    ports:
+      - "5000:5000"
+    # command: ["sh", "-c", "docker-compose down --rmi all"]
+
+
+  ui:
+    # build: ./ui
+    image : taleemhelp/ui:1.9
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    # command: ["sh", "-c", "docker-compose down --rmi all"]
+
+
