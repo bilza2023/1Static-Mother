@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { statePlayStore, statePrepStore, currentSlideStore } from './store';
-
+import { statePrepStore } from './store';
+import { Howl } from 'howler';
 import  BasePresentation  from "./BasePresentation";
 
 // PresentationObj.js

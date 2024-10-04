@@ -14,6 +14,7 @@ import { fade } from 'svelte/transition';
 import { Howl } from 'howler';
 import Toolbar from './toolbar/Toolbar.svelte';
 import {SOUND_FILE_PATH} from "../util";
+import {db} from "$lib/ajax";
 
 import PresentationObjUrl from "./PresentationObjUrl";
 
@@ -31,13 +32,13 @@ let currentSlide;
 onMount(async ()=>{  
 filename = new URLSearchParams(location.search).get("filename");
 tcode = new URLSearchParams(location.search).get("tcode");
-////////////////////////
-const resp = await ajaxPost( `${API_URL}/tcode/getByFilename` , { tcode,filename});
+
+const resp = await db.tcode.get(`filename=${filename}`)
 
   if (resp.ok){
-    const data = await resp.json();
-    // debugger;
-    let questionData = data.item;
+    const incomming = await resp.json();
+    
+    let questionData = incomming.data[0];
     presentationObj = new PresentationObjUrl(questionData ,
     `${SOUND_FILE_PATH}${questionData.filename}.opus`);
     

@@ -2,6 +2,8 @@
     //@ts-nocheck
     import { PageWrapper,HdgWithIcon } from '$lib/cmp';
     import { API_URL,onMount,toast,Icons,goto,checkToken,checkAdminToken,ajaxPost } from '$lib/util';
+    import {db} from "$lib/ajax";
+
     // import Nav from '$lib/appComp/Nav.svelte';
     import Nav from '$lib/appComp/Nav.svelte';
     
@@ -18,16 +20,12 @@
   try{
       // debugger;
       tcode = new URLSearchParams(location.search).get("tcode");
-      const resp = await ajaxPost( `${API_URL}/tcode/syllabus` , { tcode } );
-  
+      const resp = await db.tcode.get(`tcode=${tcode}&limit=1500&fields=-slides` );
   /////////////////////    
       if (resp){
-        const data = await resp.json();
-        questions = data.items; //data.data.syllabus
-
-        
-        // debugger;
-
+        debugger;
+        const incomming = await resp.json();
+        questions = incomming.data;
         isLogin = checkToken();
         isAdmin = checkAdminToken();
       }else {

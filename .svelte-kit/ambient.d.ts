@@ -55,6 +55,7 @@ declare module '$env/static/private' {
 	export const COLORTERM: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 	export const COLOR: string;
+	export const NVM_DIR: string;
 	export const DEBUGINFOD_URLS: string;
 	export const npm_config_metrics_registry: string;
 	export const IM_CONFIG_PHASE: string;
@@ -106,10 +107,12 @@ declare module '$env/static/private' {
 	export const npm_config_globalignorefile: string;
 	export const npm_execpath: string;
 	export const XDG_CONFIG_DIRS: string;
+	export const NVM_CD_FLAGS: string;
 	export const XDG_DATA_DIRS: string;
 	export const npm_config_global_prefix: string;
 	export const npm_command: string;
 	export const MEMORY_PRESSURE_WRITE: string;
+	export const NVM_RC_VERSION: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
 	export const NODE_ENV: string;
@@ -173,6 +176,7 @@ declare module '$env/dynamic/private' {
 		COLORTERM: string;
 		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 		COLOR: string;
+		NVM_DIR: string;
 		DEBUGINFOD_URLS: string;
 		npm_config_metrics_registry: string;
 		IM_CONFIG_PHASE: string;
@@ -224,10 +228,12 @@ declare module '$env/dynamic/private' {
 		npm_config_globalignorefile: string;
 		npm_execpath: string;
 		XDG_CONFIG_DIRS: string;
+		NVM_CD_FLAGS: string;
 		XDG_DATA_DIRS: string;
 		npm_config_global_prefix: string;
 		npm_command: string;
 		MEMORY_PRESSURE_WRITE: string;
+		NVM_RC_VERSION: string;
 		INIT_CWD: string;
 		EDITOR: string;
 		NODE_ENV: string;

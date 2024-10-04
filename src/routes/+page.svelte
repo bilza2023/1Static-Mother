@@ -5,45 +5,13 @@ import {PageWrapper,HdgWithIcon,Centre} from '$lib/cmp';
 import {Icons,RESOURCE_URL,API_URL,onMount,ajaxPost} from '$lib/util';
 import NavBlog from '$lib/appComp/NavBlog.svelte';
 import BooksImages from '$lib/homePage/BooksImages.svelte';
-import Questions from '../lib/appComp/syllabusComp/Questions.svelte';
-
-// import {questions} from '../lib/data/homePageData';
+// import Questions from '../lib/appComp/syllabusComp/Questions.svelte';
 
 let tcode = 'fbise9math';
 let selectedEx ='1.1';
 let selectedChapter = 1;
 
 
-// let n = [];
-//  for (let i = 0; i < questions.length; i++) {
-//     const question = questions[i];
-//     if (question.tcode == tcode && question.exercise == selectedEx && question.chapter ==  selectedChapter){
-//         n.push(question);
-//     }
-    
-//  }
-
-// console.log("n",n);
-
-let questions;
-onMount(async () => {
-  try{
-    /////////////////////    
-      const resp = await ajaxPost( `${API_URL}/tcode/syllabus` , { tcode  } );
-      if (resp){
-        const data = await resp.json();
-        questions = data.items; //data.data.syllabus
-        console.log("questions" ,questions);
-      }else {
-       const data = await resp.json();
-       chapter_map_array = await chapter_map(questions);
-        toast.push(data.message);
-      }
-  
-    } catch (e) {
-         toast.push('System error');
-    }      
-  });
 </script>
 
 <NavBlog />
@@ -80,10 +48,6 @@ onMount(async () => {
 
 </div>    
 
-{#if questions}
-<!-- <Questions {questions} tcode='videoBlog' selectedEx='videoBlog' selectedChapter= {1} /> -->
-<Questions {questions} {tcode} {selectedEx} {selectedChapter} />
-{/if}
 
 <br/>
 

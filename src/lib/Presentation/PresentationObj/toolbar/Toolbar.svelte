@@ -1,4 +1,4 @@
-<script lang="ts">
+<script  >
     //@ts-nocheck
     import { Icons ,goto} from '../../util';
     import PlayButtons from './PlayButtons.svelte';
@@ -10,14 +10,14 @@
 
 
     export let start;
-    export let stop: () => void;
-    export let pause: () => void;
+    export let stop;
+    export let pause;
 
-    export let setVolume: (volume: number) => void;
+    export let setVolume;
     export let currentSlide;
-    export let slides: any[];
-    export let pulse: number;
-    export let setPulse: (value: number) => void;
+    export let slides;
+    export let pulse;
+    export let setPulse;
 
     let ready = false;
 //////////store
