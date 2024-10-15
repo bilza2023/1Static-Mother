@@ -26,6 +26,8 @@
 		"svelte-katex": "0.1.2",
 		"sveltetools_bils": "^0.0.3",
 		"taleem_ui_lib": "^0.0.6",
-		"taleemtools": "^1.0.5"
+		"taleemtools": "^1.0.5",
+		"simplerestclient2": "^1.0.5",
+		"taleempresentation": "^0.1.10"
 	}
 }
