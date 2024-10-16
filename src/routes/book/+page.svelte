@@ -4,7 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import {db} from "$lib/db";
 import {AppConsts} from "taleemtools";
-import BookToolbar from '$lib/appComp/BookToolbar.svelte';
+import BookToolbar from './BookToolbar.svelte';
 
 let tcode;
 let questions;
@@ -16,18 +16,16 @@ onMount(async ()=>{
     tcode = new URLSearchParams(location.search).get("tcode");
     let d = await AppConsts.getTcode(tcode);
     chaptersData = d.chapters;
-    // debugger;
     
   //---DB access
   const resp = await db.tcode.get(`tcode=${tcode}&limit=1500&fields=-slides`)
 
   if (resp.ok){
     const incomming = await resp.json();
-    debugger;
+    
     questions = incomming.data;
 
-    // console.log("incomming" ,incomming);
- }else {
+}else {
     toast.push("failed to load");
  } 
 });
