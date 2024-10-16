@@ -47,15 +47,15 @@ $:{
     <h1 class="bg-stone-600 p-2 m-2 rounded-lg">No Question found!</h1>
 </div>
 {:else}
-<div class='flex  bg-gray-700 p-2 m-2 rounded-md w-full justify-center  flex-wrap  '>
+<div class='flex   bg-gray-900 p-2 m-1 rounded-md justify-center  flex-wrap '>
 
     {#each selectedQuestions as question,index}
       
-        <div class='w-3/12'>
-        <div class='flex justify-center flex-wrap gap-4  '>
+        <!-- <div class='w-3/12'> -->
+        <div class='flex flex-col justify-center flex-wrap gap-4  '>
         <Qthumb name={question.name} filename={question.filename} {tcode} exercise={question.exercise} chapter={question.chapter} questionNo={question.questionNo} part={question.part} />
         </div>    
-        </div>
+        <!-- </div> -->
 
     {/each}
 

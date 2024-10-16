@@ -47,7 +47,7 @@ let selectedChapter = 1;
 
 
 </div>    
-
+<a href="/book?tcode=fbise9math" >Book</a>
 
 <br/>
 

@@ -24,10 +24,12 @@
 		"howler": "^2.2.4",
 		"mathjs": "^12.3.0",
 		"svelte-katex": "0.1.2",
+		
 		"sveltetools_bils": "^0.0.3",
 		"taleem_ui_lib": "^0.0.6",
+
 		"taleemtools": "^1.0.5",
 		"simplerestclient2": "^1.0.5",
-		"taleempresentation": "^0.1.10"
+		"taleempresentation": "^0.2.0"
 	}
 }
