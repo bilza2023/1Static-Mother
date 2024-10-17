@@ -5,15 +5,18 @@ import QuestionsCol from "./QuestionsCol.svelte";
 
 import {PresentationObjUrl,PresentationPlayer80} from "taleempresentation";
 import {db} from "$lib/db";
+import {onMount} from "svelte";
   
     export let chaptersData;
     export let questions;
-    export let selectedChapter = null;
-    export let selectedEx = null;
+    export let selectedChapter;
+    export let selectedChapterNumber;
+    export let selectedEx;
     export let exBtnCollor = "bg-blue-600";
     export let imgUrl = "";
-    
-    let selectedVideo=null;
+    export let selectedVideoId;
+    let showRightBar = true;
+
     let presentationObj=null;
 
 async function getVideo(id){
@@ -25,6 +28,7 @@ async function getVideo(id){
         }
         
         presentationObj  = null;
+        selectedVideoId = id;
         let questionData = await resp.json();
   
       presentationObj = new PresentationObjUrl(questionData);
@@ -38,17 +42,28 @@ async function getVideo(id){
 
 function handleChapterChange(event) {
 selectedChapter = chaptersData.find(chapter => chapter.number == parseInt(event.target.value) );
+selectedChapterNumber = selectedChapter.number;
 }
 
 function handleExerciseClick(exerciseName) {
     selectedEx = exerciseName;
 }
 
+function toggleRightBar(){
+    showRightBar = !showRightBar;
+}
+onMount(async ()=>{
+
+});
+// getVideo(selectedVideoId);
 </script>
 
 <div class="flex gap-4 bg-gray-600 p-1 rounded-md mx-1 my-1 ">
 
-<img class="ml-2" src={imgUrl} alt="" width=30 height=70>    
+<img class="ml-2" src={imgUrl} alt="" width=30 height=70>   
+
+<!-- This is the button for show hide right-bar -->
+<button on:click={toggleRightBar}>Toggle</button>
     <!-- Dropdown for chapters -->
     <div class="bg-gray-900 text-white">
         <select on:change={handleChapterChange} class="p-2 text-base bg-gray-800 text-gray-100">
@@ -85,23 +100,25 @@ function handleExerciseClick(exerciseName) {
 
 
 
-{#if questions && selectedEx && selectedChapter}
+{#if questions && selectedEx && selectedChapterNumber}
 <!-- In your parent component -->
 <div class="flex">
+
     <div class="w-10/12 bg-green-950">
-        {#if presentationObj}
             <PresentationPlayer80 {presentationObj} />
-        {/if}
     </div>
+
     <!-- Modified container for QuestionsCol -->
-    <div class="w-2/12 h-screen overflow-y-auto bg-gray-800">
+     {#if showRightBar}
+      <div class="w-2/12 h-screen overflow-y-auto bg-gray-800">
         <QuestionsCol 
             {questions} 
             tcode='fbise9math' 
             {selectedEx} 
-            selectedChapter={selectedChapter.number} 
+            selectedChapter={selectedChapterNumber} 
             {getVideo}
         />
-    </div>
+      </div>
+     {/if}
 </div>
 {/if}

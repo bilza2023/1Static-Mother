@@ -36,7 +36,14 @@ onMount(async ()=>{
 style='position: fixed; top: 0;'>
 
 {#if chaptersData && questions}
-   <BookToolbar {chaptersData} imgUrl="/fbise9math/images/thumbnail.png" {questions}/>
+   <BookToolbar 
+   {chaptersData} 
+   imgUrl="/fbise9math/images/thumbnail.png" 
+   {questions}
+   selectedChapterNumber = 1
+   selectedEx="1.1"
+   selectedVideoId = "66505334ba9a237f5dd73370"
+   />
    {/if}
 
 
