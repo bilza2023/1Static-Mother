@@ -6,7 +6,7 @@ import {db} from "$lib/db";
 import {AppConsts} from "taleemtools";
 import BookToolbar from './BookToolbar.svelte';
 import QuestionsCol from "./QuestionsCol.svelte";
-import {PresentationObjUrl,PresentationPlayer80} from "taleempresentation";
+import {PresentationObjUrl,Player} from "taleempresentation";
 
 let tcode;
 let questions;
@@ -136,7 +136,7 @@ function toggleRightBar(){
   <div class="flex absolute   w-full">
   
       <div class="w-10/12 bg-gray-900">
-              <PresentationPlayer80 {presentationObj} />
+              <Player {presentationObj} />
       </div>
   
       <!-- Modified container for QuestionsCol -->

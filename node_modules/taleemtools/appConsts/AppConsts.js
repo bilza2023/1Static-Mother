@@ -17,13 +17,7 @@ const AppConsts = {
       videoBlog,
       fbise9mathOld
     ], 
-    /**
-     * Future tcodes
-     * - matrices
-     * - spoken english
-     * 
-     */
-
+    
     TCODE_LIST : [
       "fbise9math",
        "fbise9mathOld",
