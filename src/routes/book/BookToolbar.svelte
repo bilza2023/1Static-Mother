@@ -111,7 +111,7 @@ onMount(async ()=>{
 <!-- In your parent component -->
 <div class="flex">
 
-    <div class="w-10/12 bg-green-950">
+    <div class="w-10/12 bg-gray-900">
             <PresentationPlayer80 {presentationObj} />
     </div>
 

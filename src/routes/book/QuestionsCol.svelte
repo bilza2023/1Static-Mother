@@ -56,7 +56,7 @@ $:{
             <div class='flex flex-col  bg-gray-800 rounded'>
              
                 <button 
-                class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded"
+                class="mt-2  hover:bg-blue-700 text-white px-2 py-1 rounded"
                 on:click={() => getVideo(question._id)}
             >
                 <Qthumb 

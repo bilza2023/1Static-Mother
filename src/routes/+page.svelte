@@ -26,7 +26,8 @@ let selectedChapter = 1;
 <div class='flex  justify-center gap-32    p-2 m-2'>
 
 <!-- <BooksImages tcode='fbise9mathOld' /> -->
-<BooksImages tcode='fbise9math' />
+<BooksImages tcode='fbise9math'  url={`/syllabus?tcode=${tcode}`} />
+<BooksImages tcode='fbise9math'  url={`/book?tcode=${tcode}`} />
 <!-- <BooksImages tcode='fbise9english' /> -->
 
 </div>
