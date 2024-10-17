@@ -30,6 +30,6 @@
 
 		"taleemtools": "^1.0.5",
 		"simplerestclient2": "^1.0.5",
-		"taleempresentation": "^0.2.2"
+		"taleempresentation": "^0.3.0"
 	}
 }

@@ -1,5 +1,6 @@
 <script>
-    // Props
+    
+ import {NavBtn2} from "$lib/cmp";   
     export let chaptersData;
     export let selectedChapterNumber;
     export let selectedChapter;
@@ -34,7 +35,12 @@
 <div class="flex gap-4 bg-gray-600 p-4  text-white ">
     <img class="ml-2" src={imgUrl} alt="" width=30 height=70>   
     
-    <button on:click={toggleRightBar}>Toggle</button>
+    <!-- <NavBtn2 icon='' /> -->
+    <button on:click={toggleRightBar}>
+        <div class="ml-2 hover:bg-gray-400" src={imgUrl} alt="" width=30 height=70 >
+            🔍
+        </div>  
+    </button>
     
     <div class="bg-gray-900 text-white">
         <select 

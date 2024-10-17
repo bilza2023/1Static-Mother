@@ -61,37 +61,41 @@
     </script>
     
     {#if chaptersData}
-        <BookToolbar
-            {chaptersData}
-            bind:selectedChapterNumber
-            bind:selectedChapter
-            bind:selectedEx
-            bind:showRightBar
-            {imgUrl}
-        />
-        
-        {#if !selectedChapter}
-            <br><div class="w-full text-center">select a chapter.</div>
-        {/if}
-        {#if !selectedEx}
-            <br><div class="w-full text-center">select an exercise.</div>
-        {/if}
-        
-        {#if questions && selectedEx && selectedChapterNumber}
-            <div class="flex absolute w-full">
-                <div class="w-10/12 ">
-                    <Player {presentationObj} />
-                </div>
-        
-                <div class="w-2/12 h-screen  ">
-                    <QuestionsCol 
-                        {questions} 
-                        tcode='fbise9math' 
-                        {selectedEx} 
-                        selectedChapter={selectedChapterNumber} 
-                        {getVideo}
-                    />
-                </div>
+    <BookToolbar
+        {chaptersData}
+        bind:selectedChapterNumber
+        bind:selectedChapter
+        bind:selectedEx
+        bind:showRightBar
+        {imgUrl}
+    />
+    
+    {#if !selectedChapter}
+        <br><div class="w-full text-center">select a chapter.</div>
+    {/if}
+    {#if !selectedEx}
+        <br><div class="w-full text-center">select an exercise.</div>
+    {/if}
+    
+{#if questions && selectedEx && selectedChapterNumber}
+    <div class="flex absolute w-full">
+        <div class={showRightBar ? 'w-10/12 overflow-hidden relative' : 'w-full overflow-hidden relative'}>
+            <Player {presentationObj} />
+        </div>
+
+        {#if showRightBar}
+            <div class="w-2/12 h-screen">
+                <QuestionsCol 
+                    {questions} 
+                    tcode='fbise9math' 
+                    {selectedEx} 
+                    selectedChapter={selectedChapterNumber} 
+                    {getVideo}
+                />
             </div>
         {/if}
-    {/if}
+    </div>
+{/if}
+
+
+{/if}
