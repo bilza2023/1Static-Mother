@@ -1,6 +1,5 @@
 <script>
     
- import {NavBtn2} from "$lib/cmp";   
     export let chaptersData;
     export let selectedChapterNumber;
     export let selectedChapter;

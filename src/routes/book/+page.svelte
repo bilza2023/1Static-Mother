@@ -17,6 +17,7 @@
     let selectedEx="1.1";
     let selectedVideoId = "66505334ba9a237f5dd73370";
     let selectedChapter;
+    let ready = false
     ////////////////////////////////////////////////////////
     
     onMount(async ()=>{  
@@ -32,6 +33,7 @@
             questions = incomming.data;
             selectedChapter = chaptersData.find(chapter => chapter.number == selectedChapterNumber);
             await getVideo(selectedVideoId);
+            ready = true;
         } else {
             toast.push("failed to load");
         } 
@@ -60,7 +62,7 @@
     }
     </script>
     
-    {#if chaptersData}
+{#if chaptersData}
     <BookToolbar
         {chaptersData}
         bind:selectedChapterNumber
@@ -69,33 +71,30 @@
         bind:showRightBar
         {imgUrl}
     />
+  
     
-    {#if !selectedChapter}
-        <br><div class="w-full text-center">select a chapter.</div>
-    {/if}
-    {#if !selectedEx}
-        <br><div class="w-full text-center">select an exercise.</div>
-    {/if}
-    
-{#if questions && selectedEx && selectedChapterNumber}
-    <div class="flex absolute w-full">
-        <div class={showRightBar ? 'w-10/12 overflow-hidden relative' : 'w-full overflow-hidden relative'}>
-            <Player {presentationObj} />
-        </div>
-
-        {#if showRightBar}
-            <div class="w-2/12 h-screen">
-                <QuestionsCol 
-                    {questions} 
-                    tcode='fbise9math' 
-                    {selectedEx} 
-                    selectedChapter={selectedChapterNumber} 
-                    {getVideo}
-                />
+    {#if questions && selectedEx && selectedChapterNumber}
+        <div class="flex absolute w-full">
+            <div class={showRightBar ? 'w-10/12 overflow-hidden relative' : 'w-full overflow-hidden relative'}>
+                <Player {presentationObj} />
             </div>
-        {/if}
-    </div>
-{/if}
+
+            {#if showRightBar}
+                <div class="w-2/12 h-screen">
+                    <QuestionsCol 
+                        {questions} 
+                        tcode='fbise9math' 
+                        {selectedEx} 
+                        selectedChapter={selectedChapterNumber} 
+                        {getVideo}
+                    />
+                </div>
+            {/if}
+        </div>
+    {/if}
 
 
-{/if}
+    {/if}
+{#if !ready}    
+    <div class="w-full text-center text-gray-300 mt-20">loading....</div>
+{/if}    
