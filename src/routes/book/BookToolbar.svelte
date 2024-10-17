@@ -40,8 +40,8 @@ async function getVideo(id){
 }
 
 
-function handleChapterChange(event) {
-selectedChapter = chaptersData.find(chapter => chapter.number == parseInt(event.target.value) );
+function handleChapterChange(chapterNumber) {
+    selectedChapter = chaptersData.find(chapter => chapter.number == chapterNumber);
 selectedChapterNumber = selectedChapter.number;
 }
 
@@ -53,7 +53,8 @@ function toggleRightBar(){
     showRightBar = !showRightBar;
 }
 onMount(async ()=>{
-
+    handleChapterChange(parseInt(selectedChapterNumber));
+    await getVideo(selectedVideoId);
 });
 // getVideo(selectedVideoId);
 </script>
@@ -66,12 +67,18 @@ onMount(async ()=>{
 <button on:click={toggleRightBar}>Toggle</button>
     <!-- Dropdown for chapters -->
     <div class="bg-gray-900 text-white">
-        <select on:change={handleChapterChange} class="p-2 text-base bg-gray-800 text-gray-100">
-            <option disabled selected>Select a chapter</option>
-            {#each chaptersData.sort((a, b) => a.number - b.number) as chapter}
-                <option value={chapter.number}>{chapter.details}</option>
-            {/each}
+        
+        <select 
+        bind:value={selectedChapterNumber} 
+        on:change={(e) => handleChapterChange(parseInt(e.target.value))} 
+        class="p-2 text-base bg-gray-800 text-gray-100"
+    >
+        <option disabled>Select a chapter</option>
+        {#each chaptersData.sort((a, b) => a.number - b.number) as chapter}
+            <option value={chapter.number}>{chapter.details}</option>
+        {/each}
         </select>
+
     </div>
 
     <!-- Buttons for each exercise of the selected chapter -->
