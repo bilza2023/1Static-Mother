@@ -1,0 +1,1 @@
+{"version":3,"file":"config-C86t3E_A.js","sources":["../../../.svelte-kit/adapter-node/chunks/config.js"],"sourcesContent":["const API_URL = \"https://taleem.help/api\";\nexport {\n  API_URL as A\n};\n"],"names":[],"mappings":"AAAK,MAAC,OAAO,GAAG;;;;"}

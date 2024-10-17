@@ -2,7 +2,7 @@
 //@ts-nocheck
 import {Anchor,PageWrapper,HdgWithIcon,Centre,Card} from '$lib/cmp';
 import {Icons} from "$lib/util";
-import CanvasPlayer from "../Presentation/slides/canvas/canvasPlayer/CanvasPlayer.svelte"
+// import CanvasPlayer from "../Presentation/slides/canvas/canvasPlayer/CanvasPlayer.svelte"
 export let name;
 
 
@@ -64,7 +64,3 @@ const extra = {
         "gridLineColor": "#363C34"
       };      
 </script>
-
-<div style = {`width: ${extra.canvasWidth}px; height: ${extra.cellHeight}px;`} >
-<CanvasPlayer pulse=0  {items}   {extra}  />
-</div>

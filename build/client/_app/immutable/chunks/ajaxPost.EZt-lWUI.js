@@ -1,1 +1,0 @@
-const r="https://taleem.help/api";async function n(e,a){try{const t=localStorage.getItem("token");return await fetch(e,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${t}`},body:JSON.stringify(a)})}catch(t){return t}}export{r as A,n as a};
