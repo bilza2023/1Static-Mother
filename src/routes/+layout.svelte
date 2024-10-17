@@ -15,4 +15,8 @@
 </script>
 
 <SvelteToast {options} />
-<slot />
+<!-- <slot/> -->
+
+<div class="bg-gray-800 min-h-screen h-full">
+  <slot></slot>
+  </div>

@@ -50,10 +50,10 @@ $:{
     </div>
     {:else}
     <!-- Added h-full to ensure the container takes full height -->
-    <div class='flex flex-col h-full bg-gray-900 p-2 m-1 rounded-md overflow-y-auto'>
+    <div class='flex flex-col h-full p-1 gap-1    '>
         {#each selectedQuestions as question, index}
             <!-- Made each question item a more compact card -->
-            <div class='flex flex-col  bg-gray-800 rounded'>
+            <div class='flex flex-col  '>
              
                 <button 
                 class="mt-2  hover:bg-blue-700 text-white px-2 py-1 rounded"
