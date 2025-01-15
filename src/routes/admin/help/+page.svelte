@@ -67,7 +67,7 @@ const list = [
 
 </script>
 
-<Nav {isLogin} {isAdmin}/>
+<Nav/>
 <!-- ************** -->
 <PageWrapper>
 

@@ -5,6 +5,8 @@
       import {onMount} from "svelte";
       import {Presentation} from './Presentation.js';
       import {db} from '$lib/db.js';
+      import Nav from '../Nav.svelte';
+
     ////////////////////////////////////////////
       let slides;
       let id;
@@ -28,7 +30,7 @@
   
   </script>
   
-    
+  <Nav/>
   
     <div class="w-full bg-gray-800">
     {#if slides}

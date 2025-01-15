@@ -62,5 +62,8 @@ let selectedChapter = 1;
 <br/>
 
 <br/>
+
+<div><a class='text-xs' href='/admin'>admin</a></div>      
 <div class="text-xs">version 0.0.2</div>
+
 </PageWrapper>

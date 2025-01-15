@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     //@ts-nocheck 
     import { toast } from '@zerodevx/svelte-toast';
     import { onMount } from 'svelte';
@@ -97,4 +97,4 @@
     {/if}
 {#if !ready}    
     <div class="w-full text-center text-gray-300 mt-20">loading....</div>
-{/if}    
+{/if}     -->

@@ -32,7 +32,8 @@ const email = localStorage.getItem("teacher_name");
 <div class='flex justify-between items-center   p-0  px-1 m-0 bg-gray-700'>
 
     <div class='flex'>
-    <Logo url='/admin' />
+    <Logo url='/' title='Home' icon='🏠' />
+    <Logo url='/admin' title='AdminOffice'  icon='🔬' />
     </div>
             
     
