@@ -23,7 +23,6 @@
       const resp = await db.tcode.get(`tcode=${tcode}&limit=1500&fields=-slides` );
   /////////////////////    
       if (resp){
-        debugger;
         const incomming = await resp.json();
         questions = incomming.data;
         isLogin = checkToken();

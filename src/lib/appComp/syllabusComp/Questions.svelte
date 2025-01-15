@@ -24,7 +24,6 @@ function sortBySortOrder( ){
   selectedQuestions.sort((a, b) => a.sortOrder - b.sortOrder);
 }
 $:{
-    debugger;
     selectedEx;
     selectedChapter;
     selectedQuestions=[];
