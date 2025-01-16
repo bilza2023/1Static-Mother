@@ -1,15 +1,15 @@
 <script>  
   //@ts-nocheck
   import { PageWrapper,HdgWithIcon } from 'sveltetools_bils/src/cmp';
-  import { API_URL,onMount,toast,Icons,goto } from '$lib/app/util';
+  import { API_URL,onMount,toast,Icons,goto } from '$lib/util';
 
-  import {db} from "$lib/app/db";
+  import {db} from "$lib";
 
   import Nav from '../Nav.svelte';
   
   
-  import SyllabusComp from '$lib/app/appComp/syllabusComp/SyllabusComp.svelte';
-  import Summary from '$lib/app/appComp/Summary.svelte';
+  import SyllabusComp from '$lib/appComp/syllabusComp/SyllabusComp.svelte';
+  import Summary from '$lib/appComp/Summary.svelte';
   
   let tcode; 
   /////////////////////////////////
