@@ -10,6 +10,7 @@
     ////////////////////////////////////////////
       let slides;
       let id;
+      let presentation;
       let showToolbar=true;
 
   onMount(async()=>{
@@ -20,14 +21,31 @@
     const resp = await db.tcode.getOne(id);
     
     if (resp.ok){
-        const presentation = await resp.json();
+        presentation = await resp.json();
         slides = presentation.slides;
 
     }
     console.log("slides Editor ::--->", slides);
   
   });
+  async function save(){
   
+  if (presentation.name && presentation.name !== ''){
+    presentation.name = convertToUrlFriendlyName(presentation.name);
+  }  
+  if (slides && slides.length > 0){
+    slides[0].startTime = 0;
+  }
+ 
+  presentation.slides = slides;
+ const data = presentation;
+  const resp = await db.tcode.update(presentation._id, data);
+    if(resp.ok){
+      toast.push("Saved...!");
+    }else {
+      toast.push("Failed to save...");
+    } 
+ }
   </script>
   
   <Nav/>
@@ -39,6 +57,7 @@
         {showToolbar}
         bind:slides={slides}
         {audioData}
+        {save}
       />
     {/if}
     </div>

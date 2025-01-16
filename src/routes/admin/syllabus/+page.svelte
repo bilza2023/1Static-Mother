@@ -1,7 +1,7 @@
 <script>  
   //@ts-nocheck
   import { PageWrapper,HdgWithIcon } from 'sveltetools_bils/src/cmp';
-  import { API_URL,onMount,toast,Icons,goto,checkToken,checkAdminToken } from '$lib/app/util';
+  import { API_URL,onMount,toast,Icons,goto } from '$lib/app/util';
 
   import {db} from "$lib/app/db";
 

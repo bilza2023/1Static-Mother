@@ -2,7 +2,7 @@
     //@ts-nocheck
     import { PageWrapper,HdgWithIcon } from '$lib/cmp';
     import { API_URL,onMount,toast,Icons,goto,checkToken,checkAdminToken,ajaxPost } from '$lib/util';
-    import {db} from "$lib/ajax";
+    import {db} from "$lib";
 
     // import Nav from '$lib/appComp/Nav.svelte';
     import Nav from '$lib/appComp/Nav.svelte';
