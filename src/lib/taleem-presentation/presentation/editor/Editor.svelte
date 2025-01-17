@@ -9,7 +9,6 @@
   import StackPanel from './StackPanel.svelte';
   import TimingErrorDiv from "./TimingErrorDiv.svelte";
   import { fade } from 'svelte/transition';
-
  
   // Initialize slide types
   registerSlideTypes();
@@ -201,10 +200,6 @@
     ready = true;
   });
 
-  $:{
-    slides;
-    // debugger;
-  }
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -227,6 +222,7 @@
       {setCurrentSlideIndex}
       {shiftTime}
       {save}
+    
     />
   </div>
   {/if}
@@ -235,6 +231,7 @@
   {#if timingError}
   <TimingErrorDiv {timingErrorMessage}/>
   {/if}
+
 
 
   <div class="flex justify-start w-full">

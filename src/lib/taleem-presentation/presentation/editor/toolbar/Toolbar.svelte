@@ -10,6 +10,7 @@ export let addNew;
 export let isBlob;
 export let showSidePanel;
 export let currentSlideIndex;
+export let showSlideEditBox=false;
 
 export let copySlide;
 export let pasteSlide;
@@ -54,7 +55,7 @@ export let currentTime=0;
     </div>
     
     <span class='text-xs'>End</span>
-    <input class='bg-gray-500 text-white p-0 px-1 text-center m-0 rounded-md border-2 border-white text-center '  type="number" value={slides[currentSlideIndex].endTime}
+    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" value={slides[currentSlideIndex].endTime}
     on:input={(e) => shiftTime(+e.target.value)}
 
     min=0

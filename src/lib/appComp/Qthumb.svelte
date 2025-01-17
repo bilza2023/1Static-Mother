@@ -1,4 +1,5 @@
 <script>
+    export let question;
     export let filename;
     export let name="";
     export let tcode;
@@ -6,6 +7,7 @@
     export let exercise;
     export let questionNo;
     export let part;
+    export let clickLink; // this is just either player , editor
   
     function getName() {
     let name2 = name && name !== "" ? name : '';
@@ -30,7 +32,7 @@
     }
   </script>
 
-  <a href={`/player?tcode=${tcode}&filename=${filename}`} >
+  <a href={`/${clickLink}?id=${question._id}`} >
   <div class="border-2 border-gray-400 rounded-md p-1 m-1 bg-gray-800">
     <img 
       width="200px" 

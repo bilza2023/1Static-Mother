@@ -4,6 +4,7 @@ import {NavBtn,NavBtn2} from 'sveltetools_bils/src/cmp';
 import Logo from './Logo.svelte';
 import {Icons,goto, toast,onMount} from '$lib/util';
 
+export let showSlideEditBox=false;
 ///////////////////////////////////
 function logout(){
     localStorage.removeItem('token');
@@ -34,6 +35,7 @@ const email = localStorage.getItem("teacher_name");
     <div class='flex'>
     <Logo url='/' title='Home' icon='🏠' />
     <Logo url='/admin' title='AdminOffice'  icon='🔬' />
+    <NavBtn2 title='Edit' icon='🛠️'  clk={() => showSlideEditBox = !showSlideEditBox} />
     </div>
             
     

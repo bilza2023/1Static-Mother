@@ -4,6 +4,9 @@ export let tcode ;
 export let questions;
 export let selectedChapter;
 export let selectedEx;
+export let filterByStatus = 'all';
+export let clickLink = 'player'; // this is just either player , editor
+
 import Qthumb from '$lib/appComp/Qthumb.svelte';
 
 let selectedQuestions=[];
@@ -31,9 +34,9 @@ $:{
     const question = questions[i];
     //--no need to check for tcode ... since the get syllabus from api is already tcode based
     if (question.chapter === selectedChapter && question.exercise === selectedEx ){
-        if (question.status === 'final' ){
+            if (filterByStatus === 'all' || question.status === filterByStatus) {
                     selectedQuestions.push(question);
-        }
+            }
         }
     }
     sortBySortOrder();
@@ -52,7 +55,10 @@ $:{
       
         <div class='w-3/12'>
         <div class='flex justify-center flex-wrap gap-4  '>
-        <Qthumb name={question.name} filename={question.filename} {tcode} exercise={question.exercise} chapter={question.chapter} questionNo={question.questionNo} part={question.part} />
+        <Qthumb name={question.name} filename={question.filename} {tcode} exercise={question.exercise} chapter={question.chapter} questionNo={question.questionNo} part={question.part}
+        {clickLink}
+        {question}
+        />
         </div>    
         </div>
 

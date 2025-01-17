@@ -2,18 +2,15 @@
   //@ts-nocheck
   import { PageWrapper,HdgWithIcon } from 'sveltetools_bils/src/cmp';
   import { API_URL,onMount,toast,Icons,goto } from '$lib/util';
-
   import {db} from "$lib";
-
   import Nav from '../Nav.svelte';
-  
-  
   import SyllabusComp from '$lib/appComp/syllabusComp/SyllabusComp.svelte';
   import Summary from '$lib/appComp/Summary.svelte';
   
-  let tcode; 
   /////////////////////////////////
+  let tcode; 
   let questions;
+  let filterByStatus = 'all';
   
   
 onMount(async () => {
@@ -49,7 +46,7 @@ try{
     
       <Summary {questions} />
   
-  <SyllabusComp  {questions} {tcode} uiMode={false}/>
+  <SyllabusComp  {questions} {tcode} uiMode={false}  {filterByStatus} clickLink ='admin/editor'  />
   {/if}
   
   <br>
