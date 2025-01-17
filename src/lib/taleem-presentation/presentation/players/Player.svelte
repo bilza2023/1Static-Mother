@@ -4,13 +4,12 @@
     import PlayerWithSound from "./PlayerWithSound.svelte";
     import PlayerNs from "./PlayerNs.svelte";
     import { onMount } from 'svelte';
-    import {Taleem} from "../../index";
+    import { Taleem } from "../../index";
     
   let assets = null;
     ////////////////////====Slides Registration///////
-    //--very important -- will break the library
-    import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
-    registerSlideTypes();
+    
+    Taleem.registerSlideTypes();//--very important -- if removed will break the library
 
     /////////////////////////////////////////
     export let slides;

@@ -3,8 +3,9 @@
 
   import { onMount } from 'svelte';
   import Icons  from "../icons";
-  import SlideRegistry  from '../../code/slideRegistery/SlideRegistry';
-  const registry = SlideRegistry.getInstance();
+  import {Taleem} from '../../index';
+
+  const registry = Taleem.SlideRegistry.getInstance();
   
   export let currentTime = 0;
   export let currentSlide;

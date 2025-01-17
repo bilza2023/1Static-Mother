@@ -2,9 +2,9 @@
 <script>
     //@ts-nocheck
     import { onMount } from 'svelte';
-    import SlideRegistry  from '../../code/slideRegistery/SlideRegistry';
-    const registry = SlideRegistry.getInstance();
-
+    import { Taleem } from "../../index";
+    const registry = Taleem.SlideRegistry.getInstance();
+ 
     export let  presentationObj;
     export let currentTime;
     export let assets;
@@ -15,7 +15,7 @@
     let currentSlide;
 
     let ready = false;
-$:{//first load
+$:{ 
   if(presentationObj){
      currentSlide =  presentationObj.getCurrentSlide();
   }

@@ -4,13 +4,13 @@
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import {Taleem} from "../../index";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
-  import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
+  // import registerSlideTypes from "../../taleemObject/slideRegistery/registerSlideTypes";
   import StackPanel from './StackPanel.svelte';
   import TimingErrorDiv from "./TimingErrorDiv.svelte";
   import { fade } from 'svelte/transition';
  
   // Initialize slide types
-  registerSlideTypes();
+  Taleem.registerSlideTypes();
 
   // Props with defaults
   export let slides;
