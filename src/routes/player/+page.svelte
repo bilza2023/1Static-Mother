@@ -3,17 +3,23 @@
   //@ts-nocheck 
   import {Player ,SlideObject} from 'taleem-presentation';
   import {onMount} from "svelte";
-  import {Presentation} from './Presentation';
+  import {db} from '$lib/db.js';
 
   let slides=[];
-  
+      let id;
+      let presentation;
   
 
   onMount(async()=>{
-    // slides = SlideObject.getDynamicDemoSlide();
-    slides = Presentation.slides;
+  
+    id = new URLSearchParams(location.search).get("id");
+    const resp = await db.tcode.getOne(id);
     
-   console.log("slides Player ::--->", slides);
+    if (resp.ok){
+        presentation = await resp.json();
+        slides = presentation.slides;
+
+    }
   });
 
 

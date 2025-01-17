@@ -52,7 +52,7 @@
  }
   </script>
   
-  <Nav   bind:showSlideEditBox={showSlideEditBox} />
+  <Nav   bind:showSlideEditBox={showSlideEditBox} {presentation}/>
   
   {#if showSlideEditBox}
   <!-- give it current slide -->

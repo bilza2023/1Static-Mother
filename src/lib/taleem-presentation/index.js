@@ -1,5 +1,5 @@
 
-import Taleem from "./presentation/taleemObject/Taleem"
+import Taleem from "./taleemObject/Taleem"
 import Editor from './presentation/editor/Editor.svelte';
 import Player from './presentation/players/Player.svelte';
 import SlideObject from "./slides/slideObject/slideObject";

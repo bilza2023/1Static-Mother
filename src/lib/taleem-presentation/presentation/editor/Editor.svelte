@@ -3,7 +3,7 @@
   import {SlideObject} from "../../slides/index";
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
-  import Taleem from "../taleemObject/Taleem";
+  import {Taleem} from "../../index";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
   import StackPanel from './StackPanel.svelte';
