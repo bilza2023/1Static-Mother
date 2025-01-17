@@ -7,7 +7,7 @@
 import TopToolbar from './TopToolbar.svelte';
 
 import Row from './Row.svelte';
-import {SlideObject} from "../../index";
+import {Taleem} from "../../../index";
   import { onMount } from 'svelte';
 
 // export let just items and currentTime which is required for Editor only
@@ -65,7 +65,7 @@ function delEq(index) {
 
 
 function addEq(i=0) {
-  const newItem = SlideObject.Eqs.getNewItem();
+  const newItem = Taleem.Slides.Eqs.getNewItem();
   items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
 }
 function setFakeTimings() {

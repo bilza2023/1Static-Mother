@@ -18,7 +18,7 @@
   //--draw functions are removed just here for final clean up.
   // import draw from './drawFunctions/draw';
  
-  import {SlideObject} from "../../index";
+  import {Taleem} from "../../../index";
 
     export let slideExtra = {};
     export let items;
@@ -101,7 +101,7 @@ $:{ //this is only for loading images
             preDraw(ctx,assets);   
         
             //very important line
-            const Obj = SlideObject.Canvas.ItemsMap.get(item.itemExtra.type);
+            const Obj = Taleem.Slides.Canvas.ItemsMap.get(item.itemExtra.type);
         
             if(item.itemExtra.type == 'Eqs'){
               console.log("Eqs",item);

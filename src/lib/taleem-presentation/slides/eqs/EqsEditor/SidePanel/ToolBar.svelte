@@ -1,10 +1,10 @@
 <script>
   //@ts-nocheck
-  import {SlideObject} from "../../../index";
+  import {Taleem} from "../../../../index";
   export let item;
 
   function getEqsSpItem(type){
-    const spItem = SlideObject.Eqs.getEqsSpItem(type);
+    const spItem = Taleem.Slides.Eqs.getEqsSpItem(type);
 
     item = {
       ...item,

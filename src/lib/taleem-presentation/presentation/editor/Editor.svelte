@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import {SlideObject} from "../../slides/index";
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import {Taleem} from "../../index";
@@ -125,7 +124,7 @@
     try {
       if(slideType === 'Eqs'){slideType='eqs';}
 
-      const newSlide = SlideObject.getNewSlide(slideType);
+      const newSlide = Taleem.Slides.getNewSlide(slideType);
       setNewSlideTimings(newSlide); //setNewSlideTimings
       slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);

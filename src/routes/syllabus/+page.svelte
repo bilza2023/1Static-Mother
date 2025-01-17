@@ -21,7 +21,6 @@
       // debugger;
       tcode = new URLSearchParams(location.search).get("tcode");
       const resp = await db.tcode.get(`tcode=${tcode}&limit=1500&fields=-slides` );
-      debugger;
   /////////////////////    
       if (resp){
         const incomming = await resp.json();

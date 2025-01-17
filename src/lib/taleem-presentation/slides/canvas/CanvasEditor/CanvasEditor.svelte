@@ -14,14 +14,14 @@
     import DialogueBox from '../dialogueBox/DialogueBox.svelte';
     import CanvasCommand from "../dialogueBox/CanvasCommand.svelte";
     import itemsToitemObjects from './editObjects/itemsToitemObjects';
-    import {SlideObject} from "../../../index.js";
+    import {Taleem} from "../../../index";
 
     export let items;
     export let slideExtra;
     export let assets;
     export let showAddToolbar = true;
 
-    const ItemsMap = SlideObject.Canvas.ItemsMap;
+    const ItemsMap = Taleem.Slides.Canvas.ItemsMap;
     let selectedItem = null;
     let itemObjects = null;
        
@@ -44,7 +44,7 @@ onDestroy(async () => {
 });
     
 function getDialogueBox(itemType){
-    const staticItem = SlideObject.Canvas.ItemsMap.get(itemType);
+    const staticItem = Taleem.Slides.Canvas.ItemsMap.get(itemType);
     return staticItem.dialogueBox();
 
 }
@@ -55,7 +55,7 @@ function addNewItem(itemType) {
     const firstSegment = uuid().split('-')[0];
     const name = newItemExtra.type + '_' +firstSegment  ;
 
-    const newItem = SlideObject.getNewItem(newItemExtra,name) ;
+    const newItem = Taleem.Slides.getNewItem(newItemExtra,name) ;
     // newItem.itemExtra = newItemExtra;
     items.unshift(newItem);
     items = [...items];

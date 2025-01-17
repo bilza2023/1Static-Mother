@@ -2,8 +2,6 @@
 import Taleem from "./taleemObject/Taleem"
 import Editor from './presentation/editor/Editor.svelte';
 import Player from './presentation/players/Player.svelte';
-import SlideObject from "./slides/slideObject/slideObject";
-import ItemsMap from "./slides/canvas/staticItems/ItemsMap";
 
 import {
         CanvasEditor,
@@ -16,11 +14,9 @@ import {
 ///////////////////////////////////////////////////////////////
 
 export {
-    Taleem, // name may need changing
-    SlideObject,
+    Taleem, 
     Editor,
     Player,
-    ItemsMap,
 
     CanvasEditor,
     CanvasPlayer,
