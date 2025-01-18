@@ -1,7 +1,6 @@
 <script>
     import {Editor} from '$lib/taleem-presentation';
     // 15-dec-2024 :why import Editor directy ???? is it error--> NO-18dec2024--
-      import audioData from "./audioData.js";
       import {onMount,toast} from "../../../lib/util";
       // import {Presentation} from './Presentation.js';
       import {db} from '$lib/db.js';
@@ -13,7 +12,7 @@
       let id;
       let presentation;
       let showToolbar=true;
-
+      export let audioData = undefined;
       let showSlideEditBox = false; //showSlideEditBox
     
   onMount(async()=>{
@@ -52,7 +51,7 @@
  }
   </script>
   
-  <Nav   bind:showSlideEditBox={showSlideEditBox} {presentation}/>
+  <Nav   bind:showSlideEditBox={showSlideEditBox} {presentation} bind:showToolbar={showToolbar}/>
   
   {#if showSlideEditBox}
   <!-- give it current slide -->

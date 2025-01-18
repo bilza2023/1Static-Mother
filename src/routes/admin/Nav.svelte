@@ -8,6 +8,7 @@ import {Icons,goto, toast,onMount} from '$lib/util';
 
 export let showSlideEditBox=false;
 export let presentation='';
+export let showToolbar= true;
 ///////////////////////////////////
 function logout(){
     localStorage.removeItem('token');
@@ -46,10 +47,12 @@ onMount(() => {
     <Logo url='/admin' title='AdminOffice'  icon='🔬' />
 
     {#if isEditorPage}
-    <NavBtn2 title='Edit' icon='🛠️'  clk={() => showSlideEditBox = !showSlideEditBox} />
-    <NavLink title='Player' icon='🚀'  url= {`/player?id=${presentation._id}`} target='_blank'/>
+<NavBtn2 title='Edit' icon='🛠️'  clk={() => showSlideEditBox = !showSlideEditBox} />
+    <NavBtn2 title='Fold' icon='🪜'  clk={() => showToolbar = !showToolbar} />
+<NavLink title='Player' icon='🚀'  url= {`/player?id=${presentation._id}`} target='_blank'/>
     {/if}
-    </div>
+
+</div>
             
     
     <div class='flex'>

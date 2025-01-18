@@ -17,12 +17,11 @@
     if (resp.ok){
         presentation = await resp.json();
         slides = presentation.slides;
-        audioDataUrl = (presentation.status === 'final') ? `https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/${presentation.filename}.opus`  :  '/music1.opus';
-        debugger;
+        // if the question status is not final we assign default music sound
+        audioDataUrl = (presentation.status === 'final') ? `https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/${presentation.filename}.opus`  :  '/music.opus';
+        // debugger;
       }
   });
-
-
 
   </script> 
 

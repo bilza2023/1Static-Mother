@@ -3,7 +3,8 @@
 import Katex from 'svelte-katex'
 import Table from './Table.svelte';
 import TableCode from './TableCode.svelte';
-// import {HdgWithIcon} from "sveltetools_bils/src/cmp"
+import {Taleem} from "../../../../index";
+
 export let eq;
 export let slideExtra;
 
@@ -24,7 +25,7 @@ export let slideExtra;
     {#if eq.type == 'img' || eq.type == 'image'}
 
     <img class="rounded-lg p-1 px-2" 
-    src= {slideExtra.imagesUrl + eq.code } alt="Not found" />
+    src= {Taleem.imagesUrl + eq.code } alt="Not found" />
 
 
     {/if}
