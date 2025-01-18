@@ -39,6 +39,6 @@
 </script>
 
 
-<h1>Edit Slide</h1>
+<h1 class='text-white'>Edit Slide</h1>
 
 <DialogueBox  {item} {dialogueBox}/>
