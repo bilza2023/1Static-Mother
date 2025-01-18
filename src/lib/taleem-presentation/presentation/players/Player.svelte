@@ -20,22 +20,24 @@
 /////////////////////////////////////////////////
   onMount(async()=>{
        assets =  await Taleem.loadAssets();
-      //  debugger;
+       await Taleem.loadAppImages(slides);
   }); 
   </script>
   
   {#if hasAudio && slides && assets}
+
     <PlayerWithSound 
       {slides}
       {audioData}
       {isBlob}
       {assets}
     />
+
   {:else}
-   {#if slides}
+
     <PlayerNs 
       {slides}
       {assets}
       />
-    {/if}
+
   {/if}

@@ -195,7 +195,9 @@
   onMount(async()=>{
     // assets injected with loadAssets functions nothing else required. just call the loadAssets function and on this layer of the app you get assets bundle. 
     assets =  await Taleem.loadAssets();
+    // debugger;
     slides = slides;
+    await Taleem.loadAppImages(slides);
     ready = true;
   });
 

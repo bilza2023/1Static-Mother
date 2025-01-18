@@ -24,7 +24,7 @@ export let slideExtra;
     {#if eq.type == 'img' || eq.type == 'image'}
 
     <img class="rounded-lg p-1 px-2" 
-    src= {slideExtra.imagesUrl + eq.code} alt="Not found" />
+    src= {slideExtra.imagesUrl + eq.code } alt="Not found" />
 
 
     {/if}

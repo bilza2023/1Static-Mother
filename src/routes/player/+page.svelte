@@ -1,26 +1,27 @@
 
 <script>
   //@ts-nocheck 
-  import {Player ,SlideObject} from 'taleem-presentation';
+  import {Player} from '$lib/taleem-presentation';
   import {onMount} from "svelte";
   import {db} from '$lib/db.js';
 
-  let slides=[];
+  let slides=null;
       let id;
       let presentation;
+      let audioDataUrl;
   
 
   onMount(async()=>{
-  
     id = new URLSearchParams(location.search).get("id");
     const resp = await db.tcode.getOne(id);
-    
     if (resp.ok){
         presentation = await resp.json();
         slides = presentation.slides;
-
-    }
+        audioDataUrl = (presentation.status === 'final') ? `https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/${presentation.filename}.opus`  :  '/music1.opus';
+        debugger;
+      }
   });
+
 
 
   </script> 
@@ -33,10 +34,10 @@
             <Player
               isBlob = {false}
               slides={slides} 
-              audioData= "/music1.opus"    
+              audioData= {audioDataUrl}
+                
             />
         {/key}
-
       </div>
     {/if}
   </div>
