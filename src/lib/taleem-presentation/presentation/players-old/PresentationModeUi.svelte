@@ -52,8 +52,7 @@ async function loadImages() {
 //ERROR==> use of permanent url 
     if (item.itemExtra.type == 'image' ) {
       try {
-        const url = Taleem.imagesUrl + item.extra.src + '.' + item.extra.ext;
-          // const url = 'https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/'+ item.extra.src + '.' + item.extra.ext;
+          const url = 'https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/'+ item.extra.src + '.' + item.extra.ext;
           const img = await loadImage( url);
           item.extra.image = img;
           

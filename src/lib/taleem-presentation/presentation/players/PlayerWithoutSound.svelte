@@ -11,24 +11,17 @@
   import { onMount } from 'svelte';
   import PlayerToolbar from './PlayerToolbar.svelte';
   import PresentationModeUi from './PresentationModeUi.svelte';
-  import PresentationObj from './PresentationObj';
+  import PresentationObjNs from './PresentationObjNs';
   import { scale } from 'svelte/transition';
-  import { Taleem } from '../../index';
 
-      ////////////////////====Slides Registration///////
-    
-      Taleem.registerSlideTypes();//--very important -- if removed will break the library
+  let pulse = 0;
+  let interval;
+  let showToolbarBool = false;
 
-/////////////////////////////////////////
-export let slides;
-export let audioData;
-export let isBlob = false;
+  export let slides;
+  export let assets;
 
-let assets=null;
-let presentationObj;
-let pulse = 0;
-let interval;
-let showToolbarBool = false;
+  let presentationObj;
 
   function showToolbar() {
     if (!showToolbarBool) {
@@ -64,14 +57,10 @@ let showToolbarBool = false;
   }
 
   onMount(async () => {
-    debugger;
-       assets =  await Taleem.loadAssets();
-       await Taleem.loadAppImages(slides);
-    presentationObj = new PresentationObj(slides, audioData, isBlob);
+    presentationObj = new PresentationObjNs(slides);
     await presentationObj.init();
   });
 </script>
-
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="container" on:mousemove={showToolbar}>
@@ -79,8 +68,8 @@ let showToolbarBool = false;
     {#if showToolbarBool}
       <div
         class="toolbar"
-        in:scale="{{ duration: 300 }}"
-        out:scale="{{ duration: 300, start: 0.95 }}"
+        in:scale={{ duration: 300 }}
+        out:scale={{ duration: 300, start: 0.95 }}
       >
         <PlayerToolbar
           {presentationObj}
@@ -101,7 +90,6 @@ let showToolbarBool = false;
         currentTime={pulse}
         {pause}
         {assets}
-        {setPulse}
       />
     </div>
   {/if}

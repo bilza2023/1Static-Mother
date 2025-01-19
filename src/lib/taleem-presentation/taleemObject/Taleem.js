@@ -1,13 +1,15 @@
+
 import loadAssets from "./assets/loadAssets";
-import slides from "./slides";
+import Slides from "./Slides";
 import SlideRegistry from './slideRegistery/SlideRegistry';
 import registerSlideTypes from './slideRegistery/registerSlideTypes'; 
 
 
+////////////////////////////////////////////////////
 export default class Taleem{
-
+////////////////////////////////////////////////////
 static loadAssets = loadAssets;    
-static Slides = slides;    
+static Slides = Slides;    
 static SlideRegistry = SlideRegistry;    
 static registerSlideTypes = registerSlideTypes;    
 // This line tie Taleem object to my specific taleem-media server. This should not happen but everything else is static so deal with it later.

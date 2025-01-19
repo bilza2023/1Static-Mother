@@ -1,10 +1,10 @@
 
 <script>
   //@ts-nocheck 
-  import {Player} from '$lib/taleem-presentation';
+  import {Player,Taleem} from '$lib/taleem-presentation';
   import {onMount} from "svelte";
   import {db} from '$lib/db.js';
-
+  
   let slides=null;
       let id;
       let presentation;
@@ -12,6 +12,10 @@
   
 
   onMount(async()=>{
+    /////--Testing Code
+    // slides = Taleem.Slides.getDynamicSlides();
+    // audioDataUrl = '/music.opus';
+    ///////////////////Real code///////////////////////////////
     id = new URLSearchParams(location.search).get("id");
     const resp = await db.tcode.getOne(id);
     if (resp.ok){

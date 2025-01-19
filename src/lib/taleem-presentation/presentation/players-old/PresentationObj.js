@@ -1,5 +1,5 @@
 import { Howl } from 'howler';
-import setEqSlidesEndTime from "./setEqSlidesEndTime";
+import setEqSlidesEndTime from "./setEqSlidesEndTime.js";
 const PLAY_STATE = {
     INITIAL: 0,
     LOADED: 1,
