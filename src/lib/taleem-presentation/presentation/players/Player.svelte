@@ -7,8 +7,7 @@
   />
 </svelte:head>
 <script>
-  import { onMount } from 'svelte';
-  import {Howl} from 'howler';
+   import { onMount, onDestroy } from 'svelte';
   import PlayerToolbar from './PlayerToolbar.svelte';
   import PresentationModeUi from './PresentationModeUi.svelte';
   import { scale } from 'svelte/transition';
@@ -58,18 +57,28 @@ let showToolbarBool = false;
     player.setPulse(value);
     pulse = Math.floor(player.pulse());
   }
-
+  async function initializeSound() {
+      try {
+          sound = await Taleem.loadSound(audioData); // Use utility to load the sound
+          // playState = "LOADED";
+      } catch (error) {
+          // playState = "INITIAL";
+          console.error('Error loading sound:', error);
+      }
+  }
+  let sound = null;
   onMount(async () => {
-    let sound = new Howl({
-        src: [audioData], // Replace with actual sound URL
-        volume: 1.0,
-        html5: true,
-    });
 
+    await initializeSound(); // Load the sound when the component mounts
     assets =  await Taleem.loadAssets();
     await Taleem.loadAppImages(slides);
     player = new Taleem.Player(slides, sound);
     await player.init();
+  });
+  onDestroy(() => {
+      if (sound) {
+          sound.unload(); // Clean up Howl instance on destroy
+      }
   });
 </script>
 
