@@ -6,26 +6,22 @@
     crossorigin="anonymous"
   />
 </svelte:head>
-
 <script>
   import { onMount } from 'svelte';
+  import {Howl} from 'howler';
   import PlayerToolbar from './PlayerToolbar.svelte';
   import PresentationModeUi from './PresentationModeUi.svelte';
-  import PresentationObj from './PresentationObj';
   import { scale } from 'svelte/transition';
   import { Taleem } from '../../index';
 
-      ////////////////////====Slides Registration///////
-    
-      Taleem.registerSlideTypes();//--very important -- if removed will break the library
-
+////////////////////====Slides Registration///////
+Taleem.registerSlideTypes();//--very important -- if removed will break the library
 /////////////////////////////////////////
 export let slides;
 export let audioData;
-export let isBlob = false;
 
 let assets=null;
-let presentationObj;
+let player;
 let pulse = 0;
 let interval;
 let showToolbarBool = false;
@@ -41,41 +37,46 @@ let showToolbarBool = false;
 
   function start() {
     interval = setInterval(gameloop, 500);
-    pulse = Math.floor(presentationObj.pulse());
+    pulse = Math.floor(player.pulse());
   }
 
   function gameloop() {
-    pulse = Math.floor(presentationObj.pulse());
+    pulse = Math.floor(player.pulse());
   }
 
   function stop() {
     clearInterval(interval);
-    pulse = Math.floor(presentationObj.pulse());
+    pulse = Math.floor(player.pulse());
   }
 
   function pause() {
-    presentationObj.pause();
-    pulse = Math.floor(presentationObj.pulse());
+    player.pause();
+    pulse = Math.floor(player.pulse());
   }
 
   function setPulse(value) {
-    presentationObj.setPulse(value);
-    pulse = Math.floor(presentationObj.pulse());
+    player.setPulse(value);
+    pulse = Math.floor(player.pulse());
   }
 
   onMount(async () => {
-    debugger;
-       assets =  await Taleem.loadAssets();
-       await Taleem.loadAppImages(slides);
-    presentationObj = new PresentationObj(slides, audioData, isBlob);
-    await presentationObj.init();
+    let sound = new Howl({
+        src: [audioData], // Replace with actual sound URL
+        volume: 1.0,
+        html5: true,
+    });
+
+    assets =  await Taleem.loadAssets();
+    await Taleem.loadAppImages(slides);
+    player = new Taleem.Player(slides, sound);
+    await player.init();
   });
 </script>
 
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="container" on:mousemove={showToolbar}>
-  {#if presentationObj}
+  {#if player}
     {#if showToolbarBool}
       <div
         class="toolbar"
@@ -83,7 +84,7 @@ let showToolbarBool = false;
         out:scale="{{ duration: 300, start: 0.95 }}"
       >
         <PlayerToolbar
-          {presentationObj}
+          {player}
           {pulse}
           preStart={start}
           preStop={stop}
@@ -96,7 +97,7 @@ let showToolbarBool = false;
     {/if}
     <div class="h-full">
       <PresentationModeUi
-        {presentationObj}
+        {player}
         {pulse}
         currentTime={pulse}
         {pause}

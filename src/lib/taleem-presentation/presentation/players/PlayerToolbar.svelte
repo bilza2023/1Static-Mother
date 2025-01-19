@@ -4,7 +4,7 @@
   import Slider from './Slider.svelte';
   import { fade } from 'svelte/transition';
 
-  export let presentationObj;   
+  export let player;   
   export let pulse;   
   export let preStart = () => {};   
   export let preStop = () => {};   
@@ -15,18 +15,18 @@
 
   function start() {
       preStart();
-      presentationObj.start();
+      player.start();
   }    
   function stop() {
       preStop();
-      presentationObj.stop();
+      player.stop();
   }    
   function pause() {
       prePause();
-      presentationObj.pause();
+      player.pause();
   }    
   function setVolume(value) {
-      presentationObj.setVolume(value);
+      player.setVolume(value);
   }
   function home() {
       stop();
@@ -38,7 +38,7 @@
     : { bg: '#fff', text: '#333', primary: '#065d7f', secondary: '#aeb18c' };
 </script>
 
-{#if presentationObj}
+{#if player}
 <div class='toolbar-wrapper' in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} style="--opacity: {opacity};">
   <div class='toolbar-content flex items-center space-x-2' style="background-color: {themeVars.secondary};">
       <!-- <button class="toolbar-button" style="background-color: {themeVars.primary};" on:click={home}>🏠</button> -->
@@ -56,12 +56,12 @@
         {:else}
           {pulse}
         {/if}
-        / {presentationObj.slides[presentationObj.slides.length - 1].endTime} sec
+        / {player.slides[player.slides.length - 1].endTime} sec
       </div>
       
       <div class='progress-slider-container' style="background-color: {themeVars.bg};">
         <input type="range" min=0 
-          max={presentationObj.slides[presentationObj.slides.length - 1].endTime} value={pulse}
+          max={player.slides[player.slides.length - 1].endTime} value={pulse}
           class="progress-slider"
           style="background-color: {themeVars.secondary};"
           on:change="{e => setPulse(e.target.value)}">

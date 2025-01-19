@@ -2,7 +2,7 @@
 
 import setEqSlidesEndTime from "./setEqSlidesEndTime.js";
 
-export default class PresentationObjNs {
+export default class PlayerNoSound {
     static PLAY_STATE = {
         INITIAL: 0,
         LOADED: 1,
@@ -10,14 +10,14 @@ export default class PresentationObjNs {
         PLAY: 3,
         PAUSE: 4
     };
-
+    Player
     constructor(slides) {
         this.slides = slides;
         this.currentSlide = null;
         this.maxSliderValue = 0;
    
         this.stopTime = null;
-        this.playState = PresentationObjNs.PLAY_STATE.LOADED;
+        this.playState = PlayerNoSound.PLAY_STATE.LOADED;
 
         this.currentTime = 0;
         this.lastTimestamp = 0;
@@ -25,7 +25,7 @@ export default class PresentationObjNs {
     }
 
     async loadSound() {
-        this.playState = PresentationObjNs.PLAY_STATE.LOADED;
+        this.playState = PlayerNoSound.PLAY_STATE.LOADED;
         return true;
     }
 
@@ -54,24 +54,24 @@ export default class PresentationObjNs {
     }
 
     start() {
-        if (this.playState === PresentationObjNs.PLAY_STATE.INITIAL) return false; 
-        if (this.playState === PresentationObjNs.PLAY_STATE.PLAY) return false;
-        if (this.playState === PresentationObjNs.PLAY_STATE.STOP) {
+        if (this.playState === PlayerNoSound.PLAY_STATE.INITIAL) return false; 
+        if (this.playState === PlayerNoSound.PLAY_STATE.PLAY) return false;
+        if (this.playState === PlayerNoSound.PLAY_STATE.STOP) {
             this.currentTime = 0;
         }
 
-        if (this.playState === PresentationObjNs.PLAY_STATE.PAUSE) {
+        if (this.playState === PlayerNoSound.PLAY_STATE.PAUSE) {
             this.lastTimestamp = performance.now();
         }
 
-        this.playState = PresentationObjNs.PLAY_STATE.PLAY;
+        this.playState = PlayerNoSound.PLAY_STATE.PLAY;
         this.lastTimestamp = performance.now();
         this.animationFrameId = requestAnimationFrame(this.animate);
         return true;
     }
 
     animate = (timestamp) => {
-        if (this.playState !== PresentationObjNs.PLAY_STATE.PLAY) return;
+        if (this.playState !== PlayerNoSound.PLAY_STATE.PLAY) return;
 
         const deltaTime = (timestamp - this.lastTimestamp) / 1000;
         this.currentTime += deltaTime;
@@ -86,19 +86,19 @@ export default class PresentationObjNs {
     }
 
     pause() {
-        if (this.playState === PresentationObjNs.PLAY_STATE.PLAY) {
-            this.playState = PresentationObjNs.PLAY_STATE.PAUSE;
+        if (this.playState === PlayerNoSound.PLAY_STATE.PLAY) {
+            this.playState = PlayerNoSound.PLAY_STATE.PAUSE;
             cancelAnimationFrame(this.animationFrameId);
-        } else if (this.playState === PresentationObjNs.PLAY_STATE.PAUSE) {
+        } else if (this.playState === PlayerNoSound.PLAY_STATE.PAUSE) {
             this.start();
         }
     }
 
     stop() {
-        if (this.playState !== PresentationObjNs.PLAY_STATE.STOP) {
+        if (this.playState !== PlayerNoSound.PLAY_STATE.STOP) {
             this.currentTime = 0;
             cancelAnimationFrame(this.animationFrameId);
-            this.playState = PresentationObjNs.PLAY_STATE.STOP;
+            this.playState = PlayerNoSound.PLAY_STATE.STOP;
             this.setCurrentSlide();
             return true;
         }

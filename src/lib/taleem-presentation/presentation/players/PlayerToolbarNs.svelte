@@ -4,7 +4,7 @@
   import Slider from './Slider.svelte';
   import { fade } from 'svelte/transition';
 
-  export let presentationObj;   
+  export let player;   
   export let pulse;   
 
   export let preStart = () => {};   
@@ -14,19 +14,19 @@
   
   function start() {
       preStart();
-      presentationObj.start();
+      player.start();
   }    
   function stop() {
       preStop();
-      presentationObj.stop();
+      player.stop();
   }    
   function pause() {
       prePause();
-      presentationObj.pause();
+      player.pause();
   }    
 
 //   function setVolume(value) {
-//       presentationObj.setVolume(value);
+//       player.setVolume(value);
 //   }
 
   function home() {
@@ -35,7 +35,7 @@
   }
 </script>
 
-{#if presentationObj}
+{#if player}
 <div class='toolbar-wrapper' in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
   <div class='toolbar-content flex items-center space-x-2'>
      
@@ -58,13 +58,13 @@
             {:else}
               {pulse}
             {/if}
-            / {presentationObj.slides[presentationObj.slides.length - 1].endTime} sec
+            / {player.slides[player.slides.length - 1].endTime} sec
           </div>
       
           <!-- Slider Input -->
           <div class='w-10/12 p-1 rounded-sm bg-gray-900 text-yellow-500 text-xs text-center'>
             <input type="range" min='0' 
-              max={presentationObj.slides[presentationObj.slides.length - 1].endTime} value={pulse}
+              max={player.slides[player.slides.length - 1].endTime} value={pulse}
               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
               on:change="{e => setPulse(e.target.value)}">
           </div>

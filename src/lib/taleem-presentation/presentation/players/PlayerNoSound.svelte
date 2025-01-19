@@ -11,17 +11,21 @@
   import { onMount } from 'svelte';
   import PlayerToolbar from './PlayerToolbar.svelte';
   import PresentationModeUi from './PresentationModeUi.svelte';
-  import PresentationObjNs from './PresentationObjNs';
   import { scale } from 'svelte/transition';
+  import { Taleem } from '../../index';
+
+////////////////////====Slides Registration///////
+Taleem.registerSlideTypes();//--very important -- if removed will break the library
+/////////////////////////////////////////
 
   let pulse = 0;
   let interval;
   let showToolbarBool = false;
+  let assets=null;
 
   export let slides;
-  export let assets;
 
-  let presentationObj;
+  let player;
 
   function showToolbar() {
     if (!showToolbarBool) {
@@ -34,37 +38,39 @@
 
   function start() {
     interval = setInterval(gameloop, 500);
-    pulse = Math.floor(presentationObj.pulse());
+    pulse = Math.floor(player.pulse());
   }
 
   function gameloop() {
-    pulse = Math.floor(presentationObj.pulse());
+    pulse = Math.floor(player.pulse());
   }
 
   function stop() {
     clearInterval(interval);
-    pulse = Math.floor(presentationObj.pulse());
+    pulse = Math.floor(player.pulse());
   }
 
   function pause() {
-    presentationObj.pause();
-    pulse = Math.floor(presentationObj.pulse());
+    player.pause();
+    pulse = Math.floor(player.pulse());
   }
 
   function setPulse(value) {
-    presentationObj.setPulse(value);
-    pulse = Math.floor(presentationObj.pulse());
+    player.setPulse(value);
+    pulse = Math.floor(player.pulse());
   }
 
   onMount(async () => {
-    presentationObj = new PresentationObjNs(slides);
-    await presentationObj.init();
+    assets =  await Taleem.loadAssets();
+    await Taleem.loadAppImages(slides);
+    player = new Taleem.PlayerNoSound(slides);
+    await player.init(); // init is required even if no sound
   });
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="container" on:mousemove={showToolbar}>
-  {#if presentationObj}
+  {#if player}
     {#if showToolbarBool}
       <div
         class="toolbar"
@@ -72,7 +78,7 @@
         out:scale={{ duration: 300, start: 0.95 }}
       >
         <PlayerToolbar
-          {presentationObj}
+          {player}
           {pulse}
           preStart={start}
           preStop={stop}
@@ -85,7 +91,7 @@
     {/if}
     <div class="h-full">
       <PresentationModeUi
-        {presentationObj}
+        {player}
         {pulse}
         currentTime={pulse}
         {pause}
