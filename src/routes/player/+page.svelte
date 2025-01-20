@@ -1,7 +1,7 @@
 
 <script>
   //@ts-nocheck 
-  import {Player,Taleem} from 'taleem-presentation';
+  import {Player,Taleem} from '$lib/taleem-presentation';
   import {onMount} from "svelte";
   import {db} from '$lib/db.js';
   

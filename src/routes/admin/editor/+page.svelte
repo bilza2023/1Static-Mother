@@ -1,5 +1,5 @@
 <script>
-    import {Editor} from 'taleem-presentation';
+    import {Editor} from '$lib/taleem-presentation';
     // 15-dec-2024 :why import Editor directy ???? is it error--> NO-18dec2024--
       import {onMount,toast} from "../../../lib/util";
       // import {Presentation} from './Presentation.js';
