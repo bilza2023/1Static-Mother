@@ -4,7 +4,6 @@
 import {HdgWithIcon,Centre,PageWrapper} from '$lib/cmp';
 import {Icons,RESOURCE_URL,API_URL,onMount,ajaxPost} from '$lib/util';
 import NavBlog from '$lib/appComp/NavBlog.svelte';
-import BooksImages from '$lib/homePage/BooksImages.svelte';
 
 let tcode = 'fbise9math';
 let selectedEx ='1.1';
@@ -24,9 +23,7 @@ let selectedChapter = 1;
 <div class="bg-gray-700 rounded-md w-full mx-8">
 <div class='flex  justify-center gap-32    p-2 m-2'>
 
-<!-- <BooksImages tcode='fbise9mathOld' /> -->
-<BooksImages tcode='fbise9math'  url={`/syllabus?tcode=${tcode}`} />
-<!-- <BooksImages tcode='fbise9english' /> -->
+<a href={`/syllabus?tcode=${tcode}`}> <img class="p-2  border-2 border-white rounded-md" src='/system_images/fbise9math.png' alt="Math FBSIE 9th" /></a>
 
 </div>
 </div>
