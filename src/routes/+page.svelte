@@ -3,7 +3,7 @@
 //@ts-nocheck
 import {HdgWithIcon,Centre,PageWrapper} from '$lib/cmp';
 import {Icons,RESOURCE_URL,API_URL,onMount,ajaxPost} from '$lib/util';
-import NavBlog from '$lib/appComp/NavBlog.svelte';
+import NavBlog from '../lib/appComp/NavBlog.svelte';
 
 let tcode = 'fbise9math';
 let selectedEx ='1.1';
@@ -32,11 +32,6 @@ let selectedChapter = 1;
 </Centre> 
 
 
-<!-- <div class='flex justify-start m-2 p-2 '>
-    <HdgWithIcon bgColor='bg-gray-600' icon={Icons.BOOKS}>
-        &nbsp; FBISE Math Class 9th (NBF Syllabus) Ch 1 Ex 1.1
-    </HdgWithIcon>
-</div> -->
 
 
 

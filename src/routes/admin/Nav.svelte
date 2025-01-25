@@ -45,6 +45,8 @@ onMount(() => {
     <div class='flex'>
     <Logo url='/' title='Home' icon='🏠' />
     <Logo url='/admin' title='AdminOffice'  icon='🔬' />
+  
+
 
     {#if isEditorPage}
 <NavBtn2 title='Edit' icon='🛠️'  clk={() => showSlideEditBox = !showSlideEditBox} />
@@ -56,8 +58,9 @@ onMount(() => {
             
     
     <div class='flex'>
-    <NavBtn title='Question Manager' icon ={Icons.BOOKS} url='/admin/questionManager'/>
+    <NavBtn title='Question Manager' icon ={Icons.QUESTIONMARK} url='/admin/questionManager'/>
+    <NavBtn  url="/notes/index.html" title="Notes" icon="📚" />
     <NavBtn title='Help' icon ={Icons.BOOK}    url='/admin/help'/>
-    </div>
+</div>
 </div><!--outer most div-->
 

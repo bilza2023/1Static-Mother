@@ -29,9 +29,9 @@ onMount( async ()=>{
     
     <NavBtn title='Blog' icon ={Icons.BOOK} url='/blog'/>
     <NavBtn title='Payment' icon ={Icons.ROCKET} url='/payment'/>
+    <NavBtn  url="/notes/index.html" title="Notes" icon="📚" />
 
     {#if isLogin}
-
     <NavBtn2 title='Logout' icon ={Icons.DOOR} clk={logout} />
     {:else}
     <NavBtn title='Login' icon ={Icons.KEY} url='/login'/>
