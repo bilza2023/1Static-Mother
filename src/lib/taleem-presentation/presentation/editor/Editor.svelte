@@ -12,9 +12,9 @@
   // Initialize slide types
   Taleem.registerSlideTypes();
 
-  // Props with defaults
+  export let soundUrl;
+  export let imagesUrl;
   export let slides;
-  export let isBlob = false;
   export let showToolbar = true;
   export let audioData = '';
   export let save = ()=>{console.log("hookup save function here");};
@@ -192,16 +192,15 @@
     }
   }
 
-  onMount(async()=>{
-    // assets injected with loadAssets functions nothing else required. just call the loadAssets function and on this layer of the app you get assets bundle. 
-    assets =  await Taleem.loadAssets();
-    // debugger;
-    slides = slides;
-    await Taleem.loadAppImages(slides);
-    ready = true;
-  });
+onMount(async()=>{
+  const isEditorMode = true;
+  assets = await Taleem.loadAssets(slides, imagesUrl, soundUrl, isEditorMode);
+
+  ready = true;
+});
 
 </script>
+{#if ready}
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
 
@@ -219,10 +218,10 @@
       pasteSlide={pasteSlideFn}
       cloneSlide={cloneSlideFn}
       soundFile={audioData}
-      {isBlob}
       {setCurrentSlideIndex}
       {shiftTime}
       {save}
+      {assets}
     
     />
   </div>
@@ -266,3 +265,4 @@
     {/if}
   </div>
 </div>
+{/if} 

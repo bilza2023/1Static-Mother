@@ -3,6 +3,7 @@
   import SidePanel from './sp/SidePanel.svelte';
 
   export let currentTime;
+  export let assets;
   export let slideExtra;
   export let setPulse;
 </script>
@@ -15,7 +16,7 @@
     </div>
 
     <div class="side-panel">
-      <SidePanel {currentTime} {slideExtra} />
+      <SidePanel {currentTime} {slideExtra} {assets}/>
     </div>
   </div>
 </div>

@@ -9,6 +9,22 @@ export default class Canvas {
     static ItemsMap = Object.freeze(new Map(ItemsMap));
 
  
+    static getPresentationImages(slides) {
+      let res = [];
+      for (let i = 0; i < slides.length; i++) {
+        const slide =   slides[i];
+        if(slide.type === 'canvas'){
+          for (let j = 0; j < slide.items.length; j++) {
+            const item =   slide.items[j];
+              if(item.itemExtra.type == 'image'){
+                res.push(item.itemExtra.src);
+              }
+            
+          }
+        }
+      }
+      return res;
+    }//getPresentationImages
     static getDynamicDemoSlide() {
       let xx= 10; let yy=50;
       
@@ -33,6 +49,7 @@ export default class Canvas {
       return dynSlide;
     }
     static getDynamicSlide() {
+      // debugger;
       let xx= 10; let yy=50;
       
       let dynSlide = Canvas.getNewSlide();
@@ -56,6 +73,7 @@ export default class Canvas {
       return dynSlide;
     }
     static getCanvasNewItem(itemType) {
+      // if(itemType === "image"){debugger;}
       const newItemExtra = ItemsMap.get(itemType).data();
   
       const newItem = Canvas.getNewItem(newItemExtra) ;

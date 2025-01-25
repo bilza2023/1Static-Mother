@@ -8,6 +8,25 @@ export default class Eqs{
     static availableEqsItems =  ['hdg' , 'code', 'txt','text' ];
     static availableEqsSpItems =['code' , 'text', 'img' , 'heading' , 'table' , 'tableCode' ];
 
+    static getPresentationImages(slides) {
+        let res = [];
+        for (let i = 0; i < slides.length; i++) {
+          const slide =   slides[i];
+          if((slide.type).toLowerCase()  === 'eqs' ){
+            for (let j = 0; j < slide.items.length; j++) {
+              const item =   slide.items[j];
+
+               for (let k = 0; k < item.itemExtra.sp.length; k++) {
+                const sp =    item.itemExtra.sp[k];
+                        if(sp.type == 'image' || sp.type == 'img'){
+                            res.push(sp.code);
+                        }
+               }
+            }
+          }
+        }
+        return res;
+      }//getPresentationImages    
 static getDynamicSlide(){
     // const spLoop = () => [...Eqs.availableEqsSpItems];
     const spLoop = () => {
@@ -108,4 +127,14 @@ static getDefaultItemExtra(type="txt"){
     };
 }
 
+static getEqImages(slides){
+
+    for (let i = 0; i < slides.length; i++) {
+        // const slide = slides[i];
+        // if(slide.)
+        
+    }
 }
+
+
+}//class

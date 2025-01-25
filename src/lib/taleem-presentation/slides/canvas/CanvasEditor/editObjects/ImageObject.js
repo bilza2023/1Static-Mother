@@ -4,10 +4,7 @@ import ItemObject from './ItemObject';
 export default class ImageObject extends ItemObject {
     constructor(itemData , assets) {
         super(itemData , assets);
-        if (this.itemData.itemExtra.src ==null || this.itemData.itemExtra.image == null){
-            this.itemData.itemExtra.src = '/system_images/gen/wood.jpg'; 
-        }
-        this.loadImage(); 
+     
         this.dialogueBox = [
             {
                 componentName: 'TrText',

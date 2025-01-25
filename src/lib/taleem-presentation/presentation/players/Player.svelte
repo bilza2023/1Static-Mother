@@ -17,7 +17,8 @@
 Taleem.registerSlideTypes();//--very important -- if removed will break the library
 /////////////////////////////////////////
 export let slides;
-export let audioData;
+export let soundUrl=null;
+export let imagesUrl=null;
 
 let assets=null;
 let player;
@@ -60,12 +61,12 @@ let showToolbarBool = false;
 
   let sound = null;
   onMount(async () => {
-//  debugger;
-    sound = await Taleem.loadSoundFromUrl(audioData); // Load the sound when the component mounts
-    assets =  await Taleem.loadAssets();
-    await Taleem.loadAppImages(slides);
-    player = new Taleem.Player(slides, sound);
-    await player.init();
+
+  assets =  await Taleem.loadAssets(slides,imagesUrl,soundUrl);
+  sound = assets.narration;
+  player = new Taleem.Player(slides, sound);
+  await player.init();
+  
   });
   onDestroy(() => {
       if (sound) {

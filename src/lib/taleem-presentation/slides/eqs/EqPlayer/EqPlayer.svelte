@@ -13,6 +13,7 @@
         
           export let items = []; 
           export let slideExtra; 
+          export let assets; 
           export let currentTime = 0;
           export let setPulse = ()=>{console.log("setPulse..add custom code");};
   
@@ -30,6 +31,7 @@
     {slideExtra}
     {currentTime}
     {setPulse}
+    {assets}
   />      
 
   <style>

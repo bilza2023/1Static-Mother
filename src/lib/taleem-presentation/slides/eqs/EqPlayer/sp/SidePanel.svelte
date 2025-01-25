@@ -6,6 +6,7 @@
    
    export let currentTime;
    export let slideExtra;
+   export let assets;
    
    let currentItem;
    
@@ -26,7 +27,7 @@
        <div class="item-container">
          {#if currentItem.itemExtra.sp.length > 0}    
            {#each currentItem.itemExtra.sp as eq}  
-             <ImgCodeTxt {eq} {slideExtra} />         
+             <ImgCodeTxt {eq} {slideExtra} {assets}/>         
            {/each}
          {/if}
        </div>

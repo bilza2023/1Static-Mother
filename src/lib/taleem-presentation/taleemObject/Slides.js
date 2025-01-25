@@ -15,17 +15,17 @@ export default class Slides {
 
   // Generate a dynamic demo slides / presentation
 //depricated
-  static getDynamicDemoSlide() {
-    const eqs = Eqs.getDynamicDemoSlide();
-    eqs.startTime = 0;
-    eqs.endTime = 10;
+  // static getDynamicDemoSlide() {
+  //   const eqs = Eqs.getDynamicDemoSlide();
+  //   eqs.startTime = 0;
+  //   eqs.endTime = 10;
 
-    const canvas = Canvas.getDynamicDemoSlide();
-    canvas.startTime = 10;
-    canvas.endTime = 20;
+  //   const canvas = Canvas.getDynamicDemoSlide();
+  //   canvas.startTime = 10;
+  //   canvas.endTime = 20;
 
-    return [eqs, canvas];
-  }
+  //   return [eqs, canvas];
+  // }
   static getDynamicSlides() {
     const eqs = Eqs.getDynamicSlide();
     eqs.startTime = 0;

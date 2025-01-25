@@ -6,20 +6,23 @@
       import {db} from '$lib/db.js';
       import Nav from '../Nav.svelte';
       import SlideEditBox from '$lib/SlideEditBox.svelte'; 
- 
+    
+   // Environment variables
+   const SOUND_URL = import.meta.env.VITE_SOUND_BASE_URL;
+  const IMAGES_URL = import.meta.env.VITE_IMAGES_BASE_URL;
+  const DEFAULT_AUDIO = import.meta.env.VITE_DEFAULT_AUDIO;
     ////////////////////////////////////////////
-      let slides;
+      let slides=null;
       let id;
       let presentation;
       let showToolbar=true;
-      export let audioData = undefined;
       let showSlideEditBox = false; //showSlideEditBox
     
   onMount(async()=>{
    
   id = new URLSearchParams(location.search).get("id");
     const resp = await db.tcode.getOne(id);
-    
+    // debugger;
     if (resp.ok){
         presentation = await resp.json();
         slides = presentation.slides;
@@ -61,10 +64,10 @@
     <div class="w-full bg-gray-800">
     {#if slides}
       <Editor
-        isBlob={true}
-        {showToolbar}
-        bind:slides={slides}
-        {audioData}
+      soundUrl={`${SOUND_URL}${presentation.filename}`}
+      imagesUrl= {IMAGES_URL}
+      {showToolbar}
+      bind:slides={slides}
         {save}
       />
     {/if}

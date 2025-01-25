@@ -17,7 +17,7 @@ onMount(async () => {
 try{
   tcode = new URLSearchParams(location.search).get("tcode");
   const resp = await db.tcode.get(`limit=1500&tcode=${tcode}&fields=-slides`);
-/////////////////////    
+/////////////////////  
     if (resp){
       const incomming = await resp.json();
       questions = incomming.data; //data.data.syllabus

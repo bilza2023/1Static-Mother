@@ -5,9 +5,9 @@ import Icons from '../../icons';
 import SoundButtons from './SoundButtons.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 export let show;
+export let assets;
 export let slides;
 export let addNew;
-export let isBlob;
 export let showSidePanel;
 export let currentSlideIndex;
 export let showSlideEditBox=false;
@@ -42,7 +42,8 @@ export let currentTime=0;
     
 
 {#if soundFile}
-<SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
+<SoundButtons  {soundFile}  bind:currentTime={currentTime} narration={assets.narration || null}
+  Icons = {assets.icons} />    
 {/if}
 
   </div> 

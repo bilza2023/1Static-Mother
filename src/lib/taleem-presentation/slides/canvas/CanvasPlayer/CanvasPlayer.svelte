@@ -39,16 +39,6 @@
     let interval;
     let isInitialized = false;
    
-$:{ //this is only for loading images
-  items;
-  for (let i = 0; i < items.length; i++) {
-    const element =   items[i];
-    if(element.itemExtra.type == 'image'){
-      loadImage(element.itemExtra); 
-    }
-  }
-}
-  
     function handleMouseMove(event) {
       eventMouseMove(event, ctx);
   }
@@ -102,7 +92,7 @@ $:{ //this is only for loading images
         
             //very important line
             const Obj = Taleem.Slides.Canvas.ItemsMap.get(item.itemExtra.type);
-        
+            // if(item.itemExtra.type === 'image'){debugger;}
             Obj.draw(ctx,item.itemExtra,assets);
             postDraw(ctx,assets);   
         }
@@ -177,19 +167,7 @@ $:{ //this is only for loading images
       }
     });
   
-  function loadImage(itemExtra) {
-  const img = new Image();
-  img.src = itemExtra.src;
 
-  img.onload = () => {
-      itemExtra.image = img;
-  };
-
-  img.onerror = () => {
-      console.error(`Image failed to load: ${itemExtra.src}`);
-  };
-  
-}
   </script>
   
   <div class="container">

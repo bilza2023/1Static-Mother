@@ -1,17 +1,6 @@
 // audioUtils.js
 import { Howl } from 'howler';
 
-// function isBlobData(data) {
-//     return !data.startsWith('http://') && !data.startsWith('https://') && !data.startsWith('data:');
-// }
-
-// async function loadSound(audioData) {
-//     if (isBlobData(audioData)) {
-//         return await loadSoundFromBlob(audioData);
-//     } else {
-//         return await loadSoundFromUrl(audioData);
-//     }
-// }
 
 async function loadSoundFromBlob(blobData) {
     return new Promise((resolve, reject) => {

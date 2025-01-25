@@ -1,12 +1,18 @@
 <script>
     //@ts-nocheck
+    import {onMount} from 'svelte';
     import Katex from 'svelte-katex';
     import Table from './Table.svelte';
     import TableCode from './TableCode.svelte';
     import { Taleem } from '../../../../index';
     
     export let eq;
+    export let assets;
     export let slideExtra;
+
+    onMount(async() => {
+      console.log("assets.presentationImages", assets.presentationImages);
+    });
     </script>
     
     <div class="eq-display">
@@ -19,13 +25,22 @@
           <Katex>{eq.code}</Katex>
         </div>
       {/if}
-    
+
       {#if eq.type == 'img' || eq.type == 'image'}
-        <img 
-          class="image-box" 
-          src={Taleem.imagesUrl + eq.code} 
-          alt="Not found" />
+      {#if assets.presentationImages.has(eq.code)}
+        <div class="image-box">
+          {@html assets.presentationImages.get(eq.code)?.outerHTML || `<p>Image ${eq.code} could not be rendered.</p>`}
+        </div>
+      {:else}
+        <p class="text-box">Image {eq.code} not found.</p>
       {/if}
+    {/if}
+    
+    
+    
+    
+    
+    
     
       {#if eq.type == 'table' || eq.type == 'tbl'}
         <Table code={eq.code} />

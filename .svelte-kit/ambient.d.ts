@@ -26,6 +26,9 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const VITE_SOUND_BASE_URL: string;
+	export const VITE_IMAGES_BASE_URL: string;
+	export const VITE_DEFAULT_AUDIO: string;
 	export const GJS_DEBUG_TOPICS: string;
 	export const LESSOPEN: string;
 	export const USER: string;
@@ -147,6 +150,9 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		VITE_SOUND_BASE_URL: string;
+		VITE_IMAGES_BASE_URL: string;
+		VITE_DEFAULT_AUDIO: string;
 		GJS_DEBUG_TOPICS: string;
 		LESSOPEN: string;
 		USER: string;

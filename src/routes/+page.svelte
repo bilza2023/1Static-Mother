@@ -1,7 +1,7 @@
     
 <script>
 //@ts-nocheck
-import {PageWrapper,HdgWithIcon,Centre} from '$lib/cmp';
+import {HdgWithIcon,Centre,PageWrapper} from '$lib/cmp';
 import {Icons,RESOURCE_URL,API_URL,onMount,ajaxPost} from '$lib/util';
 import NavBlog from '$lib/appComp/NavBlog.svelte';
 import BooksImages from '$lib/homePage/BooksImages.svelte';
