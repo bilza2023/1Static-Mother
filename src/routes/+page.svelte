@@ -4,6 +4,8 @@
 import {HdgWithIcon,Centre,PageWrapper} from '$lib/cmp';
 import {Icons,RESOURCE_URL,API_URL,onMount,ajaxPost} from '$lib/util';
 import NavBlog from '../lib/appComp/NavBlog.svelte';
+import isTeacher from "../lib/loginFns/isTeacher";
+import isAdmin from "../lib/loginFns/isAdmin";
 
 let tcode = 'fbise9math';
 let selectedEx ='1.1';
@@ -31,10 +33,6 @@ let selectedChapter = 1;
 
 </Centre> 
 
-
-
-
-
 <br/>
 
 <br/>
@@ -51,8 +49,9 @@ let selectedChapter = 1;
 <br/>
 
 <hr/>
-
-<div><a class='text-xs' href='/admin'>admin</a></div>      
+{#if isAdmin() || isTeacher()}
+<div><a class='text-xs' href='/admin'>admin</a></div>
+{/if}      
 <div class="text-xs">Taleem-Presentation version 0.8.0</div>
 
 </PageWrapper>

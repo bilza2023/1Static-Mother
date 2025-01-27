@@ -1,32 +1,23 @@
+import Cookies from 'js-cookie';
+import {jwtDecode} from "jwt-decode"; // Use default import for jwt-decode
 
-import {isLoginStore,isAdminStore , goto} from '$lib/util';
+export default function chqLogin() {
+  try {
+    const token = Cookies.get("token");
+    if (!token) {
+      return false; // No token found
+    }
 
-/**
- - This is just a temp arrangement later we add encrypted cookies
- This is where we check the login, we can change it here the strategy (cookies etc etc) and for rest of the app it will be changed.
- // --loiginFn , logoutfn and chqLogin all 3 work like hand in glove
-*/
+    const payload = jwtDecode(token);
 
-export default function chqLogin(){
-const token = localStorage.getItem('token');
-const teacher_status = localStorage.getItem('teacher_status');
- 
-      if (! token){
-        isLoginStore.set(false);
-        goto("/");
-      }else {
-        isLoginStore.set(true);
-      return true;                  
-      }
-      //=============================
-      if (! teacher_status){
-        isAdminStore.set(false);
-      }else { 
-        if (teacher_status == 'admin'){
-          isAdminStore.set(true);
-        }else {
-          isAdminStore.set(false);
-        }
-      return true;                  
-      }
+    // Check if required fields exist in the payload
+    if (payload.role && payload.email) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Invalid or missing token:", error);
+    return false; // Invalid token or decoding failed
+  }
 }

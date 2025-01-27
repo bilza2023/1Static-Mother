@@ -25,6 +25,8 @@
         presentation.status === 'final'
           ? `${SOUND_URL}/${presentation.filename}.opus`
           : DEFAULT_AUDIO;
+    }else {
+      console.error('Error fetching presentation:', resp.status, await resp.text());
     }
   });
 </script>

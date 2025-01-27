@@ -1,14 +1,9 @@
 
-import {goto ,isLoginStore,isAdminStore} from '$lib/util';
+import {goto } from '$lib/util';
 
-export default function logout(){
-    isLoginStore.set(false);
-    isAdminStore.set(false);
+import Cookies from 'js-cookie';
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("teacher_status");
-    localStorage.removeItem("teacher_name");
-    localStorage.removeItem("math_syllabus");
-     
-    goto('/login');
+export default function logout() {
+  Cookies.remove("token"); // Removes the token cookie
+  goto('/login');
 }

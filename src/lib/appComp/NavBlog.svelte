@@ -2,13 +2,10 @@
 // @ts-nocheck
 import {NavBtn,NavBtn2} from '$lib/cmp';
 import Logo from './Logo.svelte';
-import {onMount,Icons,chqLogin,goto} from '$lib/util';
+import {onMount,Icons,goto} from '$lib/util';
+import chqLogin from "../../lib/loginFns/chqLogin";
+import logout from "../../lib/loginFns/logout";
 
-function logout(){
-  localStorage.removeItem("token");
-  localStorage.removeItem("email");
-  goto('/login');
-}
 
 let isLogin = false;
 onMount( async ()=>{

@@ -21,6 +21,8 @@
 	"dependencies": {
 		"@zerodevx/svelte-toast": "^0.9.5",
 		"howler": "^2.2.4",
+		"js-cookie": "^3.0.5",
+		"jwt-decode": "^4.0.0",
 		"mathjs": "^12.3.0",
 		"simplerestclient2": "^1.0.5",
 		"svelte-katex": "0.1.2",
