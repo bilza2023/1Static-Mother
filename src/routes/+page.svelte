@@ -2,7 +2,7 @@
 <script>
 //@ts-nocheck
 import {HdgWithIcon,Centre,PageWrapper} from '$lib/cmp';
-import {Icons,RESOURCE_URL,API_URL,onMount,ajaxPost} from '$lib/util';
+import {RESOURCE_URL,API_URL} from '$lib/util';
 import NavBlog from '../lib/appComp/NavBlog.svelte';
 import isTeacher from "../lib/loginFns/isTeacher";
 import isAdmin from "../lib/loginFns/isAdmin";
@@ -18,7 +18,7 @@ let selectedChapter = 1;
 <PageWrapper>
 
     <Centre>
-        <HdgWithIcon bgColor='bg-stone-600' icon={Icons.BOOKS}> Your Online Home Tutor</HdgWithIcon>
+        <HdgWithIcon bgColor='bg-stone-600' icon='📚'> Your Online Home Tutor</HdgWithIcon>
     </Centre>
 
  <Centre>

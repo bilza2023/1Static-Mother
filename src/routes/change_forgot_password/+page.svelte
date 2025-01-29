@@ -1,8 +1,9 @@
-<script>
+underconstruction
+<!-- <script>
 //@ts-nocheck
 import Nav from '$lib/appComp/Nav.svelte';
 import {PageWrapper,HdgWithIcon,Centre,SectionHead,FormRow,InputElm,NumberElm,Comment,BtnWIconSm , BtnWIcon,FormElm,Lbl} from '$lib/cmp';
-import { Icons,ajaxPost,API_URL,toast } from '$lib/util';
+import { ajaxPost,API_URL,toast } from '$lib/util';
 
 let email ="";
 let password =""; 
@@ -32,7 +33,7 @@ async function changePassword(){
     <div class='w-10/12 '>
         <FormElm>
             <div class='flex justify-center'>
-                <HdgWithIcon icon={Icons.KEY}>Change Password</HdgWithIcon>
+                <HdgWithIcon icon='🔑'>Change Password</HdgWithIcon>
             </div>
 
             <div class='flex justify-center pt-1 text-white'>
@@ -78,7 +79,7 @@ async function changePassword(){
             </div>
            
            <div class='flex justify-center '>
-                <BtnWIconSm icons={ Icons.SAVE }
+                <BtnWIconSm icons={ '💾' }
                 clk = {()=>changePassword(email,password,password2)}
                 >Change Password</BtnWIconSm>
            </div>
@@ -90,4 +91,4 @@ async function changePassword(){
 
 </PageWrapper>
 
-
+ -->

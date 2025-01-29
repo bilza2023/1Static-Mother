@@ -1,6 +1,6 @@
 <script>
     import {NavBtn,HdgWithIcon} from '$lib/cmp';
-    import {Icons} from '$lib/util';
+    
     import NavBlog from '$lib/appComp/NavBlog.svelte';
     </script>
     

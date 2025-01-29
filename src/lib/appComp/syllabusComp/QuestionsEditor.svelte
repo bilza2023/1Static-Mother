@@ -1,7 +1,7 @@
 <script>
     //@ts-nocheck
     import { Card } from '$lib/cmp';
-    import {Icons,toast,ajaxPost,API_URL ,onMount} from '$lib/util';
+    import {toast,ajaxPost,API_URL ,onMount} from '$lib/util';
     import FilterByStatusBar from "./FilterByStatusBar.svelte";
     import  QuestionsFlexBox from "./QuestionsFlexBox.svelte";
 
@@ -131,13 +131,14 @@ selectedQuestions = selectedQuestions;
         }
     }
     
-    function getStatusIcon(status){
-      if (status == 'empty') {return '🧊'  }
-      if (status == 'filled' ) {return Icons.PENCIL }
-      if (status == 'fill' ) {return Icons.PENCIL }
-      if (status == 'locked') {return '🔒' }
-      if (status == 'final') {return Icons.STUDENTCAP }
-    }
+     
+function getStatusIcon(status){
+    if (status == 'empty') {return '🧊'  }
+    if (status == 'filled' ) {return '🖊️' }
+    if (status == 'fill' ) {return  '📝'}
+    if (status == 'locked') {return '🔒' }
+    if (status == 'final') {return '🎓' }
+}
     
 onMount(async()=>{
     // debugger;

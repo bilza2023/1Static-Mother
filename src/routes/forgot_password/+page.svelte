@@ -1,7 +1,8 @@
-<script>
+underconstruction
+<!-- <script>
 //@ts-nocheck
 import {PageWrapper,HdgWithIcon,Centre,SectionHead,FormRow,InputElm,NumberElm,Comment,BtnWIconSm , BtnWIcon,FormElm,Lbl} from '$lib/cmp';
-import { Icons,API_URL,ajaxPost } from '$lib/util';
+import { API_URL,ajaxPost } from '$lib/util';
 import Nav from '$lib/appComp/Nav.svelte';
 import { toast } from '@zerodevx/svelte-toast';
 
@@ -29,7 +30,7 @@ if(resp.ok){
     <div class='w-10/12 '>
         <FormElm>
             <div class='flex justify-center'>
-                <HdgWithIcon icon={Icons.KEY}>Forgot Password</HdgWithIcon>
+                <HdgWithIcon icon='🔑'>Forgot Password</HdgWithIcon>
             </div>
 
             <div class='flex justify-center pt-1 text-white'>
@@ -50,7 +51,7 @@ if(resp.ok){
 <h4>A link will be send to this email</h4>
 </div>           
            <div class='flex justify-center '>
-                <BtnWIconSm icons={ Icons.SAVE }
+                <BtnWIconSm icons={ '💾' }
                 clk = {forgot_passwordFn}
                 >Send Link</BtnWIconSm>
            </div>
@@ -62,4 +63,4 @@ if(resp.ok){
 
 </PageWrapper>
 
-
+ -->

@@ -1,7 +1,7 @@
 <script>
 //@ts-nocheck
 import {PageWrapper,HdgWithIcon,BtnWIconSm,FormElm} from '$lib/cmp';
-import { Icons } from '$lib/util';
+
 import loginFn from '$lib/loginFns/loginFn';
 
 let email ="";
@@ -18,7 +18,7 @@ import Nav from '../../lib/appComp/Nav.svelte';
     <div class='w-10/12 '>
         <FormElm>
             <div class='flex justify-center'>
-                    <HdgWithIcon icon={Icons.KEY} >Login</HdgWithIcon>
+                    <HdgWithIcon icon= '🔑'>Login</HdgWithIcon>
             </div>
 
             <div class='flex justify-center pt-1 text-white'>
@@ -52,9 +52,11 @@ import Nav from '../../lib/appComp/Nav.svelte';
 </div>           
 
            <div class='flex justify-center '>
-                <BtnWIconSm icons={ Icons.SAVE }
+            <BtnWIconSm icons= '💾'
                 clk = {()=>loginFn(email,password)}
-                >Login</BtnWIconSm>
+                >
+                Login
+            </BtnWIconSm>
            </div>
 
         </FormElm>

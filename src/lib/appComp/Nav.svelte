@@ -2,7 +2,7 @@
 // @ts-nocheck
 import {NavBtn,NavBtn2} from '$lib/cmp';
 import Logo from './Logo.svelte';
-import {onMount,Icons,goto} from '$lib/util';
+import {onMount,goto} from '$lib/util';
 
 import chqLogin from "../../lib/loginFns/chqLogin";
 import logout from "../../lib/loginFns/logout";
@@ -29,14 +29,14 @@ onMount( async ()=>{
     <div class='flex'>
     {#if isLogin}
 
-    <NavBtn title='Payment' icon ={Icons.ROCKET} url='/payment'/>
-    <NavBtn title='Blog' icon ={Icons.BOOK} url='/blog'/>
+    <NavBtn title='Payment' icon = '🚀' url='/payment'/>
+    <NavBtn title='Blog' icon ='📘' url='/blog'/>
       <NavBtn2 title='Logout' icon ='🚪' clk={logout}/>
     
     {:else}
 
-    <NavBtn title='Blog' icon ={Icons.BOOK} url='/blog'/>
-    <NavBtn title='Payment' icon ={Icons.ROCKET} url='/payment'/>
+    <NavBtn title='Blog' icon ='📘' url='/blog'/>
+    <NavBtn title='Payment' icon = '🚀' url='/payment'/>
     <NavBtn title='Login' icon ='🔑'  url='/login'/>
     <NavBtn title='Signup' icon ='🔓'  url='/signup'/>
     {/if}

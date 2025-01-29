@@ -1,7 +1,7 @@
 <script>  
   //@ts-nocheck
   import { PageWrapper,HdgWithIcon } from 'sveltetools_bils/src/cmp';
-  import { API_URL,onMount,toast,Icons,goto } from '$lib/util';
+  import { API_URL,onMount,toast,goto } from '$lib/util';
   import {db} from "$lib";
   import Nav from '../Nav.svelte';
   import SyllabusComp from '$lib/appComp/syllabusComp/SyllabusComp.svelte';
@@ -39,7 +39,7 @@ try{
   <PageWrapper>
   
   <div class='flex justify-center   p-2 '>
-   <HdgWithIcon bgColor='bg-stone-600' icon={Icons.TEST}>{tcode}</HdgWithIcon>
+   <HdgWithIcon bgColor='bg-stone-600' icon='🧪'>{tcode}</HdgWithIcon>
   </div>
   
   {#if questions}

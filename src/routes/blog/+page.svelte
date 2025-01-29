@@ -1,6 +1,5 @@
 <script>
 import {NavBtn,HdgWithIcon} from '$lib/cmp';
-import {Icons} from '$lib/util';
 import NavBlog from '$lib/appComp/NavBlog.svelte';
 import BlogEntry from '../../lib/appComp/BlogEntry.svelte';
 </script>
@@ -16,6 +15,7 @@ import BlogEntry from '../../lib/appComp/BlogEntry.svelte';
 <BlogEntry title="What is taleem.help" url="blog/taleem"/>
 
 <BlogEntry title="Dockers Basic Commands" url="blog/dockers"/>
+<a href="notes/index.html">test</a>
 
 
 

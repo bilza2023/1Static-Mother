@@ -20,7 +20,7 @@ import Nav from '$lib/appComp/Nav.svelte';
     <div class='w-10/12 '>
         <FormElm>
             <div class='flex justify-center'>
-                <HdgWithIcon icon={Icons.KEY}>Students  Signup</HdgWithIcon>
+                <HdgWithIcon icon='🔑'>Students  Signup</HdgWithIcon>
             </div>
 
             <div class='flex justify-center pt-1 text-white'>
@@ -67,7 +67,7 @@ import Nav from '$lib/appComp/Nav.svelte';
             </div>
            
            <div class='flex justify-center '>
-                <BtnWIconSm icons={ Icons.SAVE }
+                <BtnWIconSm icons={ '💾' }
                 clk = {()=>signupFn(email,password,password2)}
                 >Signup</BtnWIconSm>
            </div>

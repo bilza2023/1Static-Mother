@@ -3,29 +3,20 @@
   //@ts-nocheck 
   import {PlayerNoSound,Taleem} from '$lib/taleem-presentation';
   import {onMount} from "svelte";
-  import {db} from '$lib/db.js';
+  import fetchPresentation from '$lib/apiCalls/fetchPresentation';
   
   let slides=null;
-      let id;
-      let presentation;
-      let audioDataUrl;
-  
+  let id;
+  let presentation;
+  let audioDataUrl;
 
-  onMount(async()=>{
-    /////--Testing Code
-    // slides = Taleem.Slides.getDynamicSlides();
-    // audioDataUrl = '/music.opus';
-    ///////////////////Real code///////////////////////////////
-    id = new URLSearchParams(location.search).get("id");
-    const resp = await db.tcode.getOne(id);
-    if (resp.ok){
-        presentation = await resp.json();
-        slides = presentation.slides;
-        // if the question status is not final we assign default music sound
-        audioDataUrl = (presentation.status === 'final') ? `https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/${presentation.filename}.opus`  :  '/music.opus';
-        // debugger;
-      }
-  });
+///////////////////////////////////////////////////////////////////      
+onMount(async () => {
+  id = new URLSearchParams(location.search).get("id");
+  presentation = await fetchPresentation(id);
+  if (presentation) slides = presentation.slides;
+});
+//////////////////////////////////////////////////////////////////
 
   </script> 
 

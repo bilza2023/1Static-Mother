@@ -8,7 +8,7 @@
 import {PageWrapper,HdgWithIcon} from 'sveltetools_bils/src/cmp';
 import Katex from 'svelte-katex';
 
-import {Icons, onMount,toast,checkToken,checkAdminToken} from '$lib/util';
+import { onMount,toast,checkToken,checkAdminToken} from '$lib/util';
 import Nav from '../Nav.svelte';
 
 let isLogin = false;
@@ -72,7 +72,7 @@ const list = [
 <PageWrapper>
 
 <div class='flex justify-center p-2 '>
- <HdgWithIcon bgColor='bg-stone-600' icon={Icons.BOOK}>Help</HdgWithIcon>
+ <HdgWithIcon bgColor='bg-stone-600' icon='📘'>Help</HdgWithIcon>
 </div>
 
 

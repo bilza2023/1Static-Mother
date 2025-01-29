@@ -1,18 +1,17 @@
 <script>
     //@ts-nocheck
     import { Card } from '$lib/cmp';
-    import {Icons,toast,ajaxPost,API_URL } from '$lib/util';
+    import {toast,ajaxPost,API_URL } from '$lib/util';
     import FilterByStatusBar from "./FilterByStatusBar.svelte";
  
     export let questions;
-    // console.log("questions" ,questions);
     export let tcode;
     
 
 async function save(e,question){
     question.sortOrder = e.target.value;
 
-  const resp = await ajaxPost( `${API_URL}/tcode/update` , { 	question } );
+   const resp = await ajaxPost( `${API_URL}/tcode/update` , { 	question } );
     if(resp.ok){
         // resort();
     toast.push('saved');}
@@ -21,38 +20,31 @@ async function save(e,question){
 
 }    
 
-    function getTitle(question){
-        
-        if (question.name && question.name !== ''){
-            return `${question.name} `;
-        }else {
-            let r = `Ex ${question.exercise} Q-${question.questionNo}`;
-            if(question.part || question.part != 0){
-                r+= ` pt ${question.part}`
-            }
-            return r;
+function getTitle(question){
+    
+    if (question.name && question.name !== ''){
+        return `${question.name} `;
+    }else {
+        let r = `Ex ${question.exercise} Q-${question.questionNo}`;
+        if(question.part || question.part != 0){
+            r+= ` pt ${question.part}`
         }
+        return r;
     }
+}
     
-    function getStatusIcon(status){
-      if (status == 'empty') {return '🧊'  }
-      if (status == 'filled' ) {return Icons.PENCIL }
-      if (status == 'fill' ) {return Icons.PENCIL }
-      if (status == 'locked') {return '🔒' }
-      if (status == 'final') {return Icons.STUDENTCAP }
-    }
-    
-
-
+function getStatusIcon(status){
+    if (status == 'empty') {return '🧊'  }
+    if (status == 'filled' ) {return '🖊️' }
+    if (status == 'fill' ) {return  '📝'}
+    if (status == 'locked') {return '🔒' }
+    if (status == 'final') {return '🎓' }
+}
 
     </script>
 
-
-
      {#if questions.length > 0 }
     
-
-
     <div class='flex  bg-gray-700 p-2 m-2 rounded-md w-full justify-center  flex-wrap  '>
     
             {#each questions as question,index}    
@@ -61,7 +53,7 @@ async function save(e,question){
     
                 <Card
                 title = {getTitle(question)}
-                icon={Icons.TEST}
+                icon='🧪'
                 url = {"#"}
                 >
                     
@@ -74,20 +66,20 @@ async function save(e,question){
                         
                     {#if question.status !== 'final' }
                     <div class="bg-gray-800 rounded-md m-1 p-1 text-xs px-2">
-                        <a href= {`/editor?tcode=${tcode}&filename=${question.filename}`} target="_blank">{Icons.HAMMER_AND_WRENCH}</a>
+                        <a href= {`/editor?tcode=${tcode}&filename=${question.filename}`} target="_blank">🛠️</a>
                     </div>
                     {/if}
         
                     {#if question.status !== 'empty' }
                         <div class="bg-gray-800 rounded-md m-1 p-1 text-xs px-2">
-                        <a href= {`/player?tcode=${tcode}&filename=${question.filename}`} target="_blank">{Icons.START}</a>
+                        <a href= {`/player?tcode=${tcode}&filename=${question.filename}`} target="_blank">▶</a>
                         </div>
                     {/if}
                     
     
                     {#if question.status !== 'empty' }
                     <div class="bg-gray-800 rounded-md m-1 p-1 text-xs px-2">
-                    <a href= {`/player2?tcode=${tcode}&filename=${question.filename}`} target="_blank">{Icons.COMPUTER}</a>
+                    <a href= {`/player2?tcode=${tcode}&filename=${question.filename}`} target="_blank">💻</a>
                     </div>
                     {/if}
     

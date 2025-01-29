@@ -4,7 +4,7 @@
 import {NavBtn,NavBtn2} from 'sveltetools_bils/src/cmp';
 import NavLink from '../../lib/appComp/NavLink.svelte';
 import Logo from './Logo.svelte';
-import {Icons,goto, toast,onMount} from '$lib/util';
+import {goto, toast,onMount} from '$lib/util';
 
 export let showSlideEditBox=false;
 export let presentation='';
@@ -52,15 +52,16 @@ onMount(() => {
 <NavBtn2 title='Edit' icon='🛠️'  clk={() => showSlideEditBox = !showSlideEditBox} />
     <NavBtn2 title='Fold' icon='🪜'  clk={() => showToolbar = !showToolbar} />
 <NavLink title='Player' icon='🚀'  url= {`/player?id=${presentation._id}`} target='_blank'/>
+<NavLink title='PlayerNoSound' icon='🔇'  url= {`/playerNoSound?id=${presentation._id}`} target='_blank'/>
     {/if}
 
 </div>
             
     
     <div class='flex'>
-    <NavBtn title='Question Manager' icon ={Icons.QUESTIONMARK} url='/admin/questionManager'/>
+    <NavBtn title='Question Manager' icon ='❓' url='/admin/questionManager'/>
     <NavBtn  url="/notes/index.html" title="Notes" icon="📚" />
-    <NavBtn title='Help' icon ={Icons.BOOK}    url='/admin/help'/>
+    <NavBtn title='Help' icon ='📘'    url='/admin/help'/>
 </div>
 </div><!--outer most div-->
 

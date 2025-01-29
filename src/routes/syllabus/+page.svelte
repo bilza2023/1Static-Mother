@@ -1,7 +1,7 @@
 <script>  
     //@ts-nocheck
     import { PageWrapper,HdgWithIcon } from '$lib/cmp';
-    import { API_URL,onMount,toast,Icons,goto,checkToken,checkAdminToken,ajaxPost } from '$lib/util';
+    import { API_URL,onMount,toast,goto } from '$lib/util';
     import {db} from "$lib";
 
     // import Nav from '$lib/appComp/Nav.svelte';
@@ -13,8 +13,7 @@
     let tcode; 
     /////////////////////////////////
     let questions;
-    let isLogin = false;
-    let isAdmin = false;
+ 
     
   onMount(async () => {
   try{
@@ -26,8 +25,7 @@
       if (resp){
         const incomming = await resp.json();
         questions = incomming.data;
-        isLogin = checkToken();
-        isAdmin = checkAdminToken();
+     
       }else {
        const data = await resp.json();
        chapter_map_array = await chapter_map(questions);
@@ -41,11 +39,11 @@
   
     ////////////////////////////////////////////////////////
     </script>
-    <Nav {isAdmin} {isLogin}/>
+    <Nav />
     <PageWrapper>
     
     <div class='flex justify-center   p-2 '>
-     <HdgWithIcon bgColor='bg-stone-600' icon={Icons.TEST}>{tcode}</HdgWithIcon>
+     <HdgWithIcon bgColor='bg-stone-600' icon='🧪' >{tcode}</HdgWithIcon>
     </div>
     
     {#if questions}
