@@ -8,24 +8,10 @@
 import {PageWrapper,HdgWithIcon} from 'sveltetools_bils/src/cmp';
 import Katex from 'svelte-katex';
 
-import { onMount,toast,checkToken,checkAdminToken} from '$lib/util';
+import { toast} from '$lib/util';
 import Nav from '../Nav.svelte';
 
-let isLogin = false;
-let isAdmin = false;
-onMount(async () => {
-  try{
-    if (checkToken()){
-      isLogin = true;
-        if (checkAdminToken()){
-            isAdmin = true;
-        }
-    }     
 
-  } catch (e) {
-       toast.push('failed to load');
-  }      
-});
 
 const list = [
   { title: "Fraction", code: "\\frac{3}{2}" },

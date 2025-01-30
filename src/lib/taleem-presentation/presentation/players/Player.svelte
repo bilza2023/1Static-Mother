@@ -12,7 +12,7 @@
   import PresentationModeUi from './PresentationModeUi.svelte';
   import { scale } from 'svelte/transition';
   import { Taleem } from '../../index';
-
+ import MessageBar from "../../../../lib/appComp/MessageBar.svelte";
 ////////////////////====Slides Registration///////
 Taleem.registerSlideTypes();//--very important -- if removed will break the library
 /////////////////////////////////////////
@@ -60,10 +60,15 @@ let showToolbarBool = false;
   }
 
   let sound = null;
+  let soundNotAvailable = false;
   onMount(async () => {
 
   assets =  await Taleem.loadAssets(slides,imagesUrl,soundUrl);
   sound = assets.narration;
+  // console.log("sound",sound);
+  if(!sound){
+    soundNotAvailable = true;
+  }
   player = new Taleem.Player(slides, sound);
   await player.init();
   
@@ -77,7 +82,12 @@ let showToolbarBool = false;
 
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="container" on:mousemove={showToolbar}>
+<div class="container" on:mousemove={showToolbar} >
+
+{#if soundNotAvailable}
+<MessageBar text="🔇 Sound file not found" backgroundColor="#5b5b0f" color="#ff1500" fontSize="18px" />
+{/if}  
+
   {#if player}
     {#if showToolbarBool}
       <div

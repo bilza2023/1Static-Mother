@@ -24,7 +24,8 @@ Taleem.registerSlideTypes();//--very important -- if removed will break the libr
   let assets=null;
 
   export let slides;
-
+  export let imagesUrl=null;
+  
   let player;
 
   function showToolbar() {
@@ -61,10 +62,10 @@ Taleem.registerSlideTypes();//--very important -- if removed will break the libr
   }
 
   onMount(async () => {
-    assets =  await Taleem.loadAssets();
-    await Taleem.loadAppImages(slides);
-    player = new Taleem.PlayerNoSound(slides);
-    await player.init(); // init is required even if no sound
+  assets =  await Taleem.loadAssets(slides,imagesUrl);
+  player = new Taleem.PlayerNoSound(slides);
+  await player.init(); // init is required even if no sound
+  
   });
 </script>
 

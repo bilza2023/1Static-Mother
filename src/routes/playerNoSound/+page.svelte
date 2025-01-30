@@ -9,11 +9,12 @@
   let id;
   let presentation;
   let audioDataUrl;
-
+  const IMAGES_URL = import.meta.env.VITE_IMAGES_BASE_URL;
 ///////////////////////////////////////////////////////////////////      
 onMount(async () => {
   id = new URLSearchParams(location.search).get("id");
   presentation = await fetchPresentation(id);
+  
   if (presentation) slides = presentation.slides;
 });
 //////////////////////////////////////////////////////////////////
@@ -26,7 +27,8 @@ onMount(async () => {
            
         {#key slides}
             <PlayerNoSound
-              slides={slides} 
+            imagesUrl={IMAGES_URL}
+            slides={slides} 
             />
         {/key}
       </div>

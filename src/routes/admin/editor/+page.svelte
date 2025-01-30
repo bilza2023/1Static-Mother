@@ -13,6 +13,7 @@
       let slides=null;
       let id;
       let presentation;
+      let soundUrlComplete=null;
       let showToolbar=true;
       let showSlideEditBox = false; //showSlideEditBox
 
@@ -20,6 +21,7 @@
 onMount(async () => {
   id = new URLSearchParams(location.search).get("id");
   presentation = await fetchPresentation(id);
+  soundUrlComplete = SOUND_URL + "/" + presentation.filename + ".opus";
   if (presentation) slides = presentation.slides;
 });
 //////////////////////////////////////////////////////////////////\\\\
@@ -37,7 +39,8 @@ async function save() {
     <div class="w-full bg-gray-800">
     {#if slides}
       <Editor
-      soundUrl={`${SOUND_URL}${presentation.filename}` || DEFAULT_AUDIO}
+      soundUrl={soundUrlComplete}
+
       imagesUrl= {IMAGES_URL}
       {showToolbar}
       bind:slides={slides}
