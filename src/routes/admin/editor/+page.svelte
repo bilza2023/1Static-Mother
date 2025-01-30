@@ -36,15 +36,14 @@ async function save() {
   <SlideEditBox   bind:item={presentation}  />
   {/if}
 
-    <div class="w-full bg-gray-800">
-    {#if slides}
-      <Editor
-      soundUrl={soundUrlComplete}
-
-      imagesUrl= {IMAGES_URL}
-      {showToolbar}
-      bind:slides={slides}
-        {save}
-      />
-    {/if}
-    </div>
+        <div class="w-full bg-gray-800">
+        {#if slides}
+              <Editor
+                      soundUrl={soundUrlComplete}
+                      imagesUrl= {IMAGES_URL}
+                      {showToolbar}
+                      bind:slides={slides}
+                      {save}
+              />
+        {/if}
+        </div>
