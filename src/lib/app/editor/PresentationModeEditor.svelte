@@ -5,7 +5,8 @@
   import Icons  from "../icons";
   // import {Taleem} from '../../index';
   import {CanvasEditor} from '$lib/taleem-canvas/index';
-  // import EqsEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
+  import EqsEditor from '../../taleem-presentation/slides/eqs/EqsEditor/EqsEditor.svelte';
+  // import EqsEditor from '$lib/app/../../taleem-presentation/slides/eqs/EqsEditor/EqsEditor.svelte';
 
   export let currentTime = 0;
   export let currentSlide;
@@ -78,8 +79,8 @@ for (let i = 0; i < currentSlide.items.length; i++) {
   {/if}
   
   {#if (currentSlide.type).toLowerCase() == "eqs"}
-<h3>Nothing for Now</h3>
-  <!-- <EqsEditor 
+<!-- <h3>Nothing for Now</h3> -->
+  <EqsEditor 
   {currentSlide}
   bind:items={currentSlide.items}
 
@@ -89,7 +90,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
   bind:slideExtra={currentSlide.slideExtra}
   {currentTime}
   />
-   -->
+  
   {/if}
 
 {/if}
