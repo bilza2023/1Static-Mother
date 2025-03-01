@@ -4,8 +4,7 @@
     // import Taleem    from   '$lib/app/taleemObject/Taleem';
 
     import { onMount } from 'svelte';
-    import {presentationData} from './static_slide_data';
-
+    import {presentationData} from '$lib/static_slide_data.js';
     let slides = null;
     let soundUrlComplete=null;
     let audioDataUrl;
