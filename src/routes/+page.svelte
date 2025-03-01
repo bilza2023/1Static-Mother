@@ -49,9 +49,9 @@ let selectedChapter = 1;
 <br/>
 
 <hr/>
-{#if isAdmin() || isTeacher()}
+<!-- {#if isAdmin() || isTeacher()} -->
 <div><a class='text-xs' href='/admin'>admin</a></div>
-{/if}      
+<!-- {/if}       -->
 <div class="text-xs">Taleem-Presentation version 0.8.0</div>
 
 </PageWrapper>

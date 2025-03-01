@@ -8,8 +8,6 @@
   import TimingErrorDiv from "./TimingErrorDiv.svelte";
   import { fade } from 'svelte/transition';
  
-  // Initialize slide types
-  Taleem.registerSlideTypes();
 
   export let soundUrl;
   export let imagesUrl;
@@ -21,7 +19,7 @@
   // Local state
   let currentTime = 0;
   let currentSlideIndex = 0;
-  let showSidePanel = false;
+  let showSidePanel = true;
   let show = false;
   let ready = false;
   let assets = null; //starts here 
@@ -121,6 +119,7 @@
   // Slide operations
   function addNew(slideType) {
     try {
+      debugger;
       if(slideType === 'Eqs'){slideType='eqs';}
 
       const newSlide = Taleem.Slides.getNewSlide(slideType);
@@ -192,8 +191,7 @@
   }
 
 onMount(async()=>{
-  const isEditorMode = true;
-  assets = await Taleem.loadAssets(slides, imagesUrl, soundUrl, isEditorMode);
+  debugger;
 
   ready = true;
 });
@@ -230,8 +228,6 @@ onMount(async()=>{
   {#if timingError}
   <TimingErrorDiv {timingErrorMessage}/>
   {/if}
-
-
 
   <div class="flex justify-start w-full">
     {#if slides?.length}

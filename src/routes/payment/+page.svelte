@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 //@ts-nocheck
 import {PageWrapper,HdgWithIcon,Centre} from '$lib/cmp';
 import MathCard from '$lib/homePage/MathCard.svelte';
@@ -26,4 +26,4 @@ import PaymentOptions from "./PaymentOptions.svelte";
 <br/>
 <br/>
 <br/>
-</PageWrapper>
+</PageWrapper> -->

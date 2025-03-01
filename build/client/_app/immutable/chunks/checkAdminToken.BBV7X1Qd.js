@@ -1,1 +1,0 @@
-function t(){const e=localStorage.getItem("token");return!(!e||e==""||e==null)}function n(){const e=localStorage.getItem("teacher_status");return!e||e==""||e==null?!1:e=="admin"}export{n as a,t as c};

@@ -5,6 +5,7 @@
   import savePresentation  from '$lib/apiCalls/savePresentation';
   import Nav from '../Nav.svelte';
   import SlideEditBox from '$lib/SlideEditBox.svelte'; 
+  import {presentationData} from './permanent_test_data';
   //Environment variables
   const SOUND_URL = import.meta.env.VITE_SOUND_BASE_URL;
   const IMAGES_URL = import.meta.env.VITE_IMAGES_BASE_URL;
@@ -19,10 +20,11 @@
 
 /////////////////////////////////////////////////////////////\\\\\\      
 onMount(async () => {
-  id = new URLSearchParams(location.search).get("id");
-  presentation = await fetchPresentation(id);
-  soundUrlComplete = SOUND_URL + "/" + presentation.filename + ".opus";
-  if (presentation) slides = presentation.slides;
+  // id = new URLSearchParams(location.search).get("id");
+  // presentation = await fetchPresentation(id);
+  // soundUrlComplete = SOUND_URL + "/" + presentation.filename + ".opus";
+  // if (presentation) slides = presentation.slides;
+  slides = presentationData;
 });
 //////////////////////////////////////////////////////////////////\\\\
 async function save() {

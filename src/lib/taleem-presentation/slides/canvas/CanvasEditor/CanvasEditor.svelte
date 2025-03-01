@@ -1,7 +1,7 @@
 <script>
     import uuid from '../../uuid';
     import {selectedItemIndexStore} from "../store";
-
+ 
     import { onMount, onDestroy } from "svelte";
     import itemToObject from "./editObjects/itemToObject";
     //-- we are picking up canvas player directy not  using index.js

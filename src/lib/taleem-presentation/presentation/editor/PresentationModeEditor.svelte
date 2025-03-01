@@ -4,12 +4,11 @@
   import { onMount } from 'svelte';
   import Icons  from "../icons";
   import {Taleem} from '../../index';
+  import {CanvasEditor} from '$lib/taleem-canvas/index';
+  // import EqsEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
 
-  const registry = Taleem.SlideRegistry.getInstance();
-  
   export let currentTime = 0;
   export let currentSlide;
-  export let assets;
 
   let ready = false;
   
@@ -18,6 +17,8 @@ $:{
 }   
  
 onMount(async()=>{
+  debugger;
+  console.log("currentSlide" , currentSlide);
 ready = true;
 // debugger;
 }) ; 
@@ -61,22 +62,37 @@ for (let i = 0; i < currentSlide.items.length; i++) {
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div tabindex="0">
-  {#if currentSlide && ready}
-      <!-- svelte-ignore missing-declaration -->
-      <svelte:component 
-          this={registry.getEditorComponent((currentSlide.type).toLowerCase())}
-                   
-          {currentSlide}
-          bind:items={currentSlide.items}
-      
-          slideStartTime={currentSlide.startTime}
-          slideEndTime={currentSlide.endTime}
-          
-          bind:slideExtra={currentSlide.slideExtra}
-          {currentTime}
-          {assets}
-          />
-          {/if}
-        
+{#if currentSlide && ready}
+  
+  {#if (currentSlide.type).toLowerCase() == "canvas"}
+    <CanvasEditor 
+    {currentSlide}
+    bind:items={currentSlide.items}
+
+    slideStartTime={currentSlide.startTime}
+    slideEndTime={currentSlide.endTime}
+     
+    bind:slideExtra={currentSlide.slideExtra}
+    {currentTime}
+    
+    />
+  {/if}
+  
+  {#if (currentSlide.type).toLowerCase() == "eqs"}
+<h3>Nothing for Now</h3>
+  <!-- <EqsEditor 
+  {currentSlide}
+  bind:items={currentSlide.items}
+
+  slideStartTime={currentSlide.startTime}
+  slideEndTime={currentSlide.endTime}
+  
+  bind:slideExtra={currentSlide.slideExtra}
+  {currentTime}
+  />
+   -->
+  {/if}
+
+{/if}
           
 </div>
