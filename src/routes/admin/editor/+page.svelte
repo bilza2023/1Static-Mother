@@ -1,5 +1,5 @@
 <script>
-  import Editor from '../../../lib/app/editor/Editor.svelte';
+  import {Editor} from '$lib/app';
   import {onMount,toast} from "$lib/util";
   import fetchPresentation from '$lib/apiCalls/fetchPresentation';
   import savePresentation  from '$lib/apiCalls/savePresentation';

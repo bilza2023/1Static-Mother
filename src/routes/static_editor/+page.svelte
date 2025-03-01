@@ -26,8 +26,6 @@ async function save() {
 }
 </script>
   
-<h6>Nav...</h6>  
- 
 <Editor
 soundUrl={soundUrlComplete}
 imagesUrl= {IMAGES_URL}

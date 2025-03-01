@@ -1,5 +1,5 @@
 <script>
-   import Icons from "../../../Icons.js"; 
+   import Icons from "../../icons"; 
 
   
     export let taleemCanvas;

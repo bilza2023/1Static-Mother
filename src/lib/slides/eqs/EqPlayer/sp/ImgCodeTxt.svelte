@@ -4,7 +4,7 @@
     import Katex from 'svelte-katex';
     import Table from './Table.svelte';
     import TableCode from './TableCode.svelte';
-    import { Taleem } from '../../../../index';
+    // import { Taleem } from '../../../../index';
     
     export let eq;
     export let assets;

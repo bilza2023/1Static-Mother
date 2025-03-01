@@ -17,6 +17,7 @@
 
 /////////////////////////////////////////////////////////////\\\\\\      
 onMount(async () => {
+  debugger;
   id = new URLSearchParams(location.search).get("id");
   presentation = await fetchPresentation(id);
   if (presentation) slides = presentation.slides;

@@ -3,10 +3,8 @@
 
   import { onMount } from 'svelte';
   import Icons  from "../icons";
-  // import {Taleem} from '../../index';
-  import {CanvasEditor} from '$lib/taleem-canvas/index';
-  // import EqsEditor from '../../taleem-presentation/slides/eqs/EqsEditor/EqsEditor.svelte';
-  import EqsEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
+  import CanvasEditor from '../../slides/canvas/CanvasEditor/CanvasEditor.svelte';
+  import EqsEditor from '$lib/slides/eqs/EqsEditor/EqsEditor.svelte';
   export let currentTime = 0;
   export let currentSlide;
 
