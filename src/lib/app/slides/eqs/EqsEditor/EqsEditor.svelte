@@ -7,7 +7,7 @@
 import TopToolbar from './TopToolbar.svelte';
 
 import Row from './Row.svelte';
-import Eqs from "../eqs_object/Eqs";
+import Taleem from "$lib/js_modules/taleem-object/Taleem";
   import { onMount } from 'svelte';
 
 // export let just items and currentTime which is required for Editor only
@@ -65,7 +65,7 @@ function delEq(index) {
 
 
 function addEq(i=0) {
-  const newItem = Eqs.getNewItem();
+  const newItem = Taleem.Eqs.getNewItem();
   items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
 }
 function setFakeTimings() {

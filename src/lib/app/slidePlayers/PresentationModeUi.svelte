@@ -1,7 +1,7 @@
 <script>
   //@ts-nocheck
   import { onMount } from 'svelte';
-  import Taleem from "../taleemObject/Taleem";
+  import Taleem from "$lib/js_modules/taleem-object/Taleem";
 
   import CanvasPlayer from "../slides/canvas/canvasPlayer/CanvasPlayer.svelte";
   import EqPlayer from "../slides/eqs/EqPlayer/EqPlayer.svelte";

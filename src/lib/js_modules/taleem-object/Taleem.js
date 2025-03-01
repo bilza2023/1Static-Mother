@@ -1,5 +1,5 @@
 
-import loadAssets from "./assets/loadAssets.js";
+// import loadAssets from "./assets/loadAssets.js";
 import Slides from "./Slides.js";
 import Player from "./players/Player.js";
 import Icons from "./assets/icons.js";
@@ -9,7 +9,7 @@ import { loadSoundFromUrl } from './audioUtils.js'; // Import the utility file
 ////////////////////////////////////////////////////
 export default class Taleem{
 ////////////////////////////////////////////////////
-static loadAssets = loadAssets;    
+// static loadAssets = loadAssets;    
 static Slides = Slides;    
 static Player = Player;    
 static PlayerNoSound = PlayerNoSound;    

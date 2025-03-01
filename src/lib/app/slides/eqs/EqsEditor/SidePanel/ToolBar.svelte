@@ -1,10 +1,10 @@
 <script>
   //@ts-nocheck
-  import Eqs from "../../eqs_object/Eqs";
+  import Taleem from "$lib/js_modules/taleem-object/Taleem";
   export let item;
 
   function getEqsSpItem(type){
-    const spItem = Eqs.getEqsSpItem(type);
+    const spItem = Taleem.Eqs.getEqsSpItem(type);
 
     item = {
       ...item,

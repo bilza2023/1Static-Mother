@@ -1,5 +1,6 @@
 <script>
-  import Taleem from "../taleemObject/Taleem";
+  import Taleem from "../../js_modules/taleem-object/Taleem";
+  
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from './code/sliderServices';
 ///////////////////////////////////////////////////////////////////////
   import { onMount } from 'svelte';
