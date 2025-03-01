@@ -8,7 +8,6 @@
 
   export let player;
   export let currentTime;
-  export let assets;
   export let pulse;
   export let pause = () => {};
   export let setPulse = () => {};
@@ -48,7 +47,6 @@
         {currentSlide}
         {currentTime}
         {pulse}
-        {assets}
         {setPulse}
 
         slideStartTime={currentSlide.startTime}
@@ -68,7 +66,6 @@
         {currentSlide}
         {currentTime}
         {pulse}
-        {assets}
         {setPulse}
 
         slideStartTime={currentSlide.startTime}

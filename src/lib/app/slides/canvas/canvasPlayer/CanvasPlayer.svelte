@@ -1,7 +1,7 @@
 
 <script>
   import StaticPlayer from "../staticPlayer/StaticPlayer.svelte";
-  import TaleemCanvas from "taleem-canvas";
+  import TaleemCanvas from "$lib/js_modules/taleem-canvas-object";
   import { onDestroy } from "svelte";
 
   export let items = []; // Default empty array

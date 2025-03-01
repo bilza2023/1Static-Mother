@@ -1,6 +1,6 @@
 <script>
     import { onMount, onDestroy } from "svelte";
-    import TaleemCanvas from "taleem-canvas"; 
+    import TaleemCanvas from "taleem-canvas-object"; 
 ///////////////////////////////////////////////////////
     export let items;
     export let assets = {}; //asssets should come with images loaded

@@ -1,6 +1,6 @@
 <script>
     import StaticPlayer from "../staticPlayer/StaticPlayer.svelte";
-    import TaleemCanvas from "taleem-canvas";
+    import TaleemCanvas from "taleem-canvas-object";
   
     export let assets = {}; //asssets should come with images loaded
     let taleemCanvas = null; // Store reference for later use

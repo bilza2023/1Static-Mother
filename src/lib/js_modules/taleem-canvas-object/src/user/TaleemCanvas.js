@@ -1,4 +1,5 @@
 
+import ParentTaleemCanvas from "./ParentTaleemCanvas.js";
 import DrawModule from "../core/DrawModule.js";
 import EventModule from "../core/EventModule.js";
 import InputModule from "../core/InputModule.js";
@@ -10,8 +11,10 @@ import BackgroundItem from "../items/BackgroundItem.js";
 
 /////////////////////////////////////////////////////////////////
 
-export default class TaleemCanvas {
+export default class TaleemCanvas extends ParentTaleemCanvas {
+
   constructor(canvas, ctx , env=null) {
+    super();
     if (!canvas || !ctx) {
       console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");
       throw new Error("TaleemCanvas requires both `canvas` and `ctx`.");

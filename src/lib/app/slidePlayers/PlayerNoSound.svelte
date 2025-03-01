@@ -17,7 +17,6 @@
   let pulse = 0;
   let interval;
   let showToolbarBool = false;
-  let assets=null;
 
   export let slides;
   export let imagesUrl=null;
@@ -58,7 +57,6 @@
   }
 
   onMount(async () => {
-  assets =  await Taleem.loadAssets(slides,imagesUrl);
   player = new Taleem.PlayerNoSound(slides);
   await player.init(); // init is required even if no sound
   
@@ -92,7 +90,6 @@
         {pulse}
         currentTime={pulse}
         {pause}
-        {assets}
       />
     </div>
   {/if}

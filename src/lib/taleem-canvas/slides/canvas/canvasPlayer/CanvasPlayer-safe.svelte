@@ -1,6 +1,6 @@
 <script>
   import StaticPlayer from "../staticPlayer/StaticPlayer.svelte";
-  import TaleemCanvas from "taleem-canvas";
+  import TaleemCanvas from "taleem-canvas-object";
 
   export let slideExtra;
   export let items = []; // Default to empty array

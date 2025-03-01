@@ -4,7 +4,7 @@
     export let createTaleemCanvas; // Function to initialize TaleemCanvas
   
     let canvasRef; // This is the reference for the canvas-element
-    let taleemCanvas; // This is taleem-canvas object
+    let taleemCanvas; // This is taleem-canvas-object object
   
     import { onMount } from "svelte";
   
