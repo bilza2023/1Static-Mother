@@ -1,0 +1,12 @@
+
+
+import AppEditor from './AppEditor.svelte';
+///////////////////////////////////////////////////////////////
+//The AppEditor is externally Editor since SlidesEditor is mainly "selecte slides"
+
+///////////////////////////////////////////////////////////////
+
+export {
+    AppEditor as Editor
+
+}
