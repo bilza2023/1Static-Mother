@@ -1,7 +1,7 @@
 <script>
     //@ts-nocheck
     import PlayerNoSound from   '$lib/app/slidePlayers/PlayerNoSound.svelte';
-    import Taleem    from   '$lib/app/taleemObject/Taleem';
+    // import Taleem    from   '$lib/app/taleemObject/Taleem';
 
     import { onMount } from 'svelte';
     import {presentationData} from './static_slide_data';

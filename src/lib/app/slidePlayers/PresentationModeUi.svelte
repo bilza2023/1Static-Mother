@@ -3,8 +3,8 @@
   import { onMount } from 'svelte';
   import Taleem from "../taleemObject/Taleem";
 
-  import CanvasPlayer from "../../slides/canvas/canvasPlayer/CanvasPlayer.svelte";
-  import EqPlayer from "../../slides/eqs/EqPlayer/EqPlayer.svelte";
+  import CanvasPlayer from "../slides/canvas/canvasPlayer/CanvasPlayer.svelte";
+  import EqPlayer from "../slides/eqs/EqPlayer/EqPlayer.svelte";
 
   export let player;
   export let currentTime;
