@@ -5,9 +5,8 @@
   import Icons  from "../icons";
   // import {Taleem} from '../../index';
   import {CanvasEditor} from '$lib/taleem-canvas/index';
-  import EqsEditor from '../../taleem-presentation/slides/eqs/EqsEditor/EqsEditor.svelte';
-  // import EqsEditor from '$lib/app/../../taleem-presentation/slides/eqs/EqsEditor/EqsEditor.svelte';
-
+  // import EqsEditor from '../../taleem-presentation/slides/eqs/EqsEditor/EqsEditor.svelte';
+  import EqsEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
   export let currentTime = 0;
   export let currentSlide;
 

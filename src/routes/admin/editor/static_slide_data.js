@@ -1,3 +1,7 @@
+/**
+ * 1-March-2025 
+ * This is permanent static data for both the slide types (canvas as eqs). This is the data to which all the components abide-by.
+ */
 export const presentationData = [
     {"uuid":"953f0ad9-2614-4e40-8807-0529b5b8fd09",
         "name":"New Slide",
