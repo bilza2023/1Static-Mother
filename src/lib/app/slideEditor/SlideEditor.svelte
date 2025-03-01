@@ -1,6 +1,6 @@
 <script>
-  import Taleem from "../../js_modules/taleem-object/Taleem";
-  
+  import TaleemAppObject from "$lib/appObject/TaleemAppObject";
+
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from './code/sliderServices';
 ///////////////////////////////////////////////////////////////////////
   import { onMount } from 'svelte';
@@ -121,10 +121,9 @@
   // Slide operations
   function addNew(slideType) {
     try {
-      debugger;
       if(slideType === 'Eqs'){slideType='eqs';}
 
-      const newSlide = Taleem.Slides.getNewSlide(slideType);
+      const newSlide = TaleemAppObject.Slides.getNewSlide(slideType);
       setNewSlideTimings(newSlide); //setNewSlideTimings
       slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);
