@@ -1,9 +1,45 @@
-
+import TaleemCanvas from "../../../js_modules/taleem-canvas-object";
 import getNewItem from "../getNewItem.js";
 import getNewSlide from "../getNewSlide.js";
 
 export default class CanvasAppObject{
 
+  static getDynamicDemoSlide() {
+    
+    let xx= 10; let yy=50;
+    
+    let dynSlide = CanvasAppObject.getNewSlide();
+  
+    // Iterate over the keys (itemTypes) in ItemsMap
+
+    for (const itemType of TaleemCanvas.ItemsMap.keys()) {
+      try {
+        // debugger;
+        const newItem = CanvasAppObject.getCanvasNewItem(itemType);
+    
+        newItem.itemExtra.x = xx; newItem.itemExtra.y = yy;
+        
+        xx += 50;yy += 4;
+
+        dynSlide.items.push(newItem);
+      } catch (error) {
+        console.error(`Error creating item of type ${itemType}:`, error);
+        // Handle the error appropriately, e.g., skip the item, display a message, etc.
+      }
+    }
+  
+    return dynSlide;
+   }
+   
+   static getCanvasNewItem(itemType) {
+        // if(itemType === "image"){debugger;}
+        // const newItemExtra = TaleemCanvas.ItemsMap.get(itemType).data();
+        // debugger;
+        const newItemExtra = TaleemCanvas.ItemsMap.get(itemType).itemExtraData();
+    
+        const newItem = CanvasAppObject.getNewItem(newItemExtra) ;
+        return newItem;
+      }
     static getPresentationImages(slides) {
         let res = [];
         for (let i = 0; i < slides.length; i++) {

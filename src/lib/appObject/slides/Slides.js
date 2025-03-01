@@ -14,8 +14,8 @@ export default class Slides{
   static updateSlides(slides) {
     return updateSlides(slides);
   }
-
-
+////////////////////////////////////////////////
+  
 //   static getDynamicSlides() {
 //     const eqs = Eqs.getDynamicSlide();
 //     eqs.startTime = 0;

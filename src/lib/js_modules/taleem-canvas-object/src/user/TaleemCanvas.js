@@ -8,10 +8,12 @@ import Env from "../core/Env.js";
 import uuid from "../items/uuid.js"; // Used to generate unique IDs
 import loadImagesLocal from "./loadImagesLocal.js";
 import BackgroundItem from "../items/BackgroundItem.js";
-
+// import ItemsMap from "./ItemsMap.js";
 /////////////////////////////////////////////////////////////////
 
 export default class TaleemCanvas extends ParentTaleemCanvas {
+  
+  // static ItemsMap = Object.freeze(new Map(ItemsMap));
 
   constructor(canvas, ctx , env=null) {
     super();

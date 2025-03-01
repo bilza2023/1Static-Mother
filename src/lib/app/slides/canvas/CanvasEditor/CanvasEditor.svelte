@@ -31,10 +31,11 @@ function gameloop() {
 }
 /////////////////////////////////////////////
 onMount(() => {
+  debugger;
   if(taleemCanvas){
     editor = new EditorJs(taleemCanvas,updateSelectedItem);
     if(items.length > 0 ){
-      editor.addItems(items);
+      // editor.addItems(items);
     }
     // taleemCanvas.setCanvasExtra(slideExtra);
   }
