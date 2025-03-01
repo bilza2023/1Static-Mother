@@ -17,8 +17,7 @@ $:{
 }   
  
 onMount(async()=>{
-  debugger;
-  console.log("currentSlide" , currentSlide);
+  // console.log("currentSlide" , currentSlide);
 ready = true;
 // debugger;
 }) ; 

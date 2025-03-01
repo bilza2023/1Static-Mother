@@ -1,7 +1,7 @@
 <script>
   import StaticPlayer from "../staticPlayer/StaticPlayer.svelte";
   import EditorJs from "./EditorJs.js"
-  import TaleemCanvas from "taleem-canvas";
+  import TaleemCanvas from "../../../../js_modules/taleem-canvas";
   import AddToolbar from "./AddToolbar.svelte";
   import { onMount, onDestroy } from "svelte";
   import DialogueBox from "./dialoguebox/Dialoguebox.svelte";
@@ -31,7 +31,6 @@ function gameloop() {
 }
 /////////////////////////////////////////////
 onMount(() => {
- debugger;
   if(taleemCanvas){
     editor = new EditorJs(taleemCanvas,updateSelectedItem);
     if(items.length > 0 ){

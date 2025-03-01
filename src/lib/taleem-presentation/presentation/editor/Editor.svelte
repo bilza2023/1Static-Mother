@@ -21,7 +21,7 @@
   let currentSlideIndex = 0;
   let showSidePanel = true;
   let show = false;
-  let ready = false;
+  let ready = true;
   let assets = null; //starts here 
 
   let timingError = false;
@@ -189,12 +189,6 @@
       console.error('Failed to clone slide:', error);
     }
   }
-
-onMount(async()=>{
-  debugger;
-
-  ready = true;
-});
 
 </script>
 {#if ready}
