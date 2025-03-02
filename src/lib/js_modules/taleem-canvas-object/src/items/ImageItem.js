@@ -12,7 +12,7 @@ export default class ImageItem extends BaseItem {
             type: 'image',
             x: 50,
             y: 50,
-            src: 'wood.jpg', // This is just the reference name
+            src: 'drops.png', // This is just the reference name
             width: 200,
             height: 200,
             globalAlpha: 1

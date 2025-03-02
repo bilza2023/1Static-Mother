@@ -21,7 +21,7 @@ function updateSelectedItem(newSelectedItem){
 /////////////////////////////////////////////
 function createTaleemCanvas(canvasElement) {
     const ctx = canvasElement.getContext("2d");
-    taleemCanvas = new TaleemCanvas(canvasElement, ctx);
+    taleemCanvas = new TaleemCanvas(canvasElement, ctx);//--Here TaleemCanvas is created 
     return taleemCanvas;
 }
 function gameloop() {
@@ -30,11 +30,12 @@ function gameloop() {
   }
 }
 /////////////////////////////////////////////
-onMount(() => {
+onMount(async () => {
   
   if(taleemCanvas){
     // console.log("items" ,items);
     // debugger;
+    await taleemCanvas.loadImages(['./images/drops.png']);
     for (let i = 0; i < items.length; i++) {
       const item =   items[i];
       taleemCanvas.addItem(item.itemExtra);

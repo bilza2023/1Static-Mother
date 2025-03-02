@@ -19,10 +19,9 @@
 
 /////////////////////////////////////////////////////////////\\\\\\      
 onMount(async () => {
-  const s = TaleemAppObject.Slides.Canvas.getDynamicDemoSlide();
-  debugger;
-  slides = [s];
-  console.log("slides" , slides);
+  const dynSlides = TaleemAppObject.Slides.Canvas.getDynamicDemoSlide();
+  slides = [dynSlides];
+  // console.log("slides" , slides);
   // slides = presentationData;
 });
 //////////////////////////////////////////////////////////////////\\\\
