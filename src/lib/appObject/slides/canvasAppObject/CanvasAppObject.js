@@ -4,7 +4,7 @@ import getNewSlide from "../getNewSlide.js";
 
 export default class CanvasAppObject{
 
-  static getDynamicDemoSlide() {
+   static getDynamicDemoSlide() {
     
     let xx= 10; let yy=50;
     

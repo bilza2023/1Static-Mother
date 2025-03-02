@@ -1,16 +1,15 @@
 <script>
   import TaleemAppObject from "$lib/appObject/TaleemAppObject";
-
+  import TaleemSlides from "$lib/appObject/TaleemSlides.js";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from './code/sliderServices';
 ///////////////////////////////////////////////////////////////////////
   import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
-  import StackPanel from './StackPanel.svelte';
+  import SlidePanel from './SlidePanel.svelte';
   import TimingErrorDiv from "./TimingErrorDiv.svelte";
   import { fade } from 'svelte/transition';
- 
-
+ ////////////////////////////////////////////////////////////////////////
   export let soundUrl;
   export let imagesUrl;
   export let slides;
@@ -20,199 +19,86 @@
 
   // Local state
   let currentTime = 0;
-  let currentSlideIndex = 0;
   let showSidePanel = true;
   let show = false;
-  let ready = true;
   let assets = null; //starts here 
 
   let timingError = false;
   let timingErrorMessage = '';
 
-  $: currentSlide = slides?.[currentSlideIndex] || null;
+  let currentSlide = null;
 
-  function checkTimingErrors() {
-  let timingError = false;
-  let timingErrorMessage = '';
-
-  if (!slides || slides.length === 0) {
-    timingError = true;
-    timingErrorMessage = "No slides found.";
-    return { timingError, timingErrorMessage };
+  function redrawTrigger(){
+    if(taleemSlides){
+    currentSlide = taleemSlides.currentSlide;
+  }
   }
 
-  // Check for missing start/end times
-  for (let i = 0; i < slides.length; i++) {
-    const slide = slides[i];
-    if (slide.startTime === undefined || slide.endTime === undefined) {
-      timingError = true;
-      timingErrorMessage = `Slide ${i + 1}: Missing startTime or endTime.`;
-      return { timingError, timingErrorMessage };
-    }
+/////////////////////////////////////
+  let taleemSlides = null;
+  // TaleemSlides
+onMount(async()=>{
+  if(slides){
+    taleemSlides = new TaleemSlides(slides,redrawTrigger);
+    taleemSlides.draw();
   }
-
-  // Check first slide start time
-  if (slides[0].startTime !== 0) {
-    timingError = true;
-    timingErrorMessage = "First slide startTime must be 0.";
-    return { timingError, timingErrorMessage };
-  }
-
-  // Check slide order and minimum duration
-  for (let i = 1; i < slides.length; i++) {
-    const prevSlide = slides[i - 1];
-    const currentSlide = slides[i];
-
-    if (prevSlide.endTime !== currentSlide.startTime) {
-      timingError = true;
-      timingErrorMessage = `Gap between slides ${i - 1} and ${i}.`;
-      return { timingError, timingErrorMessage };
-    }
-
-    if (currentSlide.endTime - currentSlide.startTime < 2) {
-      timingError = true;
-      timingErrorMessage = `Slide ${i} duration is less than 2 seconds.`;
-      return { timingError, timingErrorMessage };
-    }
-  }
-
-  return { timingError, timingErrorMessage };
-}
-  function shiftTime(newEndTime) {
-
-  // Update the end time of the specified slide
-  slides[currentSlideIndex].endTime = newEndTime;
-
-  // Adjust subsequent slides
-  for (let i = currentSlideIndex + 1; i < slides.length; i++) {
-    const durationChange = slides[i].startTime - slides[i - 1].endTime;
-    
-    // Update start time and end time to maintain total duration
-    slides[i].startTime -= durationChange;
-    slides[i].endTime -= durationChange;
-
-    // Check for overlapping timings and correct if necessary
-    if (slides[i].startTime < slides[i - 1].endTime) {
-      slides[i].startTime = slides[i - 1].endTime;
-      slides[i].endTime = slides[i].startTime + (slides[i].endTime - slides[i].startTime);
-    }
-  }
-  checkTimingErrors(); //checkTimingErrors()checkTimingErrors() 
-}
- 
-
-  // Slide navigation
-  function setCurrentSlideIndex(index) {
-    if (index >= 0 && index < slides.length) {
-      currentSlideIndex = index;
-    } else {
-      console.warn(`Invalid slide index: ${index}`);
-    }
-  }
-
-  function setNewSlideTimings(newSlide){
-    if(slides.length === 0){
-      //no need its already 0 and 10
-    }else {
-      newSlide.startTime = slides[slides.length -1 ].endTime;
-      newSlide.endTime = newSlide.startTime + 10;
-    }
-  }
-  // Slide operations
-  function addNew(slideType) {
+}) ;
+function addNew(slideType) {
     try {
       if(slideType === 'Eqs'){slideType='eqs';}
 
-      const newSlide = TaleemAppObject.Slides.getNewSlide(slideType);
+      const newSlide = TaleemAppObject.getNewSlide(slideType);
       setNewSlideTimings(newSlide); //setNewSlideTimings
       slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);
       show = false;
     } catch (error) {
       console.error('Failed to add new slide:', error);
-      // Optionally trigger UI error notification
     }
-  }
-
-  function handleMoveSlide(index, direction) {
-    try {
-      const updatedSlides = moveSlide(slides, index, direction);
-      if (updatedSlides !== slides) {
-        slides = updatedSlides;
-        setCurrentSlideIndex(direction === 'up' ? index - 1 : index + 1);
-      }
-    } catch (error) {
-      console.error('Failed to move slide:', error);
+  } 
+///////////////////////--NEW CODE--/////////////////////////////////////
+function handleMoveUp() {
+  try {
+    if(taleemSlides){
+      taleemSlides.moveUp(true);
+      taleemSlides.draw();//after move up , down etc it does not redraw 
     }
+  } catch (error) {
+    console.error('Failed to move slide:', error);
   }
-
-  function deleteSlideFn() {
-    try {
-      const { slides: updatedSlides, newIndex } = deleteSlide(slides, currentSlideIndex);
-      slides = updatedSlides;
-      currentSlideIndex = newIndex;
-    } catch (error) {
-      console.error('Failed to delete slide:', error);
+}
+function handleMoveDown() {
+  try {
+    if(taleemSlides){
+      taleemSlides.moveDown();
+      taleemSlides.draw();
     }
+  } catch (error) {
+    console.error('Failed to move slide:', error);
   }
-
-  function copySlideFn() {
-    try {
-      if (currentSlide && copySlide(currentSlide)) {
-        // Optionally show success message
-        console.log('Slide copied successfully');
-      }
-    } catch (error) {
-      console.error('Failed to copy slide:', error);
-    }
-  }
-
-  function pasteSlideFn() {
-    try {
-      const result = pasteSlide(slides);
-      if (result.success) {
-        slides = result.newSlides;
-        setCurrentSlideIndex(slides.length - 1);
-      }
-    } catch (error) {
-      console.error('Failed to paste slide:', error);
-    }
-  }
-
-  function cloneSlideFn() {
-    try {
-      const result = cloneSlide(currentSlide, slides);
-      if (result.success) {
-        slides = result.newSlides;
-        setCurrentSlideIndex(slides.length - 1);
-      }
-    } catch (error) {
-      console.error('Failed to clone slide:', error);
-    }
-  }
+}
 
 </script>
-{#if ready}
+{#if taleemSlides}
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
-
-  {#if showToolbar}
-  <div transition:fade={{ duration: 600 ,delay: 400 }}>
-    <Toolbar
-      bind:slides
-      bind:show
-      bind:showSidePanel
-      bind:currentTime={currentTime}
-      {currentSlideIndex}
-      {addNew}
-      deleteSlide ={deleteSlideFn}
+  <!-- deleteSlide ={deleteSlideFn}
       copySlide={copySlideFn}
       pasteSlide={pasteSlideFn}
       cloneSlide={cloneSlideFn}
       soundFile={audioData}
       {setCurrentSlideIndex}
-      {shiftTime}
+      {shiftTime} -->
+
+  {#if showToolbar && taleemSlides}
+  <div transition:fade={{ duration: 600 ,delay: 400 }}>
+    <Toolbar
+      bind:show
+      bind:showSidePanel
+      bind:currentTime={currentTime}
+      {addNew}
       {save}
+      {taleemSlides}
       {assets}
     
     />
@@ -226,25 +112,24 @@
 
   <div class="flex justify-start w-full">
     {#if slides?.length}
-      {#if showSidePanel}
+      {#if showSidePanel && taleemSlides}
       <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
          
-          <StackPanel
-            stackItems={slides}
-            setSelectedIndex={setCurrentSlideIndex}
-            selectedItemIndex={currentSlideIndex}
+          <SlidePanel
+            stackItems={taleemSlides.slides}
+            setSelectedIndex={taleemSlides.currentSlide}
+            selectedItemIndex={taleemSlides.currentSlide}
             displayKey={'type'}
-            onMoveDown={(index) => handleMoveSlide(index, 'down')}
-            onMoveUp={(index) => handleMoveSlide(index, 'up')}
+            onMoveDown={(index) => handleMoveDown}
+            onMoveUp={(index) =>  handleMoveUp }
           />
       </div>
       {/if}
 
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
-        {#if ready}
+        {#if taleemSlides}
           <PresentationModeEditor
-            {currentSlide}
-            {currentSlideIndex}
+            currentSlide={currentSlide}
             {assets}
             {currentTime}
           />

@@ -1,8 +1,6 @@
 
 import CanvasAppObject from "./canvasAppObject/CanvasAppObject.js";
 
-import getNewItem from "./getNewItem.js";
-import getNewSlide from "./getNewSlide.js";
 import updateSlides from "./updateSlides/updateSlides.js";
 
 
@@ -29,29 +27,6 @@ export default class Slides{
 //   }
 
   // Get a new item for a slide
-  static getNewItem(itemExtra = {}, name = '', content = '') {
-    return getNewItem(itemExtra, name, content);
-  }
-
-  // Get a new slide based on type
-  static getNewSlide(type) {
-   
-    if (!this.availableSlideTypes().includes(type)) {
-      throw new Error(`Invalid slide type: ${type}`);
-    }
-    if (type === 'canvas') {
-      return Slides.Canvas.getNewSlide();
-    }
-    if (type === 'Eqs' || type === 'eqs') {
-      return getNewSlide('eqs');
-    }
-  }
-
- 
-  // List of available slide types
-  static availableSlideTypes() {
-    return ['canvas', 'eqs'];
-  }
 
   // **New Methods**
 

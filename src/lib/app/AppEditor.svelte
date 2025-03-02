@@ -1,7 +1,6 @@
 <script>
     import SlideEditor from './slideEditor/SlideEditor.svelte';
     // import SlideEditBox from '$lib/SlideEditBox.svelte'; 
-  
     
       ////////////////////////////////////////////
         export let slides=[];
