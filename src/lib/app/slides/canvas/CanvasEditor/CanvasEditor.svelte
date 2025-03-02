@@ -33,10 +33,14 @@ function gameloop() {
 onMount(() => {
   
   if(taleemCanvas){
-    console.log("items" ,items);
-    debugger;
-    taleemCanvas.addItems(items);
-    // taleemCanvas.items = items;
+    // console.log("items" ,items);
+    // debugger;
+    for (let i = 0; i < items.length; i++) {
+      const item =   items[i];
+      taleemCanvas.addItem(item.itemExtra);
+    }
+    // taleemCanvas.addItems(items);//depricate --2-mar-2025
+    // taleemCanvas.items = items;//depricate --2-mar-2025
     editor = new EditorJs(taleemCanvas,updateSelectedItem);
   }
 

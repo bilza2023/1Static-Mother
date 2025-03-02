@@ -95,15 +95,20 @@ export default class TaleemCanvas extends ParentTaleemCanvas {
     }
   }
 
+  //--may need to be depricated since it needs itemExta with out App-item
   addItems(itemExtrasArray) {
-
     for (let i = 0; i < itemExtrasArray.length; i++) {
-      const extra =   itemExtrasArray[i].itemExtra; ///
+      const extra =   itemExtrasArray[i].itemExtra; ///ERROR!!!!!!!!!!!! 2-march-2025
       let item = this.add[extra.type]();
       item.itemExtra = extra; 
     }
     this.draw();
-   
+  }
+
+  addItem(itemExtra) {  
+      let item = this.add[itemExtra.type]();
+      item.itemExtra = itemExtra; 
+      this.draw();
   }
 
   deleteItem(item) {
