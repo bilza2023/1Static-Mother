@@ -15,7 +15,7 @@ export default class TaleemCanvas extends ParentTaleemCanvas {
   
   // static ItemsMap = Object.freeze(new Map(ItemsMap));
 
-  constructor(canvas, ctx , env=null) {
+  constructor(canvas, ctx , imagesArray=[]) {
     super();
     if (!canvas || !ctx) {
       console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");
@@ -29,13 +29,10 @@ export default class TaleemCanvas extends ParentTaleemCanvas {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
      
+    this.imagesArray = imagesArray;
     this.items = [];
-        //This will prevent from creating env again and again
-        if(env==null){
-          this.env = new Env(this.ctx);
-        }else {
-          this.env = env;
-        }
+    this.env = new Env(this.ctx);
+
     this.add = new Add(this.items, this.env); // Use Add.js as a wrapper for creating new items
     ////////////////////////////////////////////////////////////////////////
     this.background = new BackgroundItem();
@@ -52,7 +49,8 @@ export default class TaleemCanvas extends ParentTaleemCanvas {
     this.env.images =  await loadImagesLocal(imagesArray);
     return true;
   }
-  init(){
+  async init(){
+    await this.loadImages(this.imagesArray);
     this.canvas.width = this.width;
     this.canvas.height = this.height;
   }
@@ -95,15 +93,6 @@ export default class TaleemCanvas extends ParentTaleemCanvas {
     }
   }
 
-  //--may need to be depricated since it needs itemExta with out App-item
-  addItems(itemExtrasArray) {
-    for (let i = 0; i < itemExtrasArray.length; i++) {
-      const extra =   itemExtrasArray[i].itemExtra; ///ERROR!!!!!!!!!!!! 2-march-2025
-      let item = this.add[extra.type]();
-      item.itemExtra = extra; 
-    }
-    this.draw();
-  }
 
   addItem(itemExtra) {  
       let item = this.add[itemExtra.type]();

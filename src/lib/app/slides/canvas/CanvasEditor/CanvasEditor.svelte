@@ -9,6 +9,7 @@
 /////////////////////////////////////////////
 export let slideExtra;
 export let items = [];
+export let imagesArray = ['./images/drops.png'];
 
   let interval = null;
   let taleemCanvas = null;
@@ -21,9 +22,10 @@ function updateSelectedItem(newSelectedItem){
 /////////////////////////////////////////////
 function createTaleemCanvas(canvasElement) {
     const ctx = canvasElement.getContext("2d");
-    taleemCanvas = new TaleemCanvas(canvasElement, ctx);//--Here TaleemCanvas is created 
+    taleemCanvas = new TaleemCanvas(canvasElement, ctx , imagesArray);//--Here TaleemCanvas is created 
     return taleemCanvas;
 }
+
 function gameloop() {
   if (taleemCanvas) {
       taleemCanvas.draw();
@@ -33,15 +35,11 @@ function gameloop() {
 onMount(async () => {
   
   if(taleemCanvas){
-    // console.log("items" ,items);
-    // debugger;
-    await taleemCanvas.loadImages(['./images/drops.png']);
+    await taleemCanvas.init();
     for (let i = 0; i < items.length; i++) {
       const item =   items[i];
       taleemCanvas.addItem(item.itemExtra);
     }
-    // taleemCanvas.addItems(items);//depricate --2-mar-2025
-    // taleemCanvas.items = items;//depricate --2-mar-2025
     editor = new EditorJs(taleemCanvas,updateSelectedItem);
   }
 
