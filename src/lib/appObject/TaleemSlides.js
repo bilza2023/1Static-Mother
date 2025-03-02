@@ -12,28 +12,27 @@ export default class TaleemSlides {
       this.currentSlideIndex = index;
       this.draw();
     }
-  
-    moveUp(draw=true) {
+    moveUp() {
       if (this.currentSlideIndex > 0) {
         const currentSlide = this.slides[this.currentSlideIndex];
         this.slides.splice(this.currentSlideIndex, 1);
         this.slides.splice(this.currentSlideIndex - 1, 0, currentSlide);
-        this.currentSlideIndex--;
-              if(draw){
-                this.draw();
-              }
+            this.selectPrevious(); //==> this.selectPrevious()
+        return true;      
+      }else{
+        return false;
       }
     }
   
-    moveDown(draw=true) {
+    moveDown() {
+      // debugger;
       if (this.currentSlideIndex < this.slides.length - 1) {
         const currentSlide = this.slides[this.currentSlideIndex];
         this.slides.splice(this.currentSlideIndex, 1);
         this.slides.splice(this.currentSlideIndex + 1, 0, currentSlide);
-        this.currentSlideIndex++;
-                if(draw){
-                  this.draw();
-                }
+        // this.currentSlideIndex++;
+        this.selectNext(); //==> this.selectNext()
+      return true;          
       }
     }
   

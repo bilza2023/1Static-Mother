@@ -1,23 +1,37 @@
 <script>
-    import Icons from '../icons';
+
+    // import { draw } from 'svelte/transition';
+import Icons from '../icons';
     
-    export let stackItems = [];
+    export let taleemSlides;
+
     export let selectedItemIndex = -1;
-    export let displayKey = 'type';
-    export let setSelectedIndex;
-    export let onMoveUp = () => {};
-    export let onMoveDown = () => {};
+    let displayKey = 'type';
+
+/////////////////////////////////////////
+function moveDown(){
+    taleemSlides.moveDown(); 
+    taleemSlides.draw(); 
+    taleemSlides= taleemSlides; 
+}
+function moveUp(){
+    // debugger;
+    taleemSlides.moveUp(); 
+    taleemSlides.draw(); 
+    taleemSlides= taleemSlides; 
+}
+
     </script>
     
-    {#if stackItems.length}
-        {#each stackItems as item, itemIndex}
+    {#if taleemSlides}
+        {#each taleemSlides.slides  as item, itemIndex}
             <div 
                 class="stack-panel-item"
                 class:selected={itemIndex === selectedItemIndex}
             >
                 <button 
                     class="stack-panel-selector" 
-                    on:click={() => setSelectedIndex(itemIndex)}
+                    on:click={() => taleemSlides.currentSlide =itemIndex }
                 >
                     {String(item[displayKey] || '').toUpperCase().slice(0, 7)}
                 </button>
@@ -26,14 +40,14 @@
                     <div class="stack-panel-move-buttons">
                         <button 
                             class="stack-panel-move-button"
-                            on:click={() => onMoveDown(itemIndex)}
+                            on:click={moveDown}
                         >
                             {Icons.DOWN}
                         </button>
     
                         <button 
                             class="stack-panel-move-button"
-                            on:click={() => onMoveUp(itemIndex)}
+                            on:click={moveUp}
                         >
                             {Icons.UP}
                         </button>

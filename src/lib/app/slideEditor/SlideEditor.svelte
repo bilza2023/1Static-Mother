@@ -112,19 +112,14 @@ function handleMoveDown() {
 
   <div class="flex justify-start w-full">
     {#if slides?.length}
-      {#if showSidePanel && taleemSlides}
+
+    <!-- New SlidePanel -->
+    {#if showSidePanel && taleemSlides}
       <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
-         
-          <SlidePanel
-            stackItems={taleemSlides.slides}
-            setSelectedIndex={taleemSlides.currentSlide}
-            selectedItemIndex={taleemSlides.currentSlide}
-            displayKey={'type'}
-            onMoveDown={(index) => handleMoveDown}
-            onMoveUp={(index) =>  handleMoveUp }
-          />
+          <SlidePanel {taleemSlides} />
       </div>
-      {/if}
+    {/if}
+    <!-- New SlidePanel Ends-->
 
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         {#if taleemSlides}
