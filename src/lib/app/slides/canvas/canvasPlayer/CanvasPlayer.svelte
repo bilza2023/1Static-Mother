@@ -11,14 +11,6 @@
   let taleemCanvas = null;
   let lastItemsState = JSON.stringify(items); // Track last state for change detection
 
-  //--This is sent to Static Player
-//   function createTaleemCanvas(canvasElement) {
-//       const ctx = canvasElement.getContext("2d");
-//       taleemCanvas = new TaleemCanvas(canvasElement, ctx);
-//       addItems(); // Load initial items
-//       interval = setInterval(gameloop, 20); // Start gameloop
-//       return taleemCanvas;
-//   }
 function createTaleemCanvas(canvasElement) {
     const ctx = canvasElement.getContext("2d");
     taleemCanvas = new TaleemCanvas(canvasElement, ctx , imagesArray);//--Here TaleemCanvas is created 

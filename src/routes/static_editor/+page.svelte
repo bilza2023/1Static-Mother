@@ -10,10 +10,9 @@
     ////////////////////////////////////////////
       let slides=null;
       let id;
-      // let presentation;
       let soundUrlComplete=null;
       let showToolbar=true;
-      let showSlideEditBox = false; //showSlideEditBox
+      let showSlideEditBox = false; //showSlideEditBox ?? what is this?? 3-mar-2025
 
 /////////////////////////////////////////////////////////////\\\\\\      
 onMount(async () => {
@@ -21,7 +20,9 @@ onMount(async () => {
 });
 
 </script>
-  
+  <!-- 
+3-mar-2025 which is suitable place to load presentation images ? suggestion : the "CanvasEditor" should find and load its own images using imagesUrl 
+  -->
 <Editor
 soundUrl={soundUrlComplete}
 imagesUrl= {IMAGES_URL}
