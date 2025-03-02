@@ -31,14 +31,15 @@ function gameloop() {
 }
 /////////////////////////////////////////////
 onMount(() => {
-  debugger;
+  
   if(taleemCanvas){
+    console.log("items" ,items);
+    debugger;
+    taleemCanvas.addItems(items);
+    // taleemCanvas.items = items;
     editor = new EditorJs(taleemCanvas,updateSelectedItem);
-    if(items.length > 0 ){
-      // editor.addItems(items);
-    }
-    // taleemCanvas.setCanvasExtra(slideExtra);
   }
+
   interval = setInterval(gameloop, 20); // Start gameloop
 });
 

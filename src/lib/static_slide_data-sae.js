@@ -11,31 +11,7 @@ export const presentationData = [
         "endTime":10,
         "type":"canvas",
         "template":"",
-        "items":[
-
-                        {
-                "uuid": "888589fa-ade2-4fd4-881a-2222b0c8eba0",
-                "name": "e9ea64a2",
-                "content": "",
-                "showAt": 0,
-                "hideAt": null,
-                "itemExtra": {
-                    "uuid": "07fd88a0-f159-4e36-845d-d4ff69eac2f9",
-                    "type": "rectangle",
-                    "x": 10,
-                    "y": 50,
-                    "width": 100,
-                    "height": 100,
-                    "filled": true,
-                    "lineWidth": 1,
-                    "dash": 0,
-                    "gap": 0,
-                    "color": "red",
-                    "globalAlpha": 1
-                }
-            },
-
-        ],
+        "items":[],
         "slideExtra":{
             "backgroundColor":"#efebb8",
             "canvasWidth":1000,"canvasHeight":360,

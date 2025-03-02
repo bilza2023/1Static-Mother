@@ -98,7 +98,7 @@ export default class TaleemCanvas extends ParentTaleemCanvas {
   addItems(itemExtrasArray) {
 
     for (let i = 0; i < itemExtrasArray.length; i++) {
-      const extra =   itemExtrasArray[i];
+      const extra =   itemExtrasArray[i].itemExtra; ///
       let item = this.add[extra.type]();
       item.itemExtra = extra; 
     }

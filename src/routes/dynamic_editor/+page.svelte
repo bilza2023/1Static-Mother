@@ -19,15 +19,14 @@
 
 /////////////////////////////////////////////////////////////\\\\\\      
 onMount(async () => {
-  // const s = TaleemAppObject.Slides.Canvas.getDynamicDemoSlide();
-  // debugger;
-  // slides = [s];
-  slides = presentationData;
+  const s = TaleemAppObject.Slides.Canvas.getDynamicDemoSlide();
+  debugger;
+  slides = [s];
+  console.log("slides" , slides);
+  // slides = presentationData;
 });
 //////////////////////////////////////////////////////////////////\\\\
-async function save() {
-  // await savePresentation(presentation, slides);
-}
+
 </script>
   
 <Editor
