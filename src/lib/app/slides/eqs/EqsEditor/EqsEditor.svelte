@@ -7,7 +7,7 @@
 import TopToolbar from './TopToolbar.svelte';
 
 import Row from './Row.svelte';
-import Taleem from "$lib/js_modules/taleem-object/Taleem";
+import Taleem from "../../../taleem-object-legacy/Taleem";
   import { onMount } from 'svelte';
 
 // export let just items and currentTime which is required for Editor only

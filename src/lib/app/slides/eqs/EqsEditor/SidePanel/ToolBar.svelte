@@ -1,6 +1,6 @@
 <script>
   //@ts-nocheck
-  import Taleem from "$lib/js_modules/taleem-object/Taleem";
+  import Taleem from "../../../../taleem-object-legacy/Taleem";
   export let item;
 
   function getEqsSpItem(type){
