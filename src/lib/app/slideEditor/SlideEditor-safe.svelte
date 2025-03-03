@@ -8,7 +8,6 @@
   import EqsEditor from '../slides/eqs/EqsEditor/EqsEditor.svelte';
   ////////////////////////////////////////////////////////////////////////
   import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore.js";
-    $:currentSlide = $currentSlideStore;
   ////////////////////////////////////////////////////////////////////////
   export let soundUrl;
   export let imagesUrl;
@@ -28,14 +27,15 @@
 onMount(async()=>{
   if(slides){
     $slidesStore = slides;
-    if($slidesStore.length >= 0){
+    if($slidesStore.length > 0){ // Changed from >= 0
       $currentSlideIndexStore = 0;
-    }else {
+      // console.log("currentSlide", $currentSlideStore); // Changed to use store directly
+    } else {
       $currentSlideIndexStore = -1; 
     }
   }
   ready = true;
-}) ;
+});
 ////////////////////////////////////////////
 </script>
 {#if slides}
@@ -69,29 +69,29 @@ onMount(async()=>{
          <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div tabindex="0">
-  {#if currentSlide && ready}
+  {#if $currentSlideStore && ready}
     
-    {#if (currentSlide.type).toLowerCase() == "canvas"}
+    {#if ($currentSlideStore.type).toLowerCase() == "canvas"}
       <CanvasEditor 
-      {currentSlide}
-      bind:items={currentSlide.items}
+      {$currentSlideStore}
+      bind:items={$currentSlideStore.items}
   
-      slideStartTime={currentSlide.startTime}
-      slideEndTime={currentSlide.endTime}
+      slideStartTime={$currentSlideStore.startTime}
+      slideEndTime={$currentSlideStore.endTime}
        
-      bind:slideExtra={currentSlide.slideExtra}
+      bind:slideExtra={$currentSlideStore.slideExtra}
       {currentTime}
       />
     {/if}
     
-    {#if (currentSlide.type).toLowerCase() == "eqs"}
+    {#if ($currentSlideStore.type).toLowerCase() == "eqs"}
   <!-- <h3>Nothing for Now</h3> -->
     <EqsEditor 
-    {currentSlide}
-    bind:items={currentSlide.items}
-    slideStartTime={currentSlide.startTime}
-    slideEndTime={currentSlide.endTime}
-    bind:slideExtra={currentSlide.slideExtra}
+    {$currentSlideStore}
+    bind:items={$currentSlideStore.items}
+    slideStartTime={$currentSlideStore.startTime}
+    slideEndTime={$currentSlideStore.endTime}
+    bind:slideExtra={$currentSlideStore.slideExtra}
     {currentTime}
     />
     {/if}
