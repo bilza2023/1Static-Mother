@@ -6,10 +6,12 @@ import Icons from '../../icons';
 import SoundButtons from './SoundButtons.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 import getNewSlide from "../addNewSlide/getNewSlide";
+import uuid from "../addNewSlide/uuid.js";
 //////////////////////////////////////////////////////////////
-import {slidesStore,currentSlideIndexStore} from "../slidesStore";
+import {slidesStore,currentSlideIndexStore,currentSlideStore} from "../slidesStore";
     $:slides = $slidesStore;
     $:currentSlideIndex = $currentSlideIndexStore;
+    $:currentSlide = $currentSlideStore;
 //////////////////////////////////////////////////////////////
 export let show;
 export let assets;
@@ -42,7 +44,37 @@ function addNew(slideType) {
       console.error('Failed to add new slide:', error);
     }
 } 
+function deleteFn() {
+      if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
+          
+          const oldSlideIndex = $currentSlideIndexStore
+          $slidesStore.splice($currentSlideIndexStore, 1);
 
+          if ($slidesStore.length === 0) {
+            $currentSlideIndexStore = -1;
+          } else {
+            $currentSlideIndexStore = oldSlideIndex - 1;
+          }
+      }
+}
+function cloneSlide(){
+  if (!currentSlide) return false ;
+    try {
+      const clonedSlide = JSON.parse(JSON.stringify(currentSlide));
+      clonedSlide.uuid = uuid();
+      $slidesStore = [...slides, clonedSlide];
+    } catch (error) {
+      console.error('Failed to clone slide:', error);
+      return false;
+    }
+}
+// getLast() {
+//       if (this.slides.length > 0) {
+//           return this.slides[this.slides.length-1];
+//       } else {
+//           return false;
+//       }
+//   }  
 </script>
 
 <div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 pt-2 px-2 '>
@@ -66,7 +98,7 @@ function addNew(slideType) {
   </div> 
 
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
-  <!-- {#if slides.length > 0} -->
+  {#if slides.length > 0}
     <span class='text-xs'>Start</span> 
     <div class='bg-gray-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white'  type="number" >
     <!-- {slides[currentSlideIndex].startTime} -->
@@ -83,11 +115,11 @@ function addNew(slideType) {
     
 
 <!-- the + sign before +e.target.value consverts it into number-->
-<!-- <NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={cloneSlide} /> -->
+<NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={cloneSlide} />
+<NavBtn2 title='Delete' icon={Icons.WASTEBASKET}  clk={deleteFn} />
 <!-- <NavBtn2 title='Copy' icon={Icons.COPY}  clk={copySlide} /> -->
-<!-- <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} /> -->
-<!-- <NavBtn2 title='Delete' icon={Icons.WASTEBASKET}  clk={()=> delete()} /> -->
-    <!-- {/if} -->
+    <!-- <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} /> -->
+    {/if}
 
   </div>  
   

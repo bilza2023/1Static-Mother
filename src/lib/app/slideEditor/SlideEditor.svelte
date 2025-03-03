@@ -1,16 +1,21 @@
 <script>
   import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
-  import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import SlidePanel from './SlidePanel.svelte';
   import TimingErrorDiv from "./TimingErrorDiv.svelte";
   import { fade } from 'svelte/transition';
-  import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore";
- ////////////////////////////////////////////////////////////////////////
+  import CanvasEditor from '../slides/canvas/CanvasEditor/CanvasEditor.svelte';
+  import EqsEditor from '../slides/eqs/EqsEditor/EqsEditor.svelte';
+  ////////////////////////////////////////////////////////////////////////
+  import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore.js";
+    $:currentSlideIndex = $currentSlideIndexStore;
+    $:currentSlide = $currentSlideStore;
+  ////////////////////////////////////////////////////////////////////////
   export let soundUrl;
   export let imagesUrl;
   export let slides;
   export let showToolbar = true;
+  let ready = false;
   export let audioData = '';
   export let save = ()=>{console.log("hookup save function here")};
   // Local state
@@ -24,19 +29,20 @@
 onMount(async()=>{
   if(slides){
     $slidesStore = slides;
-    if(slides.length >= 0){
+    if($slidesStore.length >= 0){
       $currentSlideIndexStore = 0;
-      $currentSlideStore = slides[0]; 
+      console.log("currentSlide" , currentSlide);
+      // $currentSlideStore = slides[0]; 
     }else {
       $currentSlideIndexStore = -1; 
     }
   }
+  ready = true;
 }) ;
+////////////////////////////////////////////
 </script>
 {#if slides}
-
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
-
   {#if showToolbar}
   <div transition:fade={{ duration: 600 ,delay: 400 }}>
     <Toolbar
@@ -62,10 +68,39 @@ onMount(async()=>{
     <!-- New SlidePanel Ends-->
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         {#if slides}
-          <PresentationModeEditor
-            {assets}
-            {currentTime}
-          />
+        <!-- PresentationModeEditor ---------------------------------------------->
+         <!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div tabindex="0">
+  {#if currentSlide && ready}
+    
+    {#if (currentSlide.type).toLowerCase() == "canvas"}
+      <CanvasEditor 
+      {currentSlide}
+      bind:items={currentSlide.items}
+  
+      slideStartTime={currentSlide.startTime}
+      slideEndTime={currentSlide.endTime}
+       
+      bind:slideExtra={currentSlide.slideExtra}
+      {currentTime}
+      />
+    {/if}
+    
+    {#if (currentSlide.type).toLowerCase() == "eqs"}
+  <!-- <h3>Nothing for Now</h3> -->
+    <EqsEditor 
+    {currentSlide}
+    bind:items={currentSlide.items}
+    slideStartTime={currentSlide.startTime}
+    slideEndTime={currentSlide.endTime}
+    bind:slideExtra={currentSlide.slideExtra}
+    {currentTime}
+    />
+    {/if}
+  {/if}    
+  </div>
+        <!-- PresentationModeEditor -->
         {/if}
       </div>
     {:else}

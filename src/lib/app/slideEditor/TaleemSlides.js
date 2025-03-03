@@ -52,7 +52,6 @@ export default class TaleemSlides {
           return false;
       }
   }
-
   moveDown() {
       if (this.currentSlideIndex < this.slides.length - 1) {
           const currentSlide = this.slides[this.currentSlideIndex];
@@ -64,7 +63,6 @@ export default class TaleemSlides {
           return false;
       }
   }
-
   selectPrevious() {
       if (this.currentSlideIndex > 0) {
           this.currentSlideIndex--;
@@ -73,7 +71,6 @@ export default class TaleemSlides {
           return false;
       }
   }
-
   selectNext() {
       if (this.currentSlideIndex < this.slides.length - 1) {
           this.currentSlideIndex++;
