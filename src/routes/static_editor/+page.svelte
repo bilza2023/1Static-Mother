@@ -1,5 +1,5 @@
 <script>
-  import {Editor} from '../../lib/app';
+  import SlideEditor from '../../lib/app/SlideEditor.svelte';
   import {onMount,toast} from "$lib/util";
   import SlideEditBox from '$lib/SlideEditBox.svelte'; 
   import {presentationData} from '$lib/static_slide_data.js';
@@ -23,10 +23,12 @@ onMount(async () => {
   <!-- 
 3-mar-2025 which is suitable place to load presentation images ? suggestion : the "CanvasEditor" should find and load its own images using imagesUrl 
   -->
-<Editor
+{#if slides}
+<SlideEditor
 soundUrl={soundUrlComplete}
 imagesUrl= {IMAGES_URL}
 {showToolbar}
 bind:slides={slides}
 
 />
+{/if}

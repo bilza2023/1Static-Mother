@@ -1,30 +1,26 @@
 <script>
   import { onMount } from 'svelte';
-  import Toolbar from './toolbar/Toolbar.svelte';
-  import SlidePanel from './SlidePanel.svelte';
-  import TimingErrorDiv from "./TimingErrorDiv.svelte";
+  import Toolbar from './slideEditor/toolbar/Toolbar.svelte';
+  import SlidePanel from './slideEditor/SlidePanel.svelte';
+  import TimingErrorDiv from "./slideEditor/TimingErrorDiv.svelte";
   import { fade } from 'svelte/transition';
-  import CanvasEditor from '../slides/canvas/CanvasEditor/CanvasEditor.svelte';
-  import EqsEditor from '../slides/eqs/EqsEditor/EqsEditor.svelte';
-  ////////////////////////////////////////////////////////////////////////
-  import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore.js";
+  import CanvasEditor from './slides/canvas/CanvasEditor/CanvasEditor.svelte';
+  import EqsEditor from './slides/eqs/EqsEditor/EqsEditor.svelte';
+  import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slideEditor/slidesStore.js";
     $:currentSlide = $currentSlideStore;
-  ////////////////////////////////////////////////////////////////////////
-  export let soundUrl;
-  export let imagesUrl;
   export let slides;
+  export let soundUrl; //3-mar-2025
+  export let imagesUrl;
   export let showToolbar = true;
   let ready = false;
   export let audioData = '';
   export let save = ()=>{console.log("hookup save function here")};
-  // Local state
   let currentTime = 0;
   let showSidePanel = true;
   let show = false;
   let assets = null; //starts here 
   let timingError = false;
   let timingErrorMessage = '';
-/////////////////////////////////////
 onMount(async()=>{
   if(slides){
     $slidesStore = slides;
@@ -36,7 +32,6 @@ onMount(async()=>{
   }
   ready = true;
 }) ;
-////////////////////////////////////////////
 </script>
 {#if slides}
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -47,22 +42,19 @@ onMount(async()=>{
       bind:showSidePanel
       bind:currentTime={currentTime}
       {save}
-      {assets}
-    />
+      {assets}/>
   </div>
   {/if}
   {#if timingError}
   <TimingErrorDiv {timingErrorMessage}/>
   {/if}
-
   <div class="flex justify-start w-full">
     {#if slides?.length}
     {#if showSidePanel}
       <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
           <SlidePanel />
       </div>
-    {/if}
-    <!-- New SlidePanel Ends-->
+    {/if}<!-- New SlidePanel Ends-->
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         {#if slides}
         <!-- PresentationModeEditor ---------------------------------------------->
@@ -85,7 +77,6 @@ onMount(async()=>{
     {/if}
     
     {#if (currentSlide.type).toLowerCase() == "eqs"}
-  <!-- <h3>Nothing for Now</h3> -->
     <EqsEditor 
     {currentSlide}
     bind:items={currentSlide.items}

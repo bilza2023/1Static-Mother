@@ -37,25 +37,28 @@ function addNew(slideType) {
 
       const newSlide = getNewSlide(slideType);
       // setNewSlideTimings(newSlide); //setNewSlideTimings
-      $slidesStore = [...slides, newSlide];
-      $currentSlideIndexStore(slides.length - 1);
+      const updatedSlides = [...$slidesStore, newSlide];
+      $slidesStore = updatedSlides;
+      $currentSlideIndexStore = updatedSlides.length - 1; // Assign the value, don't call it as a function
       show = false;
     } catch (error) {
       console.error('Failed to add new slide:', error);
     }
-} 
+}
 function deleteFn() {
-      if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
-          
-          const oldSlideIndex = $currentSlideIndexStore
-          $slidesStore.splice($currentSlideIndexStore, 1);
-
-          if ($slidesStore.length === 0) {
+    if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
+        const oldSlideIndex = $currentSlideIndexStore;
+        // Create a new array without the slide to delete
+        const updatedSlides = [...$slidesStore];
+        updatedSlides.splice(oldSlideIndex, 1);
+        // Update the store with the new array
+        $slidesStore = updatedSlides;
+        if (updatedSlides.length === 0) {
             $currentSlideIndexStore = -1;
-          } else {
-            $currentSlideIndexStore = oldSlideIndex - 1;
-          }
-      }
+        } else {
+            $currentSlideIndexStore = Math.max(0, oldSlideIndex - 1);
+        }
+    }
 }
 function cloneSlide(){
   if (!currentSlide) return false ;
