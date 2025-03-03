@@ -1,6 +1,6 @@
 <script>
   import {Editor} from '../../lib/app';
-  import {onMount,toast} from "$lib/util";
+  import {onMount} from "svelte";
   import {presentationData} from '$lib/static_slide_data.js';
   //Environment variables
   const SOUND_URL = import.meta.env.VITE_SOUND_BASE_URL;

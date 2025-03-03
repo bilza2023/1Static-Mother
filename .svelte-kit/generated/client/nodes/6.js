@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/admin/questionManager/+page.svelte";
+export { default as component } from "../../../../src/routes/playerNoSound/+page.svelte";
