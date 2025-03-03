@@ -24,7 +24,6 @@
 //////////////////////////////////////////////////////
 function gameloop(){
     if(taleem_draw_engine && items){
-
         taleem_draw_engine.draw(items) 
     } 
 }

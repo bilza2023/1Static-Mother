@@ -1,5 +1,5 @@
 
-// import EventModule from "../core/EventModule.js";
+import EventModule from "./EventModule";
 // import InputModule from "../core/InputModule.js";
 // import loadImagesLocal from "./loadImagesLocal.js";
 import itemsToObjects from "../itemsToObjects";
@@ -22,7 +22,7 @@ export default class DrawEngine  {
     this.imagesArray = imagesArray;
     ////////////////////////////////////////////////////////////////////////
     // this.drawModule = new DrawModule(this.ctx, this.canvas, this.background);
-    // this.eventModule = new EventModule(this.canvas); // No longer passing items array
+    this.eventModule = new EventModule(this.canvas); // No longer passing items array
     // this.inputModule = new InputModule();
 
     // Store the currently active items for event handling
@@ -47,13 +47,14 @@ export default class DrawEngine  {
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);  
   }
+  
   onMouse(eventType, callback) {
-    // this.eventModule.on(eventType, callback);
+    this.eventModule.on(eventType, callback);
   }
 
-  onKey(eventType, callback) {
-    this.inputModule.on(eventType, callback);
-  }
+//   onKey(eventType, callback) {
+    // this.inputModule.on(eventType, callback);
+//   }
 
 
   draw(items = []) {
@@ -62,7 +63,7 @@ export default class DrawEngine  {
     // const itemObject = new Rectangle(items[0].itemExtra)
     const itemObjects = itemsToObjects(items);
     // Update event module with current items
-    // this.eventModule.updateItems(items);
+    this.eventModule.updateItems(items);
     // Draw the items
     this.clear();
     this.drawItems(itemObjects);
