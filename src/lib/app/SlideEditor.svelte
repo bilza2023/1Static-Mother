@@ -14,13 +14,21 @@
   export let showToolbar = true;
   let ready = false;
   export let audioData = '';
-  export let save = ()=>{console.log("hookup save function here")};
+  export let save = ()=>{
+    console.log("hookup save function here")
+  };
   let currentTime = 0;
   let showSidePanel = true;
   let show = false;
   let assets = null; //starts here 
   let timingError = false;
   let timingErrorMessage = '';
+
+  function saveLocal(){
+    debugger;
+    const slides = JSON.parse(JSON.stringify($slidesStore));
+    save(slides);
+  }
 onMount(async()=>{
   if(slides){
     $slidesStore = slides;
@@ -41,7 +49,7 @@ onMount(async()=>{
       bind:show
       bind:showSidePanel
       bind:currentTime={currentTime}
-      {save}
+      save={saveLocal}
       {assets}/>
   </div>
   {/if}

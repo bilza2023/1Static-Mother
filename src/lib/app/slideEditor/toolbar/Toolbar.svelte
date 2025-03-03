@@ -45,6 +45,7 @@ function addNew(slideType) {
       console.error('Failed to add new slide:', error);
     }
 }
+
 function deleteFn() {
     if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
         const oldSlideIndex = $currentSlideIndexStore;

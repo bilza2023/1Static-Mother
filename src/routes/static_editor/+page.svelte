@@ -14,6 +14,10 @@
       let showToolbar=true;
       let showSlideEditBox = false; //showSlideEditBox ?? what is this?? 3-mar-2025
 
+function save(slides){
+  debugger;
+ console.log("slides",slides); 
+}
 /////////////////////////////////////////////////////////////\\\\\\      
 onMount(async () => {
   slides = presentationData;
@@ -29,6 +33,8 @@ soundUrl={soundUrlComplete}
 imagesUrl= {IMAGES_URL}
 {showToolbar}
 bind:slides={slides}
-
+{save}
 />
 {/if}
+
+<button on:click={save}>save</button>
