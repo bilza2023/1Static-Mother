@@ -1,7 +1,7 @@
 
 
 import Editor from './editor/Editor.svelte';
-import AppPlayer from './AppPlayer.svelte';
+// import AppPlayer from './slidePlayers/PlayerNoSound.svelte';
 ///////////////////////////////////////////////////////////////
 //The AppEditor is externally Editor since SlidesEditor is mainly "selecte slides"
 
@@ -9,5 +9,5 @@ import AppPlayer from './AppPlayer.svelte';
 
 export {
     Editor,
-    AppPlayer as Player
+    // AppPlayer as Player
 }

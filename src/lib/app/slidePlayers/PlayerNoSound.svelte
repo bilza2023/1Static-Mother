@@ -12,7 +12,7 @@
   import PlayerToolbar from './PlayerToolbar.svelte';
   import PresentationModeUi from './PresentationModeUi.svelte';
   import { scale } from 'svelte/transition';
-  import Taleem from "$lib/js_modules/taleem-object/Taleem";
+  import Taleem from "../taleem-object-legacy/Taleem";
 
   let pulse = 0;
   let interval;
