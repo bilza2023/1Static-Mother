@@ -1,5 +1,5 @@
 <script>
-  import TaleemCanvasPlayer from "../taleemCanvasPlayer/TaleemCanvasPlayer.svelte";
+  import TaleemDrawEngine from "../taleemCanvasPlayer/TaleemDrawEngine.svelte";
   // import EditorJs from "./EditorJs.js"
   import AddToolbar from "./AddToolbar.svelte";
   import { onMount, onDestroy } from "svelte";
@@ -61,7 +61,7 @@ onDestroy(() => {
 <div class="page">
   <div class="container">
     <div class="canvas-container">
-      <TaleemCanvasPlayer items={currentSlide.items} />
+      <TaleemDrawEngine items={currentSlide.items} />
     </div>
 
     <div class="dialogue-box">

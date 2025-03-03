@@ -30,7 +30,7 @@ export const presentationData = [
                     "lineWidth": 1,
                     "dash": 0,
                     "gap": 0,
-                    "color": "red",
+                    "color": "green",
                     "globalAlpha": 1
                 }
             },
