@@ -1,39 +1,48 @@
 <script>
 
-    // import { draw } from 'svelte/transition';
 import Icons from '../icons';
-    
-    export let taleemSlides;
+import {slidesStore,currentSlideIndexStore} from "./slidesStore";
 
-    export let selectedItemIndex = -1;
-    let displayKey = 'type';
-
+    $:slides = $slidesStore;
+    $:currentSlideIndex = $currentSlideIndexStore;
 /////////////////////////////////////////
-function moveDown(){
-    taleemSlides.moveDown(); 
-    taleemSlides.draw(); 
-    taleemSlides= taleemSlides; 
-}
-function moveUp(){
+
+function moveUp() {
     // debugger;
-    taleemSlides.moveUp(); 
-    taleemSlides.draw(); 
-    taleemSlides= taleemSlides; 
-}
+    if ($currentSlideIndexStore > 0) {
+      const newSlides = [...$slidesStore];
+      const currentSlide = newSlides[$currentSlideIndexStore];
+      newSlides.splice($currentSlideIndexStore, 1);
+      newSlides.splice($currentSlideIndexStore - 1, 0, currentSlide);
+      $slidesStore = newSlides;
+      $currentSlideIndexStore -= 1;
+    }
+  }
+
+  function moveDown() {
+    if ($currentSlideIndexStore < $slidesStore.length - 1) {
+      const newSlides = [...$slidesStore];
+      const currentSlide = newSlides[$currentSlideIndexStore];
+      newSlides.splice($currentSlideIndexStore, 1);
+      newSlides.splice($currentSlideIndexStore + 1, 0, currentSlide);
+      $slidesStore = newSlides;
+      $currentSlideIndexStore += 1;
+    }
+  }
 
     </script>
     
-    {#if taleemSlides}
-        {#each taleemSlides.slides  as item, itemIndex}
+    {#if slides && slides.length > 0}
+    {#each slides as item, itemIndex (itemIndex)}
             <div 
                 class="stack-panel-item"
-                class:selected={itemIndex === selectedItemIndex}
+                class:selected={itemIndex === currentSlideIndex}
             >
                 <button 
                     class="stack-panel-selector" 
-                    on:click={() => taleemSlides.currentSlide =itemIndex }
+                    on:click={() => $currentSlideIndexStore = itemIndex }
                 >
-                    {String(item[displayKey] || '').toUpperCase().slice(0, 7)}
+                    {String(item.type || '').toUpperCase().slice(0, 7)}
                 </button>
                 
                 <div class="stack-panel-actions">

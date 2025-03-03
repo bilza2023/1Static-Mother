@@ -1,6 +1,6 @@
 import TaleemCanvas from "../../../js_modules/taleem-canvas-object";
-import getNewItem from "../getNewItem.js";
-import getNewSlide from "../getNewSlide.js";
+// import getNewItem from "../getNewItem.js";
+// import getNewSlide from "../getNewSlide.js";
 
 export default class CanvasAppObject{
 
@@ -56,13 +56,13 @@ export default class CanvasAppObject{
         }
         return res;
       }//getPresentationImages
-    static getNewSlide() {
-        const slideExtra = CanvasAppObject.getSlideExtra();
-        return getNewSlide('canvas' , slideExtra);
-    }
-    static getNewItem( itemExtra = {} , name='',content='') {
-        return getNewItem(itemExtra, name, content);
-    }
+    // static getNewSlide() {
+    //     const slideExtra = CanvasAppObject.getSlideExtra();
+    //     return getNewSlide('canvas' , slideExtra);
+    // }
+    // static getNewItem( itemExtra = {} , name='',content='') {
+    //     return getNewItem(itemExtra, name, content);
+    // }
     //should this be here or in taleem-canvas-object ?? i think in taleem-canvas-object.
     static getSlideExtra(){
         return {

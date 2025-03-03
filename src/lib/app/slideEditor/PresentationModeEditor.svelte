@@ -5,16 +5,18 @@
   import Icons  from "../icons";
   import CanvasEditor from '../slides/canvas/CanvasEditor/CanvasEditor.svelte';
   import EqsEditor from '../slides/eqs/EqsEditor/EqsEditor.svelte';
-  
+  import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore";
+
+
   export let currentTime = 0;
   export let currentSlide;
 
   let ready = false;
   
-$:{
-  currentSlide;
-}   
- 
+/////////////////////////////////////////////////
+$:currentSlide = $currentSlideStore;   
+/////////////////////////////////////////////////
+
 onMount(async()=>{
   // console.log("currentSlide" , currentSlide);
 ready = true;
