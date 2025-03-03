@@ -1,7 +1,7 @@
 <script>
   import StaticPlayer from "../staticPlayer/StaticPlayer.svelte";
   import EditorJs from "./EditorJs.js"
-  import TaleemCanvas from "$lib/js_modules/taleem-canvas-object";
+  import TaleemCanvas from "../taleem-canvas-object";
   import AddToolbar from "./AddToolbar.svelte";
   import { onMount, onDestroy } from "svelte";
   import DialogueBox from "./dialoguebox/Dialoguebox.svelte";
