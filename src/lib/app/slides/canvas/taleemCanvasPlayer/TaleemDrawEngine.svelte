@@ -10,11 +10,25 @@
   let taleem_draw_engine=null;
   let interval=null;
 /////////////////////////////////////////////////////
+function handleMouseMove(event, hitItem) {
+  // event: the original mouse event
+  // hitItem: the item under the cursor (or null if no item)
+  
+  console.log('Mouse position:', event.clientX, event.clientY);
+  
+  if (hitItem) {
+    console.log('Mouse over item:', hitItem);
+    // You can access properties of the hit item
+    // For example: hitItem.id, hitItem.type, etc.
+  }
+}
+/////////////////////////////////////////////////////
   onMount(async () => {
     
     if (canvasElement){
       const ctx = canvasElement.getContext("2d");
       taleem_draw_engine = new DrawEngine(canvasElement, ctx);
+      taleem_draw_engine.onMouse('mousemove', handleMouseMove);
       const itemExtras = stripItemExtraFromItems(items);
       taleem_draw_engine.clear();
       taleem_draw_engine.draw(itemExtras);//FIX THIS

@@ -22,8 +22,8 @@ export default class EventModule {
     }
   
     // New method to update the items array
-    updateItems(items) {
-      this.items = items;
+    updateItems(itemObjects) {
+      this.itemObjects = itemObjects;
     }
   
     handleEvent(event, type) {
@@ -31,9 +31,10 @@ export default class EventModule {
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
   
+      // debugger;
       // Find the first item that is hit (if any)
       let hitItem = null;
-      for (let item of this.items) {
+      for (let item of this.itemObjects) {
         if (item.isHit(mouseX, mouseY)) {
           hitItem = item;
           break;

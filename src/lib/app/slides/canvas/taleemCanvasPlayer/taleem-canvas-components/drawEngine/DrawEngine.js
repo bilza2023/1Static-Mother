@@ -25,8 +25,6 @@ export default class DrawEngine  {
     this.eventModule = new EventModule(this.canvas); // No longer passing items array
     // this.inputModule = new InputModule();
 
-    // Store the currently active items for event handling
-    this._currentItems = [];
   }
 
 //   async loadImages(imagesArray=[]){//thise can be loaded later
@@ -47,8 +45,9 @@ export default class DrawEngine  {
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);  
   }
-  
+
   onMouse(eventType, callback) {
+    // debugger;
     this.eventModule.on(eventType, callback);
   }
 
@@ -58,12 +57,10 @@ export default class DrawEngine  {
 
 
   draw(items = []) {
-    // Update the current items reference for event handling
-    this._currentItems = items;
-    // const itemObject = new Rectangle(items[0].itemExtra)
-    const itemObjects = itemsToObjects(items);
+      // const itemObject = new Rectangle(items[0].itemExtra)
+      const itemObjects = itemsToObjects(items);
     // Update event module with current items
-    this.eventModule.updateItems(items);
+    this.eventModule.updateItems(itemObjects);
     // Draw the items
     this.clear();
     this.drawItems(itemObjects);
