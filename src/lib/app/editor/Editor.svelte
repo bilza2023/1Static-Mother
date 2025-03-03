@@ -1,34 +1,30 @@
 <script>
-  import { onMount } from 'svelte';
-  import Toolbar from './slideEditor/toolbar/Toolbar.svelte';
-  import SlidePanel from './slideEditor/SlidePanel.svelte';
-  import TimingErrorDiv from "./slideEditor/TimingErrorDiv.svelte";
-  import { fade } from 'svelte/transition';
-  import CanvasEditor from './slides/canvas/CanvasEditor/CanvasEditor.svelte';
-  import EqsEditor from './slides/eqs/EqsEditor/EqsEditor.svelte';
-  import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slideEditor/slidesStore.js";
-    $:currentSlide = $currentSlideStore;
+//*********************IMPORTS**********************8*/  
+import { onMount } from 'svelte';
+import Toolbar from './toolbar/Toolbar.svelte';
+import SlidePanel from './SlidePanel.svelte';
+import TimingErrorDiv from "./TimingErrorDiv.svelte";
+import { fade } from 'svelte/transition';
+import CanvasEditor from '../slides/canvas/CanvasEditor/CanvasEditor.svelte';
+import EqsEditor from '../slides/eqs/EqsEditor/EqsEditor.svelte';
+import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore.js";
+$:currentSlide = $currentSlideStore;
+//*********************EXPORT LET**********************8*/  
   export let slides;
   export let soundUrl; //3-mar-2025
   export let imagesUrl;
   export let showToolbar = true;
   let ready = false;
   export let audioData = '';
-  export let save = ()=>{
-    console.log("hookup save function here")
-  };
+  export let save = ()=>{console.log("hookup save function here")};//this line is final 3-mar-2025
+//*********************LET**********************8*/    
   let currentTime = 0;
   let showSidePanel = true;
   let show = false;
   let assets = null; //starts here 
   let timingError = false;
   let timingErrorMessage = '';
-
-  function saveLocal(){
-    debugger;
-    const slides = JSON.parse(JSON.stringify($slidesStore));
-    save(slides);
-  }
+function saveLocal(){const slides=JSON.parse(JSON.stringify($slidesStore));save(slides);}
 onMount(async()=>{
   if(slides){
     $slidesStore = slides;
@@ -70,15 +66,12 @@ onMount(async()=>{
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div tabindex="0">
   {#if currentSlide && ready}
-    
     {#if (currentSlide.type).toLowerCase() == "canvas"}
       <CanvasEditor 
       {currentSlide}
       bind:items={currentSlide.items}
-  
       slideStartTime={currentSlide.startTime}
-      slideEndTime={currentSlide.endTime}
-       
+      slideEndTime={currentSlide.endTime} 
       bind:slideExtra={currentSlide.slideExtra}
       {currentTime}
       />

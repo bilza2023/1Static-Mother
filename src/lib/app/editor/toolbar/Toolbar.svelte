@@ -1,8 +1,7 @@
 <script >
 //@ts-nocheck
-import TaleemAppObject from "$lib/appObject/TaleemAppObject";
 import NavBtn2 from './NavBtn2.svelte';
-import Icons from '../../icons';
+import Icons from '../icons';
 import SoundButtons from './SoundButtons.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 import getNewSlide from "../addNewSlide/getNewSlide";

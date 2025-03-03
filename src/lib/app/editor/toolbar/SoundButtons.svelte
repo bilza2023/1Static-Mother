@@ -1,6 +1,6 @@
 <script>
   //@ts-nocheck
-  import {NavBtn2} from 'sveltetools_bils/src/cmp';
+  import NavBtn2 from './NavBtn2.svelte';
   
   export let Icons;
   export let narration = null;

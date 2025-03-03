@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/app/matrix/+page.svelte";
+export { default as component } from "../../../../src/routes/dynamic_editor/+page.svelte";

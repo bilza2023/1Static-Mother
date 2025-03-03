@@ -1,7 +1,7 @@
 <script>
     //@ts-nocheck
-import {NavBtn2} from 'sveltetools_bils/src/cmp';
-import Icons from '../../icons';
+import NavBtn2 from './NavBtn2.svelte';
+import Icons from '../icons';
 export let addNew;    
 </script>
 

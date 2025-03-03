@@ -1,6 +1,6 @@
 <script>
 
-import Icons from '../icons';
+import Icons from './icons';
 import {slidesStore,currentSlideIndexStore} from "./slidesStore";
 
     $:slides = $slidesStore;

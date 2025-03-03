@@ -1,7 +1,6 @@
 <script>
-  import SlideEditor from '../../lib/app/SlideEditor.svelte';
+  import {Editor} from '../../lib/app';
   import {onMount,toast} from "$lib/util";
-  import SlideEditBox from '$lib/SlideEditBox.svelte'; 
   import {presentationData} from '$lib/static_slide_data.js';
   //Environment variables
   const SOUND_URL = import.meta.env.VITE_SOUND_BASE_URL;
@@ -12,7 +11,6 @@
       let id;
       let soundUrlComplete=null;
       let showToolbar=true;
-      let showSlideEditBox = false; //showSlideEditBox ?? what is this?? 3-mar-2025
 
 function save(slides){
   debugger;
@@ -28,7 +26,7 @@ onMount(async () => {
 3-mar-2025 which is suitable place to load presentation images ? suggestion : the "CanvasEditor" should find and load its own images using imagesUrl 
   -->
 {#if slides}
-<SlideEditor
+<Editor
 soundUrl={soundUrlComplete}
 imagesUrl= {IMAGES_URL}
 {showToolbar}
