@@ -1,4 +1,4 @@
-
+<!-- //do we need this style ?  -->
 <script>
 //Create and Finalized on 16-Feb-2025 not to be edited    
     export let createTaleemCanvas; // Function to initialize TaleemCanvas

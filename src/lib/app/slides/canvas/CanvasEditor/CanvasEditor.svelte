@@ -1,18 +1,19 @@
 <script>
-  import StaticPlayer from "../staticPlayer/StaticPlayer.svelte";
-  import EditorJs from "./EditorJs.js"
-  import TaleemCanvas from "../taleem-canvas-object";
+  import TaleemCanvasPlayer from "../taleemCanvasPlayer/TaleemCanvasPlayer.svelte";
+  // import EditorJs from "./EditorJs.js"
   import AddToolbar from "./AddToolbar.svelte";
   import { onMount, onDestroy } from "svelte";
   import DialogueBox from "./dialoguebox/Dialoguebox.svelte";
   import CanvasDialogueBox from "./dialoguebox/items/CanvasDialogueBox.svelte";
 /////////////////////////////////////////////
 export let slideExtra;
-export let items = [];
+export let currentSlide;
+// export let items = [];
+//This is the place to add images array
 export let imagesArray = ['./images/drops.png'];
 
   let interval = null;
-  let taleemCanvas = null;
+  // let taleemCanvas = null;
   let editor = null;
   let selectedItemItemExtra = null;
 /////////////////////////////////////////////
@@ -20,28 +21,28 @@ function updateSelectedItem(newSelectedItem){
   selectedItemItemExtra = newSelectedItem;
 }
 /////////////////////////////////////////////
-function createTaleemCanvas(canvasElement) {
-    const ctx = canvasElement.getContext("2d");
-    taleemCanvas = new TaleemCanvas(canvasElement, ctx , imagesArray);//--Here TaleemCanvas is created 
-    return taleemCanvas;
-}
+// function createTaleemCanvas(canvasElement) {
+//     const ctx = canvasElement.getContext("2d");
+//     taleemCanvas = new TaleemCanvas(canvasElement, ctx , imagesArray);//--Here TaleemCanvas is created 
+//     return taleemCanvas;
+// }
 
 function gameloop() {
-  if (taleemCanvas) {
-      taleemCanvas.draw();
-  }
+  // if (taleemCanvas) {
+  //     taleemCanvas.draw();
+  // }
 }
 /////////////////////////////////////////////
 onMount(async () => {
-  
-  if(taleemCanvas){
-    await taleemCanvas.init();
-    for (let i = 0; i < items.length; i++) {
-      const item =   items[i];
-      taleemCanvas.addItem(item.itemExtra);
-    }
-    editor = new EditorJs(taleemCanvas,updateSelectedItem);
-  }
+  console.log("currentSlide-->CanvasEditor",currentSlide);
+  // if(taleemCanvas){
+  //   await taleemCanvas.init();
+  //   for (let i = 0; i < items.length; i++) {
+  //     const item =   items[i];
+  //     taleemCanvas.addItem(item.itemExtra);
+  //   }
+  //   editor = new EditorJs(taleemCanvas,updateSelectedItem);
+  // }
 
   interval = setInterval(gameloop, 20); // Start gameloop
 });
@@ -53,14 +54,14 @@ onDestroy(() => {
 
 </script>
 
-{#if taleemCanvas}
-  <AddToolbar {taleemCanvas} />
-{/if}
+<!-- {#if taleemCanvas} -->
+  <!-- <AddToolbar {taleemCanvas} /> -->
+<!-- {/if} -->
 
 <div class="page">
   <div class="container">
     <div class="canvas-container">
-      <StaticPlayer {createTaleemCanvas} />
+      <TaleemCanvasPlayer items={currentSlide.items} />
     </div>
 
     <div class="dialogue-box">
