@@ -1,8 +1,9 @@
 <script>
+   
    import Icons from "../../icons"; 
 
   
-    export let taleemCanvas;
+    export let addItem;
   
     // List of toolbar buttons
     const shapeItems = [
@@ -19,12 +20,6 @@
         { icon: Icons.PIZZA, payload: 'piechart', title: 'Pie' },
     ];
   
-    function addItem(type) {
-        if (taleemCanvas && taleemCanvas.add[type]) {
-            taleemCanvas.add[type]();
-            taleemCanvas.draw(); // Ensure item appears immediately
-        }
-    }
   </script>
   <!-- Toolbar UI -->
 <div class="toolbar">
