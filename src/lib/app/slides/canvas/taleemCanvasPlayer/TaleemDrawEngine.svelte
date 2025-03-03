@@ -31,14 +31,16 @@ function handleMouseMove(event, hitItem) {
       taleem_draw_engine.onMouse('mousemove', handleMouseMove);
       const itemExtras = stripItemExtraFromItems(items);
       taleem_draw_engine.clear();
-      taleem_draw_engine.draw(itemExtras);//FIX THIS
-    //   interval = setInterval(gameloop,20);
+      taleem_draw_engine.draw(itemExtras);
+      interval = setInterval(gameloop,20);
     }
   });
 //////////////////////////////////////////////////////
 function gameloop(){
     if(taleem_draw_engine && items){
-        taleem_draw_engine.draw(items) 
+      const itemExtras = stripItemExtraFromItems(items);
+      taleem_draw_engine.clear();
+      taleem_draw_engine.draw(itemExtras);
     } 
 }
 //////////////////////////////////////////////////////

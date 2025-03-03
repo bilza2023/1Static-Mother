@@ -7,24 +7,13 @@ import {ItemsMap} from "../taleemCanvasPlayer/taleem-canvas-components";
   import { onMount, onDestroy } from "svelte";
   import DialogueBox from "./dialoguebox/Dialoguebox.svelte";
   import CanvasDialogueBox from "./dialoguebox/items/CanvasDialogueBox.svelte";
+  import getNewItem from "../../../editor/addNewSlide/getNewItem";
 /////////////////////////////////////////////
 export let slideExtra;
-export let currentSlide;
+// export let slideStartTime=0;
+// export let slideEndTime=10;
+export let items = [];
 
-function redraw(){
-  items = items;
-}
-
-let items = [];
-
-$:{
-  currentSlide;
-  if(currentSlide && currentSlide.items){
-    items = currentSlide.items;
-  }else {
-    items = []
-  }
-}
 
 //This is the place to add images array
 export let imagesArray = ['./images/drops.png'];
@@ -52,8 +41,6 @@ function gameloop() {
 /////////////////////////////////////////////
 onMount(async () => {
   // debugger;
-  // items = currentSlide.items;
-  // console.log("currentSlide-->CanvasEditor",currentSlide);
   // if(taleemCanvas){
   //   await taleemCanvas.init();
   //   for (let i = 0; i < items.length; i++) {
@@ -69,8 +56,10 @@ function addItem(itemType){
   debugger;
   const OBJECT = ItemsMap.get(itemType);
             const itemExtra = OBJECT.itemExtraData();
-            items.push(itemExtra);
-            items = items;
+            const newItem = getNewItem(itemExtra);
+            // items.push(newItem);
+            items = [...items,newItem];
+
 }
 onDestroy(() => {
   if (interval) clearInterval(interval);
@@ -85,7 +74,7 @@ onDestroy(() => {
 <div class="page">
   <div class="container">
     <div class="canvas-container">
-      <TaleemDrawEngine items={items} />
+      <TaleemDrawEngine bind:items={items} />
     </div>
 
     <div class="dialogue-box">

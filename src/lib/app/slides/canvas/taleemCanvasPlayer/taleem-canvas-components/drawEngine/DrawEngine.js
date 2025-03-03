@@ -56,12 +56,9 @@ export default class DrawEngine  {
 //   }
 
 
-  draw(items = []) {
-      // const itemObject = new Rectangle(items[0].itemExtra)
-      const itemObjects = itemsToObjects(items);
-    // Update event module with current items
+  draw(itemExtras = []) {
+    const itemObjects = itemsToObjects(itemExtras);
     this.eventModule.updateItems(itemObjects);
-    // Draw the items
     this.clear();
     this.drawItems(itemObjects);
   }

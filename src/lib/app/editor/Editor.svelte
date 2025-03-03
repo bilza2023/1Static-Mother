@@ -68,7 +68,6 @@ onMount(async()=>{
   {#if currentSlide && ready}
     {#if (currentSlide.type).toLowerCase() == "canvas"}
       <CanvasEditor 
-      {currentSlide}
       bind:items={currentSlide.items}
       slideStartTime={currentSlide.startTime}
       slideEndTime={currentSlide.endTime} 
