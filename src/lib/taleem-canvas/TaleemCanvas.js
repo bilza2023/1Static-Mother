@@ -20,8 +20,8 @@ static ItemsMap = ItemsMap;
     this.canvas = canvas;
     this.ctx = ctx;
     this.env = new Env(this.ctx);
-    this.backgroundItem = new BackgroundItem();
-    this.backgroundItem.env = this.env; // very important
+    this._backgroundItem = new BackgroundItem();
+    this._backgroundItem.env = this.env; // very important
     this.slideExtra = {backgroundColor: "gray"};
     this.width = 1000;
     this.height = 360;
@@ -81,7 +81,7 @@ static ItemsMap = ItemsMap;
     const itemObjects = this.itemsToObjects(this.items);
     this.eventModule.updateItems(itemObjects);
     this.clear();
-    this.backgroundItem.draw(this.ctx);
+    this._backgroundItem.draw(this.ctx);
     this.drawItems(itemObjects);
   }
   drawItems(items = []) {

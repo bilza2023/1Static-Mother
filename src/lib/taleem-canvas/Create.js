@@ -1,3 +1,4 @@
+import BackgroundItem from "./items/BackgroundItem.js";
 import Rectangle from "./items/Rectangle.js";
 import Circle from "./items/Circle.js";
 import Ellipse from "./items/Ellipse.js";
@@ -11,7 +12,8 @@ import Piechart from "./items/Piechart.js";
 import Sprite from "./items/Sprite.js";
 
 export default class Create {
-
+//special item BackgroundItem 
+    background() {return new BackgroundItem();}
     sprite() {return new Sprite();}
     image() {return new ImageItem();}
     piechart() {return new Piechart();}
