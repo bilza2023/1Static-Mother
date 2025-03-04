@@ -1,4 +1,5 @@
 
+//BackgroundItem must not be included here since here we have just those items which are drawn by user the BackgroundItem is drawn automatically
 import TextItem from "./items/TextItem";
 import Rectangle from "./items/Rectangle";
 import Ellipse from "./items/Ellipse";

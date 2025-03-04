@@ -44,8 +44,8 @@
         //Register Events Here
         taleem_draw_engine.onMouse('mousemove', handleMouseMove);
        
-        console.log("TaleemCanvas.Create",TaleemCanvas.Create);
-        console.log("TaleemCanvas.ItemsMap",TaleemCanvas.ItemsMap);
+        // console.log("TaleemCanvas.Create",TaleemCanvas.Create);
+        // console.log("TaleemCanvas.ItemsMap",TaleemCanvas.ItemsMap);
         interval = setInterval(gameloop,20);
       }
     });
@@ -53,9 +53,8 @@
   function gameloop(){
       if(taleem_draw_engine && items){
         const itemExtras = stripItemExtraFromItems(items);//convt to canvas items
-        taleem_draw_engine.items = itemExtras; 
-        taleem_draw_engine.clear();
-        taleem_draw_engine.draw(itemExtras);
+        taleem_draw_engine.items = itemExtras;//improve:: change only if edited 
+        taleem_draw_engine.draw();
       } 
   }
   //////////////////////////////////////////////////////

@@ -1,8 +1,9 @@
 
 import Create from "./Create.js";
 import ItemsMap from "./ItemsMap.js";
-
+import BackgroundItem from "./items/BackgroundItem.js";
 import EventModule from "./EventModule.js";
+import Env from "./Env.js";
 // import InputModule from "../core/InputModule.js";
 // import loadImagesLocal from "./loadImagesLocal.js";
 /////////////////////////////////////////////////////////////////
@@ -10,17 +11,6 @@ export default class TaleemCanvas  {
 
 static Create = Create;  
 static ItemsMap = ItemsMap;
-
-static itemsToObjects(items){
-  let itemObjects = [];
-  for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      const OBJECT = TaleemCanvas.ItemsMap.get(item.type);
-      const itemObject = new OBJECT(item);
-      itemObjects.push(itemObject);
-  }
-  return itemObjects;
-}
 ///////////////////////////////////////////////////////////////
   constructor(canvas, ctx) {
     if (!canvas || !ctx) {
@@ -29,6 +19,9 @@ static itemsToObjects(items){
     }
     this.canvas = canvas;
     this.ctx = ctx;
+    this.env = new Env(this.ctx);
+    this.backgroundItem = new BackgroundItem();
+    this.backgroundItem.env = this.env; // very important
     this.slideExtra = {backgroundColor: "gray"};
     this.width = 1000;
     this.height = 360;
@@ -44,6 +37,17 @@ static itemsToObjects(items){
 
   }
 
+  itemsToObjects(items){
+    let itemObjects = [];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const OBJECT = TaleemCanvas.ItemsMap.get(item.type);
+        const itemObject = new OBJECT(item);
+        itemObject.env = this.env; //=====> INJECT ENV INTO EACH OBJECT
+        itemObjects.push(itemObject);
+    }
+    return itemObjects;
+  }
   async loadImages(imagesArray=[]){//thise can be loaded later
     // this.env.images = await loadImagesLocal(imagesArray);
     return true;
@@ -74,9 +78,10 @@ static itemsToObjects(items){
 
 //--Add drawing background item : 
   draw() {
-    const itemObjects = TaleemCanvas.itemsToObjects(this.items);
+    const itemObjects = this.itemsToObjects(this.items);
     this.eventModule.updateItems(itemObjects);
     this.clear();
+    this.backgroundItem.draw(this.ctx);
     this.drawItems(itemObjects);
   }
   drawItems(items = []) {
