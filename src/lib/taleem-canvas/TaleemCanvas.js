@@ -1,25 +1,42 @@
 
-import EventModule from "./EventModule";
+import Create from "./Create.js";
+import ItemsMap from "./ItemsMap.js";
+
+import EventModule from "./EventModule.js";
 // import InputModule from "../core/InputModule.js";
 // import loadImagesLocal from "./loadImagesLocal.js";
-import itemsToObjects from "../itemsToObjects";
 /////////////////////////////////////////////////////////////////
-export default class DrawEngine  {
+export default class TaleemCanvas  {
 
-  constructor(canvas, ctx,slideExtra={}, imagesArray=[]) {
+static Create = Create;  
+static ItemsMap = ItemsMap;
+
+static itemsToObjects(items){
+  let itemObjects = [];
+  for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const OBJECT = TaleemCanvas.ItemsMap.get(item.type);
+      const itemObject = new OBJECT(item);
+      itemObjects.push(itemObject);
+  }
+  return itemObjects;
+}
+///////////////////////////////////////////////////////////////
+  constructor(canvas, ctx) {
     if (!canvas || !ctx) {
       console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");
       throw new Error("TaleemCanvas requires both `canvas` and `ctx`.");
     }
     this.canvas = canvas;
     this.ctx = ctx;
-    this.slideExtra = slideExtra;
+    this.slideExtra = {backgroundColor: "gray"};
     this.width = 1000;
     this.height = 360;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
      
-    this.imagesArray = imagesArray;
+    this.imagesArray = [];
+    this.items = [];
     ////////////////////////////////////////////////////////////////////////
     // this.drawModule = new DrawModule(this.ctx, this.canvas, this.background);
     this.eventModule = new EventModule(this.canvas); // No longer passing items array
@@ -27,16 +44,16 @@ export default class DrawEngine  {
 
   }
 
-//   async loadImages(imagesArray=[]){//thise can be loaded later
-//     this.env.images = await loadImagesLocal(imagesArray);
-//     return true;
-//   }
+  async loadImages(imagesArray=[]){//thise can be loaded later
+    // this.env.images = await loadImagesLocal(imagesArray);
+    return true;
+  }
 
-//   async init(){
-//     await this.loadImages(this.imagesArray);
-//     this.canvas.width = this.width;
-//     this.canvas.height = this.height;
-//   }
+  // async init(){
+  //   // await this.loadImages(this.imagesArray);
+  //   this.canvas.width = this.width;
+  //   this.canvas.height = this.height;
+  // }
 
   clear(){
     const { ctx, canvas, slideExtra } = this;
@@ -56,8 +73,8 @@ export default class DrawEngine  {
 //   }
 
 //--Add drawing background item : 
-  draw(itemExtras = []) {
-    const itemObjects = itemsToObjects(itemExtras);
+  draw() {
+    const itemObjects = TaleemCanvas.itemsToObjects(this.items);
     this.eventModule.updateItems(itemObjects);
     this.clear();
     this.drawItems(itemObjects);

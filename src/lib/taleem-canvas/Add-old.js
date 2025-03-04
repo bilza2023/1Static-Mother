@@ -1,14 +1,14 @@
-import Rectangle from "../items/Rectangle.js";
-import Circle from "../items/Circle.js";
-import Ellipse from "../items/Ellipse.js";
-import Line from "../items/Line.js";
-import Ray from "../items/Ray.js";
-import Triangle from "../items/Triangle.js";
-import ImageItem from "../items/ImageItem.js";
-import TextItem from "../items/TextItem.js";
-import List from "../items/List.js";
-import Piechart from "../items/Piechart.js";
-import Sprite from "../items/Sprite.js";
+import Rectangle from "./items/Rectangle.js";
+import Circle from "./items/Circle.js";
+import Ellipse from "./items/Ellipse.js";
+import Line from "./items/Line.js";
+import Ray from "./items/Ray.js";
+import Triangle from "./items/Triangle.js";
+import ImageItem from "./items/ImageItem.js";
+import TextItem from "./items/TextItem.js";
+import List from "./items/List.js";
+import Piechart from "./items/Piechart.js";
+import Sprite from "./items/Sprite.js";
 
 export default class Add {
     constructor(items,env) {

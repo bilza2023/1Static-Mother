@@ -1,13 +1,21 @@
 
-
 <script>
-    import { onMount, onDestroy } from "svelte";
-    import {DrawEngine} from "./taleem-canvas-components"; 
+  // since CanvasStaticPlayer is a Bridge between TaleemCanvas (TaleemCanvas) and the App so it takes App item and convert it into canvas-item before feeding it.
+
+  import { onMount, onDestroy } from "svelte";
+    import TaleemCanvas from "../../taleem-canvas"; 
   ///////////////////////////////////////////////////////
-    export let items;
+    export let items; // app items
     export let slideExtra={};
-    export let assets = {}; //asssets should come with images loaded
+    export let images=[];
+    //since we are getting App-Items and to convert it into canvas-items (for TaleemCanvas / TaleemCanvas) this app places the canvas-items inside "itemExtra" field of App-item (but this can be different). 
+    export let canvasItemField ="itemExtra";
+
     // assets.images = await loadImages(['/images/scene.png']);     
+    //actually it does not need assets just needs images
+    // export let assets = {}; //asssets should come with images loaded
+    
+    /////////////////////////////////////////////////////
     let canvasElement;
     let taleem_draw_engine=null;
     let interval=null;
@@ -27,19 +35,25 @@
   /////////////////////////////////////////////////////
     onMount(async () => {
       
-      if (canvasElement){
+      if (canvasElement && items){
         const ctx = canvasElement.getContext("2d");
-        taleem_draw_engine = new DrawEngine(canvasElement, ctx);
-       //Register Events Here
+        //--> TaleemCanvas 
+        taleem_draw_engine = new TaleemCanvas(canvasElement, ctx);
+        taleem_draw_engine.items = items;
+        // await taleem_draw_engine.loadImages(images);
+        //Register Events Here
         taleem_draw_engine.onMouse('mousemove', handleMouseMove);
        
+        console.log("TaleemCanvas.Create",TaleemCanvas.Create);
+        console.log("TaleemCanvas.ItemsMap",TaleemCanvas.ItemsMap);
         interval = setInterval(gameloop,20);
       }
     });
   //////////////////////////////////////////////////////
   function gameloop(){
       if(taleem_draw_engine && items){
-        const itemExtras = stripItemExtraFromItems(items);//conv
+        const itemExtras = stripItemExtraFromItems(items);//convt to canvas items
+        taleem_draw_engine.items = itemExtras; 
         taleem_draw_engine.clear();
         taleem_draw_engine.draw(itemExtras);
       } 
@@ -48,14 +62,14 @@
     onDestroy(() => {
         if (interval) clearInterval(interval)
     });
-  
+  //in this app canvasItemField = "itemExtra" but we must know that itemExtra is not known to TaleemCanvas/TaleemCanvas so we use canvasItemField.
    function stripItemExtraFromItems(items){
-      let itemExtras = [];
+      let canvasItems = [];
       for (let i = 0; i < items.length; i++) {
-          const itemExtra = items[i].itemExtra;
-          itemExtras.push(itemExtra);
+          const canvasItem = items[i][canvasItemField];
+          canvasItems.push(canvasItem);
       }
-      return itemExtras;
+      return canvasItems;
    }
   </script>
   
