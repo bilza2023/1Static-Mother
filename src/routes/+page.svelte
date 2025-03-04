@@ -6,6 +6,8 @@
 
 
 <div class="container">
+    <h1><b><a class="text-white" href="/canvas_static_player">Canvas Static Player</a></b></h1>
+<hr>    
     <h1><a class="text-white" href="/static_editor">Static Editor</a></h1>
     <h1><a class="text-white" href="/static_player">Static Player</a></h1>
 <hr>

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import {Editor} from '../../lib/app';
   import {onMount,toast} from "$lib/util";
   import savePresentation  from '$lib/apiCalls/savePresentation';
@@ -34,4 +34,4 @@ imagesUrl= {IMAGES_URL}
 {showToolbar}
 bind:slides={slides}
 
-/>
+/> -->
