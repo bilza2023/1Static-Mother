@@ -4,6 +4,7 @@
   import DrawEngine from "./taleem-canvas-components/drawEngine/DrawEngine"; 
 ///////////////////////////////////////////////////////
   export let items;
+  export let slideExtra;
   export let assets = {}; //asssets should come with images loaded
   // assets.images = await loadImages(['/images/scene.png']);     
   let canvasElement;
@@ -28,10 +29,9 @@ function handleMouseMove(event, hitItem) {
     if (canvasElement){
       const ctx = canvasElement.getContext("2d");
       taleem_draw_engine = new DrawEngine(canvasElement, ctx);
+     //Register Events Here
       taleem_draw_engine.onMouse('mousemove', handleMouseMove);
-      const itemExtras = stripItemExtraFromItems(items);
-      taleem_draw_engine.clear();
-      taleem_draw_engine.draw(itemExtras);
+     
       interval = setInterval(gameloop,20);
     }
   });
