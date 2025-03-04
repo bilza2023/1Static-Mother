@@ -4,6 +4,7 @@ import ItemsMap from "./ItemsMap.js";
 import BackgroundItem from "./items/BackgroundItem.js";
 import EventModule from "./EventModule.js";
 import Env from "./Env.js";
+import Add from "./Add.js";
 // import InputModule from "../core/InputModule.js";
 // import loadImagesLocal from "./loadImagesLocal.js";
 /////////////////////////////////////////////////////////////////
@@ -19,22 +20,21 @@ static ItemsMap = ItemsMap;
     }
     this.canvas = canvas;
     this.ctx = ctx;
+    this.items = [];
     this.env = new Env(this.ctx);
-    this._backgroundItem = new BackgroundItem();
-    this._backgroundItem.env = this.env; // very important
-    this.slideExtra = {backgroundColor: "gray"};
+    this._background = new BackgroundItem();
+    this._background.env = this.env; // very important
+    
+
     this.width = 1000;
     this.height = 360;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
      
     this.imagesArray = [];
-    this.items = [];
     ////////////////////////////////////////////////////////////////////////
-    // this.drawModule = new DrawModule(this.ctx, this.canvas, this.background);
     this.eventModule = new EventModule(this.canvas); // No longer passing items array
     // this.inputModule = new InputModule();
-
   }
 
   itemsToObjects(items){
@@ -53,15 +53,9 @@ static ItemsMap = ItemsMap;
     return true;
   }
 
-  // async init(){
-  //   // await this.loadImages(this.imagesArray);
-  //   this.canvas.width = this.width;
-  //   this.canvas.height = this.height;
-  // }
-
   clear(){
     const { ctx, canvas, slideExtra } = this;
-    const bgColor = slideExtra.backgroundColor || 'gray';
+    const bgColor =  'gray';
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);  
@@ -72,6 +66,12 @@ static ItemsMap = ItemsMap;
     this.eventModule.on(eventType, callback);
   }
 
+ set background(itemExtra){
+    this._background.itemExtra = itemExtra;
+ }
+ get background(){
+    return this._background.itemExtra;
+ }
 //   onKey(eventType, callback) {
     // this.inputModule.on(eventType, callback);
 //   }
@@ -81,7 +81,7 @@ static ItemsMap = ItemsMap;
     const itemObjects = this.itemsToObjects(this.items);
     this.eventModule.updateItems(itemObjects);
     this.clear();
-    this._backgroundItem.draw(this.ctx);
+    this._background.draw(this.ctx);
     this.drawItems(itemObjects);
   }
   drawItems(items = []) {
