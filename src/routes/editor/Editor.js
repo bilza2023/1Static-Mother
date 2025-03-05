@@ -7,30 +7,32 @@ export default class Editor {
         this.player = player
         this.items = items;
         this.itemObjects = itemsToObjects(items,this.player.env);
+
+        this.player.onMouse("click", this.onClick.bind(this));
+        this.player.onMouse("dblclick", this.onDoubleClick.bind(this));
+        
+        this.player.onMouse("mousemove", this.onMouseMove.bind(this));
+        
+        this.player.onMouse("mousedown", this.onMouseDown.bind(this));
+        this.player.onMouse("mouseup", this.onMouseMove.bind(this));
         // 
     }
-    editEllipse(){
-        // debugger;
-        if(this.items.length > 0){
-        //   this.items[0].filled = !this.items[0].filled;
-          this.itemObjects[0].itemData.color = "green";
-         
-        }
-      }
+    //5 events 
+    onMouseMove(event, hitItem) {
+        console.log("Mouse position:", event.clientX, event.clientY);
+    }
+    onClick(event, hitItem) {console.log("click");}
+    onMouseDown(event, hitItem) {console.log("down");}
+    onMouseUp(event, hitItem) {console.log("up");}
+    onDoubleClick(event, hitItem) {
+        
+      if (hitItem) {
+        console.log("Mouse over item:", hitItem);
+      } 
+    }
+ 
 }
 
-///////////////////////////////////////////////////////////////////    
-// function itemsToObjects(items,env){
-//     let itemObjects = [];
-//     for (let i = 0; i < items.length; i++) {
-//         const item = items[i];
-//         const OBJECT = ItemsMap.get(item.type);
-//         const itemObject = new OBJECT(item);
-//         // itemObject.env = env; //=====> INJECT ENV INTO EACH OBJECT
-//         itemObjects.push(itemObject);
-//     }
-//     return itemObjects;
-//   }
   /////////////////////////////////////////////////////////////////
   function setBackGround(items,env){
       let backgroundItemData = items.find(item => item.type === "background");

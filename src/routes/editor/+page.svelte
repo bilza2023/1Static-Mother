@@ -9,22 +9,16 @@
     let interval;
     let items = []; //Now items-literals are external to item-canvas
   
-    function handleMouseMove(event, hitItem) {
-      if(editor){
-        editor.itemObjects[0]. x += 10;
-        console.log("edited item X" ,items[0].x); 
-      }
+    // function handleMouseMove(event, hitItem) {
+    //   if(editor){
+    //     editor.itemObjects[0]. x += 10;
+    //     console.log("edited item X" ,items[0].x); 
+    //   }
       // // event: the original mouse event
       // // hitItem: the item under the cursor (or null if no item)
   
-      // console.log("Mouse position:", event.clientX, event.clientY);
-  
-      // if (hitItem) {
-      //   console.log("Mouse over item:", hitItem);
-      //   // You can access properties of the hit item
-      //   // For example: hitItem.id, hitItem.type, etc.
-      // }
-    }
+      
+    // }
   
     function  editEllipse(){
         // debugger;
@@ -48,10 +42,9 @@
         //--pre-drawn images
         
         //Register Events Here
-        taleem_draw_engine.onMouse("mousemove", handleMouseMove);
+        // taleem_draw_engine.onMouse("mousemove", handleMouseMove);
         
         // editor.itemObjects[0].itemData.filled = true;
-        editor.editEllipse();
         console.log("items->first ",items);
         interval = setInterval(gameloop, 100);
       
