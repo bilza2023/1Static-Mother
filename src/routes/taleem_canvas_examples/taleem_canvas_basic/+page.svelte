@@ -1,10 +1,11 @@
 <script>
-    import TaleemCanvas from "$lib/taleem-canvas";
+    import TaleemStaticPlayer from "../../../lib/taleem-canvas/TaleemStaticPlayer.js";
     import { onMount, onDestroy } from "svelte";
   
     let canvasElement;
     let taleem_draw_engine;
     let interval;
+    let items = []; //Now items-literals are external to item-canvas
   
     function handleMouseMove(event, hitItem) {
       // event: the original mouse event
@@ -18,19 +19,29 @@
         // For example: hitItem.id, hitItem.type, etc.
       }
     }
+    function editEllipse(){
+      if(items.length > 0){
+        items[0].filled = !items[0].filled; 
+      }
+    }
     onMount(async () => {
       if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         //--> TaleemCanvas
-        taleem_draw_engine = new TaleemCanvas(canvasElement, ctx);
+        const ellipse = TaleemStaticPlayer.Create.ellipse();
+        items.push(ellipse);
+
+        taleem_draw_engine = new TaleemStaticPlayer(canvasElement, ctx);
+        taleem_draw_engine.items = items;
         // await taleem_draw_engine.loadImages(images);
         //--pre-drawn images
-        const ellipse = TaleemCanvas.Create.ellipse();
-        taleem_draw_engine.items = [...taleem_draw_engine.items, ellipse.itemExtra];
+        
+        // taleem_draw_engine.items = [...taleem_draw_engine.items, ellipse.itemExtra];
         //Register Events Here
         taleem_draw_engine.onMouse("mousemove", handleMouseMove);
   
         interval = setInterval(gameloop, 20);
+        interval = setInterval(editEllipse, 2000);
       }
     });
     //////////////////////////////////////////////////////
@@ -40,21 +51,10 @@
       }
     }
     function addRectangle() {
-      const newItem = {
-        uuid: "abc",
-        type: "rectangle",
-        x: 100,
-        y: 100,
-        width: 100,
-        height: 100,
-        filled: true,
-        lineWidth: 1,
-        dash: 0,
-        gap: 0,
-        color: "red",
-        globalAlpha: 1,
-      };
-      taleem_draw_engine.items = [...taleem_draw_engine.items, newItem];
+      const rectangle = TaleemStaticPlayer.Create.rectangle();
+      rectangle.color = "green";
+      items.push(rectangle);
+      taleem_draw_engine.items = items;
     }
     onDestroy(() => {
       if (interval) clearInterval(interval);

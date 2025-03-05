@@ -1,12 +1,12 @@
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class Rectangle extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || Rectangle.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: 'rectangle',
@@ -25,20 +25,20 @@ export default class Rectangle extends BaseItem {
 
   draw(ctx,assets={}) {
     ctx.save();
-    ctx.lineWidth = this.itemExtra.lineWidth;
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
+    ctx.lineWidth = this.itemData.lineWidth;
+    ctx.globalAlpha = this.itemData.globalAlpha;
     // Set dash style if applicable.
-    if (this.itemExtra.dash > 0 || this.itemExtra.gap > 0) {
-      ctx.setLineDash([this.itemExtra.dash, this.itemExtra.gap]);
+    if (this.itemData.dash > 0 || this.itemData.gap > 0) {
+      ctx.setLineDash([this.itemData.dash, this.itemData.gap]);
     } else {
       ctx.setLineDash([]);
     }
     // Use base getters for x, y, width, height.
-    if (this.itemExtra.filled) {
-      ctx.fillStyle = this.itemExtra.color;
+    if (this.itemData.filled) {
+      ctx.fillStyle = this.itemData.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
     } else {
-      ctx.strokeStyle = this.itemExtra.color;
+      ctx.strokeStyle = this.itemData.color;
       ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
     ctx.restore();

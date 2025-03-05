@@ -1,12 +1,13 @@
-import BaseItem from './BaseItem.js';
+
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class ImageItem extends BaseItem {
-    constructor(itemExtra) {
-        super(itemExtra || ImageItem.itemExtraData());
+    constructor(itemData) {
+        super(itemData);
     }
 
-    static itemExtraData() {
+    static newItemData() {
         return {
             uuid: uuid(),
             type: 'image',
@@ -21,10 +22,10 @@ export default class ImageItem extends BaseItem {
   
     draw(ctx) {
         ctx.save();
-        ctx.globalAlpha = this.itemExtra.globalAlpha;
+        ctx.globalAlpha = this.itemData.globalAlpha;
     
         // ✅ Get the correct image from assets Map
-        const imageObj = this.env.getImage(this.itemExtra.src);
+        const imageObj = this.env.getImage(this.itemData.src);
         const image = imageObj ? imageObj.img : null;
     
         if (image) {
@@ -49,7 +50,7 @@ export default class ImageItem extends BaseItem {
             ctx.fillStyle = "white";
             ctx.font = "16px Arial";
             ctx.textAlign = "center";
-            ctx.fillText(`${this.itemExtra.src}: not found`, this.x + this.width / 2, this.y + this.height / 2);
+            ctx.fillText(`${this.itemData.src}: not found`, this.x + this.width / 2, this.y + this.height / 2);
         }
     
         ctx.restore();

@@ -1,12 +1,12 @@
-import BaseItem from "./BaseItem.js";
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from "./uuid.js";
 
 export default class List extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || List.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: "list",
@@ -28,13 +28,13 @@ export default class List extends BaseItem {
 
   draw(ctx) {
     ctx.save();
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
-    ctx.fillStyle = this.itemExtra.color;
-    ctx.font = `${this.itemExtra.fontSize}px ${this.itemExtra.fontFamily}`;
+    ctx.globalAlpha = this.itemData.globalAlpha;
+    ctx.fillStyle = this.itemData.color;
+    ctx.font = `${this.itemData.fontSize}px ${this.itemData.fontFamily}`;
     
-    let { x, y, listArray, lineGap, indentation } = this.itemExtra;
+    let { x, y, listArray, lineGap, indentation } = this.itemData;
     let currentIndent = 0;
-    let lineHeight = this.itemExtra.fontSize + lineGap;
+    let lineHeight = this.itemData.fontSize + lineGap;
     
     listArray.forEach((text, index) => {
       ctx.fillText(text, x + currentIndent, y + index * lineHeight);

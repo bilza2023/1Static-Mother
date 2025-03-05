@@ -1,13 +1,13 @@
 
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class Ellipse extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || Ellipse.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: 'ellipse',
@@ -26,45 +26,45 @@ export default class Ellipse extends BaseItem {
   }
 
   boundingRectangleWidth() {
-    return this.itemExtra.radiusX * 2;
+    return this.itemData.radiusX * 2;
   }
   boundingRectangleHeight() {
-    return this.itemExtra.radiusY * 2;
+    return this.itemData.radiusY * 2;
   }
   
   // Override bounding calculations using respective radii.
   boundingRectangleX() {
-    return this.x - this.itemExtra.radiusX;
+    return this.x - this.itemData.radiusX;
   }
   boundingRectangleY() {
-    return this.y - this.itemExtra.radiusY;
+    return this.y - this.itemData.radiusY;
   }
 
   // Use radii to compute width and height.
   get width() {
-    return this.itemExtra.radiusX * 2;
+    return this.itemData.radiusX * 2;
   }
   set width(newWidth) {
-    this.itemExtra.radiusX = newWidth / 2;
+    this.itemData.radiusX = newWidth / 2;
   }
   get height() {
-    return this.itemExtra.radiusY * 2;
+    return this.itemData.radiusY * 2;
   }
   set height(newHeight) {
-    this.itemExtra.radiusY = newHeight / 2;
+    this.itemData.radiusY = newHeight / 2;
   }
 
   draw(ctx,assets={}) {
     ctx.save();
-    ctx.lineWidth = this.itemExtra.lineWidth;
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
+    ctx.lineWidth = this.itemData.lineWidth;
+    ctx.globalAlpha = this.itemData.globalAlpha;
     ctx.beginPath();
-    ctx.ellipse(this.x, this.y, this.itemExtra.radiusX, this.itemExtra.radiusY, this.itemExtra.rotation, this.itemExtra.startAngle, this.itemExtra.endAngle);
-    if (this.itemExtra.filled) {
-      ctx.fillStyle = this.itemExtra.color;
+    ctx.ellipse(this.x, this.y, this.itemData.radiusX, this.itemData.radiusY, this.itemData.rotation, this.itemData.startAngle, this.itemData.endAngle);
+    if (this.itemData.filled) {
+      ctx.fillStyle = this.itemData.color;
       ctx.fill();
     } else {
-      ctx.strokeStyle = this.itemExtra.color;
+      ctx.strokeStyle = this.itemData.color;
       ctx.stroke();
     }
     ctx.restore();

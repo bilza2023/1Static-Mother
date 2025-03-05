@@ -1,12 +1,12 @@
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class Ray extends BaseItem {
-    constructor(itemExtra) {
-        super(itemExtra ||  Ray.itemExtraData() );
+    constructor(itemData) {
+        super(itemData );
     }
 
-    static itemExtraData() {
+    static newItemData() {
         return {
             uuid: uuid(),
             type: 'ray',
@@ -29,20 +29,20 @@ export default class Ray extends BaseItem {
     boundingRectangleWidth() { return this.width; }
     boundingRectangleHeight() { return this.height; }
 
-    boundingRectangleX() { return Math.min(this.itemExtra.x1, this.itemExtra.x2); }
-    boundingRectangleY() { return Math.min(this.itemExtra.y1, this.itemExtra.y2); }
-    get width() { return Math.abs(this.itemExtra.x2 - this.itemExtra.x1); }
-    set width(newWidth) { this.itemExtra.x2 = this.itemExtra.x1 + newWidth; }
-    get height() { return Math.abs(this.itemExtra.y2 - this.itemExtra.y1); }
-    set height(newHeight) { this.itemExtra.y2 = this.itemExtra.y1 + newHeight; }
+    boundingRectangleX() { return Math.min(this.itemData.x1, this.itemData.x2); }
+    boundingRectangleY() { return Math.min(this.itemData.y1, this.itemData.y2); }
+    get width() { return Math.abs(this.itemData.x2 - this.itemData.x1); }
+    set width(newWidth) { this.itemData.x2 = this.itemData.x1 + newWidth; }
+    get height() { return Math.abs(this.itemData.y2 - this.itemData.y1); }
+    set height(newHeight) { this.itemData.y2 = this.itemData.y1 + newHeight; }
 
     draw(ctx) {
         ctx.save();
-        ctx.lineWidth = this.itemExtra.lineWidth;
-        ctx.globalAlpha = this.itemExtra.globalAlpha;
-        ctx.strokeStyle = this.itemExtra.color;
-        ctx.fillStyle = this.itemExtra.color;
-        ctx.setLineDash([this.itemExtra.dash, this.itemExtra.gap]);
+        ctx.lineWidth = this.itemData.lineWidth;
+        ctx.globalAlpha = this.itemData.globalAlpha;
+        ctx.strokeStyle = this.itemData.color;
+        ctx.fillStyle = this.itemData.color;
+        ctx.setLineDash([this.itemData.dash, this.itemData.gap]);
 
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
@@ -50,12 +50,12 @@ export default class Ray extends BaseItem {
         
         ctx.stroke();
 
-        if (this.itemExtra.startArrow) {
-            this.drawArrowHead(ctx, this.itemExtra.x2, this.itemExtra.y2, this.itemExtra.x1, this.itemExtra.y1);
+        if (this.itemData.startArrow) {
+            this.drawArrowHead(ctx, this.itemData.x2, this.itemData.y2, this.itemData.x1, this.itemData.y1);
         }
 
-        if (this.itemExtra.endArrow) {
-            this.drawArrowHead(ctx, this.itemExtra.x1, this.itemExtra.y1, this.itemExtra.x2, this.itemExtra.y2);
+        if (this.itemData.endArrow) {
+            this.drawArrowHead(ctx, this.itemData.x1, this.itemData.y1, this.itemData.x2, this.itemData.y2);
         }
 
         ctx.restore();
@@ -63,8 +63,8 @@ export default class Ray extends BaseItem {
 
     drawArrowHead(ctx, x1, y1, x2, y2) {
         const angle = Math.atan2(y2 - y1, x2 - x1);
-        const arrowWidth = this.itemExtra.arrowWidth;
-        const arrowHeight = this.itemExtra.arrowHeight;
+        const arrowWidth = this.itemData.arrowWidth;
+        const arrowHeight = this.itemData.arrowHeight;
     
         ctx.save();
         ctx.translate(x2, y2);

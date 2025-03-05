@@ -1,13 +1,13 @@
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class Line extends BaseItem {
-    constructor(itemExtra) {
-        super(itemExtra ||  Line.itemExtraData());
+    constructor(itemData) {
+        super(itemData);
         
     }
 
-    static itemExtraData() {
+    static newItemData() {
         return {
             uuid: uuid(),
             type: 'line',
@@ -27,19 +27,19 @@ export default class Line extends BaseItem {
     boundingRectangleWidth() { return this.width; }
     boundingRectangleHeight() { return this.height; }
 
-    boundingRectangleX() { return Math.min(this.itemExtra.x1, this.itemExtra.x2); }
-    boundingRectangleY() { return Math.min(this.itemExtra.y1, this.itemExtra.y2); }
-    get width() { return Math.abs(this.itemExtra.x2 - this.itemExtra.x1); }
-    set width(newWidth) { this.itemExtra.x2 = this.itemExtra.x1 + newWidth; }
-    get height() { return Math.abs(this.itemExtra.y2 - this.itemExtra.y1); }
-    set height(newHeight) { this.itemExtra.y2 = this.itemExtra.y1 + newHeight; }
+    boundingRectangleX() { return Math.min(this.itemData.x1, this.itemData.x2); }
+    boundingRectangleY() { return Math.min(this.itemData.y1, this.itemData.y2); }
+    get width() { return Math.abs(this.itemData.x2 - this.itemData.x1); }
+    set width(newWidth) { this.itemData.x2 = this.itemData.x1 + newWidth; }
+    get height() { return Math.abs(this.itemData.y2 - this.itemData.y1); }
+    set height(newHeight) { this.itemData.y2 = this.itemData.y1 + newHeight; }
 
     draw(ctx) {
         ctx.save();
-        ctx.lineWidth = this.itemExtra.lineWidth;
-        ctx.globalAlpha = this.itemExtra.globalAlpha;
-        ctx.strokeStyle = this.itemExtra.color;
-        ctx.setLineDash([this.itemExtra.dash, this.itemExtra.gap]);
+        ctx.lineWidth = this.itemData.lineWidth;
+        ctx.globalAlpha = this.itemData.globalAlpha;
+        ctx.strokeStyle = this.itemData.color;
+        ctx.setLineDash([this.itemData.dash, this.itemData.gap]);
 
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);

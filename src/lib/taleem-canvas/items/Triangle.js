@@ -1,12 +1,12 @@
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class Triangle extends BaseItem {
-    constructor(itemExtra) {
-        super(itemExtra || Triangle.itemExtraData());
+    constructor(itemData) {
+        super(itemData);
     }
 
-    static itemExtraData() {
+    static newItemData() {
         return {
             uuid: uuid(),
             type: 'triangle',
@@ -23,36 +23,36 @@ export default class Triangle extends BaseItem {
     }
 
     boundingRectangleWidth() {
-        return Math.max(this.itemExtra.x1, this.itemExtra.x2, this.itemExtra.x3) - this.boundingRectangleX();
+        return Math.max(this.itemData.x1, this.itemData.x2, this.itemData.x3) - this.boundingRectangleX();
     }
     
     boundingRectangleHeight() {
-        return Math.max(this.itemExtra.y1, this.itemExtra.y2, this.itemExtra.y3) - this.boundingRectangleY();
+        return Math.max(this.itemData.y1, this.itemData.y2, this.itemData.y3) - this.boundingRectangleY();
     }
 
     get width() { return this.boundingRectangleWidth(); }
 get height() { return this.boundingRectangleHeight(); }
 
-    boundingRectangleX() { return Math.min(this.itemExtra.x1, this.itemExtra.x2, this.itemExtra.x3); }
-    boundingRectangleY() { return Math.min(this.itemExtra.y1, this.itemExtra.y2, this.itemExtra.y3); }
-    get width() { return Math.max(this.itemExtra.x1, this.itemExtra.x2, this.itemExtra.x3) - this.boundingRectangleX(); }
-    get height() { return Math.max(this.itemExtra.y1, this.itemExtra.y2, this.itemExtra.y3) - this.boundingRectangleY(); }
+    boundingRectangleX() { return Math.min(this.itemData.x1, this.itemData.x2, this.itemData.x3); }
+    boundingRectangleY() { return Math.min(this.itemData.y1, this.itemData.y2, this.itemData.y3); }
+    get width() { return Math.max(this.itemData.x1, this.itemData.x2, this.itemData.x3) - this.boundingRectangleX(); }
+    get height() { return Math.max(this.itemData.y1, this.itemData.y2, this.itemData.y3) - this.boundingRectangleY(); }
 
     draw(ctx) {
         ctx.save();
-        ctx.lineWidth = this.itemExtra.lineWidth;
-        ctx.globalAlpha = this.itemExtra.globalAlpha;
-        ctx.strokeStyle = this.itemExtra.color;
-        ctx.fillStyle = this.itemExtra.color;
-        ctx.setLineDash([this.itemExtra.dash, this.itemExtra.gap]);
+        ctx.lineWidth = this.itemData.lineWidth;
+        ctx.globalAlpha = this.itemData.globalAlpha;
+        ctx.strokeStyle = this.itemData.color;
+        ctx.fillStyle = this.itemData.color;
+        ctx.setLineDash([this.itemData.dash, this.itemData.gap]);
 
         ctx.beginPath();
-        ctx.moveTo(this.itemExtra.x1, this.itemExtra.y1);
-        ctx.lineTo(this.itemExtra.x2, this.itemExtra.y2);
-        ctx.lineTo(this.itemExtra.x3, this.itemExtra.y3);
+        ctx.moveTo(this.itemData.x1, this.itemData.y1);
+        ctx.lineTo(this.itemData.x2, this.itemData.y2);
+        ctx.lineTo(this.itemData.x3, this.itemData.y3);
         ctx.closePath();
 
-        if (this.itemExtra.filled) ctx.fill();
+        if (this.itemData.filled) ctx.fill();
         ctx.stroke();
 
         ctx.restore();

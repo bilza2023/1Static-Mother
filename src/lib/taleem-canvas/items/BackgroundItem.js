@@ -1,13 +1,13 @@
 
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class BackgroundItem extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || BackgroundItem.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
  }
 
- static itemExtraData(){
+ static newItemData(){
     return {
       uuid: uuid(),
       type: 'background',  
@@ -23,10 +23,10 @@ export default class BackgroundItem extends BaseItem {
     };
   }
   drawBgImage(ctx) {
-    const base64String = this.env.getBackgroundImage(this.itemExtra.backgroundImage);
+    const base64String = this.env.getBackgroundImage(this.itemData.backgroundImage);
 
     if (!base64String || typeof base64String !== "string") {
-        console.error("Invalid background image:", this.itemExtra.backgroundImage);
+        console.error("Invalid background image:", this.itemData.backgroundImage);
         return;
     }
 
@@ -38,12 +38,12 @@ export default class BackgroundItem extends BaseItem {
 
     // ✅ Ensure the image is fully loaded before drawing
     if (this.cachedBgImage.complete) {
-        ctx.globalAlpha = this.itemExtra.globalAlpha;
+        ctx.globalAlpha = this.itemData.globalAlpha;
         ctx.drawImage(this.cachedBgImage, 0, 0, this.env.getCanvasWidth(), this.env.getCanvasHeight());
         ctx.globalAlpha = 1;
     } else {
         this.cachedBgImage.onload = () => {
-            ctx.globalAlpha = this.itemExtra.globalAlpha;
+            ctx.globalAlpha = this.itemData.globalAlpha;
             ctx.drawImage(this.cachedBgImage, 0, 0, this.env.getCanvasWidth(), this.env.getCanvasHeight());
             ctx.globalAlpha = 1;
         };
@@ -57,13 +57,13 @@ export default class BackgroundItem extends BaseItem {
   
   drawGrid(ctx) {
 
-    ctx.strokeStyle = this.itemExtra.gridLineColor;
-    ctx.lineWidth = this.itemExtra.gridLineWidth;
+    ctx.strokeStyle = this.itemData.gridLineColor;
+    ctx.lineWidth = this.itemData.gridLineWidth;
     
     const width = this.env.getCanvasWidth();
     const height = this.env.getCanvasHeight();
 
-    for (let x = this.itemExtra.cellWidth; x < width; x += this.itemExtra.cellWidth) {
+    for (let x = this.itemData.cellWidth; x < width; x += this.itemData.cellWidth) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, height);
@@ -71,7 +71,7 @@ export default class BackgroundItem extends BaseItem {
     }
 
     // Draw horizontal grid lines
-    for (let y = this.itemExtra.cellHeight; y < height; y += this.itemExtra.cellHeight) {
+    for (let y = this.itemData.cellHeight; y < height; y += this.itemData.cellHeight) {
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(width, y);
@@ -81,19 +81,19 @@ export default class BackgroundItem extends BaseItem {
   }
 
   draw(ctx) {
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
+    ctx.globalAlpha = this.itemData.globalAlpha;
     // ✅ Get canvas width & height from Env
     const width = this.env.getCanvasWidth();
     const height = this.env.getCanvasHeight();
     // ✅ Fill the entire canvas area
-    ctx.fillStyle = this.itemExtra.backgroundColor;
+    ctx.fillStyle = this.itemData.backgroundColor;
     ctx.fillRect(0, 0, width, height);
     // ✅ Draw grid if enabled
 
-    if (this.itemExtra.backgroundImage !== null) {
+    if (this.itemData.backgroundImage !== null) {
       this.drawBgImage(ctx);
     }
-    if (this.itemExtra.showGrid) {
+    if (this.itemData.showGrid) {
       this.drawGrid(ctx);
     }
   }

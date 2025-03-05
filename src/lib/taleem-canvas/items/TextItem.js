@@ -1,13 +1,13 @@
-import BaseItem from "./BaseItem.js";
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from "../utils/uuid.js";
 
 export default class TextItem extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || TextItem.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
   // Default properties remain static.
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: "text",
@@ -26,12 +26,12 @@ export default class TextItem extends BaseItem {
   // Instance draw method: uses the environment (this.env) to get ctx.
   draw(ctx,assets={}) {
     // Ensure defaults for font settings.
-    if (!this.itemExtra.fontSize) this.itemExtra.fontSize = 40;
-    if (!this.itemExtra.fontFamily) this.itemExtra.fontFamily = "Arial";
+    if (!this.itemData.fontSize) this.itemData.fontSize = 40;
+    if (!this.itemData.fontFamily) this.itemData.fontFamily = "Arial";
 
     ctx.save();
 
-    const { text, x, y, globalAlpha, color, fontSize, fontFamily } = this.itemExtra;
+    const { text, x, y, globalAlpha, color, fontSize, fontFamily } = this.itemData;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
     ctx.shadowBlur = 0;
@@ -47,17 +47,17 @@ export default class TextItem extends BaseItem {
  
   // Use the environment's text measurement function for width.
   get width() {
-    if (this.itemExtra.width === 0) {
-        this.itemExtra.width = this.env.getTextWidth(
-            this.itemExtra.text,
-            this.itemExtra.fontSize,
-            this.itemExtra.fontFamily
+    if (this.itemData.width === 0) {
+        this.itemData.width = this.env.getTextWidth(
+            this.itemData.text,
+            this.itemData.fontSize,
+            this.itemData.fontFamily
         );
     }
-    return this.itemExtra.width;
+    return this.itemData.width;
 }
 get height() {
-  return this.env.getTextWidth("W", this.itemExtra.fontSize, this.itemExtra.fontFamily);
+  return this.env.getTextWidth("W", this.itemData.fontSize, this.itemData.fontFamily);
 }
 
   boundingRectangleX() { return this.x; }
@@ -73,12 +73,12 @@ boundingRectangleHeight() {
 
   // Setters that adjust the fontSize, then reset cached dimensions.
   set width(newWidth) {
-    this.itemExtra.fontSize += newWidth / 10;
-    this.itemExtra.width = 0;  // Reset cache.
+    this.itemData.fontSize += newWidth / 10;
+    this.itemData.width = 0;  // Reset cache.
   }
 
   set height(newHeight) {
-    this.itemExtra.fontSize += newHeight / 10;
-    this.itemExtra.height = 0;  // Reset cache.
+    this.itemData.fontSize += newHeight / 10;
+    this.itemData.height = 0;  // Reset cache.
   }
 }

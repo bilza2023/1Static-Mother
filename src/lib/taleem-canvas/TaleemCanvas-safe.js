@@ -8,25 +8,10 @@ import Add from "./Add.js";
 // import InputModule from "../core/InputModule.js";
 // import loadImagesLocal from "./loadImagesLocal.js";
 /////////////////////////////////////////////////////////////////
-function itemsToObjects(items){
-  let itemObjects = [];
-  for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      const OBJECT = ItemsMap.get(item.type);
-      const itemObject = new OBJECT(item);
-      itemObject.env = this.env; //=====> INJECT ENV INTO EACH OBJECT
-      itemObjects.push(itemObject);
-  }
-  return itemObjects;
-}
-/////////////////////////////////////////////////////////////////
 export default class TaleemCanvas  {
-// Create has to be totally external since this has to be a subscriber app
-// The Editor and the Player must be seperate such that both take in itemData literals and the Static Player can also take directly itemObjects 
-// ===> THIS IS THE POINT THE STATIC PLAYER SHOULD BE ABLE TO TAKE IN DATA-ITEM-LITERALS AS WELL AS ITEM-OBJECTS SO THAT IT CAN PAIR WITH THE APP AS WELL AS THE EDITOR AND ITS SELF DOES NOT DO ANY EDITING (though the base class is same for all item-objects).
 
 static Create = Create;  
-// static ItemsMap = ItemsMap;-->Bas idea
+static ItemsMap = ItemsMap;
 ///////////////////////////////////////////////////////////////
   constructor(canvas, ctx) {
     if (!canvas || !ctx) {
@@ -35,9 +20,10 @@ static Create = Create;
     }
     this.canvas = canvas;
     this.ctx = ctx;
+    this._items = [];
     this.env = new Env(this.ctx);
-    // this._background = new BackgroundItem();
-    // this._background.env = this.env; // very important
+    this._background = new BackgroundItem();
+    this._background.env = this.env; // very important
     
 
     this.width = 1000;
@@ -51,7 +37,17 @@ static Create = Create;
     // this.inputModule = new InputModule();
   }
 
- 
+  itemsToObjects(items){
+    let itemObjects = [];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const OBJECT = TaleemCanvas.ItemsMap.get(item.type);
+        const itemObject = new OBJECT(item);
+        itemObject.env = this.env; //=====> INJECT ENV INTO EACH OBJECT
+        itemObjects.push(itemObject);
+    }
+    return itemObjects;
+  }
   async loadImages(imagesArray=[]){//thise can be loaded later
     // this.env.images = await loadImagesLocal(imagesArray);
     return true;

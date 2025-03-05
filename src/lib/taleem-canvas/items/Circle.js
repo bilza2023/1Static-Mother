@@ -1,13 +1,13 @@
 
-import BaseItem from './BaseItem.js';
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from './uuid.js';
 
 export default class Circle extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || Circle.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: 'circle',
@@ -26,45 +26,45 @@ export default class Circle extends BaseItem {
   }
 
   boundingRectangleWidth() {
-    return this.itemExtra.radius * 2;
+    return this.itemData.radius * 2;
   }
   boundingRectangleHeight() {
-    return this.itemExtra.radius * 2;
+    return this.itemData.radius * 2;
   }
   
   // Override bounding calculations for a circle.
   boundingRectangleX() {
-    return this.x - this.itemExtra.radius;
+    return this.x - this.itemData.radius;
   }
   boundingRectangleY() {
-    return this.y - this.itemExtra.radius;
+    return this.y - this.itemData.radius;
   }
 
   // Use radius to compute width and height.
   get width() {
-    return this.itemExtra.radius * 2;
+    return this.itemData.radius * 2;
   }
   set width(newWidth) {
-    this.itemExtra.radius = newWidth / 2;
+    this.itemData.radius = newWidth / 2;
   }
   get height() {
-    return this.itemExtra.radius * 2;
+    return this.itemData.radius * 2;
   }
   set height(newHeight) {
-    this.itemExtra.radius = newHeight / 2;
+    this.itemData.radius = newHeight / 2;
   }
 
   draw(ctx,assets={}) {
     ctx.save();
-    ctx.lineWidth = this.itemExtra.lineWidth;
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
+    ctx.lineWidth = this.itemData.lineWidth;
+    ctx.globalAlpha = this.itemData.globalAlpha;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.itemExtra.radius, this.itemExtra.startAngle, this.itemExtra.endAngle);
-    if (this.itemExtra.filled) {
-      ctx.fillStyle = this.itemExtra.color;
+    ctx.arc(this.x, this.y, this.itemData.radius, this.itemData.startAngle, this.itemData.endAngle);
+    if (this.itemData.filled) {
+      ctx.fillStyle = this.itemData.color;
       ctx.fill();
     } else {
-      ctx.strokeStyle = this.itemExtra.color;
+      ctx.strokeStyle = this.itemData.color;
       ctx.stroke();
     }
     ctx.restore();

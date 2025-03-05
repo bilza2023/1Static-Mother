@@ -1,12 +1,12 @@
-import BaseItem from "./BaseItem.js";
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from "./uuid.js";
 
 export default class PieChart extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || PieChart.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: "piechart",
@@ -27,8 +27,8 @@ export default class PieChart extends BaseItem {
 
   draw(ctx) {
     ctx.save();
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
-    let { x, y, radius, data, showLabels, labelFontSize, labelColor } = this.itemExtra;
+    ctx.globalAlpha = this.itemData.globalAlpha;
+    let { x, y, radius, data, showLabels, labelFontSize, labelColor } = this.itemData;
     let startAngle = 0;
 
     data.forEach((item) => {

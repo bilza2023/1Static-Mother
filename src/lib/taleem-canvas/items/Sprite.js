@@ -1,12 +1,12 @@
-import BaseItem from "./BaseItem.js";
+import BaseItem from '../baseItemModule/BaseItem.js';
 import uuid from "./uuid.js";
 
 export default class Sprite extends BaseItem {
-  constructor(itemExtra) {
-    super(itemExtra || Sprite.itemExtraData());
+  constructor(itemData) {
+    super(itemData);
   }
 
-  static itemExtraData() {
+  static newItemData() {
     return {
       uuid: uuid(),
       type: "sprite",
@@ -41,12 +41,12 @@ export default class Sprite extends BaseItem {
   ////////////////////////////////////////////////////////
   draw(ctx) {
     ctx.save();
-    ctx.globalAlpha = this.itemExtra.globalAlpha;
+    ctx.globalAlpha = this.itemData.globalAlpha;
 
-    const spriteObj = this.env.getSprite(this.itemExtra.src);
+    const spriteObj = this.env.getSprite(this.itemData.src);
     const sprite = spriteObj ? spriteObj.img : null;
 
-    const itemData = this.getItemData(spriteObj, this.itemExtra.selectedItem);
+    const itemData = this.getItemData(spriteObj, this.itemData.selectedItem);
 
     if (sprite && itemData) {
       const { sx, sy, sw, sh } = itemData;
@@ -57,7 +57,7 @@ export default class Sprite extends BaseItem {
       ctx.fillStyle = "white";
       ctx.font = "16px Arial";
       ctx.textAlign = "center";
-      ctx.fillText(`${this.itemExtra.src}: not found`, this.x + this.width / 2, this.y + this.height / 2);
+      ctx.fillText(`${this.itemData.src}: not found`, this.x + this.width / 2, this.y + this.height / 2);
     }
 
     ctx.restore();
