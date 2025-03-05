@@ -57,7 +57,7 @@ export default class TaleemStaticPlayer  {
     // this._background = setBackGround(items,this.env);
     this.itemObjects = [];
     this.itemObjects = itemsToObjects(items,this.env);
-    // this.eventModule.updateItems(this.itemObjects);
+    this.eventModule.updateItems(this.itemObjects);
   } 
   get items(){
     return this.this.itemObjects;

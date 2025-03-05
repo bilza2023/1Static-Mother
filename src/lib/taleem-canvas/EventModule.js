@@ -26,9 +26,9 @@ export default class EventModule {
     }
   
     // New method to update the items array--?????????????????
-    // updateItems(itemObjects) {
-    //   this.itemObjects = itemObjects;
-    // }
+    updateItems(itemObjects) {
+      this.itemObjects = itemObjects;
+    }
   
     handleEvent(event, type) {
       const rect = this.canvas.getBoundingClientRect();

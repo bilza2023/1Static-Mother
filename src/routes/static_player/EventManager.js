@@ -23,18 +23,18 @@ this.itemSelected = ()=>{console.log("No event attached..!")}
     // console.log("Mouse position from Event Manager:", event.clientX, event.clientY);
 }
 onClick(event, hitItem) {
- debugger;
-  if (hitItem) {
-    this.itemSelected(event, hitItem);
-    console.log("Double Click from Event Manager:", hitItem);
 
-  } 
     console.log("click");
 }
 onMouseDown(event, hitItem) {console.log("down..");}
 onMouseUp(event, hitItem) {console.log("up..");}
 onDoubleClick(event, hitItem) {
-    
+  if (hitItem) {
+    // debugger;
+    this.itemSelected(event, hitItem);
+    // console.log("Double Click from Event Manager:", hitItem);
+
+  } 
 }
 
 
