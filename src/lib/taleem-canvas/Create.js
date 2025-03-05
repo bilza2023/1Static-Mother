@@ -13,17 +13,16 @@ import Sprite from "./items/Sprite.js";
 
 export default class Create {
 //special item BackgroundItem 
-    background() {return new BackgroundItem();}
-    sprite() {return new Sprite();}
-    image() {return new ImageItem();}
-    piechart() {return new Piechart();}
-    list() {return new List();}
-    rectangle() {return new Rectangle();}
-    circle() {return new Circle();}
-    ellipse() {return new Ellipse();}
-    line() {return new Line();}
-    ray() {return new Ray();}
-    triangle() {return new Triangle();}
-    text() {return new TextItem();
-    }
+static    background() {return  BackgroundItem.itemExtraData() ;}
+static    sprite() {return  Sprite.itemExtraData();}
+static    image() {return  ImageItem.itemExtraData();}
+static    piechart() {return  Piechart.itemExtraData();}
+static    list() {return  List.itemExtraData();}
+static    rectangle() {return  Rectangle.itemExtraData();}
+static    circle() {return  Circle.itemExtraData();}
+static    ellipse() {return Ellipse.itemExtraData() ;}
+static    line() {return  Line.itemExtraData();}
+static    ray() {return  Ray.itemExtraData();}
+static    triangle() {return  Triangle.itemExtraData();}
+static    text() {return  TextItem.itemExtraData();}
 }
