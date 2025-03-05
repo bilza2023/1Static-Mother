@@ -20,7 +20,7 @@ static ItemsMap = ItemsMap;
     }
     this.canvas = canvas;
     this.ctx = ctx;
-    this.items = [];
+    this._items = [];
     this.env = new Env(this.ctx);
     this._background = new BackgroundItem();
     this._background.env = this.env; // very important
@@ -65,6 +65,14 @@ static ItemsMap = ItemsMap;
     // debugger;
     this.eventModule.on(eventType, callback);
   }
+//if am not using items firectly rather using _items
+ set items(items){
+  //add checking fields system here so that no item has less or more fields
+ this._items = items;
+ } 
+ get items(){
+  return this._items;
+ }
 
  set background(itemExtra){
     this._background.itemExtra = itemExtra;
@@ -78,7 +86,7 @@ static ItemsMap = ItemsMap;
 
 //--Add drawing background item : 
   draw() {
-    const itemObjects = this.itemsToObjects(this.items);
+    const itemObjects = this.itemsToObjects(this._items);
     this.eventModule.updateItems(itemObjects);
     this.clear();
     this._background.draw(this.ctx);
