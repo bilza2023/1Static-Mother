@@ -1,5 +1,5 @@
 <script>
-    import TaleemStaticPlayer from "../../../lib/taleem-canvas/TaleemStaticPlayer.js";
+    import {Player,Create} from "../../../lib/taleem-canvas"
     import { onMount, onDestroy } from "svelte";
   
     let canvasElement;
@@ -28,15 +28,14 @@
       if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         //--> TaleemCanvas
-        const ellipse = TaleemStaticPlayer.Create.ellipse();
+        const ellipse = Create.ellipse();
         items.push(ellipse);
 
-        taleem_draw_engine = new TaleemStaticPlayer(canvasElement, ctx);
+        taleem_draw_engine = new Player(canvasElement, ctx);
         taleem_draw_engine.items = items;
         // await taleem_draw_engine.loadImages(images);
         //--pre-drawn images
         
-        // taleem_draw_engine.items = [...taleem_draw_engine.items, ellipse.itemExtra];
         //Register Events Here
         taleem_draw_engine.onMouse("mousemove", handleMouseMove);
   
@@ -51,7 +50,7 @@
       }
     }
     function addRectangle() {
-      const rectangle = TaleemStaticPlayer.Create.rectangle();
+      const rectangle = Create.rectangle();
       rectangle.color = "green";
       items.push(rectangle);
       taleem_draw_engine.items = items;

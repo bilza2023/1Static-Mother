@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/player/+page.svelte";
+export { default as component } from "../../../../src/routes/taleem_canvas_examples/taleem_canvas_basic/+page.svelte";
