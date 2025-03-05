@@ -9,6 +9,7 @@ constructor(itemData:{x:Number,y:Number,width:Number,height:Number,type:String})
     this.itemData = itemData;
 }
 static newItemData(){}//  
+static dialogueBox(){}//  
 ///////////////////////////////////
 }
 

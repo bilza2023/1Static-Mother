@@ -24,6 +24,21 @@ export default class PieChart extends BaseItem {
       globalAlpha: 1,
     };
   }
+  static dialogueBox(){
+
+    let dialogueBox = [];
+ 
+  dialogueBox.push({name:'data', type:'TextArea',      config:{min:0,max:1000,step:1} });
+
+  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
+
+  dialogueBox.push({name:'radius', type:'Number',      config:{min:0,max:1000,step:1} });
+
+
+  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
+return dialogueBox;
+}
 
   draw(ctx) {
     ctx.save();

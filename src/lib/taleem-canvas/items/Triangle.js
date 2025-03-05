@@ -21,7 +21,27 @@ export default class Triangle extends BaseItem {
             globalAlpha: 1
         };
     }
+    static dialogueBox(){
 
+        let dialogueBox = [];
+     
+      dialogueBox.push({name:'x1', type:'Number',config:{min:0,max:2000,step:1} });
+      dialogueBox.push({name:'y1', type:'Number',config:{min:0,max:2000,step:1} });
+      dialogueBox.push({name:'x2', type:'Number',config:{min:0,max:2000,step:1} });
+      dialogueBox.push({name:'y2', type:'Number',config:{min:0,max:2000,step:1} });
+      dialogueBox.push({name:'x3', type:'Number',config:{min:0,max:2000,step:1} });
+      dialogueBox.push({name:'y3', type:'Number',config:{min:0,max:2000,step:1} });
+    
+      dialogueBox.push({name:'filled', type:'Boolean',  config:{} });
+      dialogueBox.push({name:'lineWidth', type:'Number',config:{min:0,max:1000,step:1} });
+      
+      dialogueBox.push({name:'dash', type:'Number',     config:{min:0,max:1000,step:1} });
+      dialogueBox.push({name:'gap', type:'Number',      config:{min:0,max:1000,step:1} });
+      
+      dialogueBox.push({name:'color', type:'Color',     config:{} });
+      dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
+    return dialogueBox;
+    }
     boundingRectangleWidth() {
         return Math.max(this.itemData.x1, this.itemData.x2, this.itemData.x3) - this.boundingRectangleX();
     }

@@ -1,5 +1,6 @@
 
-//BackgroundItem must not be included here since here we have just those items which are drawn by user the BackgroundItem is drawn automatically
+
+import BackgroundItem from "./items/BackgroundItem";
 import TextItem from "./items/TextItem";
 import Rectangle from "./items/Rectangle";
 import Ellipse from "./items/Ellipse";
@@ -22,6 +23,7 @@ import List from "./items/List";
 const ItemsMap = new Map();
 
 
+ItemsMap.set('background', BackgroundItem);
 ItemsMap.set('rectangle', Rectangle);
 ItemsMap.set('ellipse', Ellipse);
 ItemsMap.set('circle', Circle);

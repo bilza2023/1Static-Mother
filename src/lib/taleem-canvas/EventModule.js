@@ -1,7 +1,11 @@
+
+//Any Event Manager on top of this is a wrapper.
+// this return a itemObject in case of click,dbl click , mouse over etc etc
 export default class EventModule {
-    constructor(canvas) {
+    constructor(canvas,itemObjects) {
       this.canvas = canvas;
-      this.items = []; // This will be updated with each draw cycle
+      this.itemObjects = itemObjects; //keep pointer 
+      // this.items = []; // This will be updated with each draw cycle==> i do not have to just give the pointer to StaticPlayer 
       this.callbacks = {
         click: null,
         dblclick: null,
@@ -21,16 +25,17 @@ export default class EventModule {
       this.canvas.addEventListener("mouseup", (e) => this.handleEvent(e, "mouseup"));
     }
   
-    // New method to update the items array
-    updateItems(itemObjects) {
-      this.itemObjects = itemObjects;
-    }
+    // New method to update the items array--?????????????????
+    // updateItems(itemObjects) {
+    //   this.itemObjects = itemObjects;
+    // }
   
     handleEvent(event, type) {
       const rect = this.canvas.getBoundingClientRect();
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
   
+      // if(type == "click"){debugger;}
       // debugger;
       // Find the first item that is hit (if any)
       let hitItem = null;
@@ -43,7 +48,7 @@ export default class EventModule {
   
       // Always trigger the callback with hitItem (or null if no item was hit)
       if (this.callbacks[type]) {
-        this.callbacks[type](event, hitItem);
+        this.callbacks[type](event, hitItem);//from here we get the hit-item
       }
     }
   

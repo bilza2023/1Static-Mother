@@ -3,6 +3,7 @@ import Create from "../Create.js";
 import ItemsMap from "../ItemsMap.js";
 import BackgroundItem from "../items/BackgroundItem.js";
 import EventModule from "../EventModule.js";
+import itemToObject from "../itemToObject.js";
 import Env from "../Env.js";
 import Add from "../Add.js";
 // import InputModule from "../core/InputModule.js";
@@ -28,8 +29,10 @@ export default class TaleemStaticPlayer  {
     this.canvas = canvas;
     this.ctx = ctx;
     this.env = new Env(this.ctx);
-    // this.itemObjects = itemsToObjects(items,this.env);
-    this._background = null;
+    
+    const bg = Create.background();
+    this._background = itemToObject(bg,this.env);
+
     this.itemObjects = [];
 
     this.width = 1000;
@@ -39,16 +42,22 @@ export default class TaleemStaticPlayer  {
      
     this.imagesArray = [];
     ////////////////////////////////////////////////////////////////////////
-    this.eventModule = new EventModule(this.canvas); // No longer passing items array
+    this.eventModule = new EventModule(this.canvas,this.itemObjects); // No longer passing items array
     // this.inputModule = new InputModule();
   }
 
-  //reloadItems is key to enable the same canvas be written completely from outside just add itemData and draw.
+  set background(bg){
+    this._background = itemToObject(bg,this.env);
+  }
+
+  get background(){
+    return this._background;
+  }
   set items(items){
-    this._background = setBackGround(items,this.env);
+    // this._background = setBackGround(items,this.env);
     this.itemObjects = [];
     this.itemObjects = itemsToObjects(items,this.env);
-    this.eventModule.updateItems(this.itemObjects);
+    // this.eventModule.updateItems(this.itemObjects);
   } 
   get items(){
     return this.this.itemObjects;
@@ -56,12 +65,10 @@ export default class TaleemStaticPlayer  {
   setItemObjects(itemObjects){ // i am sure this is bad idea
     this.itemObjects = itemObjects;
   }
-
   async loadImages(imagesArray=[]){//thise can be loaded later
     // this.env.images = await loadImagesLocal(imagesArray);
     return true;
   }
-
   clear(){
     const { ctx, canvas } = this;
     const bgColor =  'gray';
@@ -71,7 +78,6 @@ export default class TaleemStaticPlayer  {
   }
 
   onMouse(eventType, callback) {
-    // debugger;
     this.eventModule.on(eventType, callback);
   }
 //   onKey(eventType, callback) {
