@@ -17,11 +17,10 @@
     let selectedItem = null;
 ///////////////////--local-events--////////////////////////////////
 function itemSelected(event, hitItem){
-  console.log("The selected item",hitItem);
+  selectedItem = hitItem;
+  console.log("item selected",hitItem);
 }
-
 //////////////////////////////////////////////////////////////////
-
     onMount(async () => {
       if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
@@ -36,9 +35,20 @@ function itemSelected(event, hitItem){
         taleem_draw_engine.items = items;
         editor = new Editor(taleem_draw_engine,items);
         /////////////////--Event Manager
-        event_manager = new EventManager(taleem_draw_engine);
+        event_manager = new EventManager();
+        ///Event to event-mamanger
         event_manager.itemSelected = itemSelected;
-  
+
+        ///EventManager is mapped to Player
+        taleem_draw_engine.mapEvents(
+          event_manager.onClick.bind(event_manager),
+          event_manager.onDoubleClick.bind(event_manager),
+          event_manager.onMouseMove.bind(event_manager),
+          event_manager.onMouseUp.bind(event_manager),
+          event_manager.onMouseDown.bind(event_manager),
+
+        );
+
         interval = setInterval(gameloop, 20);
       }
     });
@@ -48,7 +58,6 @@ function itemSelected(event, hitItem){
         taleem_draw_engine.draw();
       }
     }
-  
     onDestroy(() => {
       if (interval) clearInterval(interval);
     });
@@ -81,13 +90,16 @@ function itemSelected(event, hitItem){
 
 
   {#if selectedItem}
-  <!-- <X_Y_Width_Height -->
- <!-- {selectedItem} -->
-  <!-- /> -->
+  <X_Y_Width_Height
+ bind:selectedItem={selectedItem}
+  />
+  {/if}
 
+  <button on:click={()=>console.log("Log Items",items)}>Log Items</button>
+<!-- 
   <DialogueBox 
   dialogueBox={selectedItem.dialogueBox()}
   item={selectedItem}
-  />
-  {/if}
+  /> -->
+  
   

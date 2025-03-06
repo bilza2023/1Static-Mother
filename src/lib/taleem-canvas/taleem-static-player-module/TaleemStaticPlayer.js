@@ -6,6 +6,9 @@ import EventModule from "../EventModule.js";
 import itemToObject from "../itemToObject.js";
 import Env from "../Env.js";
 import Add from "../Add.js";
+/**
+ * The easiest way to edit an object in svelte is to make that object hold reference to a class-literal. The object will edit/chagne the class-literal and not the object its-self
+ */
 // import InputModule from "../core/InputModule.js";
 // import loadImagesLocal from "./loadImagesLocal.js";
 
@@ -79,6 +82,16 @@ export default class TaleemStaticPlayer  {
 
   onMouse(eventType, callback) {
     this.eventModule.on(eventType, callback);
+  }
+
+  mapEvents(clickCallback,doubleClickCallback,mousemoveCallback,mouseupCallback,mousedownCallback){
+
+    this.onMouse("click",clickCallback );
+    this.onMouse("dblclick", doubleClickCallback);
+    this.onMouse("mousemove", mousemoveCallback);
+    this.onMouse("mousedown", mouseupCallback);
+    this.onMouse("mouseup", mousedownCallback);
+
   }
 //   onKey(eventType, callback) {
     // this.inputModule.on(eventType, callback);
