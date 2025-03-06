@@ -1,16 +1,13 @@
 
-import Handles from "./Handles";
 
 export default class EventManager{
-constructor(){
+constructor(selectedItemManager){
+  
+  this.selectedItemManager = selectedItemManager;
 // out going events
 this.isDrag = false;
 this.activeHandle = null;
-this.itemSelected = ()=>{console.log("No event attached..!")}
-this.itemUnSelected = ()=>{console.log("No event attached..!")}
-this.isItemSelected = ()=>{console.log("No event attached..!")}
-this.drawHandles = ()=>{console.log("No event attached..!")}
-this.removeHandles = ()=>{console.log("No event attached..!")}
+
 this.removeHandles = ()=>{console.log("No event attached..!")}
 
 this.heightenSelectedItem = ()=>{console.log("No event attached..!")}
@@ -19,6 +16,9 @@ this.moveSelectedItem = ()=>{console.log("No event attached..!")}
 
 }
 
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // Event handlers for processing Player mouse events
   //5 events 
 onMouseMove(event) {
@@ -53,26 +53,52 @@ onMouseUp(event, hitItems) {
 
 onMouseDown(event, hitItems) {
   if (hitItems) {
-    if(Handles.hasHandle(hitItems)){
+    if(hasHandle(hitItems)){
       this.isDrag = true;
-      const handle = Handles.getHandles(hitItems)[0];
+      const handle = getHandles(hitItems)[0];
       this.activeHandle = handle.itemData.handleType;  
     }
   }
 }
 
 onDoubleClick(event, hitItems) {
-  if (hitItems) {
-          if (!Handles.hasHandle(hitItems)){
-            this.itemSelected(event, hitItems[0]);
-            this.drawHandles();
+  debugger;
+  if (Array.isArray(hitItems) &&  hitItems.length >0) {
+          if (!hasHandle(hitItems)){
+            // debugger;
+            this.selectedItemManager.itemSelected(hitItems[0]);
           }
   }else {
-    this.removeHandles();//keep it up before removing the selected item.
-    this.itemUnSelected();
+    // this.removeHandles();//keep it up before removing the selected item.
+    debugger;
+    this.selectedItemManager.itemUnSelected();
+
+    // this.selectedItemManager.removeHandles();
   } 
 }
 
 
 }//EventManager
 
+
+function hasHandle(hitItems){
+  let result = false;
+  for (let i = 0; i < hitItems.length; i++) {
+    const hitItem =   hitItems[i];
+    if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
+      result =  true;
+    }
+  }
+  return result;
+}
+
+function getHandles(hitItems){
+  let result = [];
+  for (let i = 0; i < hitItems.length; i++) {
+    const item =   hitItems[i];
+    if(item.itemData.flag && item.itemData.flag === "handle"){
+      result.push(item);
+    }
+  }
+  return result;
+}

@@ -1,6 +1,8 @@
 
 import { Create } from "../../lib/taleem-canvas";
 
+
+//This Handles is for item-handles not itemObject handles which is handled by EventManager.
 export default class Handles {
 
     static getHandleData(x,y,color,handleType){
@@ -48,28 +50,37 @@ export default class Handles {
         }
         return  itemsWithoutHandles;
     }
-
-    static hasHandle(hitItems){
-    let result = false;
-    for (let i = 0; i < hitItems.length; i++) {
-      const hitItem =   hitItems[i];
-      if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
-        result =  true;
-      }
-    }
-    return result;
-  }
+    static  updateHandles(items,selectedItem){
   
-  static getHandles(hitItems){
-    let result = [];
-    for (let i = 0; i < hitItems.length; i++) {
-      const item =   hitItems[i];
-      if(item.itemData.flag && item.itemData.flag === "handle"){
-        result.push(item);
+        const handles = Handles.getHandles(items);
+        if(Array.isArray(handles) && handles.length > 0){
+          for (let i = 0; i < handles.length; i++) {
+            const handle = handles[i];
+            // debugger;
+            if(handle.handleType == "move"){
+              handle.x = selectedItem.x;
+              handle.y = selectedItem.y;
+            }
+            if(handle.handleType == "width"){
+              handle.x = selectedItem.x + selectedItem.width;
+              handle.y = selectedItem.y;
+            }
+            if(handle.handleType == "height"){
+              handle.x = selectedItem.x + selectedItem.width;
+              handle.y = selectedItem.y +  selectedItem.height;
+            }
+          }
+        }
+      
       }
-    }
-    return result;
-  }
-
-
+      static getHandles(items){
+        let result = [];
+        for (let i = 0; i < items.length; i++) {
+          const item =   items[i];
+          if(item.flag && item.flag === "handle"){
+            result.push(item);
+          }
+        }
+        return result;
+      }
 }//
