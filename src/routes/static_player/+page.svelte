@@ -34,16 +34,37 @@ function isItemSelected(){
 }
 function drawHandles(){
   if(selectedItem){
-  const handleMove =  Create.rectangle();
+  ///////////Handle Move
+    const handleMove =  Create.rectangle();
   handleMove.x = selectedItem.x;
-  handleMove.y = selectedItem.y;
+  handleMove.y = selectedItem.y - 10;
   handleMove.width = 10;
   handleMove.height = 10;
-  handleMove.color = "red";
-  ///---special
+  handleMove.color = "purple";
   handleMove.flag = "handle";
   handleMove.handleType = "move";
-  items = [...items , handleMove];
+
+  ///////////Handle Width
+  const handleWidth =  Create.rectangle();
+  handleWidth.x = selectedItem.x + selectedItem.width;
+  handleWidth.y = selectedItem.y;
+  handleWidth.width = 10;
+  handleWidth.height = 10;
+  handleWidth.color = "green";
+  handleWidth.flag = "handle";
+  handleWidth.handleType = "width";
+
+  ///////////Handle Move
+  const handleHeight =  Create.rectangle();
+  handleHeight.x = selectedItem.x + selectedItem.width;
+  handleHeight.y = selectedItem.y +  selectedItem.height;
+  handleHeight.width = 10;
+  handleHeight.height = 10;
+  handleHeight.color = "blue";
+  handleHeight.flag = "handle";
+  handleHeight.handleType = "height";
+  ////////////////////////////////////////
+  items = [...items , handleMove,handleWidth,handleHeight];
   }
 }
 function removeHandles() {
