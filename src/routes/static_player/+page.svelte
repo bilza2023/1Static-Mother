@@ -6,7 +6,7 @@
     import DialogueBox from "../../lib/dialogueBox/DialogueBox.svelte";
     import Editor from "./Editor";
     import EventManager from "./EventManager.js";
-
+    import Handle from "./Handles";
     let canvasElement;
     let interval=null;
     let event_manager=null;
@@ -30,47 +30,6 @@ function isItemSelected(){
     return false;
   }else {
     return true;
-  }
-}
-function drawHandles(){
-  if(selectedItem){
-  ///////////Handle Move
-    const handleMove =  Create.rectangle();
-  handleMove.x = selectedItem.x;
-  handleMove.y = selectedItem.y - 10;
-  handleMove.width = 10;
-  handleMove.height = 10;
-  handleMove.color = "purple";
-  handleMove.flag = "handle";
-  handleMove.handleType = "move";
-
-  ///////////Handle Width
-  const handleWidth =  Create.rectangle();
-  handleWidth.x = selectedItem.x + selectedItem.width;
-  handleWidth.y = selectedItem.y;
-  handleWidth.width = 10;
-  handleWidth.height = 10;
-  handleWidth.color = "green";
-  handleWidth.flag = "handle";
-  handleWidth.handleType = "width";
-
-  ///////////Handle Move
-  const handleHeight =  Create.rectangle();
-  handleHeight.x = selectedItem.x + selectedItem.width;
-  handleHeight.y = selectedItem.y +  selectedItem.height;
-  handleHeight.width = 10;
-  handleHeight.height = 10;
-  handleHeight.color = "blue";
-  handleHeight.flag = "handle";
-  handleHeight.handleType = "height";
-  ////////////////////////////////////////
-  items = [...items , handleMove,handleWidth,handleHeight];
-  }
-}
-function removeHandles() {
-  if (selectedItem) {
-    const newitems = items.filter(item => !(item.flag && item.flag === "handle"));
-    items = [...newitems];
   }
 }
 
@@ -126,8 +85,14 @@ function getHandles(){
         event_manager.itemSelected = itemSelected;
         event_manager.itemUnSelected = itemUnSelected;
         event_manager.isItemSelected = isItemSelected;
-        event_manager.drawHandles = drawHandles;
-        event_manager.removeHandles = removeHandles;
+        event_manager.drawHandles =   ()=> {
+          const changedItems = Handle.drawHandles(items,selectedItem);
+          items = [...items , ...changedItems];
+        };
+        event_manager.removeHandles = ()=> {
+          const changedItems = Handle.removeHandles(selectedItem);
+          items = changedItems;
+        };
         event_manager.moveSelectedItem = moveSelectedItem;
 
         ///EventManager is mapped to Player
