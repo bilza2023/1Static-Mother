@@ -41,14 +41,16 @@ function moveSelectedItem(clientX,clientY){
   }
 }
 function widenSelectedItem(clientX,clientY){
+  // debugger;
   if(selectedItem){
-    selectedItem.width = selectedItem.width + 1;
+
+    selectedItem.width = clientX - selectedItem.x  ;
     updateHandles();
   }
 }
 function heightenSelectedItem(clientX,clientY){
   if(selectedItem){
-    selectedItem.height = selectedItem.height + 1;
+    selectedItem.height =  clientY - selectedItem.y ;
     updateHandles();
   }
 }
@@ -94,9 +96,9 @@ function getHandles(){
         const ctx = canvasElement.getContext("2d");
   
         //--> Preload an item
-        const ellipse = Create.ellipse();
-        ellipse.filled = true ; ellipse.color = "green";
-        items.push(ellipse);
+        const rectangle = Create.rectangle();
+        rectangle.filled = true ; rectangle.color = "green";
+        items.push(rectangle);
         //Create Static Player
         taleem_draw_engine = new Player(canvasElement, ctx);
         //important

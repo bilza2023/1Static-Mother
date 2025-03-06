@@ -23,7 +23,6 @@ this.moveSelectedItem = ()=>{console.log("No event attached..!")}
   //5 events 
 onMouseMove(event) {
 
-
   if(this.isDrag){
     switch (this.activeHandle) {
       case "move":
@@ -42,54 +41,32 @@ onMouseMove(event) {
  
   }
 }
-onClick(event, hitItem) {
 
-    console.log("click");
+onClick(event, hitItem) {
+    // console.log("click");
 }
+
 onMouseUp(event, hitItems) {
   this.isDrag = false;
   this.activeHandle = null;
-  // console.log("No Drag");
 }
 
 onMouseDown(event, hitItems) {
-  debugger;
   if (hitItems) {
     if(Handles.hasHandle(hitItems)){
-      this.isDrag = true; 
-      this.setActiveHandle(hitItems);
-      // console.log("Drag...!");
+      this.isDrag = true;
+      const handle = Handles.getHandles(hitItems)[0];
+      this.activeHandle = handle.itemData.handleType;  
     }
   }
 }
-setActiveHandle(hitItems){
-  const handle = Handles.getHandles(hitItems)[0];
 
-    switch (handle.itemData.handleType) {
-      case "move":
-        this.activeHandle = "move";       
-        break;
-      case "width":
-        this.activeHandle = "width";
-        break;
-      case "height":
-        this.activeHandle = "height";
-        break;
-    
-      default:
-        break;
-    }
-
-}
 onDoubleClick(event, hitItems) {
   if (hitItems) {
-    if (Handles.hasHandle(hitItems)){
-      // this.itemSelected(event, getHandle(hitItems));
-      // this.drawHandles();
-    }else{
-      this.itemSelected(event, hitItems[0]);
-      this.drawHandles();
-    }
+          if (!Handles.hasHandle(hitItems)){
+            this.itemSelected(event, hitItems[0]);
+            this.drawHandles();
+          }
   }else {
     this.removeHandles();//keep it up before removing the selected item.
     this.itemUnSelected();

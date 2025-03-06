@@ -38,7 +38,6 @@ export default class Handles {
         return [handleMove,handleWidth,handleHeight];
       }
 
-
     static removeHandles(items) {
         const itemsWithoutHandles = [];
         for (let i = 0; i < items.length; i++) {
