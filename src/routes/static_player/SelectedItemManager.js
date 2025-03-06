@@ -28,7 +28,7 @@ export default class SelectedItemManager {
         if(this.selectedItem){
           this.selectedItem.x = clientX;
           this.selectedItem.y = clientY;
-          Handles.updateHandles(items,this.selectedItem);
+          Handles.updateHandles(this.items,this.selectedItem);
         }
       }
      widenSelectedItem(clientX,clientY){
@@ -36,13 +36,13 @@ export default class SelectedItemManager {
         if(this.selectedItem){
       
           this.selectedItem.width = clientX - this.selectedItem.x  ;
-          Handles.updateHandles(items,this.selectedItem);
+          Handles.updateHandles(this.items,this.selectedItem);
         }
       }
      heightenSelectedItem(clientX,clientY){
         if(this.selectedItem){
           this.selectedItem.height =  clientY - this.selectedItem.y ;
-          Handles.updateHandles(items,this.selectedItem);
+          Handles.updateHandles(this.items,this.selectedItem);
         }
       }
       removeHandles(){
@@ -56,6 +56,9 @@ export default class SelectedItemManager {
         this.items = [...this.items , ...changedItems];
         this.redraw(this.items);
         }
+      }
+      updateHandles(){
+        Handles.updateHandles(this.items,this.selectedItem);
       }
 
 

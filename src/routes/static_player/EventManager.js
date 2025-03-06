@@ -3,16 +3,10 @@
 export default class EventManager{
 constructor(selectedItemManager){
   
-  this.selectedItemManager = selectedItemManager;
+this.selectedItemManager = selectedItemManager;
 // out going events
 this.isDrag = false;
 this.activeHandle = null;
-
-this.removeHandles = ()=>{console.log("No event attached..!")}
-
-this.heightenSelectedItem = ()=>{console.log("No event attached..!")}
-this.widenSelectedItem = ()=>{console.log("No event attached..!")}
-this.moveSelectedItem = ()=>{console.log("No event attached..!")}
 
 }
 
@@ -26,13 +20,16 @@ onMouseMove(event) {
   if(this.isDrag){
     switch (this.activeHandle) {
       case "move":
-        this.moveSelectedItem(event.clientX,event.clientY);       
+        this.selectedItemManager.moveSelectedItem(event.clientX,event.clientY);      
+        // this.selectedItemManager.updateHandles(); 
         break;
       case "width":
-        this.widenSelectedItem(event.clientX,event.clientY);       
+        this.selectedItemManager.widenSelectedItem(event.clientX,event.clientY);
+        // this.selectedItemManager.updateHandles();       
         break;
       case "height":
-        this.heightenSelectedItem(event.clientX,event.clientY);       
+        this.selectedItemManager.heightenSelectedItem(event.clientX,event.clientY);
+        // this.selectedItemManager.updateHandles();       
         break;
     
       default:
@@ -62,7 +59,7 @@ onMouseDown(event, hitItems) {
 }
 
 onDoubleClick(event, hitItems) {
-  debugger;
+  // debugger;
   if (Array.isArray(hitItems) &&  hitItems.length >0) {
           if (!hasHandle(hitItems)){
             // debugger;
@@ -70,7 +67,7 @@ onDoubleClick(event, hitItems) {
           }
   }else {
     // this.removeHandles();//keep it up before removing the selected item.
-    debugger;
+    // debugger;
     this.selectedItemManager.itemUnSelected();
 
     // this.selectedItemManager.removeHandles();

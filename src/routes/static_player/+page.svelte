@@ -50,9 +50,6 @@ function redraw(IncommingItems){
           const changedItems = Handles.removeHandles(items);
           items = changedItems;
         };
-        event_manager.moveSelectedItem =     selectedItemManager.moveSelectedItem;
-        event_manager.widenSelectedItem =    selectedItemManager.widenSelectedItem;
-        event_manager.heightenSelectedItem = selectedItemManager.heightenSelectedItem;
 
         ///EventManager is mapped to Player
         taleem_draw_engine.mapEvents(
