@@ -39,15 +39,16 @@ export default class Handles {
       }
 
 
-      static removeHandles(items) {
-            const itemsWithoutHandles = [];
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i];
-                if(!item.flag || !item.flag === "handle"){
-                    itemsWithoutHandles.push(item);
-                }
+    static removeHandles(items) {
+        const itemsWithoutHandles = [];
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            if(!item.flag || !item.flag === "handle"){
+                itemsWithoutHandles.push(item);
             }
-            return  itemsWithoutHandles;
-      }
+        }
+        return  itemsWithoutHandles;
+    }
+
 
 }//

@@ -37,17 +37,40 @@ function moveSelectedItem(clientX,clientY){
   if(selectedItem){
     selectedItem.x = clientX;
     selectedItem.y = clientY;
-    updateHandles(clientX,clientY)
+    updateHandles();
   }
 }
-function updateHandles(clientX,clientY){
+function widenSelectedItem(clientX,clientY){
+  if(selectedItem){
+    selectedItem.width = selectedItem.width + 1;
+    updateHandles();
+  }
+}
+function heightenSelectedItem(clientX,clientY){
+  if(selectedItem){
+    selectedItem.height = selectedItem.height + 1;
+    updateHandles();
+  }
+}
+function updateHandles(){
+  
   const handles = getHandles();
   if(Array.isArray(handles) && handles.length > 0){
     for (let i = 0; i < handles.length; i++) {
       const handle = handles[i];
-      handle.x = clientX;
-      handle.y = clientY;
       
+      if(handle.handleType == "move"){
+        handle.x = selectedItem.x;
+        handle.y = selectedItem.y - 10;
+      }
+      if(handle.handleType == "width"){
+        handle.x = selectedItem.x + selectedItem.width;
+        handle.y = selectedItem.y;
+      }
+      if(handle.handleType == "height"){
+        handle.x = selectedItem.x + selectedItem.width;
+        handle.y = selectedItem.y +  selectedItem.height;
+      }
     }
   }
 
@@ -86,14 +109,16 @@ function getHandles(){
         event_manager.itemUnSelected = itemUnSelected;
         event_manager.isItemSelected = isItemSelected;
         event_manager.drawHandles =   ()=> {
-          const changedItems = Handle.drawHandles(items,selectedItem);
+          const changedItems = Handle.drawHandles(selectedItem);
           items = [...items , ...changedItems];
         };
         event_manager.removeHandles = ()=> {
-          const changedItems = Handle.removeHandles(selectedItem);
+          const changedItems = Handle.removeHandles(items);
           items = changedItems;
         };
         event_manager.moveSelectedItem = moveSelectedItem;
+        event_manager.widenSelectedItem = widenSelectedItem;
+        event_manager.heightenSelectedItem = heightenSelectedItem;
 
         ///EventManager is mapped to Player
         taleem_draw_engine.mapEvents(
