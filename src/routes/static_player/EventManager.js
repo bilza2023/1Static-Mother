@@ -1,7 +1,7 @@
 
+import Handles from "./Handles";
 
 export default class EventManager{
-
 constructor(){
 // out going events
 this.isDrag = false;
@@ -55,7 +55,7 @@ onMouseUp(event, hitItems) {
 onMouseDown(event, hitItems) {
   debugger;
   if (hitItems) {
-    if(hasHandle(hitItems)){
+    if(Handles.hasHandle(hitItems)){
       this.isDrag = true; 
       this.setActiveHandle(hitItems);
       // console.log("Drag...!");
@@ -63,7 +63,7 @@ onMouseDown(event, hitItems) {
   }
 }
 setActiveHandle(hitItems){
-  const handle = getHandles(hitItems)[0];
+  const handle = Handles.getHandles(hitItems)[0];
 
     switch (handle.itemData.handleType) {
       case "move":
@@ -83,7 +83,7 @@ setActiveHandle(hitItems){
 }
 onDoubleClick(event, hitItems) {
   if (hitItems) {
-    if (hasHandle(hitItems)){
+    if (Handles.hasHandle(hitItems)){
       // this.itemSelected(event, getHandle(hitItems));
       // this.drawHandles();
     }else{
@@ -99,25 +99,3 @@ onDoubleClick(event, hitItems) {
 
 }//EventManager
 
-
-function hasHandle(hitItems){
-  let result = false;
-  for (let i = 0; i < hitItems.length; i++) {
-    const hitItem =   hitItems[i];
-    if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
-      result =  true;
-    }
-  }
-  return result;
-}
-
-function getHandles(hitItems){
-  let result = [];
-  for (let i = 0; i < hitItems.length; i++) {
-    const item =   hitItems[i];
-    if(item.itemData.flag && item.itemData.flag === "handle"){
-      result.push(item);
-    }
-  }
-  return result;
-}
