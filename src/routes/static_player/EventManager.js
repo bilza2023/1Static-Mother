@@ -11,11 +11,9 @@ this.activeHandle = null;
 }
 
 /////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
 // Event handlers for processing Player mouse events
   //5 events 
-onMouseMove(event) {
+onMouseMove(event,hitItemsUuids) {
 
   if(this.isDrag){
     switch (this.activeHandle) {
@@ -36,16 +34,16 @@ onMouseMove(event) {
   }
 }
 
-onClick(event, hitItem) {
+onClick(event, hitItem,hitItemsUuids) {
     // console.log("click");
 }
 
-onMouseUp(event, hitItems) {
+onMouseUp(event, hitItems,hitItemsUuids) {
   this.isDrag = false;
   this.activeHandle = null;
 }
 
-onMouseDown(event, hitItems) {
+onMouseDown(event, hitItems,hitItemsUuids) {
   if (hitItems) {
     if(hasHandle(hitItems)){
       this.isDrag = true;
@@ -55,8 +53,9 @@ onMouseDown(event, hitItems) {
   }
 }
 
-onDoubleClick(event, hitItems) {
+onDoubleClick(event, hitItems,hitItemsUuids) {
   // debugger;
+  // hitItemsUuids;
   if (Array.isArray(hitItems) &&  hitItems.length >0) {
           if (!hasHandle(hitItems)){
             // debugger;

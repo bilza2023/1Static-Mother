@@ -39,15 +39,17 @@ export default class EventModule {
       // debugger;
       // Find the first item that is hit (if any)
       let hitItems = [];
+      let hitItemsUuids = [];
       for (let item of this.itemObjects) {
         if (item.isHit(mouseX, mouseY)) {
           hitItems.push(item);
+          hitItemsUuids.push(item.itemData.uuid);
         }
       }
   
       // Always trigger the callback with hitItem (or null if no item was hit)
       if (this.callbacks[type]) {
-        this.callbacks[type](event, hitItems);//from here we get the hit-item
+        this.callbacks[type](event, hitItems,hitItemsUuids);//from here we get the hit-item as well as uuids of the items/itemObject is same
       }
     }
   
