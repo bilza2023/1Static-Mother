@@ -60,10 +60,10 @@ function updateHandles(){
   if(Array.isArray(handles) && handles.length > 0){
     for (let i = 0; i < handles.length; i++) {
       const handle = handles[i];
-      
+      // debugger;
       if(handle.handleType == "move"){
         handle.x = selectedItem.x;
-        handle.y = selectedItem.y - 10;
+        handle.y = selectedItem.y;
       }
       if(handle.handleType == "width"){
         handle.x = selectedItem.x + selectedItem.width;
