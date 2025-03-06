@@ -1,13 +1,13 @@
 
 
-import TaleemStaticPlayer from "./taleem-static-player-module/TaleemStaticPlayer";
+import Player from "./Player";
 import Create from "./Create";
-import itemsToObjects from "./itemsToObjects";
+import itemsToObjects from "./core/itemsToObjects";
 import ItemsMap from "./ItemsMap";
 
 export {
-    TaleemStaticPlayer as Player,
+    Player,
     Create,
     itemsToObjects,
-    ItemsMap
+    ItemsMap //do not export
 };

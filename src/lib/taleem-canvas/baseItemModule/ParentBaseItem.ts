@@ -1,11 +1,10 @@
 
-// Just the base
-export default class ParentBaseItem {
+import { ItemData } from './ItemData'; 
 
-itemData:{x:Number,y:Number,width:Number,height:Number,type:String}
+export default abstract class ParentBaseItem {
 
-
-constructor(itemData:{x:Number,y:Number,width:Number,height:Number,type:String}) {
+itemData: ItemData;
+constructor(itemData:ItemData) {
     this.itemData = itemData;
 }
 static newItemData(){}//  

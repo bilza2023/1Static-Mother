@@ -1,5 +1,5 @@
 
-import {ItemsMap} from "./index";
+import ItemsMap from "../ItemsMap";
 
 
 export default function itemToObject(item,env){

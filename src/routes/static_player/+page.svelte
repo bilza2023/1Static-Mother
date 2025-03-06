@@ -4,7 +4,7 @@
     import SingleCallBkBtnGp from "./SingleCallBkBtnGp.svelte";
     import X_Y_Width_Height from "./X_Y_Width_Height.svelte";
     import DialogueBox from "../../lib/dialogueBox/DialogueBox.svelte";
-    import Editor from "./Editor";
+    // import Editor from "./Editor";
     import EventManager from "./EventManager.js";
     import Handles from "./Handles";
     import SelectedItemManager from "./SelectedItemManager";
@@ -38,7 +38,7 @@ function redraw(IncommingItems){
         taleem_draw_engine = new Player(canvasElement, ctx);
         //important
         taleem_draw_engine.items = items;
-        editor = new Editor(taleem_draw_engine,items);
+        // editor = new Editor(taleem_draw_engine,items);
         /////////////////--Event Manager
         event_manager = new EventManager(selectedItemManager);
         ///Event to event-mamanger

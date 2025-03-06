@@ -1,7 +1,7 @@
 
-import loadSprites from "./assets/loadSprites";
-import loadBackgroundImages from "./assets/loadBackgroundImages";
-import Icons from "./assets/Icons";
+import loadSprites from "../assets/loadSprites";
+import loadBackgroundImages from "../assets/loadBackgroundImages";
+import Icons from "../assets/Icons";
 
 export default class RenderContext {
     constructor(ctx) {

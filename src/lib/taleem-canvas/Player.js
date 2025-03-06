@@ -1,11 +1,11 @@
 
-import Create from "../Create.js";
-import ItemsMap from "../ItemsMap.js";
-import BackgroundItem from "../items/BackgroundItem.js";
-import EventModule from "../EventModule.js";
-import itemToObject from "../itemToObject.js";
-import Env from "../Env.js";
-import Add from "../Add.js";
+import Create from "./Create.js";
+import ItemsMap from "./ItemsMap.js";
+import BackgroundItem from "./items/BackgroundItem.js";
+import EventModule from "./core/EventModule.js";
+import itemToObject from "./core/itemToObject.js";
+import Env from "./core/Env.js";
+import Add from "./Add.js";
 /**
  * The easiest way to edit an object in svelte is to make that object hold reference to a class-literal. The object will edit/chagne the class-literal and not the object its-self
  */
@@ -17,7 +17,7 @@ import Add from "../Add.js";
 // - The item "item-data-literal" are external to it, it just convert them into item-objects and use them. However it can take on item-objects directly as well.
 
 /////////////////////////////////////////////////////////////////
-export default class TaleemStaticPlayer  {
+export default class Player  {
 // Create has to be totally external since this has to be a subscriber app
 // The Editor and the Player must be seperate such that both take in itemData literals and the Static Player can also take directly itemObjects 
 // ===> THIS IS THE POINT THE STATIC PLAYER SHOULD BE ABLE TO TAKE IN DATA-ITEM-LITERALS AS WELL AS ITEM-OBJECTS SO THAT IT CAN PAIR WITH THE APP AS WELL AS THE EDITOR AND ITS SELF DOES NOT DO ANY EDITING (though the base class is same for all item-objects).
@@ -65,9 +65,9 @@ export default class TaleemStaticPlayer  {
   get items(){
     return this.this.itemObjects;
   }
-  setItemObjects(itemObjects){ // i am sure this is bad idea
-    this.itemObjects = itemObjects;
-  }
+  // setItemObjects(itemObjects){ // i am sure this is bad idea
+  //   this.itemObjects = itemObjects;
+  // }
   async loadImages(imagesArray=[]){//thise can be loaded later
     // this.env.images = await loadImagesLocal(imagesArray);
     return true;

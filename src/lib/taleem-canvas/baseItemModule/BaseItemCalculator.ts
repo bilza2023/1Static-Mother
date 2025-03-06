@@ -1,19 +1,17 @@
 
+import { ItemData } from './ItemData'; 
+import BaseItemEditor from "./BaseItemEditor.ts";
 
+export default abstract class BaseItemCalculator extends BaseItemEditor{
 
-//Decision who generates the itemData ? a function 
-
-import BaseItemEditor from "./BaseItemEditor";
-
-
-export default class BaseItemCalculator extends BaseItemEditor{
-
-  constructor(itemData){
+  ItemData:ItemData;
+  
+  constructor(itemData:ItemData){
   
     super(itemData);
 
   }
-
+///////////////////////////////////////////
   // Returns the bounding rectangle using standardized methods
   getBoundingRectangle() {
     return {
@@ -25,25 +23,25 @@ export default class BaseItemCalculator extends BaseItemEditor{
   }
 
   // Default bounding rectangle calculations. Override in subclasses if needed.
-  boundingRectangleX() {
+  boundingRectangleX():number {
     return this.x;
   }
   
-  boundingRectangleY() {
+  boundingRectangleY():number {
     return this.y;
   }
   
-  boundingRectangleWidth() {
+  boundingRectangleWidth():number {
     return this.width;
   }
   
-  boundingRectangleHeight() {
+  boundingRectangleHeight():number {
     return this.height;
   }
   
   // Standardized hit detection based on bounding rectangle.
   // Only override if an item cannot define an accurate bounding rectangle.
-  isHit(mouseX, mouseY) {
+  isHit(mouseX:number, mouseY:number) {
     const { x, y, width, height } = this.getBoundingRectangle();
     return (
       mouseX >= x &&
@@ -53,20 +51,20 @@ export default class BaseItemCalculator extends BaseItemEditor{
     );
   }
 
-//   set(key, value) {
-//     if (key in this.itemExtra) {
-//         this.itemExtra[key] = value;
-//         return value;  // ✅ Return updated value
-//     }
-//     return false;  // ❌ Return false if the key doesn't exist
-// }
+  set(key:string, value:any) {
+    if (key in this.itemData) {
+        this.itemData[key] = value;
+        return value;  // ✅ Return updated value
+    }
+    return false;  // ❌ Return false if the key doesn't exist
+}
 
-//  get(key) {
-//   if (key in this.itemExtra) {
-//     return this.itemExtra[key];
-//   }
-//   return undefined; // Or return a default value if needed
-// }
+ get(key:string) {
+  if (key in this.itemData) {
+    return this.itemData[key];
+  }
+  return undefined; // Or return a default value if needed
+}
 
 ///////////////////////////////////
 }
