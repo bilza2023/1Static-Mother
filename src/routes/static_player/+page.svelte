@@ -16,10 +16,75 @@
   
     let selectedItem = null;
 ///////////////////--local-events--////////////////////////////////
+///////////////////--local-events--////////////////////////////////
+///////////////////--local-events--////////////////////////////////
 function itemSelected(event, hitItem){
   selectedItem = hitItem;
-  console.log("item selected",hitItem);
+  // console.log("item selected",hitItem);
 }
+function itemUnSelected(){
+  selectedItem = null;
+}
+function isItemSelected(){
+  if(selectedItem == null){
+    return false;
+  }else {
+    return true;
+  }
+}
+function drawHandles(){
+  if(selectedItem){
+  const handleMove =  Create.rectangle();
+  handleMove.x = selectedItem.x;
+  handleMove.y = selectedItem.y;
+  handleMove.width = 10;
+  handleMove.height = 10;
+  handleMove.color = "red";
+  ///---special
+  handleMove.flag = "handle";
+  handleMove.handleType = "move";
+  items = [...items , handleMove];
+  }
+}
+function removeHandles() {
+  if (selectedItem) {
+    const newitems = items.filter(item => !(item.flag && item.flag === "handle"));
+    items = [...newitems];
+  }
+}
+
+function moveSelectedItem(clientX,clientY){
+  if(selectedItem){
+    selectedItem.x = clientX;
+    selectedItem.y = clientY;
+    updateHandles(clientX,clientY)
+  }
+}
+function updateHandles(clientX,clientY){
+  const handles = getHandles();
+  if(Array.isArray(handles) && handles.length > 0){
+    for (let i = 0; i < handles.length; i++) {
+      const handle = handles[i];
+      handle.x = clientX;
+      handle.y = clientY;
+      
+    }
+  }
+
+}
+function getHandles(){
+  let result = [];
+  for (let i = 0; i < items.length; i++) {
+    const item =   items[i];
+    if(item.flag && item.flag === "handle"){
+      result.push(item);
+    }
+  }
+  return result;
+}
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
     onMount(async () => {
       if (canvasElement) {
@@ -38,6 +103,11 @@ function itemSelected(event, hitItem){
         event_manager = new EventManager();
         ///Event to event-mamanger
         event_manager.itemSelected = itemSelected;
+        event_manager.itemUnSelected = itemUnSelected;
+        event_manager.isItemSelected = isItemSelected;
+        event_manager.drawHandles = drawHandles;
+        event_manager.removeHandles = removeHandles;
+        event_manager.moveSelectedItem = moveSelectedItem;
 
         ///EventManager is mapped to Player
         taleem_draw_engine.mapEvents(
@@ -46,7 +116,6 @@ function itemSelected(event, hitItem){
           event_manager.onMouseMove.bind(event_manager),
           event_manager.onMouseUp.bind(event_manager),
           event_manager.onMouseDown.bind(event_manager),
-
         );
 
         interval = setInterval(gameloop, 20);
@@ -55,6 +124,7 @@ function itemSelected(event, hitItem){
     //////////////////////////////////////////////////////
     function gameloop() {
       if (taleem_draw_engine) {
+        taleem_draw_engine.items = items; //must
         taleem_draw_engine.draw();
       }
     }

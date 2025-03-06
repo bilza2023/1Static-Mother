@@ -38,17 +38,16 @@ export default class EventModule {
       // if(type == "click"){debugger;}
       // debugger;
       // Find the first item that is hit (if any)
-      let hitItem = null;
+      let hitItems = [];
       for (let item of this.itemObjects) {
         if (item.isHit(mouseX, mouseY)) {
-          hitItem = item;
-          break;
+          hitItems.push(item);
         }
       }
   
       // Always trigger the callback with hitItem (or null if no item was hit)
       if (this.callbacks[type]) {
-        this.callbacks[type](event, hitItem);//from here we get the hit-item
+        this.callbacks[type](event, hitItems);//from here we get the hit-item
       }
     }
   

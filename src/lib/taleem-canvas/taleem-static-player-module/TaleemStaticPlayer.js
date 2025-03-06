@@ -89,8 +89,8 @@ export default class TaleemStaticPlayer  {
     this.onMouse("click",clickCallback );
     this.onMouse("dblclick", doubleClickCallback);
     this.onMouse("mousemove", mousemoveCallback);
-    this.onMouse("mousedown", mouseupCallback);
-    this.onMouse("mouseup", mousedownCallback);
+    this.onMouse("mouseup", mouseupCallback);
+    this.onMouse("mousedown", mousedownCallback);
 
   }
 //   onKey(eventType, callback) {
