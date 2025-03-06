@@ -21,15 +21,12 @@ onMouseMove(event) {
     switch (this.activeHandle) {
       case "move":
         this.selectedItemManager.moveSelectedItem(event.clientX,event.clientY);      
-        // this.selectedItemManager.updateHandles(); 
         break;
       case "width":
         this.selectedItemManager.widenSelectedItem(event.clientX,event.clientY);
-        // this.selectedItemManager.updateHandles();       
         break;
       case "height":
         this.selectedItemManager.heightenSelectedItem(event.clientX,event.clientY);
-        // this.selectedItemManager.updateHandles();       
         break;
     
       default:
