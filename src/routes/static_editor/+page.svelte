@@ -20,9 +20,16 @@
 onMount(async () => { if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         player = new Player(canvasElement, ctx);//Player
+        // selectedItemManager  = mapEventsToActions(items,player,eventHandlersObject,redraw,CreateRectangle);
         selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
         //event_manager is going to be EventActionMapper we just initiate this class and the behaviour of the player changes since it attaches its self to "items" and player-events and then MAP it is Actions
         event_manager = new EventManager(player,selectedItemManager);//--Event Manager
+        //==New 
+        //we do not need  event_manager but keep 
+        //items, //correct
+        //Create.rectangle, use internally since this code will go to taleem-canvas
+        //redraw // get rid of before moving to taleem-lib. or make it a legit ticker
+        // event_manager = new EventActionMapper(player,items,redraw,Create.rectangle);//--Event Manager
         interval = setInterval(gameloop, 20);
 }});
 onDestroy(() => {if (interval) clearInterval(interval);});
