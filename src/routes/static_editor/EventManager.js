@@ -14,7 +14,6 @@ player.addMouseEvent("mousedown",this.onMouseDown.bind(this));
 //locals
 this.isDrag = false;
 this.activeHandle = null;
-
 }
 
 /////////////////////////////////////////////////////////
@@ -41,9 +40,7 @@ onMouseMove(event,hitItemsUuids) {
   }
 }
 
-onClick(event, hitItem,hitItemsUuids) {
-    // console.log("click");
-}
+onClick(event, hitItem,hitItemsUuids) {}
 
 onMouseUp(event, hitItems,hitItemsUuids) {
   this.isDrag = false;
@@ -52,17 +49,15 @@ onMouseUp(event, hitItems,hitItemsUuids) {
 
 onMouseDown(event, hitItems,hitItemsUuids) {
   if (hitItems) {
-    if(hasHandle(hitItems)){
+    if( itemObjectsHasHandles(hitItems)){
       this.isDrag = true;
-      const handle = getHandles(hitItems)[0];
+      const handle = itemObjectsHandles(hitItems)[0];
       this.activeHandle = handle.itemData.handleType;  
     }
   }
 }
 
 onDoubleClick(event, hitItems,hitItemsUuids) {
-  // debugger;
-  // hitItemsUuids;
   if (Array.isArray(hitItems) &&  hitItems.length >0) {
           if (!hasHandle(hitItems)){
             // debugger;
@@ -81,7 +76,7 @@ onDoubleClick(event, hitItems,hitItemsUuids) {
 }//EventManager
 
 
-function hasHandle(hitItems){
+function itemObjectsHasHandles(hitItems){
   let result = false;
   for (let i = 0; i < hitItems.length; i++) {
     const hitItem =   hitItems[i];
@@ -92,7 +87,7 @@ function hasHandle(hitItems){
   return result;
 }
 
-function getHandles(hitItems){
+function itemObjectsHandles(hitItems){
   let result = [];
   for (let i = 0; i < hitItems.length; i++) {
     const item =   hitItems[i];

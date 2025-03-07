@@ -7,7 +7,6 @@ export default class SelectedItemManager {
         this.selectedItem = null;
         //--remove this from SelectedItemManager item.
         Handles.createRectangleFactory = createRectangleFactory;
-
         this.redraw = redraw;
     }
 

@@ -1,8 +1,8 @@
 <script>
     import {Player,Create} from "$lib/taleem-canvas"
     import { onMount, onDestroy } from "svelte";
-    import SingleCallBkBtnGp from "./SingleCallBkBtnGp.svelte";
-    import X_Y_Width_Height from "./X_Y_Width_Height.svelte";
+    import SingleCallBkBtnGp from "./components/SingleCallBkBtnGp.svelte";
+    import X_Y_Width_Height from "./components/X_Y_Width_Height.svelte";
     import EventManager from "./EventManager.js";
     import SelectedItemManager from "./selectedItemManager/SelectedItemManager";
 /////////////////////////////////////////////////////////////////

@@ -16,7 +16,6 @@
 </div>
 {/if}
 
-
 <style>
     .flex{
         display: flex;
