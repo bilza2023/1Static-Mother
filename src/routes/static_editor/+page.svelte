@@ -5,6 +5,8 @@
     import X_Y_Width_Height from "./components/X_Y_Width_Height.svelte";
     import EventManager from "./EventManager.js";
     import SelectedItemManager from "./SelectedItemManager";
+    import CanvasEditorEventHandler from "./CanvasEditorEventHandler";
+    import mapEventsToActions from "./mapEventsToActions";
 /////////////////////////////////////////////////////////////////
     let canvasElement;
     let interval=null;
@@ -20,10 +22,11 @@
 onMount(async () => { if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         player = new Player(canvasElement, ctx);//Player
-        // selectedItemManager  = mapEventsToActions(items,player,eventHandlersObject,redraw,CreateRectangle);
-        selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
+        const canvasEditorEventHandler = new CanvasEditorEventHandler();
+        selectedItemManager  = mapEventsToActions(items,player,canvasEditorEventHandler,redraw,Create.rectangle);
+        // selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
         //event_manager is going to be EventActionMapper we just initiate this class and the behaviour of the player changes since it attaches its self to "items" and player-events and then MAP it is Actions
-        event_manager = new EventManager(player,selectedItemManager);//--Event Manager
+        // event_manager = new EventManager(player,selectedItemManager);//--Event Manager
         //==New 
         //we do not need  event_manager but keep 
         //items, //correct

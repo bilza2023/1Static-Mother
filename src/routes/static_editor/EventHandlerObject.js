@@ -2,14 +2,8 @@
 
 export default class EventHandlerObject {
 
-constructor(player){
-///////////////////////////////////////////////////////////  
-player.addMouseEvent("click",this.click.bind(this));
-player.addMouseEvent("dblclick",this.dblclick.bind(this));
-player.addMouseEvent("mousemove",this.mousemove.bind(this));
-player.addMouseEvent("mouseup",this.mouseup.bind(this));
-player.addMouseEvent("mousedown",this.mousedown.bind(this));
-///////////////////////////////////////////////////////////  
+constructor(){
+
 }
 
 /////////////////////////////////////////////////////////

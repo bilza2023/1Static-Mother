@@ -2,10 +2,10 @@
 
 import EventHandlerObject from "./EventHandlerObject";
 
-export default class CanvasEditorActions extends EventHandlerObject{
+export default class CanvasEditorEventHandler extends EventHandlerObject{
 
-constructor(player){
-    super(player);
+constructor(){
+    super();
 }
 /////////////////////////////////////////////////////////
 // Event handlers for processing Player mouse events
