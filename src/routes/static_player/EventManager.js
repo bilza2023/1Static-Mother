@@ -1,10 +1,17 @@
 
 
 export default class EventManager{
-constructor(selectedItemManager){
-  
-this.selectedItemManager = selectedItemManager;
-// out going events
+constructor(player,selectedItemManager){
+
+  this.selectedItemManager = selectedItemManager;
+///////////////////////////////////////////////////////////  
+player.addMouseEvent("click",this.onClick.bind(this));
+player.addMouseEvent("dblclick",this.onDoubleClick.bind(this));
+player.addMouseEvent("mousemove",this.onMouseMove.bind(this));
+player.addMouseEvent("mouseup",this.onMouseUp.bind(this));
+player.addMouseEvent("mousedown",this.onMouseDown.bind(this));
+///////////////////////////////////////////////////////////  
+//locals
 this.isDrag = false;
 this.activeHandle = null;
 

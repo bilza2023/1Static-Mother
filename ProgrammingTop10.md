@@ -14,3 +14,6 @@ The Top 10 Lessons that I learnt from 10 years of Software Development
 
 6: First clerify the concept and then draw class-diagram and then test and elaborate.
 
+7: Single Responsibility: Fora function or a object there must be single responsibility.
+
+8: Only independent/pure code works.

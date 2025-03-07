@@ -1,12 +1,15 @@
 
-import { Create } from "../../lib/taleem-canvas";
 
-
-//This Handles is for item-handles not itemObject handles which is handled by EventManager.
 export default class Handles {
 
+  static createRectangleFactory = null; // Default to null
+
     static getHandleData(x,y,color,handleType){
-        const handle =  Create.rectangle();
+      if (!Handles.createRectangleFactory) {
+        throw new Error("Rectangle factory not provided to Handles");
+    }
+    
+        const handle = Handles.createRectangleFactory();
         handle.x = x;
         handle.y = y;
         handle.width = 10;

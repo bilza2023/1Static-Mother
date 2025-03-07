@@ -2,9 +2,12 @@
 import Handles from "./Handles";
 /////////////////////////////////////////////
 export default class SelectedItemManager {
-    constructor(items,redraw){
+    constructor(items,createRectangleFactory,redraw){
         this.items = items; // keep this and pick selectedItem
         this.selectedItem = null;
+        //--remove this from SelectedItemManager item.
+        Handles.createRectangleFactory = createRectangleFactory;
+
         this.redraw = redraw;
     }
 
