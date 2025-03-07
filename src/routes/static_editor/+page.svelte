@@ -4,7 +4,7 @@
     import SingleCallBkBtnGp from "./components/SingleCallBkBtnGp.svelte";
     import X_Y_Width_Height from "./components/X_Y_Width_Height.svelte";
     import EventManager from "./EventManager.js";
-    import SelectedItemManager from "./selectedItemManager/SelectedItemManager";
+    import SelectedItemManager from "./SelectedItemManager";
 /////////////////////////////////////////////////////////////////
     let canvasElement;
     let interval=null;

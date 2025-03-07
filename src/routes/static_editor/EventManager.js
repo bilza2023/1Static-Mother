@@ -59,9 +59,8 @@ onMouseDown(event, hitItems,hitItemsUuids) {
 
 onDoubleClick(event, hitItems,hitItemsUuids) {
   if (Array.isArray(hitItems) &&  hitItems.length >0) {
-          if (!hasHandle(hitItems)){
-            // debugger;
-            this.selectedItemManager.itemSelected(hitItems[0]);
+          if (!itemObjectsHasHandles(hitItems)){
+            this.selectedItemManager.select(hitItems[0]);
           }
   }else {
     // this.removeHandles();//keep it up before removing the selected item.
