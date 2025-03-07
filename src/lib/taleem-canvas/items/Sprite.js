@@ -1,4 +1,4 @@
-import BaseItem from '../baseItemModule/BaseItem.js';
+import BaseItem from './BaseItem.js';
 import uuid from "./uuid.js";
 
 export default class Sprite extends BaseItem {

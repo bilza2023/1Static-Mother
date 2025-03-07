@@ -1,48 +1,48 @@
 
-import { ItemData } from './ItemData'; 
-import ParentBaseItem from "./ParentBaseItem";
+// import { ItemData } from './ItemData'; 
 
-
-export default class BaseItem extends ParentBaseItem {
-    ItemData:ItemData;
-    constructor(itemData:ItemData) {
-        super(itemData)
-    }
+export default class BaseItem  {
+  
+  constructor(itemData) {
+      this.itemData = itemData;
+  }
+  static newItemData(){}//  
+  static dialogueBox(){}//  
 //////////////////////===Editor Part====////////////////////////////////////    
-get x():number {
+get x() {
     return this.itemData.x || 0;
   }
-  set x(newX:number) {
+  set x(newX) {
     //This is clientX from even i must convert it into Cavnas X
     
     this.itemData.x = newX;
   }
 
-  get y():number {
+  get y() {
     return this.itemData.y || 0;
   }
-  set y(newY:number) {
+  set y(newY) {
     this.itemData.y = newY;
   }
 
-  get width():number {
+  get width() {
     return this.itemData.width || 0;
   }
-  set width(newWidth:number) {
+  set width(newWidth) {
     this.itemData.width = newWidth;
   }
 
-  get height():number {
+  get height() {
     return this.itemData.height || 0;
   }
-  set height(newHeight:number) {
+  set height(newHeight) {
     this.itemData.height = newHeight;
   }
 
-  getItemData():ItemData {
+  getItemData() {
     return this.itemData;
   }
-  getType():string{
+  getType(){
     return this.itemData.type;
   }
 //////////////////////===Calculator Part====////////////////////////////////////    
@@ -57,25 +57,25 @@ get x():number {
   }
 
   // Default bounding rectangle calculations. Override in subclasses if needed.
-  boundingRectangleX():number {
+  boundingRectangleX() {
     return this.x;
   }
   
-  boundingRectangleY():number {
+  boundingRectangleY() {
     return this.y;
   }
   
-  boundingRectangleWidth():number {
+  boundingRectangleWidth() {
     return this.width;
   }
   
-  boundingRectangleHeight():number {
+  boundingRectangleHeight() {
     return this.height;
   }
   
   // Standardized hit detection based on bounding rectangle.
   // Only override if an item cannot define an accurate bounding rectangle.
-  isHit(mouseX:number, mouseY:number) {
+  isHit(mouseX, mouseY) {
     const { x, y, width, height } = this.getBoundingRectangle();
     return (
       mouseX >= x &&
@@ -85,7 +85,7 @@ get x():number {
     );
   }
 
- set(key:string, value:any) {
+ set(key, value) {
     if (key in this.itemData) {
         this.itemData[key] = value;
         return value;  // ✅ Return updated value
@@ -93,7 +93,7 @@ get x():number {
     return false;  // ❌ Return false if the key doesn't exist
 }
 
- get(key:string) {
+ get(key) {
   if (key in this.itemData) {
     return this.itemData[key];
   }
