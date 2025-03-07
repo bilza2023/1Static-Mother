@@ -29,7 +29,7 @@ export default class ItemsEditor{
         }
         this.items = itemsWithoutHandles;
     }
-    updateHandles(selectedItem){
+    updateHandles(selectedItem){ //event does not comer here but selectedItem has been fixed now just fix handles
 
         const handles = this.getHandles();
         if(Array.isArray(handles) && handles.length > 0){

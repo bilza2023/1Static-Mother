@@ -20,7 +20,7 @@ this.activeHandle = null;
 // Event handlers for processing Player mouse events
   //5 events 
 onMouseMove(event,hitItemsUuids) {
-
+debugger;
   if(this.isDrag){
     switch (this.activeHandle) {
       case "move":
