@@ -14,7 +14,6 @@ export default class SelectedItemManager {
     itemSelected(hitItem){
         this.selectedItem = hitItem;
         this.drawHandles();
-        // console.log("item selected",hitItem);
     }
      itemUnSelected(){
         this.selectedItem = null;
