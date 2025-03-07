@@ -8,7 +8,6 @@
   const DEFAULT_AUDIO = import.meta.env.VITE_DEFAULT_AUDIO;
     ////////////////////////////////////////////
       let slides=null;
-      let id;
       let soundUrlComplete=null;
       let showToolbar=true;
 

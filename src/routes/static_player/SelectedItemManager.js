@@ -17,6 +17,10 @@ export default class SelectedItemManager {
         this.selectedItem = null;
         this.removeHandles();
       }
+      selectedLast(){
+        this.selectedItem = null;
+        this.removeHandles();
+      }
      isItemSelected(){
         if(this.selectedItem == null){
           return false;

@@ -93,6 +93,14 @@ export default class Player  {
     this.onMouse("mousedown", mousedownCallback);
 
   }
+  // Add this to your Player class
+addMouseEvent(eventType,callback) {
+  if (this.eventModule.callbacks[eventType] !== undefined) {
+    this.eventModule.on(eventType, callback);
+  } else {
+    console.warn(`Event type "${eventType}" is not supported.`);
+  }
+}
 //   onKey(eventType, callback) {
     // this.inputModule.on(eventType, callback);
 //   }
