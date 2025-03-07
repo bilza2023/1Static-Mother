@@ -1,141 +1,34 @@
 <script>
-  import {ItemsMap,StaticCanvasPlayer} from "../../../../staticCanvasPlayer";
-
-  // import EditorJs from "./EditorJs.js"
-  import AddToolbar from "./AddToolbar.svelte";
-  import { onMount, onDestroy } from "svelte";
-  import DialogueBox from "./dialoguebox/Dialoguebox.svelte";
-  import CanvasDialogueBox from "./dialoguebox/items/CanvasDialogueBox.svelte";
-  import getNewItem from "../../../editor/addNewSlide/getNewItem";
-/////////////////////////////////////////////
-export let slideExtra;
-// export let slideStartTime=0;
-// export let slideEndTime=10;
-export let items = [];
-
-
-//This is the place to add images array
-export let imagesArray = ['./images/drops.png'];
-
-  let interval = null;
-  // let taleemCanvas = null;
-  let editor = null;
-  let selectedItemItemExtra = null;
-/////////////////////////////////////////////
-function updateSelectedItem(newSelectedItem){
-  selectedItemItemExtra = newSelectedItem;
-}
-/////////////////////////////////////////////
-// function createTaleemCanvas(canvasElement) {
-//     const ctx = canvasElement.getContext("2d");
-//     taleemCanvas = new TaleemCanvas(canvasElement, ctx , imagesArray);//--Here TaleemCanvas is created 
-//     return taleemCanvas;
-// }
-
-function gameloop() {
-  // if (taleemCanvas) {
-  //     taleemCanvas.draw();
-  // }
-}
-/////////////////////////////////////////////
-onMount(async () => {
-  // debugger;
-  // if(taleemCanvas){
-  //   await taleemCanvas.init();
-  //   for (let i = 0; i < items.length; i++) {
-  //     const item =   items[i];
-  //     taleemCanvas.addItem(item.itemExtra);
-  //   }
-  //   editor = new EditorJs(taleemCanvas,updateSelectedItem);
-  // }
-
-  interval = setInterval(gameloop, 20); // Start gameloop
-});
-function addItem(itemType){
-  debugger;
-  const OBJECT = ItemsMap.get(itemType);
-            const itemExtra = OBJECT.itemExtraData();
-            const newItem = getNewItem(itemExtra);
-            // items.push(newItem);
-            items = [...items,newItem];
-
-}
-onDestroy(() => {
-  if (interval) clearInterval(interval);
-});
-/////////////////////////////////////////////
-
-</script>
-{#if items}
-  <AddToolbar {addItem}/>
-{/if}
-
-<div class="page">
-  <div class="container">
-    <div class="canvas-container">
-      <StaticCanvasPlayer bind:items={items} {slideExtra} />
-    </div>
-
-    <div class="dialogue-box">
-      
-      {#if selectedItemItemExtra  !== null}
-            <DialogueBox {selectedItemItemExtra}/>
-      {:else}
-            <!-- {#if slideExtra} -->
-            <CanvasDialogueBox {slideExtra}  />
-            <!-- {/if} -->
+    import {Player,Create} from "$lib/taleem-canvas"
+    import { onMount, onDestroy } from "svelte";
+    import SingleCallBkBtnGp from "./SingleCallBkBtnGp.svelte";
+    import X_Y_Width_Height from "./X_Y_Width_Height.svelte";
+    import EventManager from "./EventManager.js";
+    import SelectedItemManager from "./selectedItemManager/SelectedItemManager";
+/////////////////////////////////////////////////////////////////
+    let canvasElement;
+    let interval=null;
+    let event_manager=null;
+    let selectedItemManager=null
+    let player;
+    let items = []; 
+//////////////////////////////////////////////////////////////////
+  function redraw(IncommingItems){items =  IncommingItems;}
+  function gameloop() { if (player) {player.items = items;player.draw();}}
+  function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
+//////////////////////////////////////////////////////////////////
+onMount(async () => { if (canvasElement) {
+        const ctx = canvasElement.getContext("2d");
+        player = new Player(canvasElement, ctx);//Player
+        selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
+        event_manager = new EventManager(player,selectedItemManager);//--Event Manager
+        interval = setInterval(gameloop, 20);
+}});
+onDestroy(() => {if (interval) clearInterval(interval);});
+  </script>
+  <div ><SingleCallBkBtnGp callBack={addNewItem}/></div>
+  <canvas bind:this={canvasElement} ></canvas>
+{#if selectedItemManager && selectedItemManager.selectedItem}
+      <X_Y_Width_Height bind:selectedItem={selectedItemManager.selectedItem} />
       {/if}
-    </div>
-  </div>
-</div>
-
-<style>
-  /* Reset global margins and paddings */
-  :global(html),
-  :global(body) {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Apply background color to the entire component */
-  .page {
-    background: gray;
-    width: 100%;
-    min-height: 100vh; /* Ensures it covers full height */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Keeps content at the top */
-  }
-
-  .container {
-    display: flex;
-    height: 100vh;
-    background-color: rgb(53, 54, 53);
-    width: 100%;
-    align-items: flex-start;
-    gap: 10px; /* Space between canvas and dialogue box */
-    padding: 10px;
-  }
-
-  .canvas-container {
-    flex: 3; /* 75% */
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .dialogue-box {
-    flex: 1; /* 25% */
-    color: white;
-    background-color: black;
-    padding: 15px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
-</style>
+  <button on:click={()=>console.log("Log Items",items)}>Log Items</button>

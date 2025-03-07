@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/canvas_static_player/+page.svelte";
+export { default as component } from "../../../../src/routes/canvas_editor/+page.svelte";

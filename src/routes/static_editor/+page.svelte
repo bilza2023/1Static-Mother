@@ -1,37 +1,37 @@
 <script>
-  import {Editor} from '../../lib/app';
-  import {onMount} from "svelte";
-  import {presentationData} from '$lib/static_slide_data.js';
-  //Environment variables
-  const SOUND_URL = import.meta.env.VITE_SOUND_BASE_URL;
-  const IMAGES_URL = import.meta.env.VITE_IMAGES_BASE_URL;
-  const DEFAULT_AUDIO = import.meta.env.VITE_DEFAULT_AUDIO;
-    ////////////////////////////////////////////
-      let slides=null;
-      let soundUrlComplete=null;
-      let showToolbar=true;
+    import {Player,Create} from "$lib/taleem-canvas"
+    import { onMount, onDestroy } from "svelte";
+    import SingleCallBkBtnGp from "./SingleCallBkBtnGp.svelte";
+    import X_Y_Width_Height from "./X_Y_Width_Height.svelte";
+    import EventManager from "./EventManager.js";
+    import SelectedItemManager from "./selectedItemManager/SelectedItemManager";
+/////////////////////////////////////////////////////////////////
+    let canvasElement;
+    let interval=null;
+    let event_manager=null;
+    let selectedItemManager=null
+    let player;
+    let items = []; //Now items-literals are external to item-canvas
+//////////////////////////////////////////////////////////////////
+  function redraw(IncommingItems){items =  IncommingItems;}
+  function gameloop() { if (player) {player.items = items;player.draw();}}
+  function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
+//////////////////////////////////////////////////////////////////
+onMount(async () => { if (canvasElement) {
+        const ctx = canvasElement.getContext("2d");
+        player = new Player(canvasElement, ctx);//Player
+        selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
+        event_manager = new EventManager(player,selectedItemManager);//--Event Manager
+        interval = setInterval(gameloop, 20);
+}});
+onDestroy(() => {if (interval) clearInterval(interval);});
+  </script>
+  <div ><SingleCallBkBtnGp callBack={addNewItem}/></div>
+  <canvas bind:this={canvasElement} ></canvas>
+{#if selectedItemManager && selectedItemManager.selectedItem}
+      <X_Y_Width_Height bind:selectedItem={selectedItemManager.selectedItem} />
+      {/if}
+  <button on:click={()=>console.log("Log Items",items)}>Log Items</button>
 
-function save(slides){
-  debugger;
- console.log("slides",slides); 
-}
-/////////////////////////////////////////////////////////////\\\\\\      
-onMount(async () => {
-  slides = presentationData;
-});
-
-</script>
-  <!-- 
-3-mar-2025 which is suitable place to load presentation images ? suggestion : the "CanvasEditor" should find and load its own images using imagesUrl 
-  -->
-{#if slides}
-<Editor
-soundUrl={soundUrlComplete}
-imagesUrl= {IMAGES_URL}
-{showToolbar}
-bind:slides={slides}
-{save}
-/>
-{/if}
-
-<button on:click={save}>save</button>
+  
+  
