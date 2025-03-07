@@ -2,7 +2,7 @@
 
 export default class EventManager{
 constructor(player,selectedItemManager){
-
+ 
   this.selectedItemManager = selectedItemManager;
 ///////////////////////////////////////////////////////////  
 player.addMouseEvent("click",this.onClick.bind(this));
@@ -19,18 +19,17 @@ this.activeHandle = null;
 /////////////////////////////////////////////////////////
 // Event handlers for processing Player mouse events
   //5 events 
-onMouseMove(event,hitItemsUuids) {
-debugger;
+onMouseMove(x , y ,hitItemsUuids) {
   if(this.isDrag){
     switch (this.activeHandle) {
       case "move":
-        this.selectedItemManager.moveSelectedItem(event.clientX,event.clientY);      
+        this.selectedItemManager.moveSelectedItem(x , y);      
         break;
       case "width":
-        this.selectedItemManager.widenSelectedItem(event.clientX,event.clientY);
+        this.selectedItemManager.widenSelectedItem(x , y);
         break;
       case "height":
-        this.selectedItemManager.heightenSelectedItem(event.clientX,event.clientY);
+        this.selectedItemManager.heightenSelectedItem(x , y);
         break;
     
       default:
@@ -40,14 +39,14 @@ debugger;
   }
 }
 
-onClick(event, hitItem,hitItemsUuids) {}
+onClick(x , y , hitItem,hitItemsUuids) {}
 
-onMouseUp(event, hitItems,hitItemsUuids) {
+onMouseUp(x , y , hitItems,hitItemsUuids) {
   this.isDrag = false;
   this.activeHandle = null;
 }
 
-onMouseDown(event, hitItems,hitItemsUuids) {
+onMouseDown(x , y , hitItems,hitItemsUuids) {
   if (hitItems) {
     if( itemObjectsHasHandles(hitItems)){
       this.isDrag = true;
@@ -57,7 +56,7 @@ onMouseDown(event, hitItems,hitItemsUuids) {
   }
 }
 
-onDoubleClick(event, hitItems,hitItemsUuids) {
+onDoubleClick(x , y , hitItems,hitItemsUuids) {
   if (Array.isArray(hitItems) &&  hitItems.length >0) {
           if (!itemObjectsHasHandles(hitItems)){
             this.selectedItemManager.select(hitItems[0]);

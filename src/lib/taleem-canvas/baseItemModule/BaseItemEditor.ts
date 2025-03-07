@@ -16,6 +16,8 @@ export default abstract class BaseItemEditor extends ParentBaseItem{
     return this.itemData.x || 0;
   }
   set x(newX:number) {
+    //This is clientX from even i must convert it into Cavnas X
+    
     this.itemData.x = newX;
   }
 

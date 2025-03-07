@@ -21,6 +21,7 @@ onMount(async () => { if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         player = new Player(canvasElement, ctx);//Player
         selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
+        //event_manager is going to be EventActionMapper we just initiate this class and the behaviour of the player changes since it attaches its self to "items" and player-events and then MAP it is Actions
         event_manager = new EventManager(player,selectedItemManager);//--Event Manager
         interval = setInterval(gameloop, 20);
 }});

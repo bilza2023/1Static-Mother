@@ -28,26 +28,29 @@ export default class SelectedItemManager {
           return true;
         }
       }
-     moveSelectedItem(clientX,clientY){
+     moveSelectedItem(x,y){
         if(this.selectedItem){
-          this.selectedItem.x = clientX;
-          this.selectedItem.y = clientY;
+          // debugger;
+          //Here i need to convert event clienX and y into canvas x and y
+          // const x = this.selectedItem.getBoundingRectangle()
+          this.selectedItem.x = x;
+          this.selectedItem.y = y;
           this.itemsEditor.updateHandles(this.selectedItem);
           // Handles.updateHandles(this.items,this.selectedItem);
         }
       }
-     widenSelectedItem(clientX,clientY){
+     widenSelectedItem(x , y){
         // debugger;
         if(this.selectedItem){
       
-          this.selectedItem.width = clientX - this.selectedItem.x  ;
+          this.selectedItem.width = x - this.selectedItem.x  ;
           this.itemsEditor.updateHandles(this.selectedItem);
           // Handles.updateHandles(this.items,this.selectedItem);
         }
       }
-     heightenSelectedItem(clientX,clientY){
+     heightenSelectedItem(x , y){
         if(this.selectedItem){
-          this.selectedItem.height =  clientY - this.selectedItem.y ;
+          this.selectedItem.height =  y - this.selectedItem.y ;
           // Handles.updateHandles(this.items,this.selectedItem);
           this.itemsEditor.updateHandles(this.selectedItem);
         }
