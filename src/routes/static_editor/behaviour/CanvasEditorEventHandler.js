@@ -1,11 +1,13 @@
 
 
 import EventHandlerObject from "./EventHandlerObject";
-
+import SelectedItemManager from "./SelectedItemManager";
 export default class CanvasEditorEventHandler extends EventHandlerObject{
 
-constructor(){
-    super();
+constructor(items,createRectangleFactory,redraw){
+  super(items);
+// this not taken to parent EventHandlerObject yet
+  this.actions = new SelectedItemManager(items,createRectangleFactory,redraw);
 }
 /////////////////////////////////////////////////////////
 // Event handlers for processing Player mouse events
@@ -14,13 +16,13 @@ constructor(){
     if(this.isDrag){
       switch (this.activeHandle) {
         case "move":
-          this.selectedItemManager.moveSelectedItem(x , y);      
+          this.actions.moveSelectedItem(x , y);      
           break;
         case "width":
-          this.selectedItemManager.widenSelectedItem(x , y);
+          this.actions.widenSelectedItem(x , y);
           break;
         case "height":
-          this.selectedItemManager.heightenSelectedItem(x , y);
+          this.actions.heightenSelectedItem(x , y);
           break;
       
         default:
@@ -50,14 +52,14 @@ constructor(){
   dblclick(x , y , hitItems,hitItemsUuids) {
     if (Array.isArray(hitItems) &&  hitItems.length >0) {
             if (!itemObjectsHasHandles(hitItems)){
-              this.selectedItemManager.select(hitItems[0]);
+              this.actions.select(hitItems[0]);
             }
     }else {
       // this.removeHandles();//keep it up before removing the selected item.
       // debugger;
-      this.selectedItemManager.itemUnSelected();
+      this.actions.itemUnSelected();
   
-      // this.selectedItemManager.removeHandles();
+      // this.actions.removeHandles();
     } 
   }
   

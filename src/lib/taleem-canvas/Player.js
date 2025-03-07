@@ -93,6 +93,16 @@ export default class Player  {
     this.onMouse("mousedown", mousedownCallback);
 
   }
+
+  connect(eventHandlersObject){
+  debugger;
+    this.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
+    this.onMouse("dblclick",  eventHandlersObject.dblclick.bind(eventHandlersObject));
+    this.onMouse("mousemove", eventHandlersObject.mousemove.bind(eventHandlersObject));
+    this.onMouse("mouseup",   eventHandlersObject.mouseup.bind(eventHandlersObject));
+    this.onMouse("mousedown", eventHandlersObject.mousedown.bind(eventHandlersObject));
+    return eventHandlersObject.actions;
+  }
   // Add this to your Player class
 addMouseEvent(eventType,callback) {
   if (this.eventModule.callbacks[eventType] !== undefined) {

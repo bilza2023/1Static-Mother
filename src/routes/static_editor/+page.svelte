@@ -3,10 +3,10 @@
     import { onMount, onDestroy } from "svelte";
     import SingleCallBkBtnGp from "./components/SingleCallBkBtnGp.svelte";
     import X_Y_Width_Height from "./components/X_Y_Width_Height.svelte";
-    import EventManager from "./EventManager.js";
-    import SelectedItemManager from "./SelectedItemManager";
-    import CanvasEditorEventHandler from "./CanvasEditorEventHandler";
-    import mapEventsToActions from "./mapEventsToActions";
+    // import EventManager from "./behaviour/EventManager.js";
+    // import SelectedItemManager from "./behaviour/SelectedItemManager";
+    import CanvasEditorEventHandler from "./behaviour/CanvasEditorEventHandler";
+    import mapEventsToActions from "./behaviour/mapEventsToActions";
 /////////////////////////////////////////////////////////////////
     let canvasElement;
     let interval=null;
@@ -22,8 +22,10 @@
 onMount(async () => { if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         player = new Player(canvasElement, ctx);//Player
-        const canvasEditorEventHandler = new CanvasEditorEventHandler();
-        selectedItemManager  = mapEventsToActions(items,player,canvasEditorEventHandler,redraw,Create.rectangle);
+        debugger;
+        const canvasEditorEventHandler = new CanvasEditorEventHandler(items,Create.rectangle,redraw);
+        selectedItemManager = player.connect(canvasEditorEventHandler);
+        // selectedItemManager  = mapEventsToActions(items,player,canvasEditorEventHandler,redraw,Create.rectangle);
         // selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
         //event_manager is going to be EventActionMapper we just initiate this class and the behaviour of the player changes since it attaches its self to "items" and player-events and then MAP it is Actions
         // event_manager = new EventManager(player,selectedItemManager);//--Event Manager

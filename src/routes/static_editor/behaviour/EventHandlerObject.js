@@ -1,8 +1,10 @@
 
 
+import {ItemsEditor} from "../../../lib/taleem-canvas";
 export default class EventHandlerObject {
 
-constructor(){
+constructor(items){
+this.itemsEditor = new ItemsEditor(items);
 
 }
 
