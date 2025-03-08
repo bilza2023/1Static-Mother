@@ -19,8 +19,8 @@ export default class Circle extends BaseItem {
       lineWidth: 1,
       dash: 0,
       gap: 0,
-      filled: false,
-      color: "gray",
+      filled: true,
+      color: "red",
       globalAlpha: 1
     };
   }

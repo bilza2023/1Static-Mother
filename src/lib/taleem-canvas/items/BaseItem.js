@@ -1,4 +1,6 @@
-
+/**
+ * This file is HEART of theis library
+ */
 // import { ItemData } from './ItemData'; 
 
 export default class BaseItem  {

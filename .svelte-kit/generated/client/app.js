@@ -12,8 +12,8 @@ export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/canvas_editor": [3],
-		"/static_editor": [4]
+		"/static_editor": [3],
+		"/static_player": [4]
 	};
 
 export const hooks = {

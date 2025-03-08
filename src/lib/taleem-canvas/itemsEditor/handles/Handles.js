@@ -36,20 +36,19 @@ export default class Handles{
             const handle = handles[i];
             // debugger;
             if(handle.handleType == "move"){
-              handle.x = selectedItem.x - 10;
-              handle.y = selectedItem.y;
+              handle.x = selectedItem.boundingRectangleX() - 10;
+              handle.y = selectedItem.boundingRectangleY();
             }
             if(handle.handleType == "width"){
-              handle.x = selectedItem.x + selectedItem.width;
-              handle.y = selectedItem.y;
+              handle.x = selectedItem.boundingRectangleX() + selectedItem.width;
+              handle.y = selectedItem.boundingRectangleY();
             }
             if(handle.handleType == "height"){
-              handle.x = selectedItem.x + selectedItem.width;
-              handle.y = selectedItem.y +  selectedItem.height;
+              handle.x = selectedItem.boundingRectangleX() + selectedItem.width;
+              handle.y = selectedItem.boundingRectangleY() +  selectedItem.height;
             }
           }
-        }
-      
+        } 
     }
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
