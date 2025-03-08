@@ -95,7 +95,7 @@ export default class Player  {
   }
 
   connect(eventHandlersObject){
-  debugger;
+  // debugger;
     this.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
     this.onMouse("dblclick",  eventHandlersObject.dblclick.bind(eventHandlersObject));
     this.onMouse("mousemove", eventHandlersObject.mousemove.bind(eventHandlersObject));

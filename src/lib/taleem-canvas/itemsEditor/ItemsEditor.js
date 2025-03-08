@@ -5,12 +5,13 @@
 
 //--KEEP IN MIND WHERE THIS OBJECT IS USED ==> WHEN DEALING WITH RAW ITEMS AND EDITING THEM
 
-import CreateHandles from "./handles/CreateHandles";
+import createHandles from "./handles/createHandles";
+
 export default class ItemsEditor{
 
-    constructor(items,createRectangleFactory,redraw){
+    constructor(items,redraw){
         this.items = items;
-        this.createHandles = new CreateHandles(createRectangleFactory);
+        this.createHandles = createHandles;
         this.redraw = redraw;
    
     }

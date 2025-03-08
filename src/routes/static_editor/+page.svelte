@@ -3,14 +3,10 @@
     import { onMount, onDestroy } from "svelte";
     import SingleCallBkBtnGp from "./components/SingleCallBkBtnGp.svelte";
     import X_Y_Width_Height from "./components/X_Y_Width_Height.svelte";
-    // import EventManager from "./behaviour/EventManager.js";
-    // import SelectedItemManager from "./behaviour/SelectedItemManager";
-    import CanvasEditorEventHandler from "./behaviour/CanvasEditorEventHandler";
-    import mapEventsToActions from "./behaviour/mapEventsToActions";
+    import CanvasEditorEventHandler from "./selectItemBahaviour/CanvasEditorEventHandler";
 /////////////////////////////////////////////////////////////////
     let canvasElement;
     let interval=null;
-    let event_manager=null;
     let selectedItemManager=null
     let player;
     let items = []; //Now items-literals are external to item-canvas
@@ -22,19 +18,10 @@
 onMount(async () => { if (canvasElement) {
         const ctx = canvasElement.getContext("2d");
         player = new Player(canvasElement, ctx);//Player
-        debugger;
-        const canvasEditorEventHandler = new CanvasEditorEventHandler(items,Create.rectangle,redraw);
+        // debugger;
+        const canvasEditorEventHandler = new CanvasEditorEventHandler(items,redraw);
         selectedItemManager = player.connect(canvasEditorEventHandler);
-        // selectedItemManager  = mapEventsToActions(items,player,canvasEditorEventHandler,redraw,Create.rectangle);
-        // selectedItemManager  = new SelectedItemManager(items,Create.rectangle,redraw);
-        //event_manager is going to be EventActionMapper we just initiate this class and the behaviour of the player changes since it attaches its self to "items" and player-events and then MAP it is Actions
-        // event_manager = new EventManager(player,selectedItemManager);//--Event Manager
-        //==New 
-        //we do not need  event_manager but keep 
-        //items, //correct
-        //Create.rectangle, use internally since this code will go to taleem-canvas
-        //redraw // get rid of before moving to taleem-lib. or make it a legit ticker
-        // event_manager = new EventActionMapper(player,items,redraw,Create.rectangle);//--Event Manager
+     
         interval = setInterval(gameloop, 20);
 }});
 onDestroy(() => {if (interval) clearInterval(interval);});

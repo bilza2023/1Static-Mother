@@ -1,10 +1,10 @@
 
+import Actions from "../behaviourFrameWork/Actions";
 
-import {ItemsEditor}  from "$lib/taleem-canvas";
 /////////////////////////////////////////////
-export default class SelectedItemManager {
-    constructor(items,createRectangleFactory,redraw){
-        this.itemsEditor = new ItemsEditor(items,createRectangleFactory,redraw);
+export default class SelectedItemActions extends Actions{
+    constructor(itemsEditor,redraw){
+      super(itemsEditor);
         this.selectedItem = null;
     }
 
@@ -12,7 +12,8 @@ export default class SelectedItemManager {
       
       this.selectedItem = itemsObjByPlayer;
 
-      const handles = this.itemsEditor.createHandles.create();
+      const handles = this.itemsEditor.createHandles();
+      debugger;
       this.itemsEditor.addItems(handles); //since handles are also just items 
       this.itemsEditor.updateHandles(this.selectedItem);
      }
