@@ -1,7 +1,8 @@
 
-import EventHandlerObject from "../behaviourFrameWork/EventHandlerObject";
+import {Behaviour} from "../../../lib/taleem-canvas/index";
 import SelectedItemActions from "./SelectedItemActions";
-export default class CanvasEditorEventHandler extends EventHandlerObject{
+
+export default class CanvasEditorEventHandler extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////
 constructor(items,redraw){
   super(items,SelectedItemActions,redraw);

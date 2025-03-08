@@ -1,7 +1,11 @@
 
 
-import {ItemsEditor} from "$lib/taleem-canvas";
-export default class EventHandlerObject {
+
+
+
+import {ItemsEditor} from "./index";
+
+export default class Behaviour {
 //itemsEditor is to be provided by EventHandlerObject and not by ActionClass since ActionClass will be used inside  EventHandlerObject ONLY...
 
 constructor(items,ActionClass,redraw){

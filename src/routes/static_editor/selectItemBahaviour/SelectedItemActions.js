@@ -8,10 +8,8 @@ export default class SelectedItemActions{
     }
 
      select(ObjByPlayer){ //itemsObjByPlayer is in itemObject format
-      debugger;
       this.selectedItem = ObjByPlayer;
-      const handles = this.itemsEditor.handles.create();
-      // this.itemsEditor.addItems(handles); //since handles are also just items 
+      this.itemsEditor.handles.create();
       this.itemsEditor.handles.update(this.selectedItem);
      }
 
