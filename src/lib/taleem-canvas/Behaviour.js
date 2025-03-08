@@ -1,17 +1,13 @@
 
-
-
-
-
 import {ItemsEditor} from "./index";
 
 export default class Behaviour {
 //itemsEditor is to be provided by EventHandlerObject and not by ActionClass since ActionClass will be used inside  EventHandlerObject ONLY...
 
-constructor(items,ActionClass,redraw){
+constructor(items,ActionClass,redraw,callback){
 this.itemsEditor = new ItemsEditor(items,redraw);
 
-this.actions = new ActionClass(this.itemsEditor);
+this.actions = new ActionClass(this.itemsEditor,callback);
 this.redraw = redraw;
 }
 

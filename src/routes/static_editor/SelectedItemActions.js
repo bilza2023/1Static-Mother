@@ -2,9 +2,10 @@
 
 /////////////////////////////////////////////
 export default class SelectedItemActions{
-    constructor(itemsEditor){
+    constructor(itemsEditor,callback){
       this.itemsEditor = itemsEditor;
       this.selectedItem = null;
+      this.callback = callback;
     }
 
      select(ObjByPlayer){ //itemsObjByPlayer is in itemObject format

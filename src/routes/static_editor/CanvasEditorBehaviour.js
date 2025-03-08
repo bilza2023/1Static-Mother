@@ -1,12 +1,13 @@
 
-import {Behaviour} from "../../../lib/taleem-canvas/index";
+import {Behaviour} from "../../lib/taleem-canvas/index";
 import SelectedItemActions from "./SelectedItemActions";
 
 export default class CanvasEditorEventHandler extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////
-constructor(items,redraw){
-  super(items,SelectedItemActions,redraw);
+constructor(items,redraw,callback){
+  super(items,SelectedItemActions,callback);
   this.activeHandle = null;
+  this.callback = callback;
 }
 /////////////////////////////////////////////////////////
   mousemove(x , y ,hitItemsUuids) {
@@ -46,15 +47,17 @@ constructor(items,redraw){
   }
   
   dblclick(x , y , hitItems,hitItemsUuids) {
+    debugger;
     if (Array.isArray(hitItems) &&  hitItems.length >0) {
             if (!itemObjectsHasHandles(hitItems)){
+              debugger;
               this.actions.select(hitItems[0]);
+              this.callback(hitItems[0]);
             }
     }else {
       // this.removeHandles();//keep it up before removing the selected item.
       // debugger;
       this.actions.itemUnSelected();
-  
       // this.actions.removeHandles();
     } 
   }
