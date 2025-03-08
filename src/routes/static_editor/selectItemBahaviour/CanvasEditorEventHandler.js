@@ -1,18 +1,13 @@
 
-
 import EventHandlerObject from "../behaviourFrameWork/EventHandlerObject";
 import SelectedItemActions from "./SelectedItemActions";
 export default class CanvasEditorEventHandler extends EventHandlerObject{
-
-  //SelectedItemManager given at compile time not at run time.EventHandlerObject will create Actions object 
+//////////////////////////////////////////////////////////////////////////////
 constructor(items,redraw){
   super(items,SelectedItemActions,redraw);
-// this not taken to parent EventHandlerObject yet
-  // this.actions = new SelectedItemManager(items,createRectangleFactory,redraw);
+  this.activeHandle = null;
 }
 /////////////////////////////////////////////////////////
-// Event handlers for processing Player mouse events
-  //5 events 
   mousemove(x , y ,hitItemsUuids) {
     if(this.isDrag){
       switch (this.activeHandle) {
@@ -32,7 +27,6 @@ constructor(items,redraw){
    
     }
   }
-  
   click(x , y , hitItem,hitItemsUuids) {}
   
   mouseup(x , y , hitItems,hitItemsUuids) {

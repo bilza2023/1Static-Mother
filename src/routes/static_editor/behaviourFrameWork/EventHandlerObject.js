@@ -7,7 +7,7 @@ export default class EventHandlerObject {
 constructor(items,ActionClass,redraw){
 this.itemsEditor = new ItemsEditor(items,redraw);
 
-this.actions = new ActionClass(this.itemsEditor,redraw);
+this.actions = new ActionClass(this.itemsEditor);
 this.redraw = redraw;
 }
 

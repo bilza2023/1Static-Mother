@@ -1,27 +1,25 @@
 
-import Actions from "../behaviourFrameWork/Actions";
 
 /////////////////////////////////////////////
-export default class SelectedItemActions extends Actions{
-    constructor(itemsEditor,redraw){
-      super(itemsEditor);
-        this.selectedItem = null;
+export default class SelectedItemActions{
+    constructor(itemsEditor){
+      this.itemsEditor = itemsEditor;
+      this.selectedItem = null;
     }
 
-     select(itemsObjByPlayer){
-      
-      this.selectedItem = itemsObjByPlayer;
-
-      const handles = this.itemsEditor.createHandles();
+     select(ObjByPlayer){ //itemsObjByPlayer is in itemObject format
       debugger;
-      this.itemsEditor.addItems(handles); //since handles are also just items 
-      this.itemsEditor.updateHandles(this.selectedItem);
+      this.selectedItem = ObjByPlayer;
+      const handles = this.itemsEditor.handles.create();
+      // this.itemsEditor.addItems(handles); //since handles are also just items 
+      this.itemsEditor.handles.update(this.selectedItem);
      }
+
      unSelected(){
         this.selectedItem = null;
-        this.removeHandles();
+        this.itemsEditor.handles.remove();
       }
- 
+
      isItemSelected(){
         if(this.selectedItem == null){
           return false;
@@ -29,31 +27,24 @@ export default class SelectedItemActions extends Actions{
           return true;
         }
       }
+      
      moveSelectedItem(x,y){
         if(this.selectedItem){
-          // debugger;
-          //Here i need to convert event clienX and y into canvas x and y
-          // const x = this.selectedItem.getBoundingRectangle()
           this.selectedItem.x = x;
           this.selectedItem.y = y;
-          this.itemsEditor.updateHandles(this.selectedItem);
-          // Handles.updateHandles(this.items,this.selectedItem);
+          this.itemsEditor.handles.update(this.selectedItem);
         }
       }
      widenSelectedItem(x , y){
-        // debugger;
         if(this.selectedItem){
-      
           this.selectedItem.width = x - this.selectedItem.x  ;
-          this.itemsEditor.updateHandles(this.selectedItem);
-          // Handles.updateHandles(this.items,this.selectedItem);
+          this.itemsEditor.handles.update(this.selectedItem);
         }
       }
      heightenSelectedItem(x , y){
         if(this.selectedItem){
           this.selectedItem.height =  y - this.selectedItem.y ;
-          // Handles.updateHandles(this.items,this.selectedItem);
-          this.itemsEditor.updateHandles(this.selectedItem);
+          this.itemsEditor.handles.update(this.selectedItem);
         }
       }
 }//SelectedItemManager

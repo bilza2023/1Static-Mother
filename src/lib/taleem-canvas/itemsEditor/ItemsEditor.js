@@ -5,14 +5,15 @@
 
 //--KEEP IN MIND WHERE THIS OBJECT IS USED ==> WHEN DEALING WITH RAW ITEMS AND EDITING THEM
 
-import createHandles from "./handles/createHandles";
-
+import {Create} from "../index";
+import Handles from "./handles/Handles"
 export default class ItemsEditor{
 
     constructor(items,redraw){
         this.items = items;
-        this.createHandles = createHandles;
+        this.create = Create; //Create becomes create .. now we can create any item
         this.redraw = redraw;
+        this.handles = new Handles(this.items);
    
     }
     // it has ==============>>>>this.createHandles
@@ -20,52 +21,6 @@ export default class ItemsEditor{
         this.items = [...this.items,...newItems];
         this.redraw(this.items);
     }
-    removeHandles(){
-        const itemsWithoutHandles = [];
-        for (let i = 0; i < items.length; i++) {
-            const item = items[i];
-            if(!item.flag || !item.flag === "handle"){
-                itemsWithoutHandles.push(item);
-            }
-        }
-        this.items = itemsWithoutHandles;
-    }
-    updateHandles(selectedItem){ //event does not comer here but selectedItem has been fixed now just fix handles
-
-        const handles = this.getHandles();
-        if(Array.isArray(handles) && handles.length > 0){
-          for (let i = 0; i < handles.length; i++) {
-            const handle = handles[i];
-            // debugger;
-            if(handle.handleType == "move"){
-              handle.x = selectedItem.x;
-              handle.y = selectedItem.y;
-            }
-            if(handle.handleType == "width"){
-              handle.x = selectedItem.x + selectedItem.width;
-              handle.y = selectedItem.y;
-            }
-            if(handle.handleType == "height"){
-              handle.x = selectedItem.x + selectedItem.width;
-              handle.y = selectedItem.y +  selectedItem.height;
-            }
-          }
-        }
-      
-    }
-    /////////////////////////////////////////////////
-    /////////////////////////////////////////////////
-    getHandles(){
-        let result = [];
-        for (let i = 0; i < this.items.length; i++) {
-          const item =  this.items[i];
-          if(item.flag && item.flag === "handle"){
-            result.push(item);
-          }
-        }
-        return result;
-    }
-
 
     /////////////////////////////////////////////////
 }//ItemsEditObject
