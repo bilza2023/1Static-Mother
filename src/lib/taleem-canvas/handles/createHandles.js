@@ -1,4 +1,4 @@
-import {Create} from "../../index";
+import {Create} from "../index";
 
 export default function  createHandles(){
 

@@ -6,19 +6,23 @@
 //--KEEP IN MIND WHERE THIS OBJECT IS USED ==> WHEN DEALING WITH RAW ITEMS AND EDITING THEM sPECIALLY inside Behaviour object
 
 import {Create} from "../index";
-import Handles from "./handles/Handles"
 export default class ItemsEditor{
 
     constructor(items){
         this.items = items;
         this.create = Create; //Create becomes create .. now we can create any item
-        this.handles = new Handles(this.items);
-   
     }
-    // it has ==============>>>>this.createHandles
+
     addItems(newItems){
         this.items = [...this.items,...newItems];
     }
+    // set items(newItems){
+    //     this.items = newItems;
+    //     // this.items = [...this.items,...newItems];
+    // }
+    // get items (){
+    //     return this.items;
+    // }
 
     /////////////////////////////////////////////////
 }//ItemsEditObject

@@ -3,8 +3,8 @@
  * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
 */
   import {Player} from "$lib/taleem-canvas"
-  import { onMount } from "svelte";
-  import EditorBehaviour from "./editorBehaviour/editorBehaviour";
+  import { onMount,onDestroy } from "svelte";
+  import EditorBehaviour from "./editorBehaviour";
   /////////////////////////////////////////////////////////////////
       let canvasElement;
       let player; //to make it truly static even remove this so that this component is draw once.
@@ -44,16 +44,15 @@
 
     let selectedItem = null;
 
-function setSelectedItem(icommming_items,incomingSelectedItem){
+function setSelectedItem(incomingSelectedItem){
   // debugger;
   selectedItem = incomingSelectedItem;
-  player.items = icommming_items;
+  player.items = items;
   player.draw();
   // console.log("callback called...!");
 }
    
 function gameloop(){player.draw()}
-
 onMount(async () => { if (canvasElement) {
           const ctx = canvasElement.getContext("2d");
           player = new Player(canvasElement, ctx);//Player
@@ -64,10 +63,11 @@ onMount(async () => { if (canvasElement) {
           player.draw();
           interval = setInterval(gameloop,20);
   }});
+onDestroy(() => { if (interval) { clearInterval(interval) } });  
 </script>
 
 <canvas bind:this={canvasElement} ></canvas>
 
 {#if selectedItem}
-<h1>Selected Item</h1>
+<h1 style="color:white">Selected Item : {selectedItem.itemData.uuid}</h1>
 {/if}

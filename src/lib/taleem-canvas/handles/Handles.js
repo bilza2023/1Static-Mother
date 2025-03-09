@@ -1,61 +1,59 @@
 
-import {Create} from "../../index";
+import {Create} from "../index";
 
-
+//why should handles know about selectedItem ?????
 export default class Handles{
 
-    constructor(items){
-      this.items = items;
-    }
-
-    create(){
-
+    create(items){
+      // const items = [];
       const handleMove =   getHandleData(0, 0, "purple", "move");
       const handleWidth =  getHandleData(0, 0, "green", "width");
       const handleHeight = getHandleData(0, 0, "blue", "height");
       //----Add to items array
-      this.items.push(handleMove);
-      this.items.push(handleWidth);
-      this.items.push(handleHeight);
+      items.push(handleMove);
+      items.push(handleWidth);
+      items.push(handleHeight);
+      return items;
     }
 
-    remove(){
-        const itemsWithoutHandles = [];
-        for (let i = 0; i < items.length; i++) {
-            const item = this.items[i];
-            if(!item.flag || !item.flag === "handle"){
-                itemsWithoutHandles.push(item);
-            }
-        }
-        this.items =  itemsWithoutHandles; //may need change
+    remove(items) {
+      // Modify the original 'items' array directly
+      for (let i = items.length - 1; i >= 0; i--) { // Iterate backwards to avoid index issues
+          const item = items[i];
+          if (item.flag && item.flag === "handle") {
+              items.splice(i, 1); // Remove the item from the original array
+          }
+      }
+      // No need to return anything, 'items' is modified in place
     }
-    update(selectedItem){ //event does not comer here but selectedItem has been fixed now just fix handles
-        const handles = this.getHandles();
+
+    update(items,x,y,width,height){ //event does not comer here but selectedItem has been fixed now just fix handles
+        const handles = this.getHandles(items);
         if(Array.isArray(handles) && handles.length > 0){
           for (let i = 0; i < handles.length; i++) {
             const handle = handles[i];
             // debugger;
             if(handle.handleType == "move"){
-              handle.x = selectedItem.boundingRectangleX() - 10;
-              handle.y = selectedItem.boundingRectangleY();
+              handle.x = x - 10;
+              handle.y = y;
             }
             if(handle.handleType == "width"){
-              handle.x = selectedItem.boundingRectangleX() + selectedItem.width;
-              handle.y = selectedItem.boundingRectangleY();
+              handle.x = x + width;
+              handle.y = y;
             }
             if(handle.handleType == "height"){
-              handle.x = selectedItem.boundingRectangleX() + selectedItem.width;
-              handle.y = selectedItem.boundingRectangleY() +  selectedItem.height;
+              handle.x = x + width;
+              handle.y = y +  height;
             }
           }
         } 
     }
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
-    getHandles(){
+    getHandles(items){
         let result = [];
-        for (let i = 0; i < this.items.length; i++) {
-          const item =  this.items[i];
+        for (let i = 0; i < items.length; i++) {
+          const item =  items[i];
           if(item.flag && item.flag === "handle"){
             result.push(item);
           }

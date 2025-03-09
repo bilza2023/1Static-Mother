@@ -54,22 +54,19 @@ constructor(items,callback){
 
     if (Array.isArray(hitItems) &&  hitItems.length >0) {
             if (!this.itemObjectsHasHandles(hitItems)){
-              // this.selectedItem.select(hitItems[0]);
-              // debugger;
-              this.selectedItem = hitItems[0];
-              this.itemsEditor.handles.create(); //just create 3 handle not attached to any item
-              this.itemsEditor.handles.update(this.selectedItem); // place them around selected item
-              // this.callback(hitItems[0]);//return selected item for use with dialogue box
-              this.callback(this.itemsEditor.items,this.selectedItem);//return selected item for use with dialogue box
 
+              this.selectedItem = hitItems[0];
+              //just create 3 handle not attached to any item
+              this.handles.create(this.itemsEditor.items); 
+              // place them around selected item
+              this.updateHandles();
+              //return selected item for use with dialogue box 
+              this.callback(this.selectedItem);
             }
     }else {
-      // this.removeHandles();//keep it up before removing the selected item.
-      // debugger;
-      // this.selectedItem.itemUnSelected();
-      this.selectedItem = null;
-      
-      // this.selectedItem.removeHandles();
+              this.selectedItem = null;
+              this.handles.remove(this.itemsEditor.items);
+              this.callback(null);
     } 
   }
   ///////////////////////Behaviour methods/////////////
@@ -77,20 +74,39 @@ constructor(items,callback){
     if(this.selectedItem){
       this.selectedItem.x = x;
       this.selectedItem.y = y;
-      this.itemsEditor.handles.update(this.selectedItem);
+      this.updateHandles();
     }
   }
  widenSelectedItem(x , y){
     if(this.selectedItem){
       this.selectedItem.width = x - this.selectedItem.x  ;
-      this.itemsEditor.handles.update(this.selectedItem);
+      this.updateHandles();
     }
   }
  heightenSelectedItem(x , y){
     if(this.selectedItem){
       this.selectedItem.height =  y - this.selectedItem.y ;
-      this.itemsEditor.handles.update(this.selectedItem);
+      this.updateHandles();
     }
   }
 
+  isItemSelected(){
+    if(this.selectedItem == null){
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  updateHandles(){
+    if(this.selectedItem){
+      this.handles.update(
+        this.itemsEditor.items,
+        this.selectedItem.boundingRectangleX(),
+        this.selectedItem.boundingRectangleY(),
+        this.selectedItem.width,
+        this.selectedItem.height,
+        );
+    }
+  }
 }//EventManager
