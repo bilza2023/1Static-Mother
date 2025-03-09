@@ -1,9 +1,9 @@
 <script>
 /**
  * 9-Mar-2025: Do not change
- * This is the Usage Example of StaticPlayer which just takes 2 values (items and background); 
+ * This is the Usage Example of StaticEditor which just takes 2 values (items and background); 
  * */  
-    import StaticPlayerV0 from "$lib/CanvasModule/StaticPlayerV0.svelte";
+ import StaticEditorTaleemCanvas from "../../lib/CanvasModule/staticEditor/StaticEditorTaleemCanvas.svelte";
     let items = [
       {
       uuid: "abc",
@@ -35,4 +35,5 @@
     };
 </script>
 
-  <StaticPlayerV0 {items} {background} />
+<StaticEditorTaleemCanvas {items} {background}  />  
+  

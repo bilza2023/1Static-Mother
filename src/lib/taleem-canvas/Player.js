@@ -49,8 +49,8 @@ export default class Player  {
     // this.inputModule = new InputModule();
   }
 
-  set background(bg){
-    this._background = itemToObject(bg,this.env);
+  set background(bg){//this fn needs improvement 
+    if(bg !== null && typeof(bg) == 'object') this._background = itemToObject(bg,this.env);
   }
 
   get background(){

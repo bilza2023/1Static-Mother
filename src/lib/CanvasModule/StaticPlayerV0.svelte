@@ -1,0 +1,1 @@
+<script>import{Player}from"$lib/taleem-canvas";import{onMount}from"svelte";export let items=[],background={};let c,p;onMount(async()=>{if(c){const t=c.getContext("2d");p=new Player(c,t);p.background=background;p.items=items;p.draw()}});</script><canvas bind:this={c}></canvas>
