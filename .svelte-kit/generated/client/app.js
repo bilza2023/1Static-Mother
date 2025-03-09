@@ -13,9 +13,9 @@ export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/static_editor_taleem_canvas": [4],
-		"/static_editor": [3],
-		"/static_player": [5]
+		"/player_taleem": [3],
+		"/static_player_html": [5],
+		"/static_player": [4]
 	};
 
 export const hooks = {

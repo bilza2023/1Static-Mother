@@ -3,23 +3,21 @@
 //keep in mind it is not itemsOBject for canvas 
 //Purpose : ItemsEditObject just act on items - provide helper functions with no memory and state since state is the responsibility of EventManagerWrapper/EventManagerModule  (SelectedItemManager), this object just has to provide utilitu function when it comes to items.
 
-//--KEEP IN MIND WHERE THIS OBJECT IS USED ==> WHEN DEALING WITH RAW ITEMS AND EDITING THEM
+//--KEEP IN MIND WHERE THIS OBJECT IS USED ==> WHEN DEALING WITH RAW ITEMS AND EDITING THEM sPECIALLY inside Behaviour object
 
 import {Create} from "../index";
 import Handles from "./handles/Handles"
 export default class ItemsEditor{
 
-    constructor(items,redraw){
+    constructor(items){
         this.items = items;
         this.create = Create; //Create becomes create .. now we can create any item
-        this.redraw = redraw;
         this.handles = new Handles(this.items);
    
     }
     // it has ==============>>>>this.createHandles
     addItems(newItems){
         this.items = [...this.items,...newItems];
-        this.redraw(this.items);
     }
 
     /////////////////////////////////////////////////

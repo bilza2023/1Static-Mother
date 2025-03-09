@@ -1,9 +1,8 @@
 <script>
-/**
- * 9-Mar-2025: Do not change
- * This is the Usage Example of StaticPlayer which just takes 2 values (items and background); 
- * */  
-    import StaticPlayerV0 from "$lib/CanvasModule/StaticPlayerV0.svelte";
+
+    import {onMount} from "svelte";
+    import EditorBehaviour from "./editorBehaviour/editorBehaviour";
+    import StaticPlayer from "$lib/CanvasModule/StaticPlayer.svelte";
     let items = [
       {
       uuid: "abc",
@@ -33,6 +32,26 @@
       gridLineWidth: 1,
       gridLineColor: '#685454'
     };
-</script>
+    let behaviour = null;
 
-  <StaticPlayerV0 {items} {background} />
+    let seletedItem = null;
+
+    let drawItems = JSON.parse(JSON.stringify(items)); 
+function setSelectedItem(icommming_items){
+  // seletedItem = val;
+  debugger;
+  items = [];
+  items = icommming_items;
+  console.log("callback called...!");
+}
+
+onMount(async ()=>{
+
+  //behaviour and the callback remains on top level.
+    behaviour = new EditorBehaviour(items,setSelectedItem);
+});    
+
+</script>
+{#if  behaviour}
+    <StaticPlayer items={drawItems} {background} {behaviour} />
+{/if}

@@ -1,7 +1,7 @@
 <script>
 /** 
- **  9-Mar-2025: ===> NEVER TO BE CHANGES ===> SECRET CODE StaticPlayer == Player in taleem-canvas 
- * This is  StaticPlayer which just takes 2 values (items and background); 
+ **  9-Mar-2025: ===>NEVER TO BE CHANGES===> SACRED CODE StaticPlayer == Player in taleem-canvas 
+ * This is  StaticPlayer which just takes 3 values (items , background and interactive-behaviour); 
  * */
     import {Player} from "$lib/taleem-canvas"
     import { onMount } from "svelte";
