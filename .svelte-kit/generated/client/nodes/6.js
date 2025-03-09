@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/taleem_canvas_examples/create_example/+page.svelte";
+export { default as component } from "../../../../src/routes/static_player_html_hellow_world_behaviour/+page.svelte";

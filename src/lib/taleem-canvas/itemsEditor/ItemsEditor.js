@@ -5,12 +5,10 @@
 
 //--KEEP IN MIND WHERE THIS OBJECT IS USED ==> WHEN DEALING WITH RAW ITEMS AND EDITING THEM sPECIALLY inside Behaviour object
 
-import {Create} from "../index";
 export default class ItemsEditor{
 
     constructor(items){
         this.items = items;
-        this.create = Create; //Create becomes create .. now we can create any item
     }
 
     addItems(newItems){

@@ -1,6 +1,5 @@
 
 import {Behaviour} from "$lib/taleem-canvas/index";
-// import SelectedItem from "../SelectedItem";
 
 export default class EditorBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////

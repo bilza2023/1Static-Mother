@@ -2,6 +2,8 @@
 import {ItemsEditor} from "./index";
 import Handles from "./handles/Handles";
 
+import Create from "./Create";
+
 export default class Behaviour {
 //itemsEditor is provided by Parent class since we do not want to expose itemsEditor to user directly...
 
@@ -9,6 +11,7 @@ constructor(items,callback){
 this.itemsEditor = new ItemsEditor(items);
 this.callback = callback;
 this.handles = new Handles();
+this.create = Create;
 
 ////////helper functions
 this.itemObjectsHasHandles = itemObjectsHasHandles;
