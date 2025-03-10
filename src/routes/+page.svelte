@@ -5,6 +5,8 @@
 <h1 style="color:white;">Html Taleem Canvas Test Pages</h1>
 
 <div class="text-white">
+    <h1><b><a class="text-white" href="/barebone_drawEngine">barebone_drawEngine</a></b></h1>
+    <h1><b><a class="text-white" href="/draw_engine">Draw Engine</a></b></h1>
     <h1><b><a class="text-white" href="/static_player_html">Static Player Html</a></b></h1>
 
     <h1><b><a class="text-white" href="/static_player_html_hellow_world_behaviour">static_player_html_hellow_world_behaviour</a></b></h1>

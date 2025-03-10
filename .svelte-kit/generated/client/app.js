@@ -8,18 +8,22 @@ export const nodes = [
 	() => import('./nodes/4'),
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
-	() => import('./nodes/7')
+	() => import('./nodes/7'),
+	() => import('./nodes/8'),
+	() => import('./nodes/9')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/player_taleem": [3],
-		"/static_player_html_editor": [6],
-		"/static_player_html_hellow_world_behaviour": [7],
-		"/static_player_html": [5],
-		"/static_player": [4]
+		"/barebone_drawEngine": [3],
+		"/draw_engine": [4],
+		"/player_taleem": [5],
+		"/static_player_html_editor": [8],
+		"/static_player_html_hellow_world_behaviour": [9],
+		"/static_player_html": [7],
+		"/static_player": [6]
 	};
 
 export const hooks = {
