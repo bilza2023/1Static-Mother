@@ -1,7 +1,4 @@
-/**
- * This file is HEART of theis library
- */
-// import { ItemData } from './ItemData'; 
+
 
 import ParentBaseItem from "./ParentBaseItem";
 
@@ -10,7 +7,7 @@ export default class Handle extends ParentBaseItem  {
   constructor(itemData) {
     super(itemData);
   }
-//For now just 1 item is selected at a moment no multi select.
+//For now just 1 item is selected at a moment no multi select.-itgets "Create"
   createHandles(Create){
     const handleMove =   this.getHandleData(Create,0, 0, "purple", "move");
     const handleWidth =  this.getHandleData(Create,0, 0, "green", "width");
@@ -18,10 +15,11 @@ export default class Handle extends ParentBaseItem  {
     
     return [handleMove,handleWidth,handleHeight];
   }
-
+  //This is to be over-written but we still want to keep a copy of it as defaultUpdateHandles
   updateHandles(handles){
     this.defaultUpdateHandles(handles);
   }
+  //3 updates suitable for a rectangular object
   defaultUpdateHandles(handles){ 
     const x = this.x;
     const y = this.y;
@@ -47,7 +45,7 @@ export default class Handle extends ParentBaseItem  {
       }
     } 
   }
-
+ //suitable for a rectangular object
   processHandle(handleProcessData){
     // debugger;
     const {handle,deltaX,deltaY,x,y,handleType} = handleProcessData;

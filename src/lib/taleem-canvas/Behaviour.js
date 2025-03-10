@@ -12,8 +12,8 @@ this.callback = callback;
 this.create = Create;
 
 ////////helper functions
-this.itemObjectsHasHandles = itemObjectsHasHandles;
-this.itemObjectsHandles = itemObjectsHandles;
+// this.itemObjectsHasHandles = itemObjectsHasHandles;
+// this.itemObjectsHandles = itemObjectsHandles;
 }
 
 // Event handlers for processing Player mouse events //5 events 
@@ -61,30 +61,30 @@ getAllHandles(items){//This is get Handles from all items
 
 
 
-function itemObjectsHasHandles(hitItems){
-  let result = false;
-  for (let i = 0; i < hitItems.length; i++) {
-    const hitItem =   hitItems[i];
-    if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
-      result =  true;
-    }
-  }
-  return result;
-}
+// function itemObjectsHasHandles(hitItems){
+//   let result = false;
+//   for (let i = 0; i < hitItems.length; i++) {
+//     const hitItem =   hitItems[i];
+//     if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
+//       result =  true;
+//     }
+//   }
+//   return result;
+// }
 
-function itemObjectsHandles(hitItems){
-  let result = [];
-  for (let i = 0; i < hitItems.length; i++) {
-    const item =   hitItems[i];
-    if(item.itemData.flag && item.itemData.flag === "handle"){
-      result.push(item);
-    }
-  }
-  return result;
-}
+// function itemObjectsHandles(hitItems){
+//   let result = [];
+//   for (let i = 0; i < hitItems.length; i++) {
+//     const item =   hitItems[i];
+//     if(item.itemData.flag && item.itemData.flag === "handle"){
+//       result.push(item);
+//     }
+//   }
+//   return result;
+// }
 
 
 
-function isHitAll(){
+// function isHitAll(){
 
-}
+// }
