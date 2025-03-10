@@ -11,40 +11,50 @@ constructor(items,callback){
   this.selectedItem = null;
   this.activeHandle = null;
   this.isDrag = false;
+  this.oldX = 0;
+  this.oldY = 0;
 
 }
 /////////////////////////////////////////////////////////
   mousemove(x,y,type,event) {
     
     if(!this.selectedItem){return;}
-    if(!this.isDrag){return;}
-    const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);    
+    //////////////////////////////////////////////////////////////
+    if (this.activeHandle) {
+      const speedX = 10;
+      const speedY = 2;
 
-    switch (this.activeHandle) {
-            case "move":
-              this.selectedItem.move(x,y);
-              this.selectedItem.updateHandles(handlesInItems);      
-              break;
-            case "width":
-              this.selectedItem.widen(x,y);
-              this.selectedItem.updateHandles(handlesInItems);    
-              break;
-            case "height":
-              this.selectedItem.heighten(x,y);
-              this.selectedItem.updateHandles(handlesInItems);    
-              break;
-          
-            default:
-              break;
-          }
+      const deltaX =   ((x - this.oldX) > speedX)? speedX: (x - this.oldX) ;
+      const deltaY =   ((y - this.oldY) > speedY)? speedY: (y - this.oldY) ;
+      // debugger;
+      // const deltaX =   (x - this.oldX) ;
+      // const deltaY =   (y - this.oldY) ;
+
+      const handleProcessData = {
+        handle : this.activeHandle,
+        deltaX,
+        deltaY,
+        x,
+        y,
+        handleType : this.activeHandle.itemData.handleType
+      }
+      console.log("deltaX",deltaX );
+      console.log("deltaY",deltaY );
+        //finally
+        this.oldX = this.activeHandle.itemData.x; 
+        this.oldY = this.activeHandle.itemData.y; 
+
+      //////////////////////////////////////////////////////////////////
+      this.selectedItem.processHandle(handleProcessData);
+      ///////////////////////////////////////////////////////
+      //updateHandles needs to be called from outside
+      const handlesInItems = this.getAllHandles(this.itemsEditor.items);
+      this.selectedItem.updateHandles(handlesInItems);
+
+    
+    }
+ 
   }
-  click(mouseX,mouseY,type,event) {}
-  
-  mouseup(mouseX,mouseY,type,event) {
-    this.isDrag = false;
-    this.activeHandle = null;
-  }
-  
   mousedown(mouseX,mouseY,type,event) {
 
     const hitItem  = this.isHit(mouseX,mouseY); if (!hitItem){return;}
@@ -54,7 +64,12 @@ constructor(items,callback){
     if(isHandle){
         this.isDrag = true;
         // const handle = this.itemObjectsHandles(hitItems)[0];
-        this.activeHandle = hitItem.itemData.handleType;  
+        //this.activeHandle is like this.selectedItem it is the handle selected
+        // this.activeHandle == the handle Not the handleType 
+          this.activeHandle = hitItem; //The hit item is a handle and is active handle
+          // //keep these 2 lines here for now
+          // this.oldX = this.activeHandle.itemData.x;  
+          // this.oldY = this.activeHandle.itemData.y;  
       }
   }
   
@@ -66,11 +81,8 @@ constructor(items,callback){
       this.selectedItem = hitItem;
       let handles = this.selectedItem.createHandles(this.create);
       this.itemsEditor.addItems(handles);
-      // this.itemsEditor.addItems(handles);
-      
-      // this.handles.create(this.itemsEditor.items); 
-    //           // place them around selected item
-    const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+
+    const handlesInItems = this.getAllHandles(this.itemsEditor.items);
     this.selectedItem.updateHandles(handlesInItems);
               //return selected item for use with dialogue box 
         this.callback(this.selectedItem);
@@ -82,29 +94,15 @@ constructor(items,callback){
     }
 
   }
-  ///////////////////////Behaviour methods/////////////
-//   moveSelectedItem(x,y){
-//     if(this.selectedItem){
-//       this.selectedItem.move(x,y);
-//       const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
-//       this.selectedItem.updateHandles(handlesInItems);
-//     }
-//   }
-//  widenSelectedItem(x , y){
-//     if(this.selectedItem){
-//       this.selectedItem.width = x - this.selectedItem.x  ;
-//       const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
-//       this.selectedItem.updateHandles(handlesInItems);
-//     }
-//   }
-//  heightenSelectedItem(x , y){
-//     if(this.selectedItem){
-//       this.selectedItem.height =  y - this.selectedItem.y ;
-//       const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
-//       this.selectedItem.updateHandles(handlesInItems);
-//     }
-//   }
 
+
+  click(mouseX,mouseY,type,event) {}
+  mouseup(mouseX,mouseY,type,event) {
+    this.isDrag = false;
+    this.activeHandle = null;
+  }
+  
+  
   isItemSelected(){
     if(this.selectedItem == null){
       return false;

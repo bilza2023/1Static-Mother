@@ -10,7 +10,7 @@ export default class Handle extends ParentBaseItem  {
   constructor(itemData) {
     super(itemData);
   }
-
+//For now just 1 item is selected at a moment no multi select.
   createHandles(Create){
     const handleMove =   this.getHandleData(Create,0, 0, "purple", "move");
     const handleWidth =  this.getHandleData(Create,0, 0, "green", "width");
@@ -19,7 +19,10 @@ export default class Handle extends ParentBaseItem  {
     return [handleMove,handleWidth,handleHeight];
   }
 
-  updateHandles(handles){ 
+  updateHandles(handles){
+    this.defaultUpdateHandles(handles);
+  }
+  defaultUpdateHandles(handles){ 
     const x = this.x;
     const y = this.y;
     const width = this.width;
@@ -44,6 +47,29 @@ export default class Handle extends ParentBaseItem  {
       }
     } 
   }
+
+  processHandle(handleProcessData){
+    // debugger;
+    const {handle,deltaX,deltaY,x,y,handleType} = handleProcessData;
+
+    switch (handleType) {
+        case "move":
+          this.x = x; this.y = y;
+          // this.updateHandles(handlesInItems);      
+          break;
+        case "width":
+          this.width = x - this.x  ;
+          // this.updateHandles(handlesInItems);    
+          break;
+        case "height":
+          this.height =  y - this.y ;
+          // this.updateHandles(handlesInItems);    
+          break;
+      
+        default:
+          break;
+      }
+  }
   getHandleData(Create,x,y,color,handleType){
   
     const handle = Create.rectangle();
@@ -58,15 +84,6 @@ export default class Handle extends ParentBaseItem  {
   }
   
 //////////////////////===Move====////////////////////////////////////    
-  move(x,y){
-    this.x = x;
-    this.y = y;
-  }
-  widen(x,y){
-    this.width = x - this.x  ;
-  }
-  heighten(x,y){
-    this.height =  y - this.y ;
-  }
+
 //////////////////////===Class Ends====////////////////////////////////////    
 }//Handle

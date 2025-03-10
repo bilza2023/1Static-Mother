@@ -1,6 +1,5 @@
 
 import {ItemsEditor} from "./index";
-import Handles from "./handles/Handles";
 import itemsMap from "$lib/taleem-canvas/ItemsMap";
 import Create from "./Create";
 
@@ -10,7 +9,6 @@ export default class Behaviour {
 constructor(items,callback){
 this.itemsEditor = new ItemsEditor(items);
 this.callback = callback;
-this.handles = new Handles();
 this.create = Create;
 
 ////////helper functions
@@ -47,6 +45,17 @@ isHit(mouseX,mouseY){
    }
   }
 
+/////////////////////////////////////////////////////////////////
+getAllHandles(items){//This is get Handles from all items
+  let result = [];
+  for (let i = 0; i < items.length; i++) {
+    const item =  items[i];
+    if(item.flag && item.flag === "handle"){
+      result.push(item);
+    }
+  }
+  return result;
+}    
 /////////////////////////////////////////////////////////////////
 }//EventManager
 
