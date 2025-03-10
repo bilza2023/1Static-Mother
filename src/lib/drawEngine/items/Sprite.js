@@ -12,6 +12,8 @@ export default class Sprite extends DrawItem {
       type: "sprite",
       src: "people", // Default until set dynamically
       selectedItem: "man_tblt_stndg",
+      x: 10,
+      y: 10,
       width: 200,
       height: 200,
       globalAlpha: 1,
@@ -66,14 +68,14 @@ return dialogueBox;
 
     if (sprite && itemData) {
       const { sx, sy, sw, sh } = itemData;
-      ctx.drawImage(sprite, sx, sy, sw, sh, this.x, this.y, this.width, this.height);
+      ctx.drawImage(sprite, sx, sy, sw, sh, this.itemData.x, this.itemData.y, this.itemData.width, this.itemData.height);
     } else {
       ctx.fillStyle = "gray";
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.fillRect(this.itemData.x, this.itemData.y, this.itemData.width, this.itemData.height);
       ctx.fillStyle = "white";
       ctx.font = "16px Arial";
       ctx.textAlign = "center";
-      ctx.fillText(`${this.itemData.src}: not found`, this.x + this.width / 2, this.y + this.height / 2);
+      ctx.fillText(`${this.itemData.src}: not found`, this.itemData.x + this.itemData.width / 2, this.itemData.y + this.itemData.height / 2);
     }
 
     ctx.restore();

@@ -53,7 +53,7 @@ return dialogueBox;
     ctx.lineWidth = this.itemData.lineWidth;
     ctx.globalAlpha = this.itemData.globalAlpha;
     ctx.beginPath();
-    ctx.ellipse(this.x, this.y, this.itemData.radiusX, this.itemData.radiusY, this.itemData.rotation, this.itemData.startAngle, this.itemData.endAngle);
+    ctx.ellipse(this.itemData.x, this.itemData.y, this.itemData.radiusX, this.itemData.radiusY, this.itemData.rotation, this.itemData.startAngle, this.itemData.endAngle);
     if (this.itemData.filled) {
       ctx.fillStyle = this.itemData.color;
       ctx.fill();

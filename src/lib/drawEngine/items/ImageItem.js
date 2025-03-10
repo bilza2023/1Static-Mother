@@ -46,25 +46,25 @@ export default class ImageItem extends DrawItem {
             // ✅ Draw the image if found
             ctx.drawImage(
                 image,
-                this.x,
-                this.y,
-                this.width,
-                this.height
+                this.itemData.x,
+                this.itemData.y,
+                this.itemData.width,
+                this.itemData.height
             );
         } else {
             // ❌ Draw Placeholder if Image is Missing
             ctx.fillStyle = "gray";
             ctx.fillRect(
-                this.x,
-                this.y,
-                this.width,
-                this.height
+                this.itemData.x,
+                this.itemData.y,
+                this.itemData.width,
+                this.itemData.height
             );
     
             ctx.fillStyle = "white";
             ctx.font = "16px Arial";
             ctx.textAlign = "center";
-            ctx.fillText(`${this.itemData.src}: not found`, this.x + this.width / 2, this.y + this.height / 2);
+            ctx.fillText(`${this.itemData.src}: not found`, this.itemData.x + this.itemData.width / 2, this.itemData.y + this.itemData.height / 2);
         }
     
         ctx.restore();

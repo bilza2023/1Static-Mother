@@ -1,28 +1,15 @@
 <script>
 
   import Player from "../../lib/drawEngine/Player";
-  import { onMount,onDestroy } from "svelte";
+  import Create from "../../lib/drawEngine/Create";
+  import { onMount } from "svelte";
+  import SingleCallBkBtnGp from "./components/SingleCallBkBtnGp.svelte";
   // import HelloWorldBehaviour from "./helloWorldBehaviour";
   /////////////////////////////////////////////////////////////////
       let canvasElement;
       let player; //to make it truly static even remove this so that this component is draw once.
   //////////////////////////////////////////////////////////////////
-  let items = [
-      {
-      uuid: "abc",
-      type: 'rectangle',
-      x: 100,
-      y: 100,
-      width: 100,
-      height: 100,
-      filled: true,
-      lineWidth: 1,
-      dash: 0,
-      gap: 0,
-      color: "red",
-      globalAlpha: 1
-    }
-    ]; 
+  let items = [];
     let background =  {
       uuid: "44456",
       type: 'background',  
@@ -36,29 +23,23 @@
       gridLineWidth: 1,
       gridLineColor: '#685454'
     };
-    let interval = null;
 
-function callback(){
-  player.items = items;
-  player.draw();
-}
-   
-// function gameloop(){player.draw()}
-onMount(async () => { if (canvasElement) {
+    function addNewItem(newItemName){
+      const newItem = Create[newItemName]();
+      // debugger;    
+      items.push(newItem);
+      player.items = items; //We need this since this is static-Player it does not keep the reference of items
+      player.draw();
+    }
+
+    onMount(async () => { if (canvasElement) {
           const ctx = canvasElement.getContext("2d");
           player = new Player(canvasElement, ctx);//Player
-          player.background = background; // this is slideExtra
+          // player.background = background; // this is slideExtra
           player.items = items;
-          
-          //behaviour dont need to be global 
-          //  let behaviour =  new HelloWorldBehaviour(items,callback);
-          
-          //  if(behaviour){player.connect(behaviour)}
-          // debugger;
           player.draw();
-          // interval = setInterval(gameloop,20);
   }});
-onDestroy(() => { if (interval) { clearInterval(interval) } });  
 </script>
 
+<div ><SingleCallBkBtnGp callBack={addNewItem}/></div>
 <canvas bind:this={canvasElement} ></canvas>

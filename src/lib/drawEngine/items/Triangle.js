@@ -14,7 +14,7 @@ export default class Triangle extends DrawItem {
             x2: 50, y2: 200,
             x3: 200, y3: 200,
             lineWidth: 2,
-            filled: false,
+            filled: true,
             dash: 0,
             gap: 0,
             color: "red",

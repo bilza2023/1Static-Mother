@@ -1,9 +1,13 @@
-import  uuid  from '../uuid';
 
+import DrawItem from './DrawItem.js';
+import uuid from './uuid.js';
 
-export default class Angle {
-  
-  static data() { 
+export default class Angle extends DrawItem {
+  constructor(itemData) {
+    super(itemData);
+  }
+
+  static newItemData() {
     return {
       uuid: uuid(),
       type : 'angle',
@@ -45,22 +49,22 @@ export default class Angle {
 
 }
   
-  static draw(ctx, itemExtra) {
+  draw(ctx) {
     
-    const startAngle = itemExtra.startAngle * (Math.PI / 180);
-    const endAngle = itemExtra.endAngle * (Math.PI / 180);
-    const x = itemExtra.x;
-    const y = itemExtra.y;
-    const radius = itemExtra.radius;
-    const ticks = itemExtra.ticks;
-    const color = itemExtra.color;
-    const lineWidth = itemExtra.lineWidth;
-    const showOrigin = itemExtra.showOrigin;
+    const startAngle = this.itemData.startAngle * (Math.PI / 180);
+    const endAngle = this.itemData.endAngle * (Math.PI / 180);
+    const x = this.itemData.x;
+    const y = this.itemData.y;
+    const radius = this.itemData.radius;
+    const ticks = this.itemData.ticks;
+    const color = this.itemData.color;
+    const lineWidth = this.itemData.lineWidth;
+    const showOrigin = this.itemData.showOrigin;
 
     ctx.save();
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
-    ctx.globalAlpha = itemExtra.globalAlpha;
+    ctx.globalAlpha = this.itemData.globalAlpha;
 
     // Draw the arc
     ctx.beginPath();

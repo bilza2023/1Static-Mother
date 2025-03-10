@@ -1,11 +1,13 @@
-import  uuid  from '../uuid';
 
-// add type in data
-// remove item in draw
-// change class name
-export default class Dot {
-  
-  static data() { 
+import DrawItem from './DrawItem.js';
+import uuid from './uuid.js';
+
+export default class Dot extends DrawItem {
+  constructor(itemData) {
+    super(itemData);
+  }
+
+  static newItemData() {
     return {
       uuid: uuid(),
       type: 'dot',
@@ -40,7 +42,8 @@ export default class Dot {
 return dialogueBox;
 }
 
-  static draw(ctx, itemExtra) {
+draw(ctx) {
+    debugger;
     const {
       x,
       y,
@@ -50,7 +53,7 @@ return dialogueBox;
       color,
       text_color,
       globalAlpha
-  } = itemExtra;
+  } = this.itemData;
 
   ctx.save();
   ctx.globalAlpha = globalAlpha;

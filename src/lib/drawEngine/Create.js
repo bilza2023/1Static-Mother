@@ -2,6 +2,8 @@ import BackgroundItem from "./items/BackgroundItem.js";
 import Rectangle from "./items/Rectangle.js";
 import Circle from "./items/Circle.js";
 import Ellipse from "./items/Ellipse.js";
+import Dot from "./items/Dot.js";
+import Angle from "./items/Angle.js";
 import Line from "./items/Line.js";
 import Ray from "./items/Ray.js";
 import Triangle from "./items/Triangle.js";
@@ -15,6 +17,8 @@ export default class Create {
 //special item BackgroundItem 
 static    background() {return  BackgroundItem.newItemData() ;}
 static    sprite() {return  Sprite.newItemData();}
+static    dot() {return  Dot.newItemData();}
+static    angle() {return  Angle.newItemData();}
 static    image() {return  ImageItem.newItemData();}
 static    piechart() {return  Piechart.newItemData();}
 static    list() {return  List.newItemData();}

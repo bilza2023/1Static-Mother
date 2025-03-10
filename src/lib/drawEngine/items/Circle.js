@@ -49,7 +49,7 @@ return dialogueBox;
     ctx.lineWidth = this.itemData.lineWidth;
     ctx.globalAlpha = this.itemData.globalAlpha;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.itemData.radius, this.itemData.startAngle, this.itemData.endAngle);
+    ctx.arc(this.itemData.x, this.itemData.y, this.itemData.radius, this.itemData.startAngle, this.itemData.endAngle);
     if (this.itemData.filled) {
       ctx.fillStyle = this.itemData.color;
       ctx.fill();

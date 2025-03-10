@@ -117,15 +117,14 @@ addMouseEvent(eventType,callback) {
 //   }
 
   draw() {
-    // this.eventModule.updateItems(this.itemObjects);
     this.clear();
-    // if(this._background){
-        // this._background.draw(this.ctx);
-    // }
+    if(this._background){
+        this._background.draw(this.ctx);
+    }
     this.itemObjects.forEach(item => {
         if (typeof item.draw === 'function') {
-          debugger;
-          item.draw(this.ctx);
+          // debugger;
+          item.draw(this.ctx,this.assets);
         }
       });
   }

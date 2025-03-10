@@ -52,10 +52,10 @@ return dialogueBox;
     // Use base getters for x, y, width, height.
     if (this.itemData.filled) {
       ctx.fillStyle = this.itemData.color;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.fillRect(this.itemData.x, this.itemData.y, this.itemData.width, this.itemData.height);
     } else {
       ctx.strokeStyle = this.itemData.color;
-      ctx.strokeRect(this.x, this.y, this.width, this.height);
+      ctx.strokeRect(this.itemData.x, this.itemData.y, this.itemData.width, this.itemData.height);
     }
     ctx.restore();
   }

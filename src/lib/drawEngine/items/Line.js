@@ -51,8 +51,8 @@ export default class Line extends DrawItem {
         ctx.setLineDash([this.itemData.dash, this.itemData.gap]);
 
         ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x + this.width, this.y + this.height);
+        ctx.moveTo(this.itemData.x1, this.itemData.y1);
+        ctx.lineTo(this.itemData.x2, this.itemData.y2);
         
         ctx.stroke();
 
