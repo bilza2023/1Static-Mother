@@ -14,13 +14,15 @@ export default class ItemsEditor{
     addItems(newItems){
         this.items.push(...newItems);
     }
-    // set items(newItems){
-    //     this.items = newItems;
-    //     // this.items = [...this.items,...newItems];
-    // }
-    // get items (){
-    //     return this.items;
-    // }
-
+    removeAllHandles() {
+        // Modify the original 'items' array directly
+        for (let i = this.items.length - 1; i >= 0; i--) { // Iterate backwards to avo
+            const item = this.items[i];
+            if (item.flag && item.flag === "handle") {
+                this.items.splice(i, 1); // Remove the item from the original array
+            }
+        }
+        // No need to return anything, 'items' is modified in place
+    }
     /////////////////////////////////////////////////
 }//ItemsEditObject

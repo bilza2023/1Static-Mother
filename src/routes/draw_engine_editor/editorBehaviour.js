@@ -59,7 +59,7 @@ constructor(items,callback){
 
     const hitItem  = this.isHit(mouseX,mouseY);
     if (hitItem){
-      debugger;
+
       this.selectedItem = hitItem;
       let handles = this.selectedItem.createHandles(this.create);
       this.itemsEditor.addItems(handles);
@@ -67,12 +67,14 @@ constructor(items,callback){
       
       // this.handles.create(this.itemsEditor.items); 
     //           // place them around selected item
-        this.updateHandles();
+    const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+    this.selectedItem.updateHandles(handlesInItems);
               //return selected item for use with dialogue box 
         this.callback(this.selectedItem);
     }else {
       this.selectedItem = null;
-      this.handles.remove(this.itemsEditor.items);
+
+      this.itemsEditor.removeAllHandles();
       this.callback(null);
     }
 
@@ -82,19 +84,22 @@ constructor(items,callback){
     if(this.selectedItem){
       this.selectedItem.x = x;
       this.selectedItem.y = y;
-      this.updateHandles();
+      const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+      this.selectedItem.updateHandles(handlesInItems);
     }
   }
  widenSelectedItem(x , y){
     if(this.selectedItem){
       this.selectedItem.width = x - this.selectedItem.x  ;
-      this.updateHandles();
+      const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+      this.selectedItem.updateHandles(handlesInItems);
     }
   }
  heightenSelectedItem(x , y){
     if(this.selectedItem){
       this.selectedItem.height =  y - this.selectedItem.y ;
-      this.updateHandles();
+      const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+      this.selectedItem.updateHandles(handlesInItems);
     }
   }
 
@@ -106,15 +111,4 @@ constructor(items,callback){
     }
   }
 
-  updateHandles(){
-    if(this.selectedItem){
-      this.handles.update(
-        this.itemsEditor.items,
-        this.selectedItem.boundingRectangleX(),
-        this.selectedItem.boundingRectangleY(),
-        this.selectedItem.width,
-        this.selectedItem.height,
-        );
-    }
-  }
 }//EventManager

@@ -35,7 +35,7 @@
       let selectedItem = null;
   
   function setSelectedItem(incomingSelectedItem){
-    debugger;
+ 
     selectedItem = incomingSelectedItem;
     // player.items = items;
     player.items = behaviour.itemsEditor.items;

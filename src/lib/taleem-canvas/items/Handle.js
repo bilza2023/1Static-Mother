@@ -18,6 +18,42 @@ export default class Handle extends ParentBaseItem  {
     
     return [handleMove,handleWidth,handleHeight];
   }
+  updateHandles(handles){ 
+    const x = this.x;
+    const y = this.y;
+    const width = this.width;
+    const height = this.height;
+    
+    if(Array.isArray(handles) && handles.length > 0){
+      for (let i = 0; i < handles.length; i++) {
+        const handle = handles[i];
+        // debugger;
+        if(handle.handleType == "move"){
+          handle.x = x - 10;
+          handle.y = y;
+        }
+        if(handle.handleType == "width"){
+          handle.x = x + width;
+          handle.y = y;
+        }
+        if(handle.handleType == "height"){
+          handle.x = x + width;
+          handle.y = y +  height;
+        }
+      }
+    } 
+  }
+//   updateHandles(){
+//     if(this.selectedItem){
+//       this.handles.update(
+//         this.itemsEditor.items,
+//         this.selectedItem.boundingRectangleX(),
+//         this.selectedItem.boundingRectangleY(),
+//         this.selectedItem.width,
+//         this.selectedItem.height,
+//         );
+//     }
+//   }
   
   getHandleData(Create,x,y,color,handleType){
   
