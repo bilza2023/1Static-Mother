@@ -16,9 +16,10 @@ constructor(items,callback){
 /////////////////////////////////////////////////////////
   mousemove(x,y,type,event) {
     // const hitItem  = this.isHit(x,y);
+    // debugger;
     if(!this.isDrag){return;}
     
-    debugger;
+    
     switch (this.activeHandle) {
             case "move":
               this.moveSelectedItem(x , y);      
@@ -58,8 +59,13 @@ constructor(items,callback){
 
     const hitItem  = this.isHit(mouseX,mouseY);
     if (hitItem){
+      debugger;
       this.selectedItem = hitItem;
-      this.handles.create(this.itemsEditor.items); 
+      let handles = this.selectedItem.createHandles(this.create);
+      this.itemsEditor.addItems(handles);
+      // this.itemsEditor.addItems(handles);
+      
+      // this.handles.create(this.itemsEditor.items); 
     //           // place them around selected item
         this.updateHandles();
               //return selected item for use with dialogue box 

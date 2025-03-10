@@ -12,7 +12,7 @@ export default class ItemsEditor{
     }
 
     addItems(newItems){
-        this.items = [...this.items,...newItems];
+        this.items.push(...newItems);
     }
     // set items(newItems){
     //     this.items = newItems;

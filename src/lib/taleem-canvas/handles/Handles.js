@@ -50,7 +50,7 @@ export default class Handles{
     }
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
-    getHandles(items){
+    getHandles(items){//This is get Handles from all items
         let result = [];
         for (let i = 0; i < items.length; i++) {
           const item =  items[i];
