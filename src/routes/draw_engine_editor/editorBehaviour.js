@@ -1,5 +1,5 @@
 
-import {Behaviour} from "$lib/taleem-canvas/index";
+import Behaviour from "../../lib/drawEngine/editorObjects/Behaviour.js";
 
 export default class EditorBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////
