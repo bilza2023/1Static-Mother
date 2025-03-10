@@ -19,7 +19,7 @@ export default class Circle extends BaseItem {
       lineWidth: 1,
       dash: 0,
       gap: 0,
-      filled: true,
+      filled: false,
       color: "red",
       globalAlpha: 1
     };
@@ -64,28 +64,70 @@ return dialogueBox;
     return this.itemData.radius * 2;
   }
   set width(newWidth) {
-    this.itemData.radius = newWidth / 2;
+    const value = newWidth / 2;
+    if (value < 2){
+      this.itemData.radius = 2;
+    } else {
+      this.itemData.radius = value;
+    }
   }
   get height() {
     return this.itemData.radius * 2;
   }
   set height(newHeight) {
-    this.itemData.radius = newHeight / 2;
-  }
-
-  draw(ctx,assets={}) {
-    ctx.save();
-    ctx.lineWidth = this.itemData.lineWidth;
-    ctx.globalAlpha = this.itemData.globalAlpha;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.itemData.radius, this.itemData.startAngle, this.itemData.endAngle);
-    if (this.itemData.filled) {
-      ctx.fillStyle = this.itemData.color;
-      ctx.fill();
+    const value = newWidth / 2;
+    if (value < 2){
+      this.itemData.radius = 2;
     } else {
-      ctx.strokeStyle = this.itemData.color;
-      ctx.stroke();
+      this.itemData.radius = value;
     }
-    ctx.restore();
   }
+/////////////////////////////////////////////////////////////////////////////////
+createHandles(Create){
+  const move =   this.getHandleData(Create,0, 0, "green", "move");
+  const radius =   this.getHandleData(Create,0, 0, "purple", "radius");
+  
+  return [move , radius];
+}
+updateHandles(handles){
+//    debugger;
+  
+ if(Array.isArray(handles) && handles.length > 0){
+    for (let i = 0; i < handles.length; i++) {
+      const handle = handles[i];
+      // debugger;
+      if(handle.handleType == "move"){
+        handle.x = this.boundingRectangleX() -10;
+        handle.y = this.boundingRectangleY() -10;
+      }
+      if(handle.handleType == "radius"){
+        handle.x = this.itemData.x + this.itemData.radius ;
+        handle.y = this.itemData.y ;
+      }
+    }
+  } 
+}
+processHandle(handleProcessData){
+  // debugger;
+  const {handle,deltaX,deltaY,x,y,handleType,isMouseXUp,isMouseYUp} = handleProcessData;
+  switch (handleType) {
+      case "move":
+              this.x = x - 10;
+              this.y = y;
+        break;
+        case "radius":
+         // debugger;
+         if(isMouseXUp){
+          this.width = this.width +2  ;
+        }else{
+          this.width = this.width -2  ;
+        }
+        break;
+        
+      default:break;
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
 }

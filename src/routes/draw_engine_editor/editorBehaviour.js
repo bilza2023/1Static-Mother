@@ -51,7 +51,6 @@ constructor(items,callback){
   }
   dblclick(mouseX,mouseY,type,event) {
     const hitItem  = this.isHit(mouseX,mouseY);
-      
       if (hitItem){
             this.selectedItem = hitItem;
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create

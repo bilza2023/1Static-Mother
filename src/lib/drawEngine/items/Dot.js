@@ -16,7 +16,7 @@ export default class Dot extends DrawItem {
       y: 100,
       
       label: "label",
-      dot_width: 25,
+      radius: 5,
       text_color: "yellowbezier",
       text_size: 40,
       
@@ -47,7 +47,7 @@ draw(ctx) {
       x,
       y,
       label,
-      dot_width,
+      radius,
       text_size,
       color,
       text_color,
@@ -62,7 +62,7 @@ draw(ctx) {
   ctx.arc(
       x,
       y,
-      dot_width / 2,
+      radius * 2,
       0,
       2 * Math.PI
   );
@@ -74,8 +74,8 @@ draw(ctx) {
   ctx.fillStyle = text_color;
   ctx.fillText(
       label,
-      parseInt(x) - parseInt(dot_width) / 2,
-      parseInt(y) + parseInt(dot_width) * 2
+      parseInt(x) + parseInt(radius/2) ,
+      parseInt(y) +  parseInt(radius/2)
   );
 
   ctx.restore();
