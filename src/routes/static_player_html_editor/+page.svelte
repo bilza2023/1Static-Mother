@@ -6,7 +6,7 @@
     import { onMount,onDestroy } from "svelte";
     import EditorBehaviour from "./editorBehaviour";
     import SingleCallBkBtnGp from "./components/SingleCallBkBtnGp.svelte";
-    import X_Y_Width_Height from "./components/X_Y_Width_Height.svelte";
+    import SelectedItemBasicDialogue from "./components/SelectedItemBasicDialogue.svelte";
     /////////////////////////////////////////////////////////////////
         let canvasElement;
         let player; //to make it truly static even remove this so that this component is draw once.
@@ -58,6 +58,6 @@
   <div ><SingleCallBkBtnGp callBack={addNewItem}/></div>
   <canvas bind:this={canvasElement} ></canvas>
 {#if selectedItem}
-      <X_Y_Width_Height bind:selectedItem={selectedItem} />
+      <SelectedItemBasicDialogue bind:selectedItem={selectedItem} />
       {/if}
   <button on:click={()=>console.log("Log Items",items)}>Log Items</button>
