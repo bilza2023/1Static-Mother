@@ -17,13 +17,18 @@ constructor(items,callback){
     if(!this.selectedItem){return;}
     //////////////////////////////////////////////////////////////
     if (this.activeHandle) {
-      const speedX = 10;const speedY = 2;
-      const deltaX =   ((x - this.oldX) > speedX)? speedX: (x - this.oldX) ;
-      const deltaY =   ((y - this.oldY) > speedY)? speedY: (y - this.oldY) ;
+   
+      const deltaX = calculateDeltaX(x,this.oldX);
+      const deltaY = calculateDeltaY(y,this.oldY);
+      const isMouseXUp = mouseDirectionXUp(x,this.oldX);
+      const isMouseYUp = mouseDirectionYUp(y,this.oldY);
 
+// console.log("mouseDirectionXUp",mouseDirectionXUp);
+      
       const handleProcessData = {
         handle : this.activeHandle,
         deltaX,deltaY,
+        isMouseXUp,isMouseYUp,
         x,y,
         handleType : this.activeHandle.itemData.handleType
       }
@@ -65,3 +70,59 @@ constructor(items,callback){
   click(mouseX,mouseY,type,event) {}
   mouseup(mouseX,mouseY,type,event){this.activeHandle=null;}
 }//EventManager
+
+
+function calculateDeltaX(currentX, oldX, maxSpeed = 10) {
+  // Calculate raw delta
+  const rawDelta = currentX - oldX;
+  
+  // Apply easing function to smooth movement
+  if (Math.abs(rawDelta) <= maxSpeed) {
+    // For small movements, use the actual delta
+    return rawDelta;
+  } else {
+    // For larger movements, apply a dampening effect
+    // Use Math.sign to preserve direction while limiting magnitude
+    return Math.sign(rawDelta) * (maxSpeed + Math.log10(Math.abs(rawDelta) - maxSpeed + 1));
+  }
+}
+
+function calculateDeltaY(currentY, oldY, maxSpeed = 2) {
+  // Calculate raw delta
+  const rawDelta = currentY - oldY;
+  
+  // Apply easing function to smooth movement
+  if (Math.abs(rawDelta) <= maxSpeed) {
+    // For small movements, use the actual delta
+    return rawDelta;
+  } else {
+    // For larger movements, apply a dampening effect
+    // Use Math.sign to preserve direction while limiting magnitude
+    return Math.sign(rawDelta) * (maxSpeed + Math.log10(Math.abs(rawDelta) - maxSpeed + 1));
+  }
+}
+
+/**
+ * Determine horizontal mouse movement direction
+ * @param {number} currentX - Current mouse X position
+ * @param {number} oldX - Previous mouse X position
+ * @returns {boolean} true for right movement, false for left movement
+ */
+function mouseDirectionXUp(currentX, oldX) {
+  // Compare current position with old position
+  // true = moving right, false = moving left
+  return currentX >= oldX;
+}
+
+/**
+ * Determine vertical mouse movement direction
+ * @param {number} currentY - Current mouse Y position
+ * @param {number} oldY - Previous mouse Y position
+ * @returns {boolean} true for down movement, false for up movement
+ */
+function mouseDirectionYUp(currentY, oldY) {
+  // Compare current position with old position
+  // Note: In most canvas coordinate systems, Y increases downward
+  // true = moving down, false = moving up
+  return currentY >= oldY;
+}
