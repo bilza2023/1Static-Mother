@@ -7,23 +7,23 @@ export default class Circle extends BaseItem {
     super(itemData);
   }
 
-  static newItemData() {
-    return {
-      uuid: uuid(),
-      type: 'circle',
-      x: 150,
-      y: 150,
-      radius: 50,
-      startAngle: 0,
-      endAngle: 2 * Math.PI,
-      lineWidth: 1,
-      dash: 0,
-      gap: 0,
-      filled: false,
-      color: "red",
-      globalAlpha: 1
-    };
-  }
+  // static newItemData() {
+  //   return {
+  //     uuid: uuid(),
+  //     type: 'circle',
+  //     x: 150,
+  //     y: 150,
+  //     radius: 50,
+  //     startAngle: 0,
+  //     endAngle: 2 * Math.PI,
+  //     lineWidth: 1,
+  //     dash: 0,
+  //     gap: 0,
+  //     filled: false,
+  //     color: "red",
+  //     globalAlpha: 1
+  //   };
+  // }
   static dialogueBox(){
 
     let dialogueBox = [];

@@ -1,5 +1,5 @@
 
-import DrawItem from './DrawItem.js';
+import DrawItem from './DrawItem';
 import uuid from './uuid.js';
 
 export default class Circle extends DrawItem {

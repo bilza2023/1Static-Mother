@@ -3,24 +3,24 @@ import  uuid  from '../uuid';
 
 export default class Angle {
   
-  static data() { 
-    return {
-      uuid: uuid(),
-      type : 'angle',
-      x : 100,
-      y : 100,
+  // static data() { 
+  //   return {
+  //     uuid: uuid(),
+  //     type : 'angle',
+  //     x : 100,
+  //     y : 100,
 
-      radius: 25,
-      ticks: 3,
-      startAngle: -90,
-      endAngle: 0,
-      lineWidth: 1,
-      showOrigin: true,
+  //     radius: 25,
+  //     ticks: 3,
+  //     startAngle: -90,
+  //     endAngle: 0,
+  //     lineWidth: 1,
+  //     showOrigin: true,
 
-      color: "red",
-      globalAlpha: 1
-    };
-  }
+  //     color: "red",
+  //     globalAlpha: 1
+  //   };
+  // }
 
   static dialogueBox(){
 

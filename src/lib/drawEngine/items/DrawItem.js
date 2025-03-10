@@ -1,14 +1,16 @@
 /**
- * This file is HEART of theis library
+ * This file is HEART of this library
  */
-// import { ItemData } from './ItemData'; 
+// import { ItemData } from '../interfaces/ItemData';
 
-export default class DrawItem  {
-  
+export default class DrawItem {
+
   constructor(itemData) {
-      this.itemData = itemData;
+    this.itemData = itemData; // Corrected: Use lowercase "i"
   }
-  static newItemData(){}//  
-  static dialogueBox(){}//  
-//////////////////////===Class Ends====////////////////////////////////////    
-}//BaseItem
+
+  static newItemData() {}
+  static dialogueBox() {}
+  static draw() {}
+}
+

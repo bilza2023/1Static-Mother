@@ -1,4 +1,4 @@
-import DrawItem from './DrawItem.js';
+import DrawItem from './DrawItem';
 import uuid from "../utils/uuid.js";
 
 export default class TextItem extends DrawItem {
