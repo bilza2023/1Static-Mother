@@ -58,33 +58,3 @@ getAllHandles(items){//This is get Handles from all items
 }    
 /////////////////////////////////////////////////////////////////
 }//EventManager
-
-
-
-// function itemObjectsHasHandles(hitItems){
-//   let result = false;
-//   for (let i = 0; i < hitItems.length; i++) {
-//     const hitItem =   hitItems[i];
-//     if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
-//       result =  true;
-//     }
-//   }
-//   return result;
-// }
-
-// function itemObjectsHandles(hitItems){
-//   let result = [];
-//   for (let i = 0; i < hitItems.length; i++) {
-//     const item =   hitItems[i];
-//     if(item.itemData.flag && item.itemData.flag === "handle"){
-//       result.push(item);
-//     }
-//   }
-//   return result;
-// }
-
-
-
-// function isHitAll(){
-
-// }
