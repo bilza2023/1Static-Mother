@@ -108,7 +108,7 @@ updateHandles(handles){
         handle.y = this.itemData.y ;
       }
       if(handle.handleType == "radiusY"){
-        handle.x = this.itemData.x + this.itemData.radiusY ;
+        handle.x = this.itemData.x + this.itemData.radiusX + 15 ;
         handle.y = this.itemData.y ;
       }
     }
