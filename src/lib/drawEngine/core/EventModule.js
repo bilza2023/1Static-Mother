@@ -38,14 +38,14 @@ export default class EventModule {
       // if(type == "click"){debugger;}
       // debugger;
       // Find All items that ARE hit 
-      let hitItems = [];
-      let hitItemsUuids = [];
-      for (let item of this.itemObjects) {
-        if (item.isHit(mouseX, mouseY)) {
-          hitItems.push(item);
-          hitItemsUuids.push(item.itemData.uuid);
-        }
-      }
+      // let hitItems = [];
+      // let hitItemsUuids = [];
+      // for (let item of this.itemObjects) {
+      //   if (item.isHit(mouseX, mouseY)) {
+      //     hitItems.push(item);
+      //     hitItemsUuids.push(item.itemData.uuid);
+      //   }
+      // }
   
       // Always trigger the callback with hitItem (or null if no item was hit)
       if (this.callbacks[type]) {
@@ -53,7 +53,7 @@ export default class EventModule {
  * Here is the source of my Y-Error which incase of some events will move selected item well below cursor. The issue was the i was sending event without calculation where as for isHit i am using correct.
 ==> this.callbacks[type](event, hitItems,hitItemsUuids);//from here we get the hit-item as well as uuids of the items/itemObject is same
  */
-        this.callbacks[type](mouseX,mouseY, hitItems,hitItemsUuids);//from here we get the hit-item 
+        this.callbacks[type](mouseX,mouseY,type,event);//from here we get the hit-item 
       }
     }
   
