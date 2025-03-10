@@ -26,7 +26,6 @@
 
     function addNewItem(newItemName){
       const newItem = Create[newItemName]();
-      // debugger;    
       items.push(newItem);
       player.items = items; //We need this since this is static-Player it does not keep the reference of items
       player.draw();
@@ -35,6 +34,8 @@
     onMount(async () => { if (canvasElement) {
           const ctx = canvasElement.getContext("2d");
           player = new Player(canvasElement, ctx);//Player
+          // debugger;
+          await player.loadImages(["/images/drops.png"]);
           // player.background = background; // this is slideExtra
           player.items = items;
           player.draw();

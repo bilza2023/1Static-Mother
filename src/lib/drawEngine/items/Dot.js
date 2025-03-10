@@ -43,7 +43,6 @@ return dialogueBox;
 }
 
 draw(ctx) {
-    debugger;
     const {
       x,
       y,

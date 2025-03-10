@@ -5,12 +5,12 @@ import BackgroundItem from "./items/BackgroundItem.js";
 import EventModule from "./core/EventModule.js";
 import itemToObject from "./core/itemToObject.js";
 import Env from "./core/Env.js";
+import loadImagesLocal from "./core/loadImagesLocal.js";
 // import Add from "./Add.js";
 /**
  * The easiest way to edit an object in svelte is to make that object hold reference to a class-literal. The object will edit/chagne the class-literal and not the object its-self
  */
 // import InputModule from "../core/InputModule.js";
-// import loadImagesLocal from "./loadImagesLocal.js";
 
 /////////////////////////////////////////////////////////////////
 // This is a daul format Engine it can tale items (as in item-data-literals) which it converts into item-object and draw OR it can also take item-object DIRECTLY and draw them using setItemObjects. 
@@ -43,11 +43,17 @@ export default class Player  {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
      
-    this.imagesArray = [];
     ////////////////////////////////////////////////////////////////////////
     this.eventModule = new EventModule(this.canvas,this.itemObjects); // No longer passing items array
     // this.inputModule = new InputModule();
   }
+///////////////////////////////////////
+async loadImages(imagesArray){
+  // this.images = await loadImagesLocal(imagesArray);
+   this.env.images = await loadImagesLocal(imagesArray);
+}
+///////////////////////////////////////
+
 
   set background(bg){//this fn needs improvement 
     if(bg !== null && typeof(bg) == 'object') this._background = itemToObject(bg,this.env);
@@ -66,13 +72,7 @@ export default class Player  {
   get items(){
     return this.itemObjects;
   }
-  // setItemObjects(itemObjects){ // i am sure this is bad idea
-  //   this.itemObjects = itemObjects;
-  // }
-  async loadImages(imagesArray=[]){//thise can be loaded later
-    // this.env.images = await loadImagesLocal(imagesArray);
-    return true;
-  }
+  
   clear(){
     const { ctx, canvas } = this;
     const bgColor =  'gray';

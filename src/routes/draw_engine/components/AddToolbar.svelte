@@ -21,7 +21,7 @@
         {icon: Icons.LINE,   payload:'line' ,title: 'Line'},
         {icon: Icons.TRIANGE,   payload:'triangle' ,title: 'Tri'},
         {icon: Icons.SUNRISE,   payload:'ray' ,title: 'Ray'},
-        {icon: Icons.SPEAKER,   payload:'icon' ,title: 'Icon'},
+        // {icon: Icons.SPEAKER,   payload:'icon' ,title: 'Icon'},
         {icon: Icons.DOT,   payload:'dot' ,title: 'DOT'},
         {icon: Icons.ANGLE,   payload:'angle' ,title: 'ANGLE'},
         {icon: Icons.BICYCLE,   payload:'lines' ,title: 'Lines'},

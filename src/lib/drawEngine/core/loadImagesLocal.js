@@ -3,8 +3,6 @@
 
 export default async function loadImages(imagesUrlArray) {
 
-    // debugger;
-    
     if (!Array.isArray(imagesUrlArray)) {
       throw new Error("Invalid input: 'imagesUrlArray' must be an array of URLs.");
     }
