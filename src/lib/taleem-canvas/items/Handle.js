@@ -18,6 +18,7 @@ export default class Handle extends ParentBaseItem  {
     
     return [handleMove,handleWidth,handleHeight];
   }
+
   updateHandles(handles){ 
     const x = this.x;
     const y = this.y;
@@ -43,18 +44,6 @@ export default class Handle extends ParentBaseItem  {
       }
     } 
   }
-//   updateHandles(){
-//     if(this.selectedItem){
-//       this.handles.update(
-//         this.itemsEditor.items,
-//         this.selectedItem.boundingRectangleX(),
-//         this.selectedItem.boundingRectangleY(),
-//         this.selectedItem.width,
-//         this.selectedItem.height,
-//         );
-//     }
-//   }
-  
   getHandleData(Create,x,y,color,handleType){
   
     const handle = Create.rectangle();
@@ -68,5 +57,16 @@ export default class Handle extends ParentBaseItem  {
       return handle;
   }
   
+//////////////////////===Move====////////////////////////////////////    
+  move(x,y){
+    this.x = x;
+    this.y = y;
+  }
+  widen(x,y){
+    this.width = x - this.x  ;
+  }
+  heighten(x,y){
+    this.height =  y - this.y ;
+  }
 //////////////////////===Class Ends====////////////////////////////////////    
 }//Handle

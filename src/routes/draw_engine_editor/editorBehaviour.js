@@ -15,20 +15,23 @@ constructor(items,callback){
 }
 /////////////////////////////////////////////////////////
   mousemove(x,y,type,event) {
-    // const hitItem  = this.isHit(x,y);
-    // debugger;
+    
+    if(!this.selectedItem){return;}
     if(!this.isDrag){return;}
-    
-    
+    const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);    
+
     switch (this.activeHandle) {
             case "move":
-              this.moveSelectedItem(x , y);      
+              this.selectedItem.move(x,y);
+              this.selectedItem.updateHandles(handlesInItems);      
               break;
             case "width":
-              this.widenSelectedItem(x , y);
+              this.selectedItem.widen(x,y);
+              this.selectedItem.updateHandles(handlesInItems);    
               break;
             case "height":
-              this.heightenSelectedItem(x , y);
+              this.selectedItem.heighten(x,y);
+              this.selectedItem.updateHandles(handlesInItems);    
               break;
           
             default:
@@ -80,28 +83,27 @@ constructor(items,callback){
 
   }
   ///////////////////////Behaviour methods/////////////
-  moveSelectedItem(x,y){
-    if(this.selectedItem){
-      this.selectedItem.x = x;
-      this.selectedItem.y = y;
-      const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
-      this.selectedItem.updateHandles(handlesInItems);
-    }
-  }
- widenSelectedItem(x , y){
-    if(this.selectedItem){
-      this.selectedItem.width = x - this.selectedItem.x  ;
-      const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
-      this.selectedItem.updateHandles(handlesInItems);
-    }
-  }
- heightenSelectedItem(x , y){
-    if(this.selectedItem){
-      this.selectedItem.height =  y - this.selectedItem.y ;
-      const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
-      this.selectedItem.updateHandles(handlesInItems);
-    }
-  }
+//   moveSelectedItem(x,y){
+//     if(this.selectedItem){
+//       this.selectedItem.move(x,y);
+//       const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+//       this.selectedItem.updateHandles(handlesInItems);
+//     }
+//   }
+//  widenSelectedItem(x , y){
+//     if(this.selectedItem){
+//       this.selectedItem.width = x - this.selectedItem.x  ;
+//       const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+//       this.selectedItem.updateHandles(handlesInItems);
+//     }
+//   }
+//  heightenSelectedItem(x , y){
+//     if(this.selectedItem){
+//       this.selectedItem.height =  y - this.selectedItem.y ;
+//       const handlesInItems = this.handles.getAllHandles(this.itemsEditor.items);
+//       this.selectedItem.updateHandles(handlesInItems);
+//     }
+//   }
 
   isItemSelected(){
     if(this.selectedItem == null){
