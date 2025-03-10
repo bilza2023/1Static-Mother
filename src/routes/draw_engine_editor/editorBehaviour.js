@@ -50,6 +50,7 @@ constructor(items,callback){
       }
   }
   dblclick(mouseX,mouseY,type,event) {
+    debugger;
     const hitItem  = this.isHit(mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
