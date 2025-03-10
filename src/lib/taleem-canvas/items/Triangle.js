@@ -6,21 +6,22 @@ export default class Triangle extends BaseItem {
         super(itemData);
     }
 
-    static newItemData() {
-        return {
-            uuid: uuid(),
-            type: 'triangle',
-            x1: 100, y1: 100,
-            x2: 50, y2: 200,
-            x3: 200, y3: 200,
-            lineWidth: 2,
-            filled: false,
-            dash: 0,
-            gap: 0,
-            color: "red",
-            globalAlpha: 1
-        };
-    }
+    // static newItemData() {
+    //     return {
+    //         uuid: uuid(),
+    //         type: 'triangle',
+    //         x1: 100, y1: 100,
+    //         x2: 50, y2: 200,
+    //         x3: 200, y3: 200,
+    //         lineWidth: 2,
+    //         filled: false,
+    //         dash: 0,
+    //         gap: 0,
+    //         color: "red",
+    //         globalAlpha: 1
+    //     };
+    // }
+    
     static dialogueBox(){
 
         let dialogueBox = [];

@@ -12,6 +12,8 @@ export default class Sprite extends BaseItem {
       type: "sprite",
       src: "people", // Default until set dynamically
       selectedItem: "man_tblt_stndg",
+      x: 50,
+      y: 50,
       width: 200,
       height: 200,
       globalAlpha: 1,

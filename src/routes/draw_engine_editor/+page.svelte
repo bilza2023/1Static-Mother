@@ -50,6 +50,9 @@
             const ctx = canvasElement.getContext("2d");
             player = new Player(canvasElement, ctx);//Player
             player.background = background; // this is slideExtra
+            
+            await player.loadImages(["/images/drops.png"]);
+
             player.items = items;
             behaviour = new EditorBehaviour(items,setSelectedItem);
             if(behaviour){player.connect(behaviour)}
