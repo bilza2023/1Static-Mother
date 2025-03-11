@@ -7,21 +7,6 @@ export default class Line extends BaseItem {
         
     }
 
-    // static newItemData() {
-    //     return {
-    //         uuid: uuid(),
-    //         type: 'line',
-    //         x1: 100,
-    //         y1: 100,
-    //         x2: 300,
-    //         y2: 200,
-    //         lineWidth: 2,
-    //         dash: 0,
-    //         gap: 0,
-    //         color: "blue",
-    //         globalAlpha: 1
-    //     };
-    // }
 
     static dialogueBox(){
 

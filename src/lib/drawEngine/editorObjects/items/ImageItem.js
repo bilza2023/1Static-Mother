@@ -7,18 +7,7 @@ export default class ImageItem extends BaseItem {
         super(itemData);
     }
 
-    // static newItemData() {
-    //     return {
-    //         uuid: uuid(),
-    //         type: 'image',
-    //         x: 50,
-    //         y: 50,
-    //         src: 'drops.png', // This is just the reference name
-    //         width: 200,
-    //         height: 200,
-    //         globalAlpha: 1
-    //     };
-    // }
+
     static dialogueBox(){
 
         let dialogueBox = [];

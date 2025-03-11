@@ -8,8 +8,8 @@ export default class ParentBaseItem  {
   constructor(itemData) {
       this.itemData = itemData;
   }
-  static newItemData(){}//  
-  static dialogueBox(){}//  
+  // static newItemData(){}//  removed
+  // static dialogueBox(){}//  
 //////////////////////===Editor Part====////////////////////////////////////    
 get x() {
     return this.itemData.x || 0;

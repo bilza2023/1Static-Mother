@@ -6,24 +6,6 @@ export default class PieChart extends BaseItem {
     super(itemData);
   }
 
-  // static newItemData() {
-  //   return {
-  //     uuid: uuid(),
-  //     type: "piechart",
-  //     x: 200,
-  //     y: 200,
-  //     radius: 100,
-  //     data: [
-  //       { label: "A", percentage: 30, color: "red" },
-  //       { label: "B", percentage: 50, color: "blue" },
-  //       { label: "C", percentage: 20, color: "green" },
-  //     ],
-  //     showLabels: true,
-  //     labelFontSize: 14,
-  //     labelColor: "black",
-  //     globalAlpha: 1,
-  //   };
-  // }
   static dialogueBox(){
 
     let dialogueBox = [];

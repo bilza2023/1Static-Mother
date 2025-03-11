@@ -7,23 +7,6 @@ export default class Ellipse extends BaseItem {
     super(itemData);
   }
 
-  // static newItemData() {
-  //   return {
-  //     uuid: uuid(),
-  //     type: 'ellipse',
-  //     x: 100,
-  //     y: 100,
-  //     radiusX: 50,
-  //     radiusY: 75,
-  //     rotation: 0,
-  //     startAngle: 0,
-  //     endAngle: 2 * Math.PI,
-  //     lineWidth: 1,
-  //     filled: false,
-  //     color: "red",
-  //     globalAlpha: 1
-  //   };
-  // }
   static dialogueBox(){
 
     let dialogueBox = [];

@@ -7,23 +7,6 @@ export default class Dot extends BaseItem {
     super(itemData);
   }
 
-  // static newItemData() { 
-  //   return {
-  //     uuid: uuid(),
-  //     type: 'dot',
-
-  //     x: 100,
-  //     y: 100,
-      
-  //     label: "label",
-  //     radius: 25,
-  //     text_color: "yellowbezier",
-  //     text_size: 40,
-      
-  //     color: "red",
-  //     globalAlpha: 1
-  //   };
-  // }
 
   static dialogueBox(){
 
