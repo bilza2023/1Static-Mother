@@ -7,28 +7,7 @@ export default class Ellipse extends BaseItem {
     super(itemData);
   }
 
-  static dialogueBox(){
 
-    let dialogueBox = [];
- 
-  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-  
-  dialogueBox.push({name:'radiusX', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'radiusY', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'rotation', type:'Float',config:{min:0,max:360,step:0.1} });
-  
-  dialogueBox.push({name:'startAngle', type:'Float',config:{min:-360,max:360,step:0.1} });
-  dialogueBox.push({name:'endAngle', type:'Float',config:{min:-360,max:360,step:0.1} });
-
-  dialogueBox.push({name:'lineWidth', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'filled', type:'Boolean',config:{} });
-
-  dialogueBox.push({name:'color', type:'Color',     config:{} });
-  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-
-return dialogueBox;
-}
   boundingRectangleWidth() {
     return this.itemData.radiusX * 2;
   }
@@ -126,20 +105,5 @@ processHandle(handleProcessData){
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-  draw(ctx,assets={}) {
-    ctx.save();
-    ctx.lineWidth = this.itemData.lineWidth;
-    ctx.globalAlpha = this.itemData.globalAlpha;
-    ctx.beginPath();
-    ctx.ellipse(this.x, this.y, this.itemData.radiusX, this.itemData.radiusY, this.itemData.rotation, this.itemData.startAngle, this.itemData.endAngle);
-    if (this.itemData.filled) {
-      ctx.fillStyle = this.itemData.color;
-      ctx.fill();
-    } else {
-      ctx.strokeStyle = this.itemData.color;
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
+//////////////////////////////////////////////////////////////
 }

@@ -7,27 +7,6 @@ export default class Circle extends BaseItem {
     super(itemData);
   }
 
-
-  static dialogueBox(){
-
-    let dialogueBox = [];
- 
-  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-
-  dialogueBox.push({name:'radius', type:'Number',    config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'startAngle', type:'Number',    config:{min:0,max:360,step:1} });
-  dialogueBox.push({name:'endAngle', type:'Number',    config:{min:0,max:360,step:1} });
-  dialogueBox.push({name:'lineWidth', type:'Number',    config:{min:0,max:100,step:1} });
-  dialogueBox.push({name:'dash', type:'Number',    config:{min:0,max:10,step:1} });
-  dialogueBox.push({name:'gap', type:'Number',    config:{min:0,max:10,step:1} });
-  
-  dialogueBox.push({name:'filled', type:'Boolean',  config:{} });
-  
-  dialogueBox.push({name:'color', type:'Color',     config:{} });
-  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-return dialogueBox;
-}
   boundingRectangleWidth() {
     return this.itemData.radius * 2;
   }

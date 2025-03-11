@@ -8,25 +8,6 @@ export default class Line extends BaseItem {
     }
 
 
-    static dialogueBox(){
-
-        let dialogueBox = [];
-     
-      dialogueBox.push({name:'x1', type:'Number',config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'y1', type:'Number',config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'x2', type:'Number',config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'y2', type:'Number',config:{min:0,max:1000,step:1} });
-    
-      dialogueBox.push({name:'lineWidth', type:'Number',config:{min:0,max:1000,step:1} });
-    
-      dialogueBox.push({name:'dash', type:'Number',     config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'gap', type:'Number',      config:{min:0,max:1000,step:1} });
-    
-      dialogueBox.push({name:'color', type:'Color',     config:{} });
-      dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-      
-    return dialogueBox;
-    }
     boundingRectangleWidth() { return this.width; }
     boundingRectangleHeight() { return this.height; }
 
@@ -88,21 +69,5 @@ createHandles(Create){
         default:break;
       }
   }
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-    draw(ctx) {
-        ctx.save();
-        ctx.lineWidth = this.itemData.lineWidth;
-        ctx.globalAlpha = this.itemData.globalAlpha;
-        ctx.strokeStyle = this.itemData.color;
-        ctx.setLineDash([this.itemData.dash, this.itemData.gap]);
-
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x + this.width, this.y + this.height);
-        
-        ctx.stroke();
-
-        ctx.restore();
-    }
+//////////////////////////////////////////////////////////////
 }
