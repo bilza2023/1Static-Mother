@@ -1,37 +1,10 @@
 import DrawItem from './DrawItem';
+
 import { ItemData } from '../interfaces/ItemData';
+import { CircleItemData } from '../itemsProps/CircleItemData.js';
+import { DialogueBoxOption } from '../itemsProps/DialogueBoxOption.js';
 import uuid from './uuid.js';
-
-// Interface for Circle-specific item data
-interface CircleItemData extends ItemData {
-  uuid: string;
-  type: string;
-  globalAlpha: number;
-
-  x: number;
-  y: number;
-  radius: number;
-  rotation: number;
-  startAngle: number;
-  endAngle: number;
-  lineWidth: number;
-  dash: number;
-  gap: number;
-  filled: boolean;
-  color: string;
-}
-
-// Interface for dialogue box options
-interface DialogueBoxOption {
-  name: string;
-  type: 'Number' | 'Boolean' | 'Color' | 'Float' | string;
-  config: {
-    min?: number;
-    max?: number;
-    step?: number;
-  };
-}
-
+////////////////////////////////////////////////////////////////////
 export default class Circle extends DrawItem {
   // Override the itemData property to use the Circle-specific type
   declare itemData: CircleItemData;
