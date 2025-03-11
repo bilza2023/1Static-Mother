@@ -2,13 +2,8 @@
   /**
    * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
   */
-    // import {Player,Create} from "$lib/taleem-canvas"
-    import Player from "../../lib/drawEngine/Player";
-    import Create from "../../lib/drawEngine/Create";
-
+    import Player ,{Create,AddToolbar,EditorBehaviour} from "../../lib/drawEngine";
     import { onMount,onDestroy } from "svelte";
-    import EditorBehaviour from "./editorBehaviour";
-    import AddToolbar from "../../lib/drawEngine/addToolbar/AddToolbar.svelte";
     import SelectedItemBasicDialogue from "./components/SelectedItemBasicDialogue.svelte";
     /////////////////////////////////////////////////////////////////
         let canvasElement;
@@ -35,14 +30,10 @@
       let selectedItem = null;
   
   function setSelectedItem(incomingSelectedItem){
- 
     selectedItem = incomingSelectedItem;
-    // player.items = items;
     player.items = behaviour.itemsEditor.items;
     player.draw();
-    // console.log("callback called...!");
   }
-  
   function gameloop() { if (player) {player.items = items;player.draw();}}
   function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
 
@@ -61,10 +52,8 @@
     }});
   onDestroy(() => {if (interval) clearInterval(interval);});  
   </script>
-  
   <div ><AddToolbar callBack={addNewItem}/></div>
   <canvas bind:this={canvasElement} ></canvas>
 {#if selectedItem}
-      <SelectedItemBasicDialogue bind:selectedItem={selectedItem} />
-      {/if}
+      <SelectedItemBasicDialogue bind:selectedItem={selectedItem} />{/if}
   <button on:click={()=>console.log("Log Items",items)}>Log Items</button>
