@@ -1,8 +1,10 @@
 
 
 export interface ItemData {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
+  uuid: string;
+  type: string;
+  color: string;
+  rotation: number;
+  globalAlpha: number;
+  [key: string]: any; 
   }

@@ -1,3 +1,5 @@
+
+import itemsMap from "../ItemsMap";
 //We are working with items-object-literals . But to edit them raw is a difficult affait so we need a class specially for editing items-object-literals into methods ItemsEditObject.
 
 //keep in mind it is not itemsOBject for canvas 
@@ -23,6 +25,10 @@ export default class ItemsEditor{
             }
         }
         // No need to return anything, 'items' is modified in place
+    }
+
+    getEditObject(type){
+        return itemsMap.get(type);
     }
     /////////////////////////////////////////////////
 }//ItemsEditObject

@@ -1,7 +1,6 @@
 
 import ItemsEditor from "./itemsEditor/ItemsEditor";
-import itemsMap from "./ItemsMap";
-import Create from "./Create";
+import Create from "../Create";
 
 export default class Behaviour {
 //itemsEditor is provided by Parent class since we do not want to expose itemsEditor to user directly...
@@ -27,7 +26,7 @@ dblclick   (x , y , hitItems  , hitItemsUuids) {}
 isHit(mouseX,mouseY){
   for (let i = 0; i < this.itemsEditor.items.length; i++) {
     const item = this.itemsEditor.items[i];
-    const EditItemObject = itemsMap.get(item.type);
+    const EditItemObject = this.itemsEditor.getEditObject(item.type);
     const editObj = new EditItemObject(item);
     const isHit = editObj.isHit(mouseX,mouseY);
     if(isHit == true){
