@@ -1,5 +1,5 @@
 
-import Behaviour from "../editorObjects/Behaviour.js";
+import Behaviour from "../Behaviour";
 
 export default class EditorBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@
   /**
    * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
   */
-    import Player ,{Create,AddToolbar,EditorBehaviour} from "../../lib/drawEngine";
+    import Player ,{Create,AddToolbar,EditorBehaviour} from "../../lib/drawEngine/index.js";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "./components/SelectedItemBasicDialogue.svelte";
     /////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 
-import {Behaviour} from "$lib/taleem-canvas/index";
+import Behaviour from "../Behaviour";
 
 export default class HelloWorldBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////

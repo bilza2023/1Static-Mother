@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/barebone_drawEngine/+page.svelte";
+export { default as component } from "../../../../src/routes/draw_engine_editor/+page.svelte";
