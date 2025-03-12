@@ -54,7 +54,6 @@
   </script>
   <div ><AddToolbar callBack={addNewItem}/></div>
 
-
 <div class="container">
   <div>
     <canvas bind:this={canvasElement} ></canvas>
@@ -62,14 +61,12 @@
 
   <div>      
     {#if selectedItem}
-    <SelectedItemBasicDialogue bind:selectedItem={selectedItem} />
+    <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  />
     {/if}
   </div>
 </div>
 
-
   <button on:click={()=>console.log("log Items",items)}>Log Items</button>
-
 
   <style>
     .container{

@@ -12,7 +12,6 @@
   <td class="td">
 
 <input
-
 type="checkbox"
 bind:checked={value}
   class="input"

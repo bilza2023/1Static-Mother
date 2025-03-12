@@ -75,8 +75,8 @@ processHandle(handleProcessData){
   const {handle,deltaX,deltaY,x,y,handleType,isMouseXUp,isMouseYUp} = handleProcessData;
   switch (handleType) {
       case "move":
-              this.x = x - 10;
-              this.y = y;
+              this.x = x + this.width /2;
+              this.y = y + this.height /2;
         break;
         case "radius":
          // debugger;
