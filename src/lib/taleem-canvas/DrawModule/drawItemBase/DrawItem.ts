@@ -1,14 +1,17 @@
 /**
  * This file is HEART of this library
  */
-import { ItemData } from '../interfaces/ItemData';
+import { ItemData } from '../drawItemInterfaces/ItemData';
+import Env from "../core/Env";
 
 export default class DrawItem {
   // Protected instead of private so subclasses can access it
   protected itemData: ItemData;
+  protected env: Env;
   
-  constructor(itemData: ItemData) {
+  constructor(itemData: ItemData,env:Env) {
     this.itemData = itemData;
+    this.env = env;
   }
   
   static newItemData(): ItemData {

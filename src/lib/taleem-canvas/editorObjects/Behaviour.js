@@ -1,6 +1,6 @@
 
 import ItemsEditor from "./itemsEditor/ItemsEditor";
-import Create from "../Create";
+import Create from "../DrawModule/Create";
 
 export default class Behaviour {
 //itemsEditor is provided by Parent class since we do not want to expose itemsEditor to user directly...

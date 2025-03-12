@@ -1,6 +1,6 @@
 
 import DrawItem from '../drawItemBase/DrawItem.js';
-import uuid from './uuid.js';
+import uuid from '../drawItems/uuid.js';
 
 export default class Ellipse extends DrawItem {
   constructor(itemData) {

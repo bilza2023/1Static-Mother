@@ -1,16 +1,26 @@
 
-import DrawItem from '../drawItemBase/DrawItem.js';
+import DrawItem from '../drawItemBase/DrawItem';
+import { ImageItemData } from '../../itemsDataInterfaces/ImageItemData';
+import Env from "../core/Env";
 import uuid from './uuid.js';
+////////////////////////////////////////////////////////////////////
 
 export default class ImageItem extends DrawItem {
-    constructor(itemData) {
-        super(itemData);
+
+    declare itemData: ImageItemData;
+  
+    constructor(itemData: ImageItemData,env:Env) {
+      super(itemData,env);
     }
 
-    static newItemData() {
+
+    static newItemData():ImageItemData {
         return {
             uuid: uuid(),
             type: 'image',
+            name: 'image-001',
+            rotation: 0,
+            color: 'red',
             x: 50,
             y: 50,
             src: 'drops.png', // This is just the reference name
@@ -19,22 +29,8 @@ export default class ImageItem extends DrawItem {
             globalAlpha: 1
         };
     }
-    static dialogueBox(){
-
-        let dialogueBox = [];
-     
-      dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-    
-      dialogueBox.push({name:'src', type:'Text',    config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'width', type:'Number',    config:{min:0,max:1000,step:1} });
-      dialogueBox.push({name:'height', type:'Number',   config:{min:0,max:1000,step:1} });
-      
-      dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-    
-    return dialogueBox;
-    }
-    draw(ctx) {
+ 
+    draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void{
         ctx.save();
         ctx.globalAlpha = this.itemData.globalAlpha;
     

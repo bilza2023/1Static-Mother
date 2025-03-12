@@ -1,17 +1,30 @@
 
-import DrawItem from '../drawItemBase/DrawItem.js';
-import uuid from './uuid.js';
+import uuid from '../drawItems/uuid.js';
+import { BackgroundData } from './BackgroundData.js';
 
-export default class BackgroundItem extends DrawItem {
-  constructor(itemData) {
-    super(itemData);
+//////////////////////////////////////////////////////////////////////
+export default class BackgroundItem  {
+
+  itemData:BackgroundData;
+
+  constructor(env,itemData:BackgroundData| null=null) {
+    
+    if (itemData == null){
+      this.itemData = BackgroundItem.newItemData();
+    }else {
+      this.itemData = itemData;
+    }
+    this.env = env;
  }
 
- static newItemData(){
+ static newItemData():BackgroundData{
     return {
       uuid: uuid(),
       type: 'background',  
+      name: 'background',
+      color: 'gray',
       backgroundColor: 'gray',
+      rotation: 0, // keep it zero
       cellHeight: 25,
       cellWidth: 25,
       backgroundImage: null,

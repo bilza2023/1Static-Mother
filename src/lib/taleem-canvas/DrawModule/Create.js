@@ -1,22 +1,21 @@
 
-import BackgroundItem from "./drawItems/BackgroundItem.js";
-import Rectangle from "./drawItems/Rectangle.js";
-import Circle from "./drawItems/Circle.js";
-import Ellipse from "./drawItems/Ellipse.js";
-import Dot from "./drawItems/Dot.js";
-import Angle from "./drawItems/Angle.js";
-import Line from "./drawItems/Line.js";
-import Ray from "./drawItems/Ray.js";
-import Triangle from "./drawItems/Triangle.js";
-import ImageItem from "./drawItems/ImageItem.js";
-import TextItem from "./drawItems/TextItem.js";
-import List from "./drawItems/List.js";
-import Piechart from "./drawItems/Piechart.js";
-import Sprite from "./drawItems/Sprite.js";
+import Rectangle from "./drawItems/Rectangle";
+import Circle from "./drawItems/Circle";
+import Ellipse from "./drawItems/Ellipse";
+import Dot from "./drawItems/Dot";
+import Angle from "./drawItems/Angle";
+import Line from "./drawItems/Line";
+import Ray from "./drawItems/Ray";
+import Triangle from "./drawItems/Triangle";
+import ImageItem from "./drawItems/ImageItem";
+import TextItem from "./drawItems/TextItem";
+import List from "./drawItems/List";
+import Piechart from "./drawItems/Piechart";
+import Sprite from "./drawItems/Sprite";
 
 export default class Create {
 //special item BackgroundItem 
-static    background() {return  BackgroundItem.newItemData() ;}
+// static    background() {return  BackgroundItem.newItemData() ;}
 static    sprite() {return  Sprite.newItemData();}
 static    dot() {return  Dot.newItemData();}
 static    angle() {return  Angle.newItemData();}

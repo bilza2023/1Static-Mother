@@ -1,12 +1,10 @@
 
-import Create from "./Create.js";
-// import DrawItemsMap from "./DrawItemsMap.js";
-import BackgroundItem from "./drawItems/BackgroundItem.js";
-import EventModule from "../core/EventModule.js";
-import itemsToObjects from "../globals/itemsToObjects.js";
-import itemToObject from "../core/itemToObject.js";
-import Env from "../core/Env.js";
-import loadImagesLocal from "../core/loadImagesLocal.js";
+
+import BackgroundItem from "./backgroundItem/BackgroundItem";
+import EventModule from "./core/EventModule.js";
+import itemsToDrawObjects from "./core/itemsToDrawObjects";
+import Env from "./core/Env";
+import loadImagesLocal from "./core/loadImagesLocal.js";
 // import Add from "./Add.js";
 /**
  * The easiest way to edit an object in svelte is to make that object hold reference to a class-literal. The object will edit/chagne the class-literal and not the object its-self
@@ -34,8 +32,7 @@ export default class TaleemCanvas  {
     this.ctx = ctx;
     this.env = new Env(this.ctx);
     
-    const bg = Create.background();
-    this._background = itemToObject(bg,this.env);
+    this._background = new BackgroundItem(this.env);
 
     this.itemObjects = [];
 
@@ -43,10 +40,8 @@ export default class TaleemCanvas  {
     this.height = 360;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-     
     ////////////////////////////////////////////////////////////////////////
     this.eventModule = new EventModule(this.canvas,this.itemObjects); // No longer passing items array
-    // this.inputModule = new InputModule();
   }
 ///////////////////////////////////////
 async loadImages(imagesArray){
@@ -55,20 +50,18 @@ async loadImages(imagesArray){
 }
 ///////////////////////////////////////
 
+  // set background(bg){//this fn needs improvement 
+    // if(bg !== null && typeof(bg) == 'object') this._background = itemToObject(bg,this.env);
+  // }
 
-  set background(bg){//this fn needs improvement 
-    if(bg !== null && typeof(bg) == 'object') this._background = itemToObject(bg,this.env);
-  }
-
-  get background(){
-    return this._background;
-  }
+  // get background(){
+    // return this._background;
+  // }
   set items(items){
     // debugger;
     // this._background = setBackGround(items,this.env);
     this.itemObjects = [];
-    debugger;
-    this.itemObjects = itemsToObjects(items,this.env);
+    this.itemObjects = itemsToDrawObjects(items,this.env);
     // this.eventModule.updateItems(this.itemObjects);
   } 
   get items(){
@@ -87,16 +80,6 @@ async loadImages(imagesArray){
     this.eventModule.on(eventType, callback);
   }
 
-  // mapEvents(clickCallback,doubleClickCallback,mousemoveCallback,mouseupCallback,mousedownCallback){
-
-  //   this.onMouse("click",clickCallback );
-  //   this.onMouse("dblclick", doubleClickCallback);
-  //   this.onMouse("mousemove", mousemoveCallback);
-  //   this.onMouse("mouseup", mouseupCallback);
-  //   this.onMouse("mousedown", mousedownCallback);
-
-  // }
-
   connect(eventHandlersObject){
   // debugger;
     this.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
@@ -107,16 +90,13 @@ async loadImages(imagesArray){
     return true;
   }
   // Add this to your Player class
-addMouseEvent(eventType,callback) {
+ addMouseEvent(eventType,callback) {
   if (this.eventModule.callbacks[eventType] !== undefined) {
     this.eventModule.on(eventType, callback);
   } else {
     console.warn(`Event type "${eventType}" is not supported.`);
   }
-}
-//   onKey(eventType, callback) {
-    // this.inputModule.on(eventType, callback);
-//   }
+ }
 
   draw() {
     this.clear();

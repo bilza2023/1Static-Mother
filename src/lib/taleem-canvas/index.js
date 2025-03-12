@@ -1,6 +1,6 @@
 
 import TaleemCanvas from "./DrawModule/TaleemCanvas.js";
-import Create from "./Create";
+import Create from "./DrawModule/Create.js";
 import Behaviour from "./editorObjects/Behaviour";
 import AddToolbar from "./addToolbar/AddToolbar.svelte"
 import EditorBehaviour from "./editorObjects/behaviours/EditorBehaviour";

@@ -1,5 +1,7 @@
+// Define the type for background image data
+// type BackgroundImage = string; // Assuming each image is a base64 string
 
-
+// Import background images
 import paper01 from "./bgImages/paper01.js";
 import drywall from "./bgImages/drywall.js";
 import black_board from "./bgImages/black_board.js";
@@ -16,9 +18,12 @@ import design_old from "./bgImages/design_old.js";
 import blue_waves from "./bgImages/blue_waves.js";
 import wall from "./bgImages/wall.js";
 
-// Store all background images in a Map (No Async Needed)
-export default function loadBackgroundImages() {
-    return new Map([
+/**
+ * Loads all background images and returns them in a Map
+ * @returns A Map containing all background images with their names as keys
+ */
+export default function loadBackgroundImages(): Map<string, string> {
+    return new Map<string, string>([
         ["paper01", paper01],
         ["drywall", drywall],
         ["black_board", black_board],

@@ -1,41 +1,36 @@
-import DrawItem from '../drawItemBase/DrawItem.js';
-import uuid from "./uuid.js";
+
+
+import DrawItem from '../drawItemBase/DrawItem';
+import { SpriteData } from '../../itemsDataInterfaces/SpriteData.js';
+import Env from "../core/Env";
+import uuid from './uuid.js';
+////////////////////////////////////////////////////////////////////
 
 export default class Sprite extends DrawItem {
-  constructor(itemData) {
-    super(itemData);
-  }
+
+    declare itemData: SpriteData;
+  
+    constructor(itemData: SpriteData,env:Env) {
+      super(itemData,env);
+    }
 
   static newItemData() {
     return {
       uuid: uuid(),
       type: "sprite",
+      name: "sprite",
+      color: "red",
       src: "people", // Default until set dynamically
       selectedItem: "man_tblt_stndg",
       x: 10,
       y: 10,
       width: 200,
       height: 200,
+      rotation: 0,
       globalAlpha: 1,
     };
   }
 
-  static dialogueBox(){
-
-    let dialogueBox = [];
- 
-  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-  
-  dialogueBox.push({name:'spriteId', type:'Text',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'sheet', type:'Text',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'sheetItem', type:'Text',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'width', type:'Number',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'height', type:'Number',      config:{min:0,max:1000,step:1} });
-
-  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-return dialogueBox;
-}
   ////////////////////////////////////////////////////////
   // ✅ Get all available sprite names
   getAvailableSprites() {
@@ -57,7 +52,7 @@ return dialogueBox;
   }
 
   ////////////////////////////////////////////////////////
-  draw(ctx) {
+  draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void   {
     ctx.save();
     ctx.globalAlpha = this.itemData.globalAlpha;
 

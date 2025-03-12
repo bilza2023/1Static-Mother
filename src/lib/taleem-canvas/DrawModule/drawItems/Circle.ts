@@ -1,16 +1,16 @@
-import DrawItem from '../drawItemBase/DrawItem.js';
 
-import { ItemData } from '../../interfaces/ItemData.js';
-import { CircleItemData } from '../../itemsProps/CircleItemData.js';
-import { DialogueBoxOption } from '../../itemsProps/DialogueBoxOption.js';
+
+import DrawItem from '../drawItemBase/DrawItem';
+import { CircleItemData } from '../../itemsDataInterfaces/CircleItemData.js';
+import Env from "../core/Env";
 import uuid from './uuid.js';
 ////////////////////////////////////////////////////////////////////
 export default class Circle extends DrawItem {
-  // Override the itemData property to use the Circle-specific type
+
   declare itemData: CircleItemData;
 
-  constructor(itemData: CircleItemData) {
-    super(itemData);
+  constructor(itemData: CircleItemData,env:Env) {
+    super(itemData,env);
   }
 
   static newItemData(): CircleItemData {
@@ -31,24 +31,6 @@ export default class Circle extends DrawItem {
       color: "red",
       globalAlpha: 1
     };
-  }
-
-  static dialogueBox(): DialogueBoxOption[] {
-    let dialogueBox: DialogueBoxOption[] = [];
- 
-    dialogueBox.push({name:'x', type:'Number', config:{min:0, max:1000, step:1}});
-    dialogueBox.push({name:'y', type:'Number', config:{min:0, max:1000, step:1}});
-    dialogueBox.push({name:'radius', type:'Number', config:{min:0, max:1000, step:1}});
-    dialogueBox.push({name:'startAngle', type:'Number', config:{min:0, max:360, step:1}});
-    dialogueBox.push({name:'endAngle', type:'Number', config:{min:0, max:360, step:1}});
-    dialogueBox.push({name:'lineWidth', type:'Number', config:{min:0, max:100, step:1}});
-    dialogueBox.push({name:'dash', type:'Number', config:{min:0, max:10, step:1}});
-    dialogueBox.push({name:'gap', type:'Number', config:{min:0, max:10, step:1}});
-    dialogueBox.push({name:'filled', type:'Boolean', config:{}});
-    dialogueBox.push({name:'color', type:'Color', config:{}});
-    dialogueBox.push({name:'globalAlpha', type:'Float', config:{min:0, max:1, step:0.01}});
-    
-    return dialogueBox;
   }
 
   draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void {
