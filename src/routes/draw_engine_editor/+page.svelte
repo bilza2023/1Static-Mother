@@ -2,12 +2,12 @@
   /**
    * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
   */
-    import Player ,{Create,AddToolbar,EditorBehaviour} from "../../lib/drawEngine/index.js";
+    import  {TaleemCanvas,Create,AddToolbar,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "./components/SelectedItemBasicDialogue.svelte";
     /////////////////////////////////////////////////////////////////
         let canvasElement;
-        let player; //to make it truly static even remove this so that this component is draw once.
+        let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
     //////////////////////////////////////////////////////////////////
       let items = [];
       let background =  {
@@ -31,23 +31,23 @@
   
   function setSelectedItem(incomingSelectedItem){
     selectedItem = incomingSelectedItem;
-    player.items = behaviour.itemsEditor.items;
-    player.draw();
+    taleem_canvas.items = behaviour.itemsEditor.items;
+    taleem_canvas.draw();
   }
-  function gameloop() { if (player) {player.items = items;player.draw();}}
+  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.draw();}}
   function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
 
   onMount(async () => { if (canvasElement) {
             const ctx = canvasElement.getContext("2d");
-            player = new Player(canvasElement, ctx);//Player
-            player.background = background; // this is slideExtra
+            taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
+            taleem_canvas.background = background; // this is slideExtra
             
-            await player.loadImages(["/images/drops.png"]);
+            await taleem_canvas.loadImages(["/images/drops.png"]);
 
-            player.items = items;
+            taleem_canvas.items = items;
             behaviour = new EditorBehaviour(items,setSelectedItem);
-            if(behaviour){player.connect(behaviour)}
-            player.draw();
+            if(behaviour){taleem_canvas.connect(behaviour)}
+            taleem_canvas.draw();
             interval = setInterval(gameloop,20);
     }});
   onDestroy(() => {if (interval) clearInterval(interval);});  

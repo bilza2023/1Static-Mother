@@ -1,5 +1,5 @@
-import DrawItem from './DrawItem';
-import { ItemData } from '../interfaces/ItemData';
+import DrawItem from './DrawItem.js';
+import { ItemData } from '../interfaces/ItemData.js';
 import uuid from './uuid.js';
 
 // Interface for Circle-specific item data
