@@ -1,5 +1,5 @@
 
-import Player from "./Player";
+import TaleemCanvas from "./DrawModule/TaleemCanvas.js";
 import Create from "./Create";
 import Behaviour from "./editorObjects/Behaviour";
 import AddToolbar from "./addToolbar/AddToolbar.svelte"
@@ -7,7 +7,7 @@ import EditorBehaviour from "./editorObjects/behaviours/EditorBehaviour";
 import HelloWorldBehaviour from "./editorObjects/behaviours/HelloWorldBehaviour";
 
 export {
-    Player as TaleemCanvas, //CORE COMPONENT
+    TaleemCanvas, //CORE COMPONENT
     Create, //CORE COMPONENT
 
     Behaviour, // Imp but not core

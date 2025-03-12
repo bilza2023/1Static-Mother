@@ -53,7 +53,26 @@
   onDestroy(() => {if (interval) clearInterval(interval);});  
   </script>
   <div ><AddToolbar callBack={addNewItem}/></div>
-  <canvas bind:this={canvasElement} ></canvas>
-{#if selectedItem}
-      <SelectedItemBasicDialogue bind:selectedItem={selectedItem} />{/if}
-  <button on:click={()=>console.log("Log Items",items)}>Log Items</button>
+
+
+<div class="container">
+  <div>
+    <canvas bind:this={canvasElement} ></canvas>
+  </div>
+
+  <div>      
+    {#if selectedItem}
+    <SelectedItemBasicDialogue bind:selectedItem={selectedItem} />
+    {/if}
+  </div>
+</div>
+
+
+  <button on:click={()=>console.log("log Items",items)}>Log Items</button>
+
+
+  <style>
+    .container{
+      display: flex;
+    }
+  </style>
