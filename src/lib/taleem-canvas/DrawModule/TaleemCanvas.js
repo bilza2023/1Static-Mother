@@ -1,10 +1,10 @@
 
 
-import BackgroundItem from "./backgroundItem/BackgroundItem";
 import EventModule from "./core/EventModule.js";
 import itemsToDrawObjects from "./core/itemsToDrawObjects";
 import Env from "./core/Env";
 import loadImagesLocal from "./core/loadImagesLocal.js";
+import drawBg from "./core/drawBg.js";
 // import Add from "./Add.js";
 /**
  * The easiest way to edit an object in svelte is to make that object hold reference to a class-literal. The object will edit/chagne the class-literal and not the object its-self
@@ -32,9 +32,20 @@ export default class TaleemCanvas  {
     this.ctx = ctx;
     this.env = new Env(this.ctx);
     this.imagesUrl = '';
+    this.bgData =  {
+      uuid: "44456",
+      type: 'background',  
+      backgroundColor: 'gray',
+      cellHeight: 25,
+      cellWidth: 25,
+      backgroundImage: "black_mat",
+      globalAlpha: 1,
+      ///////////////////
+      showGrid: false,
+      gridLineWidth: 1,
+      gridLineColor: '#685454'
+    };
     
-    this._background = new BackgroundItem(this.env);
-
     this.itemObjects = [];
 
     this.width = 1000;
@@ -50,14 +61,13 @@ async loadImages(imagesArray){
    this.env.images = await loadImagesLocal(imagesArray,this.imagesUrl);
 }
 ///////////////////////////////////////
+set background(bg){//this fn needs improvement 
+      this.bgData =  bg; 
+}
 
-  // set background(bg){//this fn needs improvement 
-    // if(bg !== null && typeof(bg) == 'object') this._background = itemToObject(bg,this.env);
-  // }
-
-  // get background(){
-    // return this._background;
-  // }
+  get background(){
+    return this.bgData;
+  }
   set items(items){
     // debugger;
     // this._background = setBackGround(items,this.env);
@@ -101,9 +111,10 @@ async loadImages(imagesArray){
 
   draw() {
     this.clear();
-    if(this._background){
-        this._background.draw(this.ctx);
-    }
+    // if(this.background){
+      // debugger;
+      drawBg(this.ctx,this.bgData,this.env);
+    // }
     this.itemObjects.forEach(item => {
         if (typeof item.draw === 'function') {
           // debugger;

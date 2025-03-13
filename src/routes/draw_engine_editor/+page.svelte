@@ -4,7 +4,8 @@
   */
     import  {TaleemCanvas,Create,AddToolbar,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
-    import SelectedItemBasicDialogue from "./components/SelectedItemBasicDialogue.svelte";
+    import SelectedItemBasicDialogue from "../../lib/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
+    import BackgroundDialogue from "../../lib/itemsDialogueBoxes/BackgroundDialogue.svelte";
     /////////////////////////////////////////////////////////////////
         let canvasElement;
         let images = [
@@ -13,25 +14,21 @@
           "activity1.jpg",
           "drops.png"
         ];
-        // let images = [
-        //   "/images/atom.png",
-        //   "/images/baloons.png",
-        //   "/images/activity1.jpg",
-        //   "/images/drops.png"
-        // ];
+
+$: console.log("")        
         let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
     //////////////////////////////////////////////////////////////////
       let items = [];
       let background =  {
         uuid: "44456",
         type: 'background',  
-        backgroundColor: 'gray',
+        backgroundColor: '#9cc19c',
         cellHeight: 25,
         cellWidth: 25,
-        backgroundImage: null,
+        backgroundImage: "black_mat",
         globalAlpha: 1,
         ///////////////////
-        showGrid: true,
+        showGrid: false,
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };
@@ -47,11 +44,12 @@
     taleem_canvas.items = behaviour.itemsEditor.items;
     taleem_canvas.draw();
   }
-  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.draw();}}
-  function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
+
+  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.background = background;taleem_canvas.draw();}}function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
 
   onMount(async () => { if (canvasElement) {
             const ctx = canvasElement.getContext("2d");
+            debugger;
             taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
             taleem_canvas.background = background; // this is slideExtra
             taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
@@ -75,7 +73,9 @@
 
   <div>      
     {#if selectedItem}
-    <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  {images}/>
+        <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  {images}/>
+    {:else}
+        <BackgroundDialogue  bind:background={background}  />
     {/if}
   </div>
 </div>

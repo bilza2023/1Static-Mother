@@ -1,23 +1,20 @@
 
 import uuid from '../drawItems/uuid.js';
 import { BackgroundData } from './BackgroundData.js';
-
+import Env from "../core/Env.js";
 //////////////////////////////////////////////////////////////////////
 export default class BackgroundItem  {
 
   itemData:BackgroundData;
+  private env:Env;
 
-  constructor(env,itemData:BackgroundData| null=null) {
+  constructor(itemData:BackgroundData , env :Env) {
     
-    if (itemData == null){
-      this.itemData = BackgroundItem.newItemData();
-    }else {
-      this.itemData = itemData;
-    }
+    this.itemData = itemData;
     this.env = env;
  }
 
- static newItemData():BackgroundData{
+  static newItemData():BackgroundData{
     return {
       uuid: uuid(),
       type: 'background',  
@@ -94,6 +91,7 @@ export default class BackgroundItem  {
   }
 
   draw(ctx) {
+    // debugger;
     ctx.globalAlpha = this.itemData.globalAlpha;
     // ✅ Get canvas width & height from Env
     const width = this.env.getCanvasWidth();

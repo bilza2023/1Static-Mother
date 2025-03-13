@@ -10,7 +10,6 @@ export default async function loadImages(imagesUrlArray,GlobalImagesUrl) {
   
     async function loadSingleImage(imageUrl,GlobalImagesUrl) {
       return new Promise((resolve, reject) => {
-        debugger;
         const img = new Image();
         img.onload = () => resolve({ url: imageUrl, img });
         img.onerror = () => reject(new Error(`Failed to load image: ${imageUrl}`));

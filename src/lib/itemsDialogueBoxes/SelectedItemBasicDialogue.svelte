@@ -1,24 +1,24 @@
 
 <script>
-import RectangleDialogue from "../../../lib/itemsDialogueBoxes/RectangleDialogue.svelte";
-import EllipseDialogue from "../../../lib/itemsDialogueBoxes/EllipseDialogue.svelte";
-import CircleDialogue from "../../../lib/itemsDialogueBoxes/CircleDialogue.svelte";
-import ImageDialogue from "../../../lib/itemsDialogueBoxes/ImageDialogue.svelte";
-import LineDialogue from "../../../lib/itemsDialogueBoxes/LineDialogue.svelte";
-import ListDialogue from "../../../lib/itemsDialogueBoxes/ListDialogue.svelte";
-import PieChartDialogue from "../../../lib/itemsDialogueBoxes/PieChartDialogue.svelte";
-import RayDialogue from "../../../lib/itemsDialogueBoxes/RayDialogue.svelte";
-import SpriteDialogue from "../../../lib/itemsDialogueBoxes/SpriteDialogue.svelte";
-import TriangleDialogue from "../../../lib/itemsDialogueBoxes/TriangleDialogue.svelte";
-import TextDialogue from "../../../lib/itemsDialogueBoxes/TextDialogue.svelte";
+import RectangleDialogue from "./RectangleDialogue.svelte";
+import EllipseDialogue from "./EllipseDialogue.svelte";
+import CircleDialogue from "./CircleDialogue.svelte";
+import ImageDialogue from "./ImageDialogue.svelte";
+import LineDialogue from "./LineDialogue.svelte";
+import ListDialogue from "./ListDialogue.svelte";
+import PieChartDialogue from "./PieChartDialogue.svelte";
+import RayDialogue from "./RayDialogue.svelte";
+import SpriteDialogue from "./SpriteDialogue.svelte";
+import TriangleDialogue from "./TriangleDialogue.svelte";
+import TextDialogue from "./TextDialogue.svelte";
 
 export let selectedItem;
 export let images=[];
-
 </script>
 
 <div class="container">
 <!-- ///////////////////////////////////////////////////// -->
+
 
 {#if selectedItem && selectedItem.itemData.type=="rectangle"}
     <RectangleDialogue  {selectedItem}  />
