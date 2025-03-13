@@ -2,10 +2,8 @@
     import SmallBtnToolbar from './SmallBtnToolbar.svelte';
     
     export let callBack = () => {};
-    
-    export let clone;
-    export let deleteFn;
-    export let log;
+    export let containerClass = 'flex text-white';
+
     // Payload-based toolbar items
     export let  items = [
         {icon: '▭', payload: 'rectangle',title: 'Rect'},
@@ -27,50 +25,12 @@
 
 </script>
 
-<div class="container">
-    <div class="innerDiv">
-        {#each items as item (item.title)}
+<div class={containerClass}>
+    {#each items as item (item.title)}
         <SmallBtnToolbar 
             clk={() => callBack(item.payload)} 
             icon={item.icon} 
             title={item.title} 
         />
     {/each}
-    </div>
-
-    <div class="innerDiv paddingRight">
-        <SmallBtnToolbar 
-        clk={clone} 
-        icon='🐑' 
-        title="Clone" 
-        />
-        <SmallBtnToolbar 
-        clk={deleteFn} 
-        icon='🗑️'
-        title="Delete" 
-        />
-        <SmallBtnToolbar 
-        clk={log} 
-        icon='🖨️'
-        title="Log" 
-        />
-    </div>
-
 </div>
-
-
-<style>
-
-    .paddingRight{
-    padding-right: 20px;
-    }
-    .container{
-      display: flex;
-      color:azure;
-      justify-content: space-between;
-    }
-
-    .innerDiv{
-      display: flex;
-    }
-  </style>

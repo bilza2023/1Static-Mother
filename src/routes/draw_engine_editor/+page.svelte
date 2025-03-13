@@ -19,19 +19,20 @@ $: console.log("")
         let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
     //////////////////////////////////////////////////////////////////
       let items = [];
+
       let background =  {
-        uuid: "44456",
+        uuid: "44455764hfghyjty6",
         type: 'background',  
         backgroundColor: '#9cc19c',
         cellHeight: 25,
         cellWidth: 25,
         backgroundImage: "black_mat",
         globalAlpha: 1,
-        ///////////////////
         showGrid: false,
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };
+
       let behaviour = null;
   
       let imagesUrl   = "/images/";
@@ -39,17 +40,41 @@ $: console.log("")
   
       let selectedItem = null;
   
+/////////////////////////////////////////////////////////////
+
+function clone() {
+    if (selectedItem) {
+        const clonedItem = JSON.parse(JSON.stringify(selectedItem.itemData));
+        clonedItem.uuid = (Math.random() * 100000000).toString();
+        items.push(clonedItem)
+        // items = [...items]; // Trigger reactivity
+    }
+}
+function deleteFn() {
+    if (selectedItem && behaviour) {
+      const uuid = selectedItem.itemData.uuid;
+  const index = items.findIndex(item => item.uuid === uuid);
+  if (index !== -1) {
+    items.splice(index, 1);
+    behaviour.removeAllHandles(items);
+  }
+  }
+}
+
+
+/////////////////////////////////////////////////////////////
   function setSelectedItem(incomingSelectedItem){
     selectedItem = incomingSelectedItem;
+    //why this line?
     taleem_canvas.items = behaviour.itemsEditor.items;
     taleem_canvas.draw();
   }
 
-  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.background = background;taleem_canvas.draw();}}function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}
+  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.background = background;taleem_canvas.draw();}}function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}function log(){console.log("log Items",items)}
 
   onMount(async () => { if (canvasElement) {
             const ctx = canvasElement.getContext("2d");
-            debugger;
+            
             taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
             taleem_canvas.background = background; // this is slideExtra
             taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
@@ -64,10 +89,10 @@ $: console.log("")
     }});
   onDestroy(() => {if (interval) clearInterval(interval);});  
   </script>
-  <div ><AddToolbar callBack={addNewItem}/></div>
 
 <div class="container">
-  <div>
+  <div class="canvasDiv">
+    <div class="toolbarDiv"><AddToolbar callBack={addNewItem} {clone} {deleteFn} {log}/></div>
     <canvas bind:this={canvasElement} ></canvas>
   </div>
 
@@ -80,10 +105,16 @@ $: console.log("")
   </div>
 </div>
 
-  <button on:click={()=>console.log("log Items",items)}>Log Items</button>
 
   <style>
     .container{
       display: flex;
+    }
+    .toolbarDiv{
+      background-color: rgb(52, 51, 51);
+    }
+    .canvasDiv{
+      padding-top: 10px;
+    
     }
   </style>

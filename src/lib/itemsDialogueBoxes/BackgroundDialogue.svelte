@@ -26,7 +26,7 @@
  </script>
     
 <div class="container">
-    <h1 class="input" style="text-align: center;">{"background.itemData.name"}</h1>
+    <h1 class="input" style="text-align: center;">Background</h1>
 
     
     <table class="table">

@@ -45,6 +45,17 @@ isHit(mouseX,mouseY){
   }
 
 /////////////////////////////////////////////////////////////////
+removeAllHandles(items) {
+  // Loop through the array backwards to avoid index shifting issues when removing items
+  for (let i = items.length - 1; i >= 0; i--) {
+    const item = items[i];
+    if (item.flag && item.flag === "handle") {
+      items.splice(i, 1);
+    }
+  }
+  // No return needed since we're modifying the original array
+}
+/////////////////////////////////////////////////////////////////
 getAllHandles(items){//This is get Handles from all items
   let result = [];
   for (let i = 0; i < items.length; i++) {

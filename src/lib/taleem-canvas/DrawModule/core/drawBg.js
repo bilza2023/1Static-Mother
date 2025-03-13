@@ -22,7 +22,6 @@ export default function drawBg(ctx,item,env) {
 ////////////////////////////////////////////////////////////////////
 
 function drawBgImage(ctx,item,env) {
-  debugger;
   const base64String = env.getBackgroundImage(item.backgroundImage);
 
   if (!base64String || typeof base64String !== "string") {
@@ -39,7 +38,7 @@ function drawBgImage(ctx,item,env) {
       ctx.drawImage(cachedBgImage, 0, 0, env.getCanvasWidth(), env.getCanvasHeight());
       ctx.globalAlpha = 1;
   } else {
-      this.cachedBgImage.onload = () => {
+      cachedBgImage.onload = () => {
           ctx.globalAlpha = item.globalAlpha;
           ctx.drawImage(cachedBgImage, 0, 0, env.getCanvasWidth(), env.getCanvasHeight());
           ctx.globalAlpha = 1;
