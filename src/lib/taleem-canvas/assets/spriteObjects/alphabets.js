@@ -88,7 +88,7 @@ y = h * 5;
 y +=5; //5 pix error
 alphabets.addItem("8"               ,w*0  , y, w, h);
 alphabets.addItem("9"               ,w*1  , y, w, h);
-alphabets.addItem("fullstio"        ,w*2  , y, w, h);
+alphabets.addItem("fullstop"        ,w*2  , y, w, h);
 alphabets.addItem("comma"           ,w*3  , y, w, h);
 alphabets.addItem("semi_colon"      ,w*4  , y, w, h);
 alphabets.addItem("colon"           ,w*5  , y, w, h);

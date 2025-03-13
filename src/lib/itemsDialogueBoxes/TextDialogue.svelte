@@ -1,9 +1,30 @@
 
 <script>
+import InputSelect from "../../lib/itemsDialogueBoxes/components/InputSelect.svelte";   
 import InputCheckbox from "$lib/itemsDialogueBoxes/components/InputCheckbox.svelte";   
 import InputColor    from "$lib/itemsDialogueBoxes/components/InputColor.svelte";   
 import InputNumber   from "$lib/itemsDialogueBoxes/components/InputNumber.svelte";   
 import InputText     from "$lib/itemsDialogueBoxes/components/InputText.svelte";   
+
+// Common font families
+const fontFamilies = [
+  "Arial", 
+  "Helvetica", 
+  "Times New Roman", 
+  "Times", 
+  "Courier New", 
+  "Courier", 
+  "Verdana", 
+  "Georgia", 
+  "Palatino", 
+  "Garamond", 
+  "Bookman", 
+  "Comic Sans MS", 
+  "Trebuchet MS", 
+  "Arial Black", 
+  "Impact",
+  "Tahoma"
+];
 
 export let selectedItem;
 
@@ -15,24 +36,19 @@ export let selectedItem;
 
 <table class="table">
     
+<InputText     caption="Text"       bind:value={selectedItem.itemData.text}  />
 
-<InputText     caption="Name"       bind:value={selectedItem.itemData.name}  />
 <InputColor    caption="Color"      bind:value={selectedItem.itemData.color} />
 
+<InputNumber   caption="Font Size" bind:value={selectedItem.itemData.fontSize}  
+config={{min:5, max:250, step:0.5}}/>
 
-<InputNumber   caption="Start Angle" bind:value={selectedItem.itemData.startAngle}  
-config={{min:0, max:8, step:0.25}}/>
 
-<InputNumber   caption="End Angle" bind:value={selectedItem.itemData.endAngle}  
-config={{min:0, max:8, step:0.25}}/>
+<InputSelect   caption="Font" bind:value={selectedItem.itemData.fontFamily} options={fontFamilies} />
 
-<InputNumber   caption="Line Width" bind:value={selectedItem.itemData.lineWidth}  
-config={{min:1, max:50, step:1}}/>
-<InputCheckbox caption="Filled"     bind:value={selectedItem.itemData.filled}/>
-<InputNumber   caption="dash"       bind:value={selectedItem.itemData.dash}
-config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="gap"        bind:value={selectedItem.itemData.gap}
-config={{min:1, max:50, step:1}}/>
+<!-- <InputText     caption="fontFamily"       bind:value={selectedItem.itemData.fontFamily}  /> -->
+<InputText     caption="name"       bind:value={selectedItem.itemData.name}  />
+
 <InputNumber   caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
 config={{min:0, max:1, step:0.1}}/>
 

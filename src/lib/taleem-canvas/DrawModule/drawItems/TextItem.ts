@@ -1,9 +1,17 @@
-import DrawItem from '../drawItemBase/DrawItem.js';
-import uuid from "../../utils/uuid.js";
 
+
+
+import DrawItem from '../drawItemBase/DrawItem';
+import { TextData } from '../../itemsDataInterfaces/TextData.js';
+import Env from "../core/Env";
+import uuid from './uuid.js';
+////////////////////////////////////////////////////////////////////
 export default class TextItem extends DrawItem {
-  constructor(itemData) {
-    super(itemData);
+
+  declare itemData: TextData;
+
+  constructor(itemData: TextData,env:Env) {
+    super(itemData,env);
   }
 
   // Default properties remain static.
@@ -14,6 +22,7 @@ export default class TextItem extends DrawItem {
       x: 100,
       y: 100,
       text: "Add text..",
+      name: "text-001",
       fontSize: 30,
       fontFamily: "Arial",
       color: "black",
@@ -23,24 +32,9 @@ export default class TextItem extends DrawItem {
     };
   }
 
-  static dialogueBox(){
 
-    let dialogueBox = [];
- 
-  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-
-  dialogueBox.push({name:'text', type:'Text',    config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'fontSize', type:'Number',config:{min:0, max:200,step:1} });
-  dialogueBox.push({name:'fontFamily', type:'FontFamily',   config:{} });
-
-  dialogueBox.push({name:'color', type:'Color',     config:{} });
-  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-
-  return dialogueBox;
-}
   // Instance draw method: uses the environment (this.env) to get ctx.
-  draw(ctx,assets={}) {
+  draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void{
     // Ensure defaults for font settings.
     if (!this.itemData.fontSize) this.itemData.fontSize = 40;
     if (!this.itemData.fontFamily) this.itemData.fontFamily = "Arial";

@@ -21,7 +21,7 @@ export default class Sprite extends DrawItem {
       name: "sprite",
       color: "red",
       src: "people", // Default until set dynamically
-      selectedItem: "man_tblt_stndg",
+      selectedItem: "man_tblt_stndg", //selectedItem == sprite item
       x: 10,
       y: 10,
       width: 200,
