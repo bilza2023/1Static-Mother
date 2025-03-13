@@ -12,7 +12,7 @@ export default class ImageItem extends DrawItem {
     constructor(itemData: ImageItemData,env:Env) {
       super(itemData,env);
     }
-
+ 
 
     static newItemData():ImageItemData {
         return {
@@ -31,6 +31,12 @@ export default class ImageItem extends DrawItem {
     }
  
     draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void{
+        
+        if(this.itemData.src !== "drops.png"){
+            debugger;
+            // this.itemData.src = "activity1.jpg";
+        }
+
         ctx.save();
         ctx.globalAlpha = this.itemData.globalAlpha;
     

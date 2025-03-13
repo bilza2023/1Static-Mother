@@ -31,6 +31,7 @@ export default class TaleemCanvas  {
     this.canvas = canvas;
     this.ctx = ctx;
     this.env = new Env(this.ctx);
+    this.imagesUrl = '';
     
     this._background = new BackgroundItem(this.env);
 
@@ -46,7 +47,7 @@ export default class TaleemCanvas  {
 ///////////////////////////////////////
 async loadImages(imagesArray){
   // this.images = await loadImagesLocal(imagesArray);
-   this.env.images = await loadImagesLocal(imagesArray);
+   this.env.images = await loadImagesLocal(imagesArray,this.imagesUrl);
 }
 ///////////////////////////////////////
 

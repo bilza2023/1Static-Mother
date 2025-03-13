@@ -13,6 +13,7 @@ import TriangleDialogue from "../../../lib/itemsDialogueBoxes/TriangleDialogue.s
 import TextDialogue from "../../../lib/itemsDialogueBoxes/TextDialogue.svelte";
 
 export let selectedItem;
+export let images=[];
 
 </script>
 
@@ -36,7 +37,7 @@ export let selectedItem;
 {/if}
 <!--///////////////////////////////////////////////////// -->
 {#if selectedItem && selectedItem.itemData.type=="image"}
-    <ImageDialogue  {selectedItem}  />
+    <ImageDialogue  {selectedItem} {images} />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="line"}
     <LineDialogue  {selectedItem}  />

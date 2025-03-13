@@ -23,6 +23,14 @@ export default class RenderContext {
     return this.images.get(name);
   }
 
+  // public getImageByUrl(url: string): { key: string, value: { url: string, img: object } } | undefined {
+  //   // Find the image entry where the URL matches
+  //   const imageEntry = this.images.find(entry => entry.value.url === url);
+    
+  //   // Return the matching image entry or undefined if not found
+  //   return imageEntry;
+  // }
+
   public getBackgroundImage(name: string): string|undefined {    
     return this.backgroundImages.get(name);
   }

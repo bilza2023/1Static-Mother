@@ -7,6 +7,18 @@
     import SelectedItemBasicDialogue from "./components/SelectedItemBasicDialogue.svelte";
     /////////////////////////////////////////////////////////////////
         let canvasElement;
+        let images = [
+          "atom.png",
+          "baloons.png",
+          "activity1.jpg",
+          "drops.png"
+        ];
+        // let images = [
+        //   "/images/atom.png",
+        //   "/images/baloons.png",
+        //   "/images/activity1.jpg",
+        //   "/images/drops.png"
+        // ];
         let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
     //////////////////////////////////////////////////////////////////
       let items = [];
@@ -25,6 +37,7 @@
       };
       let behaviour = null;
   
+      let imagesUrl   = "/images/";
       let interval = null;
   
       let selectedItem = null;
@@ -41,8 +54,9 @@
             const ctx = canvasElement.getContext("2d");
             taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
             taleem_canvas.background = background; // this is slideExtra
+            taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
             
-            await taleem_canvas.loadImages(["/images/drops.png"]);
+            await taleem_canvas.loadImages(images);
 
             taleem_canvas.items = items;
             behaviour = new EditorBehaviour(items,setSelectedItem);
@@ -61,7 +75,7 @@
 
   <div>      
     {#if selectedItem}
-    <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  />
+    <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  {images}/>
     {/if}
   </div>
 </div>
