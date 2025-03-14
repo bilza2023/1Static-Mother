@@ -3,10 +3,9 @@ import Behaviour from "../Behaviour";
 
 export default class EditorBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////
-constructor(items,callback){
-  super(items,callback);
+constructor(itemsEditor,callback){
+  super(itemsEditor,callback);
 ///////////////////////////////////
-  this.items = items;
   this.activeHandle = null;
   this.oldX = 0;
   this.oldY = 0;
@@ -38,7 +37,8 @@ constructor(items,callback){
       //////////////////////////////////////////////////////////////////
       this.selectedItem.processHandle(handleProcessData);
       ///////////////////////////////////////////////////////
-      const handlesInItems = this.getAllHandles(this.itemsEditor.items);
+      const handlesInItems = this.itemsEditor.getAllHandles();
+
       this.selectedItem.updateHandles(handlesInItems);
     }
   }
@@ -50,14 +50,14 @@ constructor(items,callback){
       }
   }
   dblclick(mouseX,mouseY,type,event) {
-    
+    debugger;
     const hitItem  = this.isHit(mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
             this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
 
-            const handlesInItems = this.getAllHandles(this.itemsEditor.items);
+            const handlesInItems = this.itemsEditor.getAllHandles();
             this.selectedItem.updateHandles(handlesInItems);
               //return selected item for use with dialogue box 
         this.callback(this.selectedItem);

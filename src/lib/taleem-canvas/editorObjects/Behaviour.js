@@ -1,20 +1,15 @@
 
-import ItemsEditor from "./itemsEditor";
+import itemsMap from "$lib/taleem-canvas/editorObjects/ItemsMap";
 import Create from "../DrawModule/Create";
 
 export default class Behaviour {
-//itemsEditor is provided by Parent class since we do not want to expose itemsEditor to user directly...
 
-constructor(items,callback){
-this.itemsEditor = new ItemsEditor(items);
+constructor(itemsEditor,callback){
+this.itemsEditor = itemsEditor;
 this.callback = callback;
 this.create = Create;
 
-////////helper functions
-// this.itemObjectsHasHandles = itemObjectsHasHandles;
-// this.itemObjectsHandles = itemObjectsHandles;
 }
-
 // Event handlers for processing Player mouse events //5 events 
 mousemove  (x , y , hitItem   , hitItemsUuids) {}
 click      (x , y , hitItem   , hitItemsUuids) {}
@@ -26,7 +21,7 @@ dblclick   (x , y , hitItems  , hitItemsUuids) {}
 isHit(mouseX,mouseY){
   for (let i = 0; i < this.itemsEditor.items.length; i++) {
     const item = this.itemsEditor.items[i];
-    const EditItemObject = this.itemsEditor.getEditObject(item.type);
+    const EditItemObject = this.getEditObject(item.type);
     const editObj = new EditItemObject(item);
     const isHit = editObj.isHit(mouseX,mouseY);
     if(isHit == true){
@@ -43,28 +38,8 @@ isHit(mouseX,mouseY){
       return false;
    }
   }
-
-/////////////////////////////////////////////////////////////////
-removeAllHandles(items) {
-  // Loop through the array backwards to avoid index shifting issues when removing items
-  for (let i = items.length - 1; i >= 0; i--) {
-    const item = items[i];
-    if (item.flag && item.flag === "handle") {
-      items.splice(i, 1);
-    }
+  getEditObject(type){
+    return itemsMap.get(type);
   }
-  // No return needed since we're modifying the original array
-}
-/////////////////////////////////////////////////////////////////
-getAllHandles(items){//This is get Handles from all items
-  let result = [];
-  for (let i = 0; i < items.length; i++) {
-    const item =  items[i];
-    if(item.flag && item.flag === "handle"){
-      result.push(item);
-    }
-  }
-  return result;
-}    
 /////////////////////////////////////////////////////////////////
 }//EventManager

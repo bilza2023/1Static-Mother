@@ -1,24 +1,36 @@
-
+/**
+ * This module know just about item literals where as Behaviour know about EditObject.
+ */
 //this.selectedItem.createHandles
 //this.itemsEditor.getEditObject(item.type);
 //.addItems(handles)
 //this.getAllHandles(this.itemsEditor.items)
 // this.selectedItem.updateHandles(handlesInItems);
-import itemsMap from "../../lib/taleem-canvas/editorObjects/ItemsMap";
+
+
+import  {Create} from "$lib/taleem-canvas";
 ///////////////////////////////////////////////////////////////////////////////
 export default class ItemsEditor {
 
     constructor(items = []) {
-        this.items = items;
-        this._selectedItem = null;
+        this._items = items;
+        this._selectedItem = null; // this selected item is just item literal no EditObject
     }
     
-    addItems(newItems){
-    this.items.push(...newItems);
+    // addItems(newItems){
+    // this._items.push(...newItems);
+    // }
+
+    set items(items){
+        this._items = items;
+    }
+    get items(){
+        return this._items;
     }
 
-    getEditObject(type){
-        return itemsMap.get(type);
+    addNewItem(newItemName){
+        const newItem = Create[newItemName]();
+        this._items = [...this._items, newItem];
     }
 
     set selectedItem(item) {
@@ -41,18 +53,18 @@ export default class ItemsEditor {
         
     addItems(newItems) {
         if (Array.isArray(newItems)) {
-            this.items.push(...newItems);
+            this._items.push(...newItems);
         } else {
-            this.items.push(newItems);
+            this._items.push(newItems);
         }
-        return this.items;
+        return this._items;
     }
 
     removeAllHandles() {
-        for (let i = this.items.length - 1; i >= 0; i--) { 
-            const item = this.items[i];
+        for (let i = this._items.length - 1; i >= 0; i--) { 
+            const item = this._items[i];
             if (item.flag && item.flag === "handle") {
-                this.items.splice(i, 1); 
+                this._items.splice(i, 1); 
             }
         }
     }
@@ -61,14 +73,31 @@ export default class ItemsEditor {
         if (this._selectedItem) {
             const clonedItem = JSON.parse(JSON.stringify(this._selectedItem.itemData || this._selectedItem));
             clonedItem.uuid = this.generateUUID();
-            this.items.push(clonedItem);
+            this._items.push(clonedItem);
             return clonedItem;
         }
         return null;
     }
 
+    deleteFn() {
+            // if (selectedItem && behaviour) {
+                // const uuid = selectedItem.itemData.uuid;
+                // items = items.filter(item => item.uuid !== uuid); // More reactive approach
+                // behaviour.removeAllHandles(items);
+            // }
+    }
+    getAllHandles(){
+        let result = [];
+        for (let i = 0; i < this._items.length; i++) {
+          const item =  this._items[i];
+          if(item.flag && item.flag === "handle"){
+            result.push(item);
+          }
+        }
+        return result;
+      } 
     findItemByUUID(uuid) {
-        return this.items.find(item => item.uuid === uuid);
+        return this._items.find(item => item.uuid === uuid);
     }
 
     generateUUID() {
