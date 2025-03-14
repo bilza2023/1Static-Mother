@@ -53,6 +53,9 @@ constructor(itemsEditor,callback){
     const hitItem  = this.isHit(mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
+              //clear previous Handles    
+        this.itemsEditor.removeAllHandles();
+        
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
             this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
 
