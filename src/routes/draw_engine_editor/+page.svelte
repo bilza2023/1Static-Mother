@@ -3,7 +3,7 @@
    * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
   */
     import ItemsEditor from "./ItemsEditor";
-
+   
     import  {TaleemCanvas,Create,AddToolbar,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "../../lib/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
@@ -19,7 +19,8 @@
       ];
       let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
       let items = [];
-      let itemsEditor = new ItemsEditor(items);//should this move inside onMount???
+      let itemsEditor = null;
+      // $: calculatedItems =  itemsEditor.items;
       let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -43,6 +44,7 @@ function setItemToSelectedItem(selectedUuid){
 }
 /////////////////////////////////////////////////////////////
   function setSelectedItem(incomingSelectedItem){
+    debugger;
     selectedItem = incomingSelectedItem;
     //why this line?
     taleem_canvas.items = behaviour.itemsEditor.items;
@@ -51,6 +53,8 @@ function setItemToSelectedItem(selectedUuid){
 
   function gameloop() { 
     if (taleem_canvas) {
+      // if(itemsEditor.items.length > 0){debugger;}
+      items = itemsEditor.items;///THIS LINE MAKES items not the top level.
       taleem_canvas.items = itemsEditor.items;
       taleem_canvas.background = background;taleem_canvas.draw();
     }
@@ -59,14 +63,13 @@ function setItemToSelectedItem(selectedUuid){
   function log(){console.log("log Items",items)}
 
   onMount(async () => { if (canvasElement) {
+    // debugger;
             const ctx = canvasElement.getContext("2d");
-            
+            itemsEditor = new ItemsEditor(items);//should this move inside onMount???)
             taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
             taleem_canvas.background = background; // this is slideExtra
             taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
-            
             await taleem_canvas.loadImages(images);
-
             taleem_canvas.items = itemsEditor.items;
             behaviour = new EditorBehaviour(itemsEditor,setSelectedItem);
             if(behaviour){taleem_canvas.connect(behaviour)}
@@ -78,7 +81,9 @@ function setItemToSelectedItem(selectedUuid){
 
 <div class="container">
   <div class="canvasDiv">
+    {#if itemsEditor}
     <div class="toolbarDiv"><AddToolbar callBack={itemsEditor.addNewItem.bind(itemsEditor)} clone={itemsEditor.clone} deleteFn={itemsEditor.deleteFn} {log}/></div>
+    {/if}
     <canvas bind:this={canvasElement} ></canvas>
   </div>
 

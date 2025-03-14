@@ -29,6 +29,7 @@ export default class ItemsEditor {
     }
 
     addNewItem(newItemName){
+        // debugger;
         const newItem = Create[newItemName]();
         this._items = [...this._items, newItem];
     }

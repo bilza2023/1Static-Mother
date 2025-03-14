@@ -12,12 +12,13 @@
 
 <table>
 <tr class="tr">
-    <td class="td">Select Item</td>
     <td class="td">
         <select class="input" on:change={handleChange} value={selectedUuid}>
             <option value="">Select an item</option>
             {#each items as item}
+               {#if item.flag !== "handle"}     
                 <option value={item.uuid}>{item.name || item.type || item.uuid}</option>
+                {/if}
             {/each}
         </select>
     </td>

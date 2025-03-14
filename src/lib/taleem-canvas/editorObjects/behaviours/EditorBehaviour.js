@@ -50,7 +50,6 @@ constructor(itemsEditor,callback){
       }
   }
   dblclick(mouseX,mouseY,type,event) {
-    debugger;
     const hitItem  = this.isHit(mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
@@ -71,14 +70,15 @@ constructor(itemsEditor,callback){
   mouseup(mouseX,mouseY,type,event){this.activeHandle=null;}
 ///////////////////////////////////////////////////////////////
 setItemToSelectedItem(item){
-  
-  const EditItemObject = this.itemsEditor.getEditObject(item.type);
+  const EditItemObject = this.getEditObject(item.type);
   const editObj = new EditItemObject(item);
       this.selectedItem = editObj;
+        //clear previous Handles    
+        this.itemsEditor.removeAllHandles();
+
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-            debugger;
             this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
-            const handlesInItems = this.getAllHandles(this.itemsEditor.items);
+            const handlesInItems = this.itemsEditor.getAllHandles();
             this.selectedItem.updateHandles(handlesInItems);
             this.callback(this.selectedItem);
 }
