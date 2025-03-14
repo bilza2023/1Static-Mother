@@ -6,6 +6,7 @@
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "../../lib/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
     import BackgroundDialogue from "../../lib/itemsDialogueBoxes/BackgroundDialogue.svelte";
+    import SelectDropDown from "./SelectDropDown.svelte";
     /////////////////////////////////////////////////////////////////
         let canvasElement;
         let images = [
@@ -19,6 +20,7 @@ $: console.log("")
         let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
     //////////////////////////////////////////////////////////////////
       let items = [];
+      let selectedItemUuid = null;
 
       let background =  {
         uuid: "44455764hfghyjty6",
@@ -41,27 +43,52 @@ $: console.log("")
       let selectedItem = null;
   
 /////////////////////////////////////////////////////////////
-
 function clone() {
     if (selectedItem) {
         const clonedItem = JSON.parse(JSON.stringify(selectedItem.itemData));
         clonedItem.uuid = (Math.random() * 100000000).toString();
-        items.push(clonedItem)
-        // items = [...items]; // Trigger reactivity
+        items = [...items, clonedItem]; // Use this instead of push to ensure reactivity
     }
 }
 function deleteFn() {
     if (selectedItem && behaviour) {
-      const uuid = selectedItem.itemData.uuid;
-  const index = items.findIndex(item => item.uuid === uuid);
-  if (index !== -1) {
-    items.splice(index, 1);
-    behaviour.removeAllHandles(items);
-  }
-  }
+        const uuid = selectedItem.itemData.uuid;
+        items = items.filter(item => item.uuid !== uuid); // More reactive approach
+        behaviour.removeAllHandles(items);
+    }
 }
 
+// function clone() {
+//     if (selectedItem) {
+//         const clonedItem = JSON.parse(JSON.stringify(selectedItem.itemData));
+//         clonedItem.uuid = (Math.random() * 100000000).toString();
+//         items.push(clonedItem)
+//         // items = [...items]; // Trigger reactivity
+//     }
+// }
+// function deleteFn() {
+//     if (selectedItem && behaviour) {
+//       const uuid = selectedItem.itemData.uuid;
+//   const index = items.findIndex(item => item.uuid === uuid);
+//   if (index !== -1) {
+//     items.splice(index, 1);
+//     behaviour.removeAllHandles(items);
+//   }
+//   }
+// }
 
+// function handleChange(event) {
+//     selectedItemUuid = event.target.value;
+//     const selectedItemObj = items.find(item => item.uuid === selectedItemUuid);
+//     if (selectedItemObj && behaviour) {
+//         setItemToSelectedItem(selectedItemObj);
+//     }
+// }
+function setItemToSelectedItem(selectedUuid){
+  // debugger;
+  const selectedItem = items.find(item => item.uuid === selectedUuid);
+  behaviour.setItemToSelectedItem(selectedItem);
+}
 /////////////////////////////////////////////////////////////
   function setSelectedItem(incomingSelectedItem){
     selectedItem = incomingSelectedItem;
@@ -70,7 +97,12 @@ function deleteFn() {
     taleem_canvas.draw();
   }
 
-  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.background = background;taleem_canvas.draw();}}function addNewItem(newItemName){const newItem = Create[newItemName]();items.push(newItem);}function log(){console.log("log Items",items)}
+  function gameloop() { if (taleem_canvas) {taleem_canvas.items = items;taleem_canvas.background = background;taleem_canvas.draw();}}
+  function addNewItem(newItemName){
+    const newItem = Create[newItemName]();
+    items = [...items, newItem];
+  }
+  function log(){console.log("log Items",items)}
 
   onMount(async () => { if (canvasElement) {
             const ctx = canvasElement.getContext("2d");
@@ -96,7 +128,11 @@ function deleteFn() {
     <canvas bind:this={canvasElement} ></canvas>
   </div>
 
-  <div>      
+  <div>    
+  <!-- //////////////////////////////////////////////////////////////     -->
+  <SelectDropDown  {items} {setItemToSelectedItem}/> 
+<!-- {/if} -->
+  <!-- //////////////////////////////////////////////////////////////     -->
     {#if selectedItem}
         <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  {images}/>
     {:else}

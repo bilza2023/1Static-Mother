@@ -1,5 +1,5 @@
 
-import ItemsEditor from "./itemsEditor/ItemsEditor";
+import ItemsEditor from "./itemsEditor";
 import Create from "../DrawModule/Create";
 
 export default class Behaviour {

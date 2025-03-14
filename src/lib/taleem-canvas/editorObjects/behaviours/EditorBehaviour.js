@@ -6,7 +6,7 @@ export default class EditorBehaviour extends Behaviour {
 constructor(items,callback){
   super(items,callback);
 ///////////////////////////////////
-  this.selectedItem = null;
+  this.items = items;
   this.activeHandle = null;
   this.oldX = 0;
   this.oldY = 0;
@@ -69,9 +69,23 @@ constructor(items,callback){
   }
   click(mouseX,mouseY,type,event) {}
   mouseup(mouseX,mouseY,type,event){this.activeHandle=null;}
+///////////////////////////////////////////////////////////////
+setItemToSelectedItem(item){
+  
+  const EditItemObject = this.itemsEditor.getEditObject(item.type);
+  const editObj = new EditItemObject(item);
+      this.selectedItem = editObj;
+            let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
+            debugger;
+            this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
+            const handlesInItems = this.getAllHandles(this.itemsEditor.items);
+            this.selectedItem.updateHandles(handlesInItems);
+            this.callback(this.selectedItem);
+}
+
 }//EventManager
 
-
+//////////////////////////////////////////////////////////////
 function calculateDeltaX(currentX, oldX, maxSpeed = 10) {
   // Calculate raw delta
   const rawDelta = currentX - oldX;
@@ -86,7 +100,6 @@ function calculateDeltaX(currentX, oldX, maxSpeed = 10) {
     return Math.sign(rawDelta) * (maxSpeed + Math.log10(Math.abs(rawDelta) - maxSpeed + 1));
   }
 }
-
 function calculateDeltaY(currentY, oldY, maxSpeed = 2) {
   // Calculate raw delta
   const rawDelta = currentY - oldY;
@@ -101,28 +114,9 @@ function calculateDeltaY(currentY, oldY, maxSpeed = 2) {
     return Math.sign(rawDelta) * (maxSpeed + Math.log10(Math.abs(rawDelta) - maxSpeed + 1));
   }
 }
-
-/**
- * Determine horizontal mouse movement direction
- * @param {number} currentX - Current mouse X position
- * @param {number} oldX - Previous mouse X position
- * @returns {boolean} true for right movement, false for left movement
- */
 function mouseDirectionXUp(currentX, oldX) {
-  // Compare current position with old position
-  // true = moving right, false = moving left
   return currentX >= oldX;
 }
-
-/**
- * Determine vertical mouse movement direction
- * @param {number} currentY - Current mouse Y position
- * @param {number} oldY - Previous mouse Y position
- * @returns {boolean} true for down movement, false for up movement
- */
 function mouseDirectionYUp(currentY, oldY) {
-  // Compare current position with old position
-  // Note: In most canvas coordinate systems, Y increases downward
-  // true = moving down, false = moving up
   return currentY >= oldY;
 }
