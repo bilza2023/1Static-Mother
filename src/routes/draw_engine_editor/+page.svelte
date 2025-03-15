@@ -1,8 +1,4 @@
 <script>
-  /**
-   * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
-  */
-    // import Editor from "../../lib/taleem-canvas/editorObjects/editor/Editor";
    
     import  {TaleemCanvas,TaleemPlayer,Create,AddToolbar,Editor,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
@@ -18,28 +14,27 @@
         "drops.png"
       ];
       let player= null;
-      let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
-    //   let items = [
-    //     {
-    //   uuid: "kkk",
-    //   type: 'rectangle',
-    //   name: 'rectangle001',
-    //   x: 100,
-    //   y: 100,
-    //   width: 100,
-    //   height: 100,
-    //   rotation: 0,
-    //   filled: true,
-    //   lineWidth: 1,
-    //   dash: 0,
-    //   gap: 0,
-    //   color: "red",
-    //   globalAlpha: 1
-    // }
-    //   ];
-    let items = [];  
-    let editor = null;
-      // $: calculatedItems =  editor.items;
+     
+      let calculatedItems = [];
+      let items = [
+      {
+      uuid: "abc",
+      type: 'rectangle',
+      name: 'rectangle001',
+      x: 100,
+      y: 100,
+      width: 100,
+      height: 100,
+      rotation: 0,
+      filled: true,
+      lineWidth: 1,
+      dash: 0,
+      gap: 0,
+      color: "red",
+      globalAlpha: 1
+      }
+      ];
+
       let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -61,6 +56,16 @@ function setItemToSelectedItem(selectedUuid){
   const selectedItem = items.find(item => item.uuid === selectedUuid);
   behaviour.setItemToSelectedItem(selectedItem);
 }
+
+/////////////////////////////////////////////////////////////
+// let itemsForSelectDropDown = null;
+// $:{ 
+//   if(player && player.items){
+
+//     itemsForSelectDropDown = player.items._items;
+//   }
+// }
+// $: itemsForSelectDropDown = player && player.items ? player.items._items : [];
 /////////////////////////////////////////////////////////////
   function setSelectedItem(incomingSelectedItem){
     // debugger;
@@ -69,11 +74,7 @@ function setItemToSelectedItem(selectedUuid){
 
   function gameloop() { 
     if (player) {
-      // if(editor.items.length > 0){debugger;}
-      // items = editor.items;///THIS LINE MAKES items not the top level.
-      // player.items = editor.items;
-      // player.background = background;
-      // debugger;
+      calculatedItems = player.items.items
       player.draw();
     }
   }
@@ -108,7 +109,9 @@ function setItemToSelectedItem(selectedUuid){
 
   <div>    
   <!-- //////////////////////////////////////////////////////////////     -->
-  <SelectDropDown  {items} {setItemToSelectedItem}/> 
+  {#if calculatedItems }
+  <SelectDropDown items={calculatedItems} {setItemToSelectedItem}/> 
+  {/if}
   <!-- //////////////////////////////////////////////////////////////     -->
     {#if selectedItem}
         <SelectedItemBasicDialogue bind:selectedItem={selectedItem}  {images}/>

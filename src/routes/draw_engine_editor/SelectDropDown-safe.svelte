@@ -1,36 +1,34 @@
-
 <script>
-    export let items = [];
+    export let player;
+    
     export let setItemToSelectedItem = () => {}; // Default empty function
     
-    let selectedItem = "";
+    let selectedUuid = "";
+
+    $: incommingItems = player.items._items;
+    console.log("incommingItems" ,incommingItems);
     
     function handleChange(event) {
-        debugger;
-        selectedItem = event.target.value;
-        if (selectedItem) {
-            if (selectedItem) {
-                setItemToSelectedItem(selectedItem);
-            }
-        }
+        selectedUuid = event.target.value;
+        setItemToSelectedItem(selectedUuid);
     }
 </script>
 
 <table>
 <tr class="tr">
-    <td class="td">Select Item</td>
     <td class="td">
-        <select class="input" on:change={handleChange} value={selectedItem}>
+        <select class="input" on:change={handleChange} value={selectedUuid}>
             <option value="">Select an item</option>
-            {#each items as item}
-                <option value={item}>{item.name}</option>
+           
+            {#each player.items._items as item}
+               {#if item.flag !== "handle"}     
+                <option value={item.uuid}>{item.name || item.type || item.uuid}</option>
+                {/if}
             {/each}
         </select>
     </td>
 </tr>
 </table>
-
-
 
 <style>
 
