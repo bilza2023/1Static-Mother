@@ -58,6 +58,7 @@ function setItemToSelectedItem(selectedUuid){
 }
 
   function setSelectedItem(incomingSelectedItem){
+    
     selectedItem = incomingSelectedItem;
   }
 function clone(){

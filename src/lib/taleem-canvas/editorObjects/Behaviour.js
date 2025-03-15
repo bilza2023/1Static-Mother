@@ -9,8 +9,8 @@ export default class Behaviour {
 
 constructor(callback){
 this.callback = callback;
-this.itemsEditor = null; //editor == itemsEditor
-this.create = Create;
+this.itemsEditor = null; //editor == itemsEditor-->converted 16-mar-2025
+this.create = Create;//should be removed
 
 }
 // Event handlers for processing Player mouse events //5 events 
@@ -46,5 +46,6 @@ isHit(mouseX,mouseY){
   getEditObject(type){
     return itemsMap.get(type);
   }
+/////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 }//EventManager

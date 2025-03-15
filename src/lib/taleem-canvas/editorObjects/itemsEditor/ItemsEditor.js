@@ -17,7 +17,7 @@ export default class ItemsEditor {
         this.add = new Add(this._items)
         // selectedItem is always EditObject
         //selected item should be in behaviour
-        this._selectedItem = null; // this selected item is just item literal no EditObject
+       
     }
     
     set items(items){
@@ -33,23 +33,6 @@ export default class ItemsEditor {
 
     addItems(newItems){
     this._items.push(...newItems);
-    }
-    set selectedItem(item) {
-        if(item == null){this._selectedItem =null;}
-        debugger;    
-    const EditItemObject = this.getEditObject(item.type);
-    const editObj = new EditItemObject(item);
-        this.selectedItem = editObj;
-        let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-              
-        this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
-        const handlesInItems = this.getAllHandles(this.itemsEditor.items);
-        this.selectedItem.updateHandles(handlesInItems);
-        this.callback(this.selectedItem);
-    }
-
-    get selectedItem() {
-        return this._selectedItem;
     }
         
     addItems(newItems) {

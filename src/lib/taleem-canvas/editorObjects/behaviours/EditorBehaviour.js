@@ -9,6 +9,8 @@ constructor(callback){
   this.activeHandle = null;
   this.oldX = 0;
   this.oldY = 0;
+  //This can be moved to a seperate class
+this._selectedItem = null; // this selected item is just item literal no EditObject
 }
 /////////////////////////////////////////////////////////
   mousemove(x,y,type,event) {
@@ -37,7 +39,7 @@ constructor(callback){
       //////////////////////////////////////////////////////////////////
       this.selectedItem.processHandle(handleProcessData);
       ///////////////////////////////////////////////////////
-      const handlesInItems = this.editor.getAllHandles();
+      const handlesInItems = this.itemsEditor.getAllHandles();
 
       this.selectedItem.updateHandles(handlesInItems);
     }
@@ -55,18 +57,18 @@ constructor(callback){
       if (hitItem){
             this.selectedItem = hitItem;
               //clear previous Handles    
-        this.editor.removeAllHandles();
+        this.itemsEditor.removeAllHandles();
 
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-            this.editor.addItems(handles); //addItems is safe the array will not loose ref
+            this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
 
-            const handlesInItems = this.editor.getAllHandles();
+            const handlesInItems = this.itemsEditor.getAllHandles();
             this.selectedItem.updateHandles(handlesInItems);
               //return selected item for use with dialogue box 
         this.callback(this.selectedItem);
     }else {
         this.selectedItem = null;
-        this.editor.removeAllHandles();
+        this.itemsEditor.removeAllHandles();
         this.callback(null);
     }
   }
@@ -74,19 +76,33 @@ constructor(callback){
   mouseup(mouseX,mouseY,type,event){this.activeHandle=null;}
 ///////////////////////////////////////////////////////////////
 setItemToSelectedItem(item){
+  debugger;
   const EditItemObject = this.getEditObject(item.type);
   const editObj = new EditItemObject(item);
       this.selectedItem = editObj;
-        //clear previous Handles    
-        this.editor.removeAllHandles();
-
-            let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-            this.editor.addItems(handles); //addItems is safe the array will not loose ref
-            const handlesInItems = this.editor.getAllHandles();
-            this.selectedItem.updateHandles(handlesInItems);
-            this.callback(this.selectedItem);
+ 
 }
 
+///////////////////////////////////////////////
+//why we need selected item internal  should the editro bahaviour have it ? 
+set selectedItem(incommingSelectedItemEditorObject) {
+  if(incommingSelectedItemEditorObject == null){this._selectedItem =null;}
+  
+  this._selectedItem = incommingSelectedItemEditorObject;
+  let handles = this._selectedItem.createHandles(this.create);//Ref to Create->this.create
+        
+  this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
+
+  const handlesInItems = this.itemsEditor.getAllHandles();
+  this._selectedItem.updateHandles(handlesInItems);
+  this.callback(this.selectedItem);
+}
+
+get selectedItem() {
+  return this._selectedItem;
+}
+
+///////////////////////////////////////////////
 }//EventManager
 
 //////////////////////////////////////////////////////////////
