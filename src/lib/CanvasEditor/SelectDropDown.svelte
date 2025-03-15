@@ -1,12 +1,9 @@
 <script>
-    export let player;
+    export let items;
     
     export let setItemToSelectedItem = () => {}; // Default empty function
     
     let selectedUuid = "";
-
-    $: incommingItems = player.items._items;
-    console.log("incommingItems" ,incommingItems);
     
     function handleChange(event) {
         selectedUuid = event.target.value;
@@ -20,7 +17,7 @@
         <select class="input" on:change={handleChange} value={selectedUuid}>
             <option value="">Select an item</option>
            
-            {#each player.items._items as item}
+            {#each items as item}
                {#if item.flag !== "handle"}     
                 <option value={item.uuid}>{item.name || item.type || item.uuid}</option>
                 {/if}
