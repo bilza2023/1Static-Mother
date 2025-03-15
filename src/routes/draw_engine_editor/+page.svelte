@@ -1,5 +1,5 @@
 <script>
-   
+
     import  {TaleemPlayer,AddToolbar,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "../../lib/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
@@ -14,7 +14,6 @@
         "drops.png"
       ];
       let player= null;
-     
       let calculatedItems = [];
       let items = [
       {
@@ -34,7 +33,6 @@
       globalAlpha: 1
       }
       ];
-
       let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -56,10 +54,9 @@ function setItemToSelectedItem(selectedUuid){
   const selectedItem = items.find(item => item.uuid === selectedUuid);
   behaviour.setItemToSelectedItem(selectedItem);
 }
-
-  function setSelectedItem(incomingSelectedItem){
-    selectedItem = incomingSelectedItem;
-  }
+function setSelectedItem(incomingSelectedItem){
+  selectedItem = incomingSelectedItem;
+}
 function clone(){
   if(selectedItem){
     player.itemsEditor.clone(selectedItem.itemData);
@@ -69,35 +66,33 @@ function deleteFn(){
   if(selectedItem){
     player.itemsEditor.deleteFn(selectedItem.itemData);
     behaviour.setItemToSelectedItem(null);
-    // selectedItem =null;
   }
 }
-
-  function gameloop() { 
-    if (player) {
-      calculatedItems = player.itemsEditor.items
-      player.draw();
-    }
+function gameloop() { 
+  if (player) {
+    calculatedItems = player.itemsEditor.items
+    player.draw();
   }
-  function log(){console.log("log Items",items)}
+}
+function log(){console.log("log Items",items)}
 
-  onMount(async () => { if (canvasElement) {
-    // debugger;
-            const ctx = canvasElement.getContext("2d");
-            player = new TaleemPlayer(canvasElement,ctx,items);
-            player.background = background; // this is slideExtra
-            player.imagesUrl = imagesUrl; // this is slideExtra
-            await player.loadImages(images);
-            
-            ///////////////////////////////////////////////////////
-            behaviour = new EditorBehaviour(setSelectedItem);
-            if(behaviour){player.connect(behaviour)}
-            ///////////////////////////////////////////////////////
-            player.draw();
-            interval = setInterval(gameloop,20);
-    }});
-  onDestroy(() => {if (interval) clearInterval(interval);});  
-  </script>
+onMount(async () => { if (canvasElement) {
+  // debugger;
+          const ctx = canvasElement.getContext("2d");
+          player = new TaleemPlayer(canvasElement,ctx,items);
+          player.background = background; // this is slideExtra
+          player.imagesUrl = imagesUrl; // this is slideExtra
+          await player.loadImages(images);
+          
+          ///////////////////////////////////////////////////////
+          behaviour = new EditorBehaviour(setSelectedItem);
+          if(behaviour){player.connect(behaviour)}
+          ///////////////////////////////////////////////////////
+          player.draw();
+          interval = setInterval(gameloop,20);
+  }});
+onDestroy(() => {if (interval) clearInterval(interval);});  
+</script>
 
 <div class="container">
   <div class="canvasDiv">

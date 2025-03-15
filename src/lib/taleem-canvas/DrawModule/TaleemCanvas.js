@@ -1,5 +1,4 @@
 
-
 import EventModule from "./core/EventModule.js";
 import itemsToDrawObjects from "./core/itemsToDrawObjects";
 import Env from "./core/Env";
@@ -57,28 +56,22 @@ export default class TaleemCanvas  {
   }
 ///////////////////////////////////////
 async loadImages(imagesArray){
-  // this.images = await loadImagesLocal(imagesArray);
    this.env.images = await loadImagesLocal(imagesArray,this.imagesUrl);
 }
 ///////////////////////////////////////
 set background(bg){//this fn needs improvement 
       this.bgData =  bg; 
 }
-
   get background(){
     return this.bgData;
   }
   set items(items){
-    // debugger;
-    // this._background = setBackGround(items,this.env);
     this.itemObjects = [];
     this.itemObjects = itemsToDrawObjects(items,this.env);
-    // this.eventModule.updateItems(this.itemObjects);
   } 
   get items(){
     return this.itemObjects;
   }
-  
   clear(){
     const { ctx, canvas } = this;
     const bgColor =  'gray';
@@ -86,13 +79,10 @@ set background(bg){//this fn needs improvement
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);  
   }
-
   onMouse(eventType, callback) {
     this.eventModule.on(eventType, callback);
   }
-
   connect(eventHandlersObject){
-  // debugger;
     this.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
     this.onMouse("dblclick",  eventHandlersObject.dblclick.bind(eventHandlersObject));
     this.onMouse("mousemove", eventHandlersObject.mousemove.bind(eventHandlersObject));
@@ -100,7 +90,6 @@ set background(bg){//this fn needs improvement
     this.onMouse("mousedown", eventHandlersObject.mousedown.bind(eventHandlersObject));
     return true;
   }
-  // Add this to your Player class
  addMouseEvent(eventType,callback) {
   if (this.eventModule.callbacks[eventType] !== undefined) {
     this.eventModule.on(eventType, callback);
@@ -111,16 +100,16 @@ set background(bg){//this fn needs improvement
 
   draw() {
     this.clear();
-    // if(this.background){
-      // debugger;
-      drawBg(this.ctx,this.bgData,this.env);
-    // }
+    
+    drawBg(this.ctx,this.bgData,this.env);
+    
     this.itemObjects.forEach(item => {
-        if (typeof item.draw === 'function') {
-          // debugger;
-          item.draw(this.ctx,this.assets);
-        }
-      });
+      if (typeof item.draw === 'function') {
+        this.ctx.save();//dont remove
+        item.draw(this.ctx,this.assets);
+        this.ctx.restore();//dont remove
+      }
+    });
   }
 
 }

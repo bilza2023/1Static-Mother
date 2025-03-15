@@ -32,7 +32,6 @@ export default class TextItem extends DrawItem {
     };
   }
 
-
   // Instance draw method: uses the environment (this.env) to get ctx.
   draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void{
     // Ensure defaults for font settings.

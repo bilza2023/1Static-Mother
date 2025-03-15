@@ -26,22 +26,6 @@ export default class Dot extends DrawItem {
     };
   }
 
-  static dialogueBox(){
-
-    let dialogueBox = [];
- 
-  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-
-  dialogueBox.push({name:'label', type:'Text',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'dot_width', type:'Number',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'text_color', type:'Color',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'text_size', type:'Number',      config:{min:0,max:1000,step:1} });
-
-  dialogueBox.push({name:'color', type:'Color',     config:{} });
-  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-return dialogueBox;
-}
 
 draw(ctx) {
     const {

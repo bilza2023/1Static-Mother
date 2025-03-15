@@ -1,5 +1,6 @@
+
 import DrawItem from '../drawItemBase/DrawItem.js';
-import { ItemData } from '../drawItemInterfaces/ItemData.js';
+import { ItemData } from '../../itemsDataInterfaces/ItemData.js';
 import uuid from './uuid.js';
 
 // Interface for Circle-specific item data
@@ -17,17 +18,6 @@ interface EllipseItemData extends ItemData {
     filled: boolean,
     color: string,
     globalAlpha: number
-}
-
-// Interface for dialogue box options
-interface DialogueBoxOption {
-  name: string;
-  type: 'Number' | 'Boolean' | 'Color' | 'Float' | string;
-  config: {
-    min?: number;
-    max?: number;
-    step?: number;
-  };
 }
 
 export default class Ellipse extends DrawItem {
@@ -57,28 +47,6 @@ export default class Ellipse extends DrawItem {
     };
   }
 
-  static dialogueBox(): DialogueBoxOption[] {
-    let dialogueBox: DialogueBoxOption[] = [];
- 
-  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
-  
-  dialogueBox.push({name:'radiusX', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'radiusY', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'rotation', type:'Float',config:{min:0,max:360,step:0.1} });
-  
-  dialogueBox.push({name:'startAngle', type:'Float',config:{min:-360,max:360,step:0.1} });
-  dialogueBox.push({name:'endAngle', type:'Float',config:{min:-360,max:360,step:0.1} });
-
-  dialogueBox.push({name:'lineWidth', type:'Number',config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'filled', type:'Boolean',config:{} });
-
-  dialogueBox.push({name:'color', type:'Color',     config:{} });
-  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
-
-return dialogueBox;
-}
- 
 
 draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void {
     ctx.save();

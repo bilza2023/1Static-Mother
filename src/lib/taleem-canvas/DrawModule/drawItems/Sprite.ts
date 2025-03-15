@@ -50,7 +50,6 @@ export default class Sprite extends DrawItem {
     }
     return spriteObj.data.find(item => item.name === itemName) || spriteObj.data[0];
   }
-
   ////////////////////////////////////////////////////////
   draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void   {
     ctx.save();

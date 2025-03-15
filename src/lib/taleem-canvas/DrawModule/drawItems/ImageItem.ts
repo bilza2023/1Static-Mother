@@ -13,7 +13,6 @@ export default class ImageItem extends DrawItem {
       super(itemData,env);
     }
  
-
     static newItemData():ImageItemData {
         return {
             uuid: uuid(),
@@ -32,10 +31,8 @@ export default class ImageItem extends DrawItem {
  
     draw(ctx: CanvasRenderingContext2D, assets: Record<string, any> = {}): void{
         
-        if(this.itemData.src !== "drops.png"){
-            debugger;
-            // this.itemData.src = "activity1.jpg";
-        }
+        // if(this.itemData.src !== "drops.png"){
+        // }
 
         ctx.save();
         ctx.globalAlpha = this.itemData.globalAlpha;
