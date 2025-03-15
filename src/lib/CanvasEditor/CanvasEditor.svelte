@@ -21,6 +21,7 @@
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };
+    // export let safe = ()=>{};  
     /////////////////////////////////////////////////////////////////
       let canvasElement;
       let player= null;
@@ -33,10 +34,9 @@ function setItemToSelectedItem(selectedUuid){
   const selectedItem = items.find(item => item.uuid === selectedUuid);
   behaviour.setItemToSelectedItem(selectedItem);
 }
-
-  function setSelectedItem(incomingSelectedItem){
-    selectedItem = incomingSelectedItem;
-  }
+function setSelectedItem(incomingSelectedItem){
+selectedItem = incomingSelectedItem;
+}
 function clone(){
   if(selectedItem){
     player.itemsEditor.clone(selectedItem.itemData);
@@ -46,33 +46,31 @@ function deleteFn(){
   if(selectedItem){
     player.itemsEditor.deleteFn(selectedItem.itemData);
     behaviour.setItemToSelectedItem(null);
-    // selectedItem =null;
   }
 }
+function gameloop() { 
+if (player) {
+    calculatedItems = player.itemsEditor.items
+    player.draw();
+}
+}
+function log(){console.log("log Items",items)}
 
-  function gameloop() { 
-    if (player) {
-      calculatedItems = player.itemsEditor.items
-      player.draw();
-    }
-  }
-  function log(){console.log("log Items",items)}
-
-  onMount(async () => { if (canvasElement) {
-    // debugger;
-            const ctx = canvasElement.getContext("2d");
-            player = new TaleemPlayer(canvasElement,ctx,items);
-            player.background = background; // this is slideExtra
-            player.imagesUrl = imagesUrl; // this is slideExtra
-            await player.loadImages(images);
-            
-            ///////////////////////////////////////////////////////
-            behaviour = new EditorBehaviour(setSelectedItem);
-            if(behaviour){player.connect(behaviour)}
-            ///////////////////////////////////////////////////////
-            player.draw();
-            interval = setInterval(gameloop,20);
-    }});
+onMount(async () => { if (canvasElement) {
+// debugger;
+        const ctx = canvasElement.getContext("2d");
+        player = new TaleemPlayer(canvasElement,ctx,items);
+        player.background = background; // this is slideExtra
+        player.imagesUrl = imagesUrl; // this is slideExtra
+        await player.loadImages(images);
+        
+        ///////////////////////////////////////////////////////
+        behaviour = new EditorBehaviour(setSelectedItem);
+        if(behaviour){player.connect(behaviour)}
+        ///////////////////////////////////////////////////////
+        player.draw();
+        interval = setInterval(gameloop,20);
+}});
   onDestroy(() => {if (interval) clearInterval(interval);});  
   </script>
 
@@ -84,6 +82,7 @@ function deleteFn(){
     <canvas bind:this={canvasElement} ></canvas>
   </div>
   <div>    
+
   <!-- //////////////////////////////////////////////////////////////     -->
   {#if calculatedItems }
   <SelectDropDown items={calculatedItems} {setItemToSelectedItem}/> 
@@ -96,7 +95,6 @@ function deleteFn(){
     {/if}
   </div>
 </div>
-
 
   <style>
     .container{
