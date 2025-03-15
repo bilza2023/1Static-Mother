@@ -3,8 +3,8 @@ import Behaviour from "../Behaviour";
 
 export default class EditorBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////
-constructor(editor,callback){
-  super(editor,callback);
+constructor(callback){
+  super(callback);
 ///////////////////////////////////
   this.activeHandle = null;
   this.oldX = 0;

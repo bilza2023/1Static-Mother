@@ -1,16 +1,16 @@
 /**
  * 15-March-2025
  * TaleemPlayer : This is a user-facing object which wraps different internal components and handle its comlexities.
- * We are exporting this.items.add for creation which add item-literal but export edit-object
+ * We are exporting this.itemsEditor.add for creation which add item-literal but export edit-object
  */
-import {Editor,TaleemCanvas,Create} from "../index";
+import {ItemsEditor,TaleemCanvas,Create} from "../index";
 
 export default class TaleemPlayer{
 
  constructor(canvasElement, ctx ,items){
     this.canvas = new TaleemCanvas(canvasElement, ctx);
     this.create = Create; //Why needed??
-    this.items = new Editor(items);//it is items editor->Add.js is included inside
+    this.itemsEditor = new ItemsEditor(items);//it is items editor->Add.js is included inside
  }
 ///////////////////////////////////////////
 set background(bg){this.canvas.background =  bg;}
@@ -24,8 +24,8 @@ async loadImages(images){this.canvas.loadImages(images);}
 //--This object is a wrapper object so just provide an interface
 connect(eventHandlersObject){
     //Important Now the itemsEditor is injected by TaleemPlayer since TaleemPlayer is manager
-//-what is the confusion about this.items and this.editor
-    eventHandlersObject.editor = this.items;
+//-what is the confusion about this.itemsEditor and this.editor
+    eventHandlersObject.itemsEditor = this.itemsEditor;
       this.canvas.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
       this.canvas.onMouse("dblclick",  eventHandlersObject.dblclick.bind(eventHandlersObject));
       this.canvas.onMouse("mousemove", eventHandlersObject.mousemove.bind(eventHandlersObject));
@@ -34,7 +34,7 @@ connect(eventHandlersObject){
       return true;
     }
 draw() {
-    this.canvas.items = this.items.items;
+    this.canvas.items = this.itemsEditor.items;
     this.canvas.draw();
 }
 

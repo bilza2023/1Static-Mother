@@ -1,7 +1,7 @@
 
 import TaleemPlayer from "./taleemPlayer/TaleemPlayer.js";
 import TaleemCanvas from "./DrawModule/TaleemCanvas.js";
-import Editor from "./editorObjects/editor/Editor.js";
+import ItemsEditor from "./editorObjects/itemsEditor/ItemsEditor.js";
 import Create from "./DrawModule/Create.js";
 import Behaviour from "./editorObjects/Behaviour";
 import AddToolbar from "./addToolbar/AddToolbar.svelte"
@@ -12,7 +12,7 @@ export {
     TaleemPlayer, //CORE COMPONENT
     TaleemCanvas, //CORE COMPONENT
     Create, //CORE COMPONENT
-    Editor,
+    ItemsEditor,
     Behaviour, // Imp but not core
 
 

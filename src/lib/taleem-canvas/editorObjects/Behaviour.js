@@ -9,7 +9,7 @@ export default class Behaviour {
 
 constructor(callback){
 this.callback = callback;
-this.editor = null; //editor == itemsEditor
+this.itemsEditor = null; //editor == itemsEditor
 this.create = Create;
 
 }
@@ -24,8 +24,8 @@ dblclick   (x , y , hitItems  , hitItemsUuids) {}
 // This return EditObject since that is to be edited
 /////////////////////////////////////////////////////////////////
 isHit(mouseX,mouseY){
-  for (let i = 0; i < this.editor.items.length; i++) {
-    const item = this.editor.items[i];
+  for (let i = 0; i < this.itemsEditor.items.length; i++) {
+    const item = this.itemsEditor.items[i];
     const EditItemObject = this.getEditObject(item.type);
     const editObj = new EditItemObject(item);
     const isHit = editObj.isHit(mouseX,mouseY);

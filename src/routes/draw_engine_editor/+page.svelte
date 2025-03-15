@@ -1,6 +1,6 @@
 <script>
    
-    import  {TaleemCanvas,TaleemPlayer,Create,AddToolbar,Editor,EditorBehaviour} from "../../lib/taleem-canvas";
+    import  {TaleemPlayer,AddToolbar,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "../../lib/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
     import BackgroundDialogue from "../../lib/itemsDialogueBoxes/BackgroundDialogue.svelte";
@@ -69,7 +69,7 @@ function deleteFn(){
 
   function gameloop() { 
     if (player) {
-      calculatedItems = player.items.items
+      calculatedItems = player.itemsEditor.items
       player.draw();
     }
   }
@@ -95,8 +95,8 @@ function deleteFn(){
 
 <div class="container">
   <div class="canvasDiv">
-    {#if player}
-    <div class="toolbarDiv"><AddToolbar {clone} {deleteFn}  {log}/></div>
+    {#if player }
+    <div class="toolbarDiv"><AddToolbar {player} {clone} {deleteFn}  {log}/></div>
     {/if}
     <canvas bind:this={canvasElement} ></canvas>
   </div>

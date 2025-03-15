@@ -50,6 +50,7 @@ export default class Add {
 }
   
   circle() {
+    // debugger;
     const item = Create.circle();
     this.items.push(item);
     return  this.getEditObject('circle',item);

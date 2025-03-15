@@ -3,7 +3,7 @@
     import Create from '../DrawModule/Create';
 
     export let player;
-    
+    // debugger;
     export let clone;
     export let deleteFn;
     export let log;
@@ -30,17 +30,17 @@
 
 <div class="container">
     <div class="innerDiv">
-<SmallBtnToolbar clk={() => player.items.add.rectangle()} icon="▭" title="Rect"/>
-<SmallBtnToolbar clk={() => player.items.add.ellipse()} icon='🥚' title="Ellipse"/>
-<SmallBtnToolbar clk={() => player.items.add.circle()} icon="O" title="Circle"/>
-<SmallBtnToolbar clk={() => player.items.add.text()} icon='📃' title="Text"/>
-<SmallBtnToolbar clk={() => player.items.add.list()} icon='📜' title="List"/>
-<SmallBtnToolbar clk={() => player.items.add.line()} icon='➖' title="Line"/>
-<SmallBtnToolbar clk={() => player.items.add.triangle()} icon='🔺' title="Tri"/>
-<SmallBtnToolbar clk={() => player.items.add.ray()} icon='🌅' title="Ray"/>
-<SmallBtnToolbar clk={() => player.items.add.sprite()} icon='🕹️' title="Sprite"/>
-<SmallBtnToolbar clk={() => player.items.add.image()} icon='🗺️' title="Image"/>
-<SmallBtnToolbar clk={() => player.items.add.piechart()} icon='🍕' title="Pie"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.rectangle()} icon="▭" title="Rect"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.ellipse()} icon='🥚' title="Ellipse"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.circle()} icon="O" title="Circle"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.text()} icon='📃' title="Text"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.list()} icon='📜' title="List"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.line()} icon='➖' title="Line"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.triangle()} icon='🔺' title="Tri"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.ray()} icon='🌅' title="Ray"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.sprite()} icon='🕹️' title="Sprite"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.image()} icon='🗺️' title="Image"/>
+<SmallBtnToolbar clk={() => player.itemsEditor.add.piechart()} icon='🍕' title="Pie"/>
     
     </div>
 

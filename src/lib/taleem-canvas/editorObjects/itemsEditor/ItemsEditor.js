@@ -1,5 +1,6 @@
 /**
  * This module know just about item literals where as Behaviour know about EditObject.
+ *  HANDLES are itemdEsitor responsibility
  */
 //this.selectedItem.createHandles
 //this.itemsEditor.getEditObject(item.type);
@@ -8,13 +9,14 @@
 // this.selectedItem.updateHandles(handlesInItems);
 
 import Add from "./Add";
-import  {Create} from "$lib/taleem-canvas";
 ///////////////////////////////////////////////////////////////////////////////
-export default class Editor {
+export default class ItemsEditor {
 
     constructor(items = []) {
         this._items = items;
         this.add = new Add(this._items)
+        // selectedItem is always EditObject
+        //selected item should be in behaviour
         this._selectedItem = null; // this selected item is just item literal no EditObject
     }
     
