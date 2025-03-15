@@ -62,10 +62,15 @@ function setItemToSelectedItem(selectedUuid){
     selectedItem = incomingSelectedItem;
   }
 function clone(){
-  player.items.clone();
+  if(selectedItem){
+    player.itemsEditor.clone(selectedItem.itemData);
+  }
 }
 function deleteFn(){
-  player.items.deleteFn();
+  // debugger;
+  if(selectedItem){
+    player.itemsEditor.deleteFn(selectedItem.itemData);
+  }
 }
 
   function gameloop() { 

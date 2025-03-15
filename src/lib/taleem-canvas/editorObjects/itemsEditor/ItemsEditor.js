@@ -53,23 +53,23 @@ export default class ItemsEditor {
         }
     }
 
-    clone() {
+    clone(itemData) {
         debugger;
-        if (this._selectedItem) {
-            const clonedItem = JSON.parse(JSON.stringify(this._selectedItem.itemData || this._selectedItem));
+            const clonedItem = JSON.parse(JSON.stringify(itemData));
             clonedItem.uuid = this.generateUUID();
             this._items.push(clonedItem);
             return clonedItem;
-        }
-        return null;
     }
 
-    deleteFn() {
-            // if (selectedItem && behaviour) {
-                // const uuid = selectedItem.itemData.uuid;
-                // items = items.filter(item => item.uuid !== uuid); // More reactive approach
-                // behaviour.removeAllHandles(items);
-            // }
+    deleteFn(itemData) {
+        const uuid = itemData.uuid;
+        const indexToRemove = this._items.findIndex(item => item.uuid === uuid);
+        // If the item exists, remove it using splice
+        if (indexToRemove !== -1) {
+            this._items.splice(indexToRemove, 1);
+        }
+        this.removeAllHandles();
+        
     }
     
     getAllHandles(){
