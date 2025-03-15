@@ -57,20 +57,15 @@ function setItemToSelectedItem(selectedUuid){
   behaviour.setItemToSelectedItem(selectedItem);
 }
 
-/////////////////////////////////////////////////////////////
-// let itemsForSelectDropDown = null;
-// $:{ 
-//   if(player && player.items){
-
-//     itemsForSelectDropDown = player.items._items;
-//   }
-// }
-// $: itemsForSelectDropDown = player && player.items ? player.items._items : [];
-/////////////////////////////////////////////////////////////
   function setSelectedItem(incomingSelectedItem){
-    // debugger;
     selectedItem = incomingSelectedItem;
   }
+function clone(){
+  player.items.clone();
+}
+function deleteFn(){
+  player.items.deleteFn();
+}
 
   function gameloop() { 
     if (player) {
@@ -78,7 +73,6 @@ function setItemToSelectedItem(selectedUuid){
       player.draw();
     }
   }
- 
   function log(){console.log("log Items",items)}
 
   onMount(async () => { if (canvasElement) {
@@ -102,11 +96,10 @@ function setItemToSelectedItem(selectedUuid){
 <div class="container">
   <div class="canvasDiv">
     {#if player}
-    <div class="toolbarDiv"><AddToolbar player={player} clone={()=>{}} deleteFn={()=>{}} {log}/></div>
+    <div class="toolbarDiv"><AddToolbar {clone} {deleteFn}  {log}/></div>
     {/if}
     <canvas bind:this={canvasElement} ></canvas>
   </div>
-
   <div>    
   <!-- //////////////////////////////////////////////////////////////     -->
   {#if calculatedItems }

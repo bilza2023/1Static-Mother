@@ -18,8 +18,6 @@ export default class Editor {
         this._selectedItem = null; // this selected item is just item literal no EditObject
     }
     
-  
-
     set items(items){
         this._items = items;
     }
@@ -71,6 +69,7 @@ export default class Editor {
     }
 
     clone() {
+        debugger;
         if (this._selectedItem) {
             const clonedItem = JSON.parse(JSON.stringify(this._selectedItem.itemData || this._selectedItem));
             clonedItem.uuid = this.generateUUID();

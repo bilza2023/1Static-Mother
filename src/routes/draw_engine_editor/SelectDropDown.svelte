@@ -4,9 +4,6 @@
     export let setItemToSelectedItem = () => {}; // Default empty function
     
     let selectedUuid = "";
-
-    // $: incommingItems = player.items._items;
-    // console.log("incommingItems" ,incommingItems);
     
     function handleChange(event) {
         selectedUuid = event.target.value;
