@@ -44,12 +44,16 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
       this.selectedItem.updateHandles(handlesInItems);
     }
   }
-  mousedown(mouseX,mouseY,type,event) {
-    const hitItem  = this.isHit(mouseX,mouseY); if (!hitItem){return;}
-    const isHandle = this.isItemHandle(hitItem);
-    if(isHandle){
-          this.activeHandle = hitItem; //The hit item is a handle and is active handle
-      }
+  mousedown(mouseX,mouseY,type,event){
+  // debugger; 
+    const hitItemMulti =  this.isHitMulti(mouseX, mouseY);
+    if(hitItemMulti.length == 0 ){return;}
+    const hasHandles = this.arrayOfEditObjHasHandles(hitItemMulti);
+
+    if(hasHandles){
+      const handle = this.getFirstHandleFromArrayOfEditObjs(hitItemMulti)
+      this.activeHandle = handle; //The hit item is a handle and is active handle
+    }
   }
   dblclick(mouseX,mouseY,type,event) {
     // debugger;
@@ -103,6 +107,25 @@ get selectedItem() {
   return this._selectedItem;
 }
 
+arrayOfEditObjHasHandles(hitItems){
+  let response = false;
+  for (let i = 0; i < hitItems.length; i++) {
+    const hitItem =   hitItems[i];
+    if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
+            response = true;
+    }
+  }
+  return response;
+}
+getFirstHandleFromArrayOfEditObjs(hitItems){
+ //before calling this fn use  arrayOfEditObjHasHandles 
+  for (let i = 0; i < hitItems.length; i++) {
+    const hitItem =   hitItems[i];
+            if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
+            return hitItem;
+            }
+  }
+}
 ///////////////////////////////////////////////
 }//EventManager
 

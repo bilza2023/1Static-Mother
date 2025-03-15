@@ -10,7 +10,7 @@ export default class Behaviour {
 constructor(callback){
 this.callback = callback;
 this.itemsEditor = null; //editor == itemsEditor-->converted 16-mar-2025
-this.create = Create;//should be removed
+this.create = Create;//should NOT be removed.editor has to add handles etc
 
 }
 // Event handlers for processing Player mouse events //5 events 
@@ -35,6 +35,24 @@ isHit(mouseX,mouseY){
   }
   return null;
   }
+
+isHitMulti(mouseX, mouseY) {
+    const hitItems = [];
+    
+    for (let i = 0; i < this.itemsEditor.items.length; i++) {
+      const item = this.itemsEditor.items[i];
+      const EditItemObject = this.getEditObject(item.type);
+      const editObj = new EditItemObject(item);
+      const isHit = editObj.isHit(mouseX, mouseY);
+      
+      if (isHit === true) {
+        hitItems.push(editObj);
+      }
+    }
+    
+    return hitItems;
+  }
+
 //Handles should be in itemsEditor
   isItemHandle(hitItem){
     if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){

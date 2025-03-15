@@ -14,10 +14,7 @@ export default class ItemsEditor {
 
     constructor(items = []) {
         this._items = items;
-        this.add = new Add(this._items)
-        // selectedItem is always EditObject
-        //selected item should be in behaviour
-       
+        this.add = new Add(this._items);
     }
     
     set items(items){
@@ -54,7 +51,7 @@ export default class ItemsEditor {
     }
 
     clone(itemData) {
-        debugger;
+        
             const clonedItem = JSON.parse(JSON.stringify(itemData));
             clonedItem.uuid = this.generateUUID();
             this._items.push(clonedItem);
@@ -69,7 +66,7 @@ export default class ItemsEditor {
             this._items.splice(indexToRemove, 1);
         }
         this.removeAllHandles();
-        
+
     }
     
     getAllHandles(){
