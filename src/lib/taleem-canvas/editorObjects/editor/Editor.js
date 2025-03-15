@@ -87,6 +87,7 @@ export default class Editor {
                 // behaviour.removeAllHandles(items);
             // }
     }
+    
     getAllHandles(){
         let result = [];
         for (let i = 0; i < this._items.length; i++) {
@@ -96,7 +97,8 @@ export default class Editor {
           }
         }
         return result;
-      } 
+    } 
+
     findItemByUUID(uuid) {
         return this._items.find(item => item.uuid === uuid);
     }

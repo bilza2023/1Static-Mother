@@ -86,18 +86,15 @@ function setItemToSelectedItem(selectedUuid){
   onMount(async () => { if (canvasElement) {
     // debugger;
             const ctx = canvasElement.getContext("2d");
-            // editor = new Editor(items);//should this move inside onMount???)
             player = new TaleemPlayer(canvasElement,ctx,items);
-            // taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
-            // taleem_canvas.background = background; // this is slideExtra
             player.background = background; // this is slideExtra
             player.imagesUrl = imagesUrl; // this is slideExtra
-            // taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
             await player.loadImages(images);
-            // await taleem_canvas.loadImages(images);
-            // taleem_canvas.items = editor.items;
-            // behaviour = new EditorBehaviour(editor,setSelectedItem);
-            // if(behaviour){taleem_canvas.connect(behaviour)}
+            
+            ///////////////////////////////////////////////////////
+            behaviour = new EditorBehaviour(editor,setSelectedItem);
+            if(behaviour){player.connect(behaviour)}
+            ///////////////////////////////////////////////////////
             player.draw();
             interval = setInterval(gameloop,20);
     }});
