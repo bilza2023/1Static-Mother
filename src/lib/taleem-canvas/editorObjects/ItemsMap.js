@@ -23,7 +23,7 @@ import List from "./items/List";
 const ItemsMap = new Map();
 
 
-ItemsMap.set('background', BackgroundItem);
+// ItemsMap.set('background', BackgroundItem);
 ItemsMap.set('rectangle', Rectangle);
 ItemsMap.set('ellipse', Ellipse);
 ItemsMap.set('circle', Circle);

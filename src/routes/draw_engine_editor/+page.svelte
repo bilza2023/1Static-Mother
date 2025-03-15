@@ -2,9 +2,9 @@
   /**
    * This component is a complete Canvas Editor with top-level selectedItem for dialoguebox without using any svelte wrapper components for taleem-canvas lib. Directly Uses taleem-canvas.
   */
-    import ItemsEditor from "./ItemsEditor";
+    // import Editor from "../../lib/taleem-canvas/editorObjects/editor/Editor";
    
-    import  {TaleemCanvas,Create,AddToolbar,EditorBehaviour} from "../../lib/taleem-canvas";
+    import  {TaleemCanvas,TaleemPlayer,Create,AddToolbar,Editor,EditorBehaviour} from "../../lib/taleem-canvas";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "../../lib/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
     import BackgroundDialogue from "../../lib/itemsDialogueBoxes/BackgroundDialogue.svelte";
@@ -17,10 +17,29 @@
         "activity1.jpg",
         "drops.png"
       ];
+      let player= null;
       let taleem_canvas; //to make it truly static even remove this so that this component is draw once.
-      let items = [];
-      let itemsEditor = null;
-      // $: calculatedItems =  itemsEditor.items;
+    //   let items = [
+    //     {
+    //   uuid: "kkk",
+    //   type: 'rectangle',
+    //   name: 'rectangle001',
+    //   x: 100,
+    //   y: 100,
+    //   width: 100,
+    //   height: 100,
+    //   rotation: 0,
+    //   filled: true,
+    //   lineWidth: 1,
+    //   dash: 0,
+    //   gap: 0,
+    //   color: "red",
+    //   globalAlpha: 1
+    // }
+    //   ];
+    let items = [];  
+    let editor = null;
+      // $: calculatedItems =  editor.items;
       let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -52,11 +71,13 @@ function setItemToSelectedItem(selectedUuid){
   }
 
   function gameloop() { 
-    if (taleem_canvas) {
-      // if(itemsEditor.items.length > 0){debugger;}
-      items = itemsEditor.items;///THIS LINE MAKES items not the top level.
-      taleem_canvas.items = itemsEditor.items;
-      taleem_canvas.background = background;taleem_canvas.draw();
+    if (player) {
+      // if(editor.items.length > 0){debugger;}
+      // items = editor.items;///THIS LINE MAKES items not the top level.
+      // player.items = editor.items;
+      // player.background = background;
+      // debugger;
+      player.draw();
     }
   }
  
@@ -65,15 +86,19 @@ function setItemToSelectedItem(selectedUuid){
   onMount(async () => { if (canvasElement) {
     // debugger;
             const ctx = canvasElement.getContext("2d");
-            itemsEditor = new ItemsEditor(items);//should this move inside onMount???)
-            taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
-            taleem_canvas.background = background; // this is slideExtra
-            taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
-            await taleem_canvas.loadImages(images);
-            taleem_canvas.items = itemsEditor.items;
-            behaviour = new EditorBehaviour(itemsEditor,setSelectedItem);
-            if(behaviour){taleem_canvas.connect(behaviour)}
-            taleem_canvas.draw();
+            // editor = new Editor(items);//should this move inside onMount???)
+            player = new TaleemPlayer(canvasElement,ctx,items);
+            // taleem_canvas = new TaleemCanvas(canvasElement, ctx);//TaleemCanvas
+            // taleem_canvas.background = background; // this is slideExtra
+            player.background = background; // this is slideExtra
+            player.imagesUrl = imagesUrl; // this is slideExtra
+            // taleem_canvas.imagesUrl = imagesUrl; // this is slideExtra
+            await player.loadImages(images);
+            // await taleem_canvas.loadImages(images);
+            // taleem_canvas.items = editor.items;
+            // behaviour = new EditorBehaviour(editor,setSelectedItem);
+            // if(behaviour){taleem_canvas.connect(behaviour)}
+            player.draw();
             interval = setInterval(gameloop,20);
     }});
   onDestroy(() => {if (interval) clearInterval(interval);});  
@@ -81,8 +106,8 @@ function setItemToSelectedItem(selectedUuid){
 
 <div class="container">
   <div class="canvasDiv">
-    {#if itemsEditor}
-    <div class="toolbarDiv"><AddToolbar callBack={itemsEditor.addNewItem.bind(itemsEditor)} clone={itemsEditor.clone} deleteFn={itemsEditor.deleteFn} {log}/></div>
+    {#if player}
+    <div class="toolbarDiv"><AddToolbar player={player} clone={()=>{}} deleteFn={()=>{}} {log}/></div>
     {/if}
     <canvas bind:this={canvasElement} ></canvas>
   </div>

@@ -27,7 +27,7 @@ export default class TaleemCanvas  {
       console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");
       throw new Error("TaleemCanvas requires both `canvas` and `ctx`.");
     }
-    // debugger;
+  
     this.canvas = canvas;
     this.ctx = ctx;
     this.env = new Env(this.ctx);

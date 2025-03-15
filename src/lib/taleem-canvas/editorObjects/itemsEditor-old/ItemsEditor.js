@@ -1,4 +1,5 @@
 
+import Create from "../../DrawModule/Create";
 import itemsMap from "../ItemsMap";
 //We are working with items-object-literals . But to edit them raw is a difficult affait so we need a class specially for editing items-object-literals into methods ItemsEditObject.
 
@@ -30,5 +31,11 @@ export default class ItemsEditor{
     getEditObject(type){
         return itemsMap.get(type);
     }
+
+    // add(type){
+    //     const newItem =  Create[type]();
+    //     this.items = [...this.items,newItem];
+    //     // const editObj =  itemsMap.get(type);
+    // }
     /////////////////////////////////////////////////
 }//ItemsEditObject

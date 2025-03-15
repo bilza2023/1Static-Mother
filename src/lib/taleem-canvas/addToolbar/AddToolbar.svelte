@@ -1,59 +1,53 @@
 <script>
     import SmallBtnToolbar from './SmallBtnToolbar.svelte';
-    
-    export let callBack = () => {};
+    import Create from '../DrawModule/Create';
+
+    export let player;
     
     export let clone;
     export let deleteFn;
     export let log;
     // Payload-based toolbar items
-    export let  items = [
-        {icon: '▭', payload: 'rectangle',title: 'Rect'},
-        {icon: '🥚',payload:  'ellipse' ,title: 'Ellipse'},
-        {icon: 'O',payload:'circle' ,title: 'Circle'},
-        {icon: '📃',   payload:'text' ,title: 'Text'},
-        {icon: '📜',   payload:'list' ,title: 'List'},
-        {icon: '➖',   payload:'line' ,title: 'Line'},
-        {icon: '🔺',   payload:'triangle' ,title: 'Tri'},
-        {icon: '🌅',   payload:'ray' ,title: 'Ray'},
-        // {icon: Icons.SPEAKER,   payload:'icon' ,title: 'Icon'},
-        // {icon: Icons.DOT,   payload:'dot' ,title: 'DOT'},
-        // {icon: Icons.ANGLE,   payload:'angle' ,title: 'ANGLE'},
-        // {icon: Icons.BICYCLE,   payload:'lines' ,title: 'Lines'},
-        {icon: '🕹️',   payload:'sprite' ,title: 'Sprite'},
-        {icon: '🗺️',   payload:'image' ,title: 'Image'},
-        {icon: '🍕',   payload:'piechart' ,title: 'Pie'},
-    ];
+    // export let  items = [
+    //     {icon: '▭', payload: 'rectangle',title: 'Rect'},
+    //     {icon: '🥚',payload:  'ellipse' ,title: 'Ellipse'},
+    //     {icon: 'O',payload:'circle' ,title:   'Circle'},
+    //     {icon: '📃',   payload:'text' ,title: 'Text'},
+    //     {icon: '📜',   payload:'list' ,title: 'List'},
+    //     {icon: '➖',   payload:'line' ,title: 'Line'},
+    //     {icon: '🔺',   payload:'triangle' ,title: 'Tri'},
+    //     {icon: '🌅',   payload:'ray' ,title: 'Ray'},
+    //     // {icon: Icons.SPEAKER,   payload:'icon' ,title: 'Icon'},
+    //     // {icon: Icons.DOT,   payload:'dot' ,title: 'DOT'},
+    //     // {icon: Icons.ANGLE,   payload:'angle' ,title: 'ANGLE'},
+    //     // {icon: Icons.BICYCLE,   payload:'lines' ,title: 'Lines'},
+    //     {icon: '🕹️',   payload:'sprite' ,title: 'Sprite'},
+    //     {icon: '🗺️',   payload:'image' ,title: 'Image'},
+    //     {icon: '🍕',   payload:'piechart' ,title: 'Pie'},
+    // ];
 
 </script>
 
 <div class="container">
     <div class="innerDiv">
-        {#each items as item (item.title)}
-        <SmallBtnToolbar 
-            clk={() => callBack(item.payload)} 
-            icon={item.icon} 
-            title={item.title} 
-        />
-    {/each}
+<SmallBtnToolbar clk={() => player.items.add.rectangle()} icon="▭" title="Rect"/>
+<SmallBtnToolbar clk={() => player.items.add.ellipse()} icon='🥚' title="Ellipse"/>
+<SmallBtnToolbar clk={() => player.items.add.circle()} icon="O" title="Circle"/>
+<SmallBtnToolbar clk={() => player.items.add.text()} icon='📃' title="Text"/>
+<SmallBtnToolbar clk={() => player.items.add.list()} icon='📜' title="List"/>
+<SmallBtnToolbar clk={() => player.items.add.line()} icon='➖' title="Line"/>
+<SmallBtnToolbar clk={() => player.items.add.triangle()} icon='🔺' title="Tri"/>
+<SmallBtnToolbar clk={() => player.items.add.ray()} icon='🌅' title="Ray"/>
+<SmallBtnToolbar clk={() => player.items.add.sprite()} icon='🕹️' title="Sprite"/>
+<SmallBtnToolbar clk={() => player.items.add.image()} icon='🗺️' title="Image"/>
+<SmallBtnToolbar clk={() => player.items.add.piechart()} icon='🍕' title="Pie"/>
+    
     </div>
 
     <div class="innerDiv paddingRight">
-        <SmallBtnToolbar 
-        clk={clone} 
-        icon='🐑' 
-        title="Clone" 
-        />
-        <SmallBtnToolbar 
-        clk={deleteFn} 
-        icon='🗑️'
-        title="Delete" 
-        />
-        <SmallBtnToolbar 
-        clk={log} 
-        icon='🖨️'
-        title="Log" 
-        />
+        <SmallBtnToolbar clk={clone} icon='🐑' title="Clone"/>
+        <SmallBtnToolbar clk={deleteFn} icon='🗑️' title="Delete" />
+        <SmallBtnToolbar clk={log} icon='🖨️' title="Log" />
     </div>
 
 </div>

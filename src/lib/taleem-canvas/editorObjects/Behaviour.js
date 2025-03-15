@@ -4,8 +4,8 @@ import Create from "../DrawModule/Create";
 
 export default class Behaviour {
 
-constructor(itemsEditor,callback){
-this.itemsEditor = itemsEditor;
+constructor(editor,callback){
+this.editor = editor;
 this.callback = callback;
 this.create = Create;
 
@@ -19,8 +19,8 @@ dblclick   (x , y , hitItems  , hitItemsUuids) {}
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 isHit(mouseX,mouseY){
-  for (let i = 0; i < this.itemsEditor.items.length; i++) {
-    const item = this.itemsEditor.items[i];
+  for (let i = 0; i < this.editor.items.length; i++) {
+    const item = this.editor.items[i];
     const EditItemObject = this.getEditObject(item.type);
     const editObj = new EditItemObject(item);
     const isHit = editObj.isHit(mouseX,mouseY);

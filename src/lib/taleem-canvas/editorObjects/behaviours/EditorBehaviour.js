@@ -3,8 +3,8 @@ import Behaviour from "../Behaviour";
 
 export default class EditorBehaviour extends Behaviour {
 //////////////////////////////////////////////////////////////////////////////
-constructor(itemsEditor,callback){
-  super(itemsEditor,callback);
+constructor(editor,callback){
+  super(editor,callback);
 ///////////////////////////////////
   this.activeHandle = null;
   this.oldX = 0;
@@ -37,7 +37,7 @@ constructor(itemsEditor,callback){
       //////////////////////////////////////////////////////////////////
       this.selectedItem.processHandle(handleProcessData);
       ///////////////////////////////////////////////////////
-      const handlesInItems = this.itemsEditor.getAllHandles();
+      const handlesInItems = this.editor.getAllHandles();
 
       this.selectedItem.updateHandles(handlesInItems);
     }
@@ -54,18 +54,18 @@ constructor(itemsEditor,callback){
       if (hitItem){
             this.selectedItem = hitItem;
               //clear previous Handles    
-        this.itemsEditor.removeAllHandles();
-        
-            let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-            this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
+        this.editor.removeAllHandles();
 
-            const handlesInItems = this.itemsEditor.getAllHandles();
+            let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
+            this.editor.addItems(handles); //addItems is safe the array will not loose ref
+
+            const handlesInItems = this.editor.getAllHandles();
             this.selectedItem.updateHandles(handlesInItems);
               //return selected item for use with dialogue box 
         this.callback(this.selectedItem);
     }else {
         this.selectedItem = null;
-        this.itemsEditor.removeAllHandles();
+        this.editor.removeAllHandles();
         this.callback(null);
     }
   }
@@ -77,11 +77,11 @@ setItemToSelectedItem(item){
   const editObj = new EditItemObject(item);
       this.selectedItem = editObj;
         //clear previous Handles    
-        this.itemsEditor.removeAllHandles();
+        this.editor.removeAllHandles();
 
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-            this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
-            const handlesInItems = this.itemsEditor.getAllHandles();
+            this.editor.addItems(handles); //addItems is safe the array will not loose ref
+            const handlesInItems = this.editor.getAllHandles();
             this.selectedItem.updateHandles(handlesInItems);
             this.callback(this.selectedItem);
 }

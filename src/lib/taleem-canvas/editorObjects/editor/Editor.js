@@ -7,19 +7,18 @@
 //this.getAllHandles(this.itemsEditor.items)
 // this.selectedItem.updateHandles(handlesInItems);
 
-
+import Add from "./Add";
 import  {Create} from "$lib/taleem-canvas";
 ///////////////////////////////////////////////////////////////////////////////
-export default class ItemsEditor {
+export default class Editor {
 
     constructor(items = []) {
         this._items = items;
+        this.add = new Add(this._items)
         this._selectedItem = null; // this selected item is just item literal no EditObject
     }
     
-    // addItems(newItems){
-    // this._items.push(...newItems);
-    // }
+  
 
     set items(items){
         this._items = items;
@@ -28,12 +27,13 @@ export default class ItemsEditor {
         return this._items;
     }
 
-    addNewItem(newItemName){
-        // debugger;
-        const newItem = Create[newItemName]();
-        this._items = [...this._items, newItem];
+    addItem(newItem){
+        this._items.push(newItem);
     }
 
+    addItems(newItems){
+    this._items.push(...newItems);
+    }
     set selectedItem(item) {
         if(item == null){this._selectedItem =null;}
         debugger;    
