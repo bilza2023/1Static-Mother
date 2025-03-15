@@ -75,8 +75,9 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
   click(mouseX,mouseY,type,event) {}
   mouseup(mouseX,mouseY,type,event){this.activeHandle=null;}
 ///////////////////////////////////////////////////////////////
-setItemToSelectedItem(item){
-  debugger;
+setItemToSelectedItem(item=null){
+  if(item == null){this._selectedItem =null;this.callback(null);return}
+ 
   const EditItemObject = this.getEditObject(item.type);
   const editObj = new EditItemObject(item);
       this.selectedItem = editObj;
@@ -86,7 +87,7 @@ setItemToSelectedItem(item){
 ///////////////////////////////////////////////
 //why we need selected item internal  should the editro bahaviour have it ? 
 set selectedItem(incommingSelectedItemEditorObject) {
-  if(incommingSelectedItemEditorObject == null){this._selectedItem =null;}
+  if(incommingSelectedItemEditorObject == null){this._selectedItem =null;this.callback(null);return}
   
   this._selectedItem = incommingSelectedItemEditorObject;
   let handles = this._selectedItem.createHandles(this.create);//Ref to Create->this.create

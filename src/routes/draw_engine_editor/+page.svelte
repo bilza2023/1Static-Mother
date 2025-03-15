@@ -67,9 +67,10 @@ function clone(){
   }
 }
 function deleteFn(){
-  // debugger;
   if(selectedItem){
     player.itemsEditor.deleteFn(selectedItem.itemData);
+    behaviour.setItemToSelectedItem(null);
+    // selectedItem =null;
   }
 }
 
