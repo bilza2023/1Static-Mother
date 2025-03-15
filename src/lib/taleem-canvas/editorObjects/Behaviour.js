@@ -1,4 +1,7 @@
-
+/**
+ * The plan is this that itemsEditor know about item-literals where as Behaviour know about EditObjects, the Add.js know about both and create item-literal but return EditorObject.
+ * 
+ */
 import itemsMap from "$lib/taleem-canvas/editorObjects/ItemsMap";
 import Create from "../DrawModule/Create";
 
@@ -17,6 +20,8 @@ mouseup    (x , y , hitItems  , hitItemsUuids) {}
 mousedown  (x , y , hitItems  , hitItemsUuids) {}
 dblclick   (x , y , hitItems  , hitItemsUuids) {}
 /////////////////////////////////////////////////////////////////
+// isHit belong to the Brhaviour since all mouse-function execute this 
+// This return EditObject since that is to be edited
 /////////////////////////////////////////////////////////////////
 isHit(mouseX,mouseY){
   for (let i = 0; i < this.editor.items.length; i++) {
@@ -30,7 +35,7 @@ isHit(mouseX,mouseY){
   }
   return null;
   }
-
+//Handles should be in itemsEditor
   isItemHandle(hitItem){
     if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
       return true;
