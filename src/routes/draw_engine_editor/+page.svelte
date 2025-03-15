@@ -63,11 +63,8 @@ function setItemToSelectedItem(selectedUuid){
 }
 /////////////////////////////////////////////////////////////
   function setSelectedItem(incomingSelectedItem){
-    debugger;
+    // debugger;
     selectedItem = incomingSelectedItem;
-    //why this line?
-    taleem_canvas.items = behaviour.itemsEditor.items;
-    taleem_canvas.draw();
   }
 
   function gameloop() { 
@@ -92,7 +89,7 @@ function setItemToSelectedItem(selectedUuid){
             await player.loadImages(images);
             
             ///////////////////////////////////////////////////////
-            behaviour = new EditorBehaviour(editor,setSelectedItem);
+            behaviour = new EditorBehaviour(setSelectedItem);
             if(behaviour){player.connect(behaviour)}
             ///////////////////////////////////////////////////////
             player.draw();

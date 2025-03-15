@@ -4,9 +4,9 @@ import Create from "../DrawModule/Create";
 
 export default class Behaviour {
 
-constructor(editor,callback){
-this.editor = editor;
+constructor(callback){
 this.callback = callback;
+this.editor = null; //editor == itemsEditor
 this.create = Create;
 
 }

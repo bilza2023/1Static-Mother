@@ -21,8 +21,11 @@ get imagesUrl(){this.canvas.imagesUrl;}
 
 async loadImages(images){this.canvas.loadImages(images);}
 
+//--This object is a wrapper object so just provide an interface
 connect(eventHandlersObject){
-    // debugger;
+    //Important Now the itemsEditor is injected by TaleemPlayer since TaleemPlayer is manager
+//-what is the confusion about this.items and this.editor
+    eventHandlersObject.editor = this.items;
       this.canvas.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
       this.canvas.onMouse("dblclick",  eventHandlersObject.dblclick.bind(eventHandlersObject));
       this.canvas.onMouse("mousemove", eventHandlersObject.mousemove.bind(eventHandlersObject));
