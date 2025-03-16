@@ -11,7 +11,7 @@
     <br/>
     <br/>
 <div class="text-white">
-    <h1><b><a class="text-white" href="/draw_engine_editor">draw_engine_editor</a></b></h1>
+    <h1><b><a class="text-white" href="/eqs_editor">eqs_editor</a></b></h1>
     <br/>
     <br/>
     <br/>
