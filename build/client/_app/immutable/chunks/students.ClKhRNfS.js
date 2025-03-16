@@ -1,1 +1,0 @@
-import e from"./Sprite.CF5C4B9H.js";const t=new e("students","/sprites/students.png");t.addItem("student_w_tablet",183,317,225,350);t.addItem("student_red",254,0,275,250);t.addItem("student_female",424,288,220,250);t.addItem("student_black",540,0,260,266);export{t as students};

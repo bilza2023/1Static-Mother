@@ -1,6 +1,6 @@
 
 <script>
-    import CanvasEditor from "../../lib/CanvasEditor/CanvasEditor.svelte";
+    import CanvasEditor from "../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte";
     let items = [
       {
       uuid: "abc",

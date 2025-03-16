@@ -1,1 +1,0 @@
-class l{constructor(a,t){this.name=a,this.url=t,this.data=[],this.selectedData=null}addItem(a,t,e,s,i){this.data.push({name:a,sx:t,sy:e,sw:s,sh:i})}applyItem(a){for(let t=0;t<this.data.length;t++){const e=this.data[t];if(e.name==a){this.selectedData=e;return}}}}export{l as default};
