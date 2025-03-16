@@ -10,6 +10,16 @@ import EqsEditor from '../../eqsModule/EqsEditor/EqsEditor.svelte';
 
 import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore.js";
 $:currentSlide = $currentSlideStore;
+
+function getItemLiteralsForCanvasEditor(){
+  let itemLiteralsForCanvasEditor = [];
+  for (let i = 0; i < currentSlide.items.length; i++) {
+      const appItem =   currentSlide.items[i];
+      // debugger;
+      itemLiteralsForCanvasEditor.push(appItem.itemExtra);
+    }
+    return itemLiteralsForCanvasEditor;
+}
 //*********************EXPORT LET**********************8*/  
   export let slides;
   export let soundUrl; //3-mar-2025
@@ -69,7 +79,7 @@ onMount(async()=>{
   {#if currentSlide && ready}
     {#if (currentSlide.type).toLowerCase() == "canvas"}
       <CanvasEditor 
-          bind:items={currentSlide.items}             
+          items={getItemLiteralsForCanvasEditor()}             
           slideStartTime={currentSlide.startTime}
           slideEndTime={currentSlide.endTime} 
           bind:slideExtra={currentSlide.slideExtra}
