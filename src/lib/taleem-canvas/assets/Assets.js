@@ -1,7 +1,7 @@
 
 
-import loadBackgroundImages from "./loadBackgroundImages.js";
-import loadSprites from "./loadSprites.js";
+import loadBackgroundImages from "./loadBackgroundImages";
+import loadSprites from "./loadSprites";
 import Icons from "./Icons.js";
 
 export default class Assets {

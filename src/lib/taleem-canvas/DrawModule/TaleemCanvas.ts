@@ -1,7 +1,7 @@
 
 import EventModule from "./core/EventModule.js";
-import itemsToDrawObjects from "./core/itemsToDrawObjects";
-import Env from "./core/Env";
+import itemsToDrawObjects from "./core/itemsToDrawObjects.js";
+import Env from "./core/Env.js";
 import loadImagesLocal from "./core/loadImagesLocal.js";
 import drawBg from "./core/drawBg.js";
 // import Add from "./Add.js";
@@ -13,9 +13,9 @@ import drawBg from "./core/drawBg.js";
 /////////////////////////////////////////////////////////////////
 // This is a daul format Engine it can tale items (as in item-data-literals) which it converts into item-object and draw OR it can also take item-object DIRECTLY and draw them using setItemObjects. 
 // - The item "item-data-literal" are external to it, it just convert them into item-objects and use them. However it can take on item-objects directly as well.
-
+import ITaleemCanvas from "../interfaces/ITaleemCanvas.js";
 /////////////////////////////////////////////////////////////////
-export default class TaleemCanvas  {
+export default class TaleemCanvas implements ITaleemCanvas  {
 // Create has to be totally external since this has to be a subscriber app
 // The Editor and the Player must be seperate such that both take in itemData literals and the Static Player can also take directly itemObjects 
 // ===> THIS IS THE POINT THE STATIC PLAYER SHOULD BE ABLE TO TAKE IN DATA-ITEM-LITERALS AS WELL AS ITEM-OBJECTS SO THAT IT CAN PAIR WITH THE APP AS WELL AS THE EDITOR AND ITS SELF DOES NOT DO ANY EDITING (though the base class is same for all item-objects).

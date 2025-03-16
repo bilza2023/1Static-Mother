@@ -4,7 +4,7 @@ import loadBackgroundImages from "../../assets/loadBackgroundImages";
 import Icons from "../../assets/Icons";
 
 
-export default class RenderContext {
+export default class Env {
   private ctx: CanvasRenderingContext2D;
   private backgroundImages: Map<string, string>;
   private sprites: Map<string, string>;

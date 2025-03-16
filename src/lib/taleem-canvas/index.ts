@@ -1,8 +1,8 @@
 
-import TaleemPlayer from "./taleemPlayer/TaleemPlayer.js";
-import TaleemCanvas from "./DrawModule/TaleemCanvas.js";
-import ItemsEditor from "./editorObjects/itemsEditor/ItemsEditor.js";
-import Create from "./DrawModule/Create.js";
+import TaleemPlayer from "./taleemPlayer/TaleemPlayer";
+import TaleemCanvas from "./DrawModule/TaleemCanvas";
+import ItemsEditor from "./editorObjects/itemsEditor/ItemsEditor";
+import Create from "./DrawModule/Create";
 import Behaviour from "./editorObjects/Behaviour";
 import AddToolbar from "./addToolbar/AddToolbar.svelte"
 import EditorBehaviour from "./editorObjects/behaviours/EditorBehaviour";

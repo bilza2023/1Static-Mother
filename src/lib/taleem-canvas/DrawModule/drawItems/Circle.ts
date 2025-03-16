@@ -1,5 +1,4 @@
 
-
 import DrawItem from '../drawItemBase/DrawItem';
 import { CircleItemData } from '../../itemsDataInterfaces/CircleItemData.js';
 import Env from "../core/Env";

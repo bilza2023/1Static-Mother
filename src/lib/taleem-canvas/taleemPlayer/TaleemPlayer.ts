@@ -4,8 +4,9 @@
  * We are exporting this.itemsEditor.add for creation which add item-literal but export edit-object
  */
 import {ItemsEditor,TaleemCanvas,Create} from "../index";
+import ITaleemPlayer from "../interfaces/ITaleemPlayer";
 
-export default class TaleemPlayer{
+export default class TaleemPlayer implements ITaleemPlayer {
 
  constructor(canvasElement, ctx ,items){
     this.canvas = new TaleemCanvas(canvasElement, ctx);

@@ -1,4 +1,4 @@
-import Sprite from "./Sprite.js";
+import Sprite from "./Sprite";
 
 const w = 90;
 const h = 100;

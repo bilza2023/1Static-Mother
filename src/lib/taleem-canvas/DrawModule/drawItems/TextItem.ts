@@ -15,7 +15,7 @@ export default class TextItem extends DrawItem {
   }
 
   // Default properties remain static.
-  static newItemData() {
+  static newItemData():TextData {
     return {
       uuid: uuid(),
       type: "text",
@@ -24,6 +24,7 @@ export default class TextItem extends DrawItem {
       text: "Add text..",
       name: "text-001",
       fontSize: 30,
+      rotation: 30,
       fontFamily: "Arial",
       color: "black",
       globalAlpha: 1,
@@ -38,7 +39,7 @@ export default class TextItem extends DrawItem {
     if (!this.itemData.fontSize) this.itemData.fontSize = 40;
     if (!this.itemData.fontFamily) this.itemData.fontFamily = "Arial";
 
-    ctx.save();
+    ctx.save();//not required
 
     const { text, x, y, globalAlpha, color, fontSize, fontFamily } = this.itemData;
     ctx.shadowOffsetX = 0;
@@ -50,7 +51,7 @@ export default class TextItem extends DrawItem {
     ctx.textBaseline = "top";
 
     ctx.fillText(text, x, y);
-    ctx.restore();
+    ctx.restore(); //not required
   }
 
 }

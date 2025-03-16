@@ -12,9 +12,13 @@ export default class Sprite extends DrawItem {
   
     constructor(itemData: SpriteData,env:Env) {
       super(itemData,env);
+      //I thought this will allow me to use this.env without checking for null
+      // if(! this.env || this.env == null){
+      //   throw new Error("Env is required");
+      // }
     }
 
-  static newItemData() {
+  static newItemData():SpriteData {
     return {
       uuid: uuid(),
       type: "sprite",
@@ -34,12 +38,16 @@ export default class Sprite extends DrawItem {
   ////////////////////////////////////////////////////////
   // ✅ Get all available sprite names
   getAvailableSprites() {
-    return this.env.getAvailableSprites();
+    if(this.env){
+      return this.env.getAvailableSprites();
+    }
   }
 
   // ✅ Get all available items inside the selected sprite
   getSpriteItems(spriteName){
+    if(this.env){
    return this.env.getSpriteItems(spriteName); 
+    }
   }
 
   ////////////////////////////////////////////////////////
