@@ -18,9 +18,9 @@ export let slideEndTime;
 
 $:{
   items;
-  updateTimings();
+  // updateTimings();
 }
-// export let slideExtra; // slideExtra is not used in Eqs but it is available 
+export let slideExtra; // slideExtra is not used in Eqs but it is available 
 
 // the only local variable
 let timingsError = false;
