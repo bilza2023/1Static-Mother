@@ -5,8 +5,8 @@ import  EqsEditor from "../../lib/eqsModule/EqsEditor/EqsEditor.svelte";
 
 
 const slide = Eqs.getDynamicSlide();
-      
-debugger;
+console.log("Eqs slide:",slide);      
+
 </script>
 
 <h1>Eqs Module</h1>
