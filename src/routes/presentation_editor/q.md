@@ -1,3 +1,8 @@
+
+in this svelte component i set slidesObj.next
+<button style="color:white;" on:click={slidesObj.next.bind(slidesObj)}>Next</button>
+
+and then i want to display the changed currentSlide
 <script>
 import ParentEditor from "../../lib/presentation/editor/ParentEditor.svelte";
 
@@ -15,9 +20,9 @@ import SlideObj from "./SlideObj";
 
 $: currentSlide = slidesObj.currentSlide;
 
-    // let currentSlideIndex = 1; 
-    // let currentSlide = slides[currentSlideIndex];
-    // let currentSlideSafe = null;
+    let currentSlideIndex = 1; 
+    let currentSlide = slides[currentSlideIndex];
+    let currentSlideSafe = null;
 
 </script>
 
@@ -29,3 +34,19 @@ $: currentSlide = slidesObj.currentSlide;
 {currentSlide.uuid}
 </div>
 
+Here is slideObj.js
+
+export default class SlideObj{
+
+constructor(slides){
+    this.slides = slides;
+    this.currentSlide = this.slides[0];
+}
+
+next(){
+    this.currentSlide = this.slides[1];   
+}
+
+}//SlideObj
+
+The main issue is that i want the currentSlide chagne be registered in the containing .svelte compoennt
