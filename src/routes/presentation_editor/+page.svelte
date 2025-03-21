@@ -3,7 +3,7 @@ import SldiePicker from "../../lib/presentation/editor/SlidePicker.svelte";
 import { onMount } from "svelte";
 import {presentation} from "../../lib/presentation_from_db";    
 import  Eqs from "../../lib/eqsModule/Eqs";
-import AppEditor from "./AppEditor.js";
+import AppEditor from "./AppEditor";
     
 
 let slides = presentation.slides;
@@ -17,17 +17,18 @@ let slideExtra = {};
 
 function next(){
  appEditor.next();
- currentSlide = appEditor.currentSlide();
+ currentSlide = appEditor.currentSlide;
 }
 
 function prev(){
  appEditor.prev();
- currentSlide = appEditor.currentSlide();
+ currentSlide = appEditor.currentSlide;
 }
 onMount(async()=>{
+
     appEditor = new AppEditor(slides);
-    appEditor.currentSlideIndex = 0;
-    currentSlide = appEditor.currentSlide();
+    appEditor.currentSlide = 0;
+    currentSlide = appEditor.currentSlide;
 });
 
 </script>
