@@ -16,7 +16,10 @@
     let endTime = 10;
     let slideExtra = {};
     let showSidePanel = true; // Add this to control side panel visibility
-    
+    function redraw(){
+        const cs = appEditor.currentSlide;
+        currentSlide = cs;    
+    }
     function next(){
      appEditor.next();
      currentSlide = appEditor.currentSlide;
@@ -35,7 +38,7 @@
     
     </script>
   
-<Toolbar  {prev} {next} {slides} />
+<Toolbar  {prev} {next} {slides} bind:showSidePanel={showSidePanel} />
     
     {#if currentSlide}
     <div class="flex-container">
@@ -44,6 +47,7 @@
         <SlidePanel {slides} 
             getCurrentSlideIndex={appEditor.getCurrentSlideIndex.bind(appEditor)} 
             setCurrentSlide={appEditor.setCurrentSlide.bind(appEditor)} 
+            {redraw}
         />
       </div>
       {/if}
@@ -68,11 +72,11 @@
       }
       
       .side-panel {
-        width: 10%;
+        width: 7%;
       }
       
       .main-content {
-        width: 90%;
+        width: 93%;
       }
       
       .main-content-full {

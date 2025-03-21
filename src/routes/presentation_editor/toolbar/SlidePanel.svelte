@@ -2,8 +2,15 @@
 
     export let slides=[];
     export let getCurrentSlideIndex;
+    export let redraw;
     export let setCurrentSlide;
 
+function setCurrentSlideLocal(index){
+// debugger;
+setCurrentSlide(index);
+redraw();
+
+}    
 function moveUp() {console.log("move up");}
 
 function moveDown() {console.log("move down");}
@@ -18,7 +25,7 @@ function moveDown() {console.log("move down");}
             >
                 <button 
                     class="stack-panel-selector" 
-                    on:click={() => setCurrentSlide(itemIndex) }
+                    on:click={() => setCurrentSlideLocal(itemIndex) }
                 >
                     {String(item.type || '').toUpperCase().slice(0, 7)}
                 </button>
