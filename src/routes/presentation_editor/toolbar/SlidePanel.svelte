@@ -6,7 +6,7 @@
     export let setCurrentSlide;
 
 function setCurrentSlideLocal(index){
-// debugger;
+
 setCurrentSlide(index);
 redraw();
 
@@ -36,14 +36,14 @@ function moveDown() {console.log("move down");}
                             class="stack-panel-move-button"
                             on:click={moveDown}
                         >
-                        '↓'
+                        ↓
                         </button>
     
                         <button 
                             class="stack-panel-move-button"
                             on:click={moveUp}
                         >
-                        '↑'
+                        ↑
                         </button>
                     </div>
                 </div>
@@ -64,7 +64,8 @@ function moveDown() {console.log("move down");}
     
     .stack-panel-item.selected {
         border-color: white;
-        background-color: rgba(255, 0, 0, 0.1);
+        opacity: 1;
+        background-color: rgba(222, 114, 114, 0.834);
     }
     
     .stack-panel-item:hover {

@@ -2,8 +2,6 @@
 //@ts-nocheck
 import NavBtn2 from './NavBtn2.svelte';
 import SoundButtons from './SoundButtons.svelte';
-import NewSlidesDlg from "./NewSlidesDlg.svelte";
-import getNewSlide from "../addNewSlide/getNewSlide";
 import uuid from "../addNewSlide/uuid.js";
 //////////////////////////////////////////////////////////////
 export let next;
@@ -17,22 +15,6 @@ export let showSidePanel;
 export let save=()=>{};
 export let soundFile=null;
 export let currentTime=0;
-
-
-function addNew(slideType) {
-    try {
-      if(slideType === 'Eqs'){slideType='eqs';}
-
-      const newSlide = getNewSlide(slideType);
-      // setNewSlideTimings(newSlide); //setNewSlideTimings
-      // const updatedSlides = [...$slidesStore, newSlide];
-      // $slidesStore = updatedSlides;
-      // $currentSlideIndexStore = updatedSlides.length - 1; // Assign the value, don't call it as a function
-      show = false;
-    } catch (error) {
-      console.error('Failed to add new slide:', error);
-    }
-}
 
 // function deleteFn() {
 //     if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
@@ -114,9 +96,6 @@ function addNew(slideType) {
   </div>  
 </div>
 
-{#if show}
-  <NewSlidesDlg    {addNew}/>
-{/if}
 
 
 

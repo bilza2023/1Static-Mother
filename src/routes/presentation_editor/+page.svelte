@@ -2,17 +2,19 @@
     import SldiePicker from "../../lib/presentation/editor/SlidePicker.svelte";
     import { onMount } from "svelte";
     import {presentation} from "../../lib/presentation_from_db";    
-    import  Eqs from "../../lib/eqsModule/Eqs";
+    import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
     import AppEditor from "./AppEditor";
     import Toolbar from "./toolbar/Toolbar.svelte";    
     import SlidePanel from "./toolbar/SlidePanel.svelte";
-    
+    import getNewSlide from "./addNewSlide/getNewSlide";
+
     let  slides = presentation.slides;
     let  appEditor = null;
     ////////////////////////////////STATE///////////////////////////
     let currentSlide = null;
     let currentTime = 0;
     let startTime = 0;
+    let show = false;
     let endTime = 10;
     let slideExtra = {};
     let showSidePanel = true; // Add this to control side panel visibility
@@ -35,11 +37,31 @@
         appEditor.currentSlide = 0;
         currentSlide = appEditor.currentSlide;
     });
+  
     
+function addNew(slideType) {
+    try {
+        // debugger;
+      if(slideType === 'Eqs'){slideType='eqs';}
+
+      const newSlide = getNewSlide(slideType);
+     slides.push(newSlide);
+     appEditor.currentSlide = slides.length -1;
+     currentSlide = appEditor.currentSlide;
+      show = false;
+    } catch (error) {
+      console.error('Failed to add new slide:', error);
+    }
+}
     </script>
   
-<Toolbar  {prev} {next} {slides} bind:showSidePanel={showSidePanel} />
-    
+<Toolbar  {prev} {next} {slides} bind:showSidePanel={showSidePanel} bind:show={show} />
+  
+
+{#if show}
+  <NewSlidesDlg    {addNew}/>
+{/if}
+
     {#if currentSlide}
     <div class="flex-container">
       {#if showSidePanel}
