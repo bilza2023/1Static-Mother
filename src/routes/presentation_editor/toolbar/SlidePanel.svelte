@@ -1,59 +1,50 @@
 <script>
-
-    export let slides=[];
-    export let getCurrentSlideIndex;
-    export let redraw;
+    export let slides = [];
+    export let currentSlideIndex; // Direct binding instead of function call
     export let setCurrentSlide;
 
-function setCurrentSlideLocal(index){
-
-setCurrentSlide(index);
-redraw();
-
-}    
-function moveUp() {console.log("move up");}
-
-function moveDown() {console.log("move down");}
-
-    </script>
+    function moveUp() {console.log("move up");}
+    function moveDown() {console.log("move down");}
+</script>
     
-    {#if slides && slides.length > 0}
+{#if slides && slides.length > 0}
     {#each slides as item, itemIndex (itemIndex)}
-            <div 
-                class="stack-panel-item"
-                class:selected={itemIndex === getCurrentSlideIndex() }
+        <div 
+            class="stack-panel-item"
+            class:selected={itemIndex === currentSlideIndex}
+        >
+            <button 
+                class="stack-panel-selector" 
+                on:click={() => setCurrentSlide(itemIndex)}
             >
-                <button 
-                    class="stack-panel-selector" 
-                    on:click={() => setCurrentSlideLocal(itemIndex) }
-                >
-                    {String(item.type || '').toUpperCase().slice(0, 7)}
-                </button>
-                
-                <div class="stack-panel-actions">
-                    <div class="stack-panel-move-buttons">
-                        <button 
-                            class="stack-panel-move-button"
-                            on:click={moveDown}
-                        >
-                        ↓
-                        </button>
-    
-                        <button 
-                            class="stack-panel-move-button"
-                            on:click={moveUp}
-                        >
-                        ↑
-                        </button>
-                    </div>
+                {String(item.type || '').toUpperCase().slice(0, 7)}
+            </button>
+            
+            <div class="stack-panel-actions">
+                <div class="stack-panel-move-buttons">
+                    <button 
+                        class="stack-panel-move-button"
+                        on:click={moveDown}
+                    >
+                    ↓
+                    </button>
+
+                    <button 
+                        class="stack-panel-move-button"
+                        on:click={moveUp}
+                    >
+                    ↑
+                    </button>
                 </div>
             </div>
-        {/each}
-    {:else}
-        <div class="stack-panel-empty">No items</div>
-    {/if}
+        </div>
+    {/each}
+{:else}
+    <div class="stack-panel-empty">No items</div>
+{/if}
+  
     
-    <style>
+<style>
     .stack-panel-item {
         text-align: center;
         border: 2px solid #737c89;
@@ -65,7 +56,7 @@ function moveDown() {console.log("move down");}
     .stack-panel-item.selected {
         border-color: white;
         opacity: 1;
-        background-color: rgba(222, 114, 114, 0.834);
+        background-color: goldenrod;
     }
     
     .stack-panel-item:hover {
