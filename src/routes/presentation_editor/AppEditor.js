@@ -39,6 +39,9 @@ if(!this.record || !this.oldItems){return;}
     oldCurrentSlide.items = jointedItems; 
     
 }
+setCurrentSlide(index){
+    this.currentSlide = index;
+}
 set currentSlide(index){
     if(index < 0 || index > this.slides.length -1 ){return;}
     this.restoreIfOldCurrentSlideIsCanvas();   
