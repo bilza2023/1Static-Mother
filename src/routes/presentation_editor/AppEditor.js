@@ -12,7 +12,36 @@ constructor(slides,slideExtra={}){
     this.oldItems = null; 
     this.record = null; 
 }
+setFirstSlide(){
+    if(this.slides.length > 0){
+        this.slides[0].startTime = 0;
+    }
+}
+shiftTime() {
+    // debugger;
+    const MIN_DURATION = 2; // Minimum duration between startTime and endTime in seconds
+    this.setFirstSlide();
+    // Process all slides
+    for (let i = 0; i < this.slides.length; i++) {
+        const currentSlide = this.slides[i];
 
+        // Ensure minimum duration for current slide
+            const currentDuration = currentSlide.endTime - currentSlide.startTime;
+            if (currentDuration < MIN_DURATION) {
+                currentSlide.endTime = currentSlide.startTime + MIN_DURATION;
+            }
+
+        // If not the first slide, eliminate gaps with previous slide
+        if (i > 0) {
+            const prevSlide = this.slides[i - 1];
+                const timeDifference = Math.abs(currentSlide.endTime - currentSlide.startTime);
+                currentSlide.startTime = prevSlide.endTime;
+                currentSlide.endTime = currentSlide.startTime + timeDifference;
+                
+        }
+    }
+}
+///////////////////////
 saveIfNewCurrentSlideIsCanvas(slideIndex){
     // Use the provided slideIndex instead of the current slide index
     const newSlide = this.slides[slideIndex]; 
@@ -42,6 +71,7 @@ restoreIfOldCurrentSlideIsCanvas(slideIndex){
     this.oldItems = null;
     this.record = null;
 }
+
 
 setCurrentSlide(index){
     this.currentSlide = index;

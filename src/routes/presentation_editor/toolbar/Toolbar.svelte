@@ -3,6 +3,7 @@
 import NavBtn2 from './NavBtn2.svelte';
 import SoundButtons from './SoundButtons.svelte';
 import uuid from "../addNewSlide/uuid.js";
+
 //////////////////////////////////////////////////////////////
 export let next;
 export let prev;
@@ -14,7 +15,10 @@ export let showSidePanel;
 // export let shiftTime=()=>{console.log("add shift time function")};
 export let save=()=>{};
 export let soundFile=null;
+export let shiftTimeLocal;
 export let currentTime=0;
+export let startTime;
+export let endTime;
 
 // function deleteFn() {
 //     if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
@@ -75,17 +79,16 @@ export let currentTime=0;
   {#if slides.length > 0}
     <span class='text-xs'>Start</span> 
     <div class='bg-gray-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white'  type="number" >
-    <!-- {slides[currentSlideIndex].startTime} -->
-     00
+    {startTime}
     </div>
     
     <span class='text-xs'>End</span>
-<!--     
-    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" value={getLast().endTime} 
-    on:input={(e) => shiftTime(+e.target.value)} 
+    
+    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" value={endTime} 
+    on:input={(e) => shiftTimeLocal(+e.target.value)} 
      min=0 
      max=3600 
-     >  -->
+     > 
 
 <!-- the + sign before +e.target.value consverts it into number-->
 <NavBtn2 title='Clone' icon='🐑'  clk= {()=>{}} />

@@ -1,11 +1,11 @@
 <script>
-    import SldiePicker from "../../lib/presentation/editor/SlidePicker.svelte";
+    import SlidePicker from "./SlidePicker.svelte";
     import { onMount } from "svelte";
     import {presentation} from "../../lib/presentation_from_db";    
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
     import AppEditor from "./AppEditor";
     import Toolbar from "./toolbar/Toolbar.svelte";    
-    import SlidePanel from "./toolbar/SlidePanel.svelte";
+    import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
 
     let slides = presentation.slides;
@@ -14,12 +14,14 @@
     // Create a reactive store for currentSlideIndex
     let currentSlideIndex = 0;
     let currentSlide = null;
-    let currentTime = 0;
-    let startTime = 0;
-    let show = false;
-    let endTime = 10;
+    let currentTime = 0; 
+
+
     let slideExtra = {};
+
+
     let showSidePanel = true; // Add this to control side panel visibility
+    let show = false;
     
     function redraw(){
         currentSlideIndex = appEditor.getCurrentSlideIndex();
@@ -58,10 +60,23 @@
             console.error('Failed to add new slide:', error);
         }
     }
+
+function shiftTimeLocal(val){
+  currentSlide.endTime = val;
+  appEditor.shiftTime();
+  console.log("slides",appEditor.slides);
+}
 </script>
   
-<Toolbar {prev} {next} {slides} bind:showSidePanel={showSidePanel} bind:show={show} />
-  
+{#if currentSlide}
+<Toolbar {prev} {next} {slides} bind:showSidePanel={showSidePanel} bind:show={show} 
+
+bind:startTime={currentSlide.startTime}
+bind:endTime={currentSlide.endTime}
+{shiftTimeLocal}
+/>
+{/if}  
+
 {#if show}
   <NewSlidesDlg {addNew}/>
 {/if}
@@ -82,10 +97,10 @@
   {/if}
   
   <div class={showSidePanel ? "main-content" : "main-content-full"}>
-    <SldiePicker
+    <SlidePicker
       bind:items={currentSlide.items}
-      slideStartTime={startTime}
-      slideEndTime={endTime} 
+      slideStartTime={currentSlide.startTime}
+      slideEndTime={currentSlide.endTime} 
       bind:slideExtra={slideExtra}
       currentSldieType={currentSlide.type}
       {currentTime}

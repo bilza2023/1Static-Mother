@@ -1,15 +1,7 @@
 <script>
     //*********************IMPORTS**********************8*/  
-    import { onMount } from 'svelte';
-    import Toolbar from './toolbar/Toolbar.svelte';
-    import SlidePanel from './SlidePanel.svelte';
-    import TimingErrorDiv from "./TimingErrorDiv.svelte";
-    import { fade } from 'svelte/transition';
-    import CanvasEditor from '../../CanvasModule/CanvasEditor/CanvasEditor.svelte';
-    import EqsEditor from '../../eqsModule/EqsEditor/EqsEditor.svelte';
-    
-    import {slidesStore,currentSlideIndexStore,currentSlideStore} from "./slidesStore.js";
-
+    import CanvasEditor from '../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte';
+    import EqsEditor from '../../lib/eqsModule/EqsEditor/EqsEditor.svelte';
     //*********************EXPORT LET**********************8*/  
       export let items;
       export let slideExtra;
