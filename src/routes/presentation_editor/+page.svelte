@@ -4,7 +4,7 @@ import { onMount } from "svelte";
 import {presentation} from "../../lib/presentation_from_db";    
 import  Eqs from "../../lib/eqsModule/Eqs";
 import AppEditor from "./AppEditor";
-    
+import Toolbar from "./toolbar/Toolbar.svelte";    
 
 let slides = presentation.slides;
 let  appEditor = null;
@@ -32,16 +32,7 @@ onMount(async()=>{
 });
 
 </script>
-
-{#if currentSlide}
-<div style="color:white;">
-<button style="color:white;" on:click={prev}>Prev</button>
-<button style="color:white;" on:click={next}>Next</button>
-
-{currentSlide.type}
-{currentSlide.uuid}
-</div>
-{/if}
+<Toolbar  {prev} {next} />
 
 {#if currentSlide}
 <SldiePicker
