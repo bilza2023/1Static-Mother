@@ -1,4 +1,3 @@
-// +page.svelte modifications
 <script>
     import SldiePicker from "../../lib/presentation/editor/SlidePicker.svelte";
     import { onMount } from "svelte";
