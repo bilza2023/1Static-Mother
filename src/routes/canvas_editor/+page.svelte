@@ -48,7 +48,7 @@
       let assets =null;
 
 onMount(async () => { 
- debugger;
+
     const imagesMap = await loadImages(images,'/images/');
     assets = new Assets(imagesMap);
 });

@@ -5,8 +5,6 @@
     /////////////////////////////////////////////////////////////////
     export let items = [];
     export let assets;
-    // let interval   = null;
-    export let images = [];
     export let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -31,8 +29,9 @@ $:{
 onMount(async () => {
 if (canvasElement) {
           /////////////////////////////////////////////
+          // debugger;
           const ctx = canvasElement.getContext("2d");
-          player = new TaleemPlayer(canvasElement, ctx, assets, images, items);
+          player = new TaleemPlayer(canvasElement, ctx, assets, items);
           player.background = background; // this is slideExtra
           ///////////////////////////////////////////////////////
           player.drawNoEditor(items);

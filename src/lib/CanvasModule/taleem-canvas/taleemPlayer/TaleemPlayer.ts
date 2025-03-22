@@ -13,8 +13,8 @@ export default class TaleemPlayer implements ITaleemPlayer {
     create: typeof Create;
     itemsEditor:ItemsEditor
     
- constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D  ,assets:Assets,images,items){
-    this.canvas = new TaleemCanvas(canvasElement, ctx,assets,images);
+ constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D  ,assets:Assets,items){
+    this.canvas = new TaleemCanvas(canvasElement, ctx,assets);
     this.create = Create; //Why needed??
     this.itemsEditor = new ItemsEditor(items);//it is items editor->Add.js is included inside
  }

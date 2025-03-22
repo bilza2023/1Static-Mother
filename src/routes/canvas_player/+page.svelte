@@ -79,7 +79,6 @@ function addItem(){
 {#if assets}
       <CanvasPlayer 
       {items}
-      {images}
       {assets}
       {background}
       />

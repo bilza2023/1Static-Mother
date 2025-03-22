@@ -24,7 +24,7 @@ export default class TaleemCanvas implements ITaleemCanvas  {
 eventModule:EventModule;
 canvas:HTMLCanvasElement;
 ctx:CanvasRenderingContext2D;
-env:Env;
+env:Env; //assets with images
 ///////////////////////////////////////////////////////////////
   constructor(canvas :HTMLCanvasElement, ctx:CanvasRenderingContext2D,assets:Assets) { // no more incomming bacground has to be part of items but will BE counted as such yet just drawn  seperate. 
     if (!canvas || !ctx) {
