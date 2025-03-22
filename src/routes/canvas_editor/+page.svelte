@@ -1,7 +1,11 @@
 
 <script>
+  import  loadImages from "$lib/loadImages";
+   import Assets from "$lib/assets";
   import {presentation} from "../../lib/presentation_from_db";    
-    import CanvasEditor from "../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte";
+    import CanvasEditor from "$lib/CanvasModule/CanvasEditor/CanvasEditor.svelte";
+    import { onMount,onDestroy } from "svelte";
+
     // let items = [
     //   {
     //   uuid: "abc",
@@ -51,13 +55,24 @@
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };  
+      let assets =null;
+
+onMount(async () => { 
+ debugger;
+    const imagesMap = await loadImages(images,'/images/');
+    assets = new Assets(imagesMap);
+});
+
 </script>
 
+<!-- images is different -->
 
+{#if assets}
+      <CanvasEditor 
+      {items}
+      {images}
+      {assets}
+      {background}
+      />
+{/if}
 
-<CanvasEditor 
-{items}
-{images}
-{imagesUrl}
-{background}
-/>

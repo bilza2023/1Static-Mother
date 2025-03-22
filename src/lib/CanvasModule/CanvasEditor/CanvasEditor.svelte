@@ -1,14 +1,14 @@
 <script>
    
-    import  {TaleemPlayer,AddToolbar,EditorBehaviour} from "../taleem-canvas";
+    import  {TaleemPlayer,AddToolbar,EditorBehaviour,loadImages} from "../taleem-canvas";
     import { onMount,onDestroy } from "svelte";
     import SelectedItemBasicDialogue from "../itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
     import BackgroundDialogue from "../itemsDialogueBoxes/BackgroundDialogue.svelte";
     import SelectDropDown from "./SelectDropDown.svelte";
     /////////////////////////////////////////////////////////////////
     export let items = [];
-    export let imagesUrl   = "";
-    export let images = [];
+    export let images;
+    export let assets;
     export let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -57,13 +57,11 @@ if (player) {
 function log(){console.log("log Items",items)}
 
 onMount(async () => { if (canvasElement) {
-// debugger;
+
+        /////////////////////////////////////////////
         const ctx = canvasElement.getContext("2d");
-        player = new TaleemPlayer(canvasElement,ctx,items);
+        player = new TaleemPlayer(canvasElement,ctx,assets,images,items);
         player.background = background; // this is slideExtra
-        player.imagesUrl = imagesUrl; // this is slideExtra
-        await player.loadImages(images);
-        
         ///////////////////////////////////////////////////////
         behaviour = new EditorBehaviour(setSelectedItem);
         if(behaviour){player.connect(behaviour)}

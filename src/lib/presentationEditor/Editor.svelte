@@ -16,9 +16,7 @@
     let currentSlide = null;
     let currentTime = 0; 
 
-
     export let slideExtra = {};
-
 
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;

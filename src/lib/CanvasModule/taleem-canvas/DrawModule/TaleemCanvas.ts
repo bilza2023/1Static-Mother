@@ -1,5 +1,7 @@
 
 import EventModule from "./core/EventModule.js";
+
+import Assets from "../../../assets";
 import itemsToDrawObjects from "./core/itemsToDrawObjects.js";
 import Env from "./core/Env.js";
 import loadImagesLocal from "./core/loadImagesLocal.js";
@@ -19,18 +21,20 @@ export default class TaleemCanvas implements ITaleemCanvas  {
 // Create has to be totally external since this has to be a subscriber app
 // The Editor and the Player must be seperate such that both take in itemData literals and the Static Player can also take directly itemObjects 
 // ===> THIS IS THE POINT THE STATIC PLAYER SHOULD BE ABLE TO TAKE IN DATA-ITEM-LITERALS AS WELL AS ITEM-OBJECTS SO THAT IT CAN PAIR WITH THE APP AS WELL AS THE EDITOR AND ITS SELF DOES NOT DO ANY EDITING (though the base class is same for all item-objects).
-
+eventModule:EventModule;
+canvas:HTMLCanvasElement;
+ctx:CanvasRenderingContext2D;
+env:Env;
 ///////////////////////////////////////////////////////////////
-  constructor(canvas, ctx) { // no more incomming bacground has to be part of items but will BE counted as such yet just drawn  seperate. 
+  constructor(canvas :HTMLCanvasElement, ctx:CanvasRenderingContext2D,assets:Assets) { // no more incomming bacground has to be part of items but will BE counted as such yet just drawn  seperate. 
     if (!canvas || !ctx) {
       console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");
       throw new Error("TaleemCanvas requires both `canvas` and `ctx`.");
     }
-  
     this.canvas = canvas;
     this.ctx = ctx;
-    this.env = new Env(this.ctx);
-    this.imagesUrl = '';
+    this.env = new Env(this.ctx,assets);
+    // this.imagesUrl = '';
     this.bgData =  {
       uuid: "44456",
       type: 'background',  

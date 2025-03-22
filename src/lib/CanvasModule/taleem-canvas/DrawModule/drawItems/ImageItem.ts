@@ -38,7 +38,7 @@ export default class ImageItem extends DrawItem {
         ctx.globalAlpha = this.itemData.globalAlpha;
     
         // ✅ Get the correct image from assets Map
-        const imageObj = this.env.getImage(this.itemData.src);
+        const imageObj = this.env.assets.images.get(this.itemData.src);
         const image = imageObj ? imageObj.img : null;
     
         if (image) {

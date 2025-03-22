@@ -8,11 +8,14 @@ import AddToolbar from "./addToolbar/AddToolbar.svelte"
 import EditorBehaviour from "./editorObjects/behaviours/EditorBehaviour";
 import HelloWorldBehaviour from "./editorObjects/behaviours/HelloWorldBehaviour";
 import ItemsMap from "./editorObjects/ItemsMap";
+import loadImages from "./loadImages";
 export {
     ItemsMap, //core but may be changed soon
     TaleemPlayer, //CORE COMPONENT
     TaleemCanvas, //CORE COMPONENT
     Create, //CORE COMPONENT
+    loadImages, //CORE COMPONENT
+    
     ItemsEditor,
     Behaviour, // Imp but not core
 

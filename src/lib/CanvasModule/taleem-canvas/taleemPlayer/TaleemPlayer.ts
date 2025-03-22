@@ -5,6 +5,7 @@
  */
 import {ItemsEditor,TaleemCanvas,Create} from "../index";
 import ITaleemPlayer from "../interfaces/ITaleemPlayer";
+import Assets from "../../../assets";
 
 export default class TaleemPlayer implements ITaleemPlayer {
 
@@ -12,8 +13,8 @@ export default class TaleemPlayer implements ITaleemPlayer {
     create: typeof Create;
     itemsEditor:ItemsEditor
     
- constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D  ,items){
-    this.canvas = new TaleemCanvas(canvasElement, ctx);
+ constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D  ,assets:Assets,images,items){
+    this.canvas = new TaleemCanvas(canvasElement, ctx,assets,images);
     this.create = Create; //Why needed??
     this.itemsEditor = new ItemsEditor(items);//it is items editor->Add.js is included inside
  }
@@ -21,10 +22,6 @@ export default class TaleemPlayer implements ITaleemPlayer {
 set background(bg){this.canvas.background =  bg;}
 get background(){return this.canvas.background;}
 //..........................................................
-set imagesUrl(imagesUrl){this.canvas.imagesUrl=imagesUrl;}
-get imagesUrl(){this.canvas.imagesUrl;}
-
-async loadImages(images){this.canvas.loadImages(images);}
 
 //--This object is a wrapper object so just provide an interface
 connect(eventHandlersObject){

@@ -41,3 +41,10 @@ export default function loadBackgroundImages(): Map<string, string> {
         ["wall", wall]
     ]);
 }
+
+// Extract the keys as a union type
+export type BackgroundImageName = keyof ReturnType<typeof loadBackgroundImages>;
+
+// Example usage
+// const imageName: BackgroundImageName = "paper01"; // Valid
+// const imageName: BackgroundImageName = "invalidName"; // Invalid, TypeScript will throw an error
