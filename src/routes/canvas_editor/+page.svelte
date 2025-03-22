@@ -24,7 +24,7 @@
       globalAlpha: 1
       }
       ];
- 
+ //we need to add for drop-down
       let images = [
         "atom.png",
         "baloons.png",
@@ -32,7 +32,7 @@
         "drops.png"
       ];
       let imagesUrl   = "/images/";
-      let background =  {
+      let slideExtra =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
         backgroundColor: '#9cc19c',
@@ -62,7 +62,7 @@ onMount(async () => {
       {items}
       {images}
       {assets}
-      {background}
+      background={slideExtra}
       />
 {/if}
 

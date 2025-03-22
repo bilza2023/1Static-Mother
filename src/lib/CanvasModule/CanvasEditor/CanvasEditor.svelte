@@ -90,7 +90,7 @@
       if (canvasElement) {
           /////////////////////////////////////////////
           const ctx = canvasElement.getContext("2d");
-          player = new TaleemPlayer(canvasElement, ctx, assets, images, items);
+          player = new TaleemPlayer(canvasElement, ctx, assets, items);
           player.background = background; // this is slideExtra
           ///////////////////////////////////////////////////////
           behaviour = new EditorBehaviour(setSelectedItem);

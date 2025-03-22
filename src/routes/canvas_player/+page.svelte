@@ -32,7 +32,7 @@
         "drops.png"
       ];
       let imagesUrl   = "/images/";
-      let background =  {
+      let slideExtra =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
         backgroundColor: '#9cc19c',
@@ -80,7 +80,7 @@ function addItem(){
       <CanvasPlayer 
       {items}
       {assets}
-      {background}
+      background={slideExtra}
       />
 {/if}
 
