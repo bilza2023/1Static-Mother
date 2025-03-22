@@ -4,7 +4,8 @@
     import { onMount } from "svelte";
     /////////////////////////////////////////////////////////////////
     export let items = [];
-    export let imagesUrl   = "";
+    export let assets;
+    // let interval   = null;
     export let images = [];
     export let background =  {
         uuid: "44455764hfghyjty6",
@@ -22,16 +23,20 @@
       let canvasElement;
       let player= null;
 /////////////////////////////////////////////////////////////
-
-onMount(async () => { if (canvasElement) {
-
-        const ctx = canvasElement.getContext("2d");
-        player = new TaleemPlayer(canvasElement,ctx,items);
-        player.background = background; 
-        player.imagesUrl = imagesUrl; 
-        await player.loadImages(images);
-        
-        player.draw();
+$:{
+  if(items && player){
+    player.drawNoEditor(items);
+  }
+} 
+onMount(async () => {
+if (canvasElement) {
+          /////////////////////////////////////////////
+          const ctx = canvasElement.getContext("2d");
+          player = new TaleemPlayer(canvasElement, ctx, assets, images, items);
+          player.background = background; // this is slideExtra
+          ///////////////////////////////////////////////////////
+          player.drawNoEditor(items);
+///////////////////
 }});
 
   </script>

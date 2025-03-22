@@ -2,39 +2,28 @@
 <script>
   import  loadImages from "$lib/loadImages";
    import Assets from "$lib/assets";
-  import {presentation} from "../../lib/presentation_from_db";    
+  // import {presentation} from "../../lib/presentation_from_db";    
     import CanvasEditor from "$lib/CanvasModule/CanvasEditor/CanvasEditor.svelte";
     import { onMount,onDestroy } from "svelte";
 
-    // let items = [
-    //   {
-    //   uuid: "abc",
-    //   type: 'rectangle',
-    //   name: 'rectangle001',
-    //   x: 100,
-    //   y: 100,
-    //   width: 100,
-    //   height: 100,
-    //   rotation: 0,
-    //   filled: true,
-    //   lineWidth: 1,
-    //   dash: 0,
-    //   gap: 0,
-    //   color: "red",
-    //   globalAlpha: 1
-    //   }
-    //   ];
-
-    const appItems = presentation.slides[0].items;
-
-    let items = [];
-
-    for (let i = 0; i < appItems.length; i++) {
-      const appItem =   appItems[i];
-      // debugger;
-      items.push(appItem.itemExtra);
-      
-    }
+    let items = [
+      {
+      uuid: "abc",
+      type: 'rectangle',
+      name: 'rectangle001',
+      x: 100,
+      y: 100,
+      width: 100,
+      height: 100,
+      rotation: 0,
+      filled: true,
+      lineWidth: 1,
+      dash: 0,
+      gap: 0,
+      color: "red",
+      globalAlpha: 1
+      }
+      ];
  
       let images = [
         "atom.png",
@@ -55,6 +44,7 @@
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };  
+
       let assets =null;
 
 onMount(async () => { 

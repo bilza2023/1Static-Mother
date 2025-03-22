@@ -39,5 +39,9 @@ draw() {
     this.canvas.items = this.itemsEditor.items;
     this.canvas.draw();
 }
+drawNoEditor(items) {
+    this.canvas.items = items;
+    this.canvas.draw();
+}
 
 }//TaleemPlayer
