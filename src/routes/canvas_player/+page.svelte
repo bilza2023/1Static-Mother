@@ -2,7 +2,6 @@
 <script>
   import  loadImages from "$lib/loadImages";
    import Assets from "$lib/assets";
-  // import {presentation} from "../../lib/presentation_from_db";    
     import CanvasPlayer from "$lib/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
     import { onMount,onDestroy } from "svelte";
 
