@@ -8,11 +8,28 @@
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
 
+    import  loadImages from "$lib/loadImages";
+    import Assets from "$lib/assets";
+
     export let slides = presentation.slides;
+    export let images = [];
+    let background =  {
+        uuid: "44455764hfghyjty6",
+        type: 'background',  
+        backgroundColor: '#9cc19c',
+        cellHeight: 25,
+        cellWidth: 25,
+        backgroundImage: "black_mat",
+        globalAlpha: 1,
+        showGrid: false,
+        gridLineWidth: 1,
+        gridLineColor: '#685454'
+      };  
     let appEditor = null;
     ////////////////////////////////STATE///////////////////////////
     // Create a reactive store for currentSlideIndex
     let currentSlideIndex = 0;
+    let assets = null;
     let currentSlide = null;
     let currentTime = 0; 
 
@@ -40,6 +57,8 @@
     
     onMount(async() => {
         appEditor = new AppEditor(slides);
+        const imagesMap = await loadImages(images,'/images/');
+        assets = new Assets(imagesMap);
         appEditor.currentSlide = 0;
         currentSlideIndex = appEditor.getCurrentSlideIndex();
         currentSlide = appEditor.currentSlide;
@@ -102,6 +121,10 @@ bind:endTime={currentSlide.endTime}
       bind:slideExtra={slideExtra}
       currentSldieType={currentSlide.type}
       {currentTime}
+
+      {images}
+      {assets}
+      {background}
     />
   </div>
 </div>
