@@ -2,7 +2,6 @@
   import Editor from "../../lib/presentationEditor/Editor.svelte";
 
     import { onMount } from "svelte";
-    import {presentation} from "../../lib/presentation_from_db";    
     import {presentationData} from "./presentationData";    
     
     let slides=null;
