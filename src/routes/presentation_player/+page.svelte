@@ -1,5 +1,5 @@
 <script>
-  import Editor from "../../lib/presentationEditor/Editor.svelte";
+  import Player from "../../lib/presentationPlayer/Player.svelte";
 
     import { onMount } from "svelte";
     import {presentationData} from "./presentationData";    
@@ -11,9 +11,14 @@
       slides = presentationData;
 
     });
-  
+
 </script>
 
 {#if slides}
-<Editor bind:slides={slides} bind:slideExtra={slideExtra}/>
+<Player 
+bind:slides={slides} 
+bind:slideExtra={slideExtra}
+
+/>
 {/if}
+
