@@ -31,8 +31,6 @@ declare module '$env/static/private' {
 	export const VITE_DEFAULT_AUDIO: string;
 	export const GJS_DEBUG_TOPICS: string;
 	export const LESSOPEN: string;
-	export const HISTFILESIZE: string;
-	export const WARP_HONOR_PS1: string;
 	export const USER: string;
 	export const npm_config_user_agent: string;
 	export const XDG_SESSION_TYPE: string;
@@ -42,11 +40,9 @@ declare module '$env/static/private' {
 	export const npm_config_noproxy: string;
 	export const HOME: string;
 	export const CHROME_DESKTOP: string;
-	export const OLDPWD: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const DESKTOP_SESSION: string;
 	export const npm_package_json: string;
-	export const WARP_USE_SSH_WRAPPER: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE: string;
 	export const GNOME_SHELL_SESSION_MODE: string;
 	export const GTK_MODULES: string;
@@ -74,11 +70,9 @@ declare module '$env/static/private' {
 	export const MEMORY_PRESSURE_WATCH: string;
 	export const XDG_SESSION_CLASS: string;
 	export const USERNAME: string;
-	export const SSH_SOCKET_DIR: string;
 	export const TERM: string;
 	export const npm_config_cache: string;
 	export const GNOME_DESKTOP_SESSION_ID: string;
-	export const WARP_IS_LOCAL_SHELL_SESSION: string;
 	export const npm_config_node_gyp: string;
 	export const PATH: string;
 	export const SESSION_MANAGER: string;
@@ -161,8 +155,6 @@ declare module '$env/dynamic/private' {
 		VITE_DEFAULT_AUDIO: string;
 		GJS_DEBUG_TOPICS: string;
 		LESSOPEN: string;
-		HISTFILESIZE: string;
-		WARP_HONOR_PS1: string;
 		USER: string;
 		npm_config_user_agent: string;
 		XDG_SESSION_TYPE: string;
@@ -172,11 +164,9 @@ declare module '$env/dynamic/private' {
 		npm_config_noproxy: string;
 		HOME: string;
 		CHROME_DESKTOP: string;
-		OLDPWD: string;
 		TERM_PROGRAM_VERSION: string;
 		DESKTOP_SESSION: string;
 		npm_package_json: string;
-		WARP_USE_SSH_WRAPPER: string;
 		GIO_LAUNCHED_DESKTOP_FILE: string;
 		GNOME_SHELL_SESSION_MODE: string;
 		GTK_MODULES: string;
@@ -204,11 +194,9 @@ declare module '$env/dynamic/private' {
 		MEMORY_PRESSURE_WATCH: string;
 		XDG_SESSION_CLASS: string;
 		USERNAME: string;
-		SSH_SOCKET_DIR: string;
 		TERM: string;
 		npm_config_cache: string;
 		GNOME_DESKTOP_SESSION_ID: string;
-		WARP_IS_LOCAL_SHELL_SESSION: string;
 		npm_config_node_gyp: string;
 		PATH: string;
 		SESSION_MANAGER: string;
