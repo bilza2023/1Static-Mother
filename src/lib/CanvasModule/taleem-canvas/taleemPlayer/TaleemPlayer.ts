@@ -8,7 +8,11 @@ import ITaleemPlayer from "../interfaces/ITaleemPlayer";
 
 export default class TaleemPlayer implements ITaleemPlayer {
 
- constructor(canvasElement, ctx ,items){
+    canvas:TaleemCanvas;
+    create: typeof Create;
+    itemsEditor:ItemsEditor
+    
+ constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D  ,items){
     this.canvas = new TaleemCanvas(canvasElement, ctx);
     this.create = Create; //Why needed??
     this.itemsEditor = new ItemsEditor(items);//it is items editor->Add.js is included inside

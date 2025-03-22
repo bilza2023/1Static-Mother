@@ -11,6 +11,8 @@
     <br/>
     <br/>
 <div class="text-white">
+    <h1><b><a class="text-white" href="/player">Player</a></b></h1>
+    <br>
     <h1><b><a class="text-white" href="/presentation_editor">presentation_editor</a></b></h1>
     <br>
     <h1><b><a class="text-white" href="/eqs_editor">eqs_editor</a></b></h1>
@@ -19,6 +21,7 @@
     <br/>
     
     <h1><b><a class="text-white" href="/canvas_editor">CanvasEditor.svelte</a></b></h1>
+    <h1><b><a class="text-white" href="/canvas_player">canvas_player</a></b></h1>
     
 
 </div>
