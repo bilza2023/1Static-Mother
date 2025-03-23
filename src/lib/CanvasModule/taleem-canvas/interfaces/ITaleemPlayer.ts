@@ -8,9 +8,7 @@ export default interface ITaleemPlayer {
   itemsEditor: ItemsEditor;
 
   background: string;
-  imagesUrl: string;
 
-  loadImages(images: string[]): Promise<void>;
   connect(eventHandlersObject: {
     itemsEditor?: ItemsEditor;
     click: (event: MouseEvent) => void;

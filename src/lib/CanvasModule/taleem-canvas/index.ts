@@ -9,7 +9,9 @@ import EditorBehaviour from "./editorObjects/behaviours/EditorBehaviour";
 import HelloWorldBehaviour from "./editorObjects/behaviours/HelloWorldBehaviour";
 import ItemsMap from "./editorObjects/ItemsMap";
 import loadImages from "./loadImages";
+// import ShapeItem from "./ShapeTypes.ts";
 export {
+    // ShapeItem,
     ItemsMap, //core but may be changed soon
     TaleemPlayer, //CORE COMPONENT
     TaleemCanvas, //CORE COMPONENT

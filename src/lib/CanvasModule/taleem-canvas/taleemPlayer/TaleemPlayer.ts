@@ -2,10 +2,12 @@
  * 15-March-2025
  * TaleemPlayer : This is a user-facing object which wraps different internal components and handle its comlexities.
  * We are exporting this.itemsEditor.add for creation which add item-literal but export edit-object
- */
+ * - 23-March-2025 : I have added more typescript removed loadImages from here and now assets just get images on init/startup. 
+*/
+
 import {ItemsEditor,TaleemCanvas,Create} from "../index";
 import ITaleemPlayer from "../interfaces/ITaleemPlayer";
-import Assets from "../../../assets";
+import {IAssets} from "../../../assets/IAssets";
 
 export default class TaleemPlayer implements ITaleemPlayer {
 
@@ -13,7 +15,7 @@ export default class TaleemPlayer implements ITaleemPlayer {
     create: typeof Create;
     itemsEditor:ItemsEditor
     
- constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D  ,assets:Assets,items){
+ constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D,assets:IAssets,items){
     this.canvas = new TaleemCanvas(canvasElement, ctx,assets);
     this.create = Create; //Why needed??
     this.itemsEditor = new ItemsEditor(items);//it is items editor->Add.js is included inside

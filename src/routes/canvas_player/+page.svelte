@@ -1,11 +1,12 @@
 
-<script>
-  import  loadImages from "$lib/loadImages";
-   import Assets from "$lib/assets";
-    import CanvasPlayer from "$lib/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
-    import { onMount,onDestroy } from "svelte";
+<script lang="ts">
+    import type{ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
+  import  loadImages from "../../lib/loadImages";
+   import Assets from "../../lib/assets";
+    import CanvasPlayer from "../../lib/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
+    import { onMount} from "svelte";
 
-    let items = [
+    let items:ShapeItem[] = [
       {
       uuid: "abc",
       type: 'rectangle',
@@ -24,7 +25,7 @@
       }
       ];
  
-      let images = [
+      let images:string[] = [
         "atom.png",
         "baloons.png",
         "activity1.jpg",
@@ -48,6 +49,7 @@
 
 onMount(async () => { 
     const imagesMap = await loadImages(images,imagesUrl);
+    //images are inside assets
     assets = new Assets(imagesMap);
 });
 
@@ -73,13 +75,12 @@ function addItem(){
 }
 </script>
 
-<!-- images is different -->
 
 {#if assets}
       <CanvasPlayer 
       {items}
       {assets}
-      background={slideExtra}
+      bind:background={slideExtra}
       />
 {/if}
 

@@ -1,10 +1,12 @@
-<script>
-   
+
+<script lang="ts">
+    import type {ShapeItem} from "../taleem-canvas/ShapeTypes";
+    import type { IAssets } from "../../assets/IAssets";
     import  {TaleemPlayer} from "../taleem-canvas";
     import { onMount } from "svelte";
     /////////////////////////////////////////////////////////////////
-    export let items = [];
-    export let assets;
+    export let items:ShapeItem[]  = [];
+    export let assets:IAssets;
     export let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  
@@ -18,8 +20,8 @@
         gridLineColor: '#685454'
       };
     /////////////////////////////////////////////////////////////////
-      let canvasElement;
-      let player= null;
+      let canvasElement:HTMLCanvasElement;
+      let player:TaleemPlayer= null;
 /////////////////////////////////////////////////////////////
 $:{
   if(items && player){
@@ -30,7 +32,7 @@ onMount(async () => {
 if (canvasElement) {
           /////////////////////////////////////////////
           // debugger;
-          const ctx = canvasElement.getContext("2d");
+          const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
           player = new TaleemPlayer(canvasElement, ctx, assets, items);
           player.background = background; // this is slideExtra
           ///////////////////////////////////////////////////////

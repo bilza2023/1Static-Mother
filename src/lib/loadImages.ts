@@ -1,7 +1,7 @@
 
 
 
-export default async function loadImages(imagesUrlArray:[string],GlobalImagesUrl:string="") {
+export default async function loadImages(imagesUrlArray:string[],GlobalImagesUrl:string="") {
 //GlobalImagesUrl this if set will be added to the image path this will allow user if want to just feed the images names array and feed images url seperately. in that case the url part is in GlobalImagesUrl where as the local imageUrl will just contain the image names
 
     if (!Array.isArray(imagesUrlArray)) {
