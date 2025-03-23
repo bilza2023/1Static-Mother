@@ -8,51 +8,19 @@ import uuid from "../addNewSlide/uuid.js";
 export let next;
 export let prev;
 //////////////////////////////////////////////////////////////
-export let slides=[];
 export let show;
 export let assets;
 export let showSidePanel;
-// export let shiftTime=()=>{console.log("add shift time function")};
+
 export let save=()=>{};
+export let log=()=>{};
+export let deleteFn;
 export let soundFile=null;
 export let shiftTimeLocal;
 export let currentTime=0;
 export let startTime;
 export let endTime;
-
-// function deleteFn() {
-//     if ($currentSlideIndexStore >= 0 && $currentSlideIndexStore < $slidesStore.length) {
-//         const oldSlideIndex = $currentSlideIndexStore;
-//         // Create a new array without the slide to delete
-//         const updatedSlides = [...$slidesStore];
-//         updatedSlides.splice(oldSlideIndex, 1);
-//         // Update the store with the new array
-//         $slidesStore = updatedSlides;
-//         if (updatedSlides.length === 0) {
-//             $currentSlideIndexStore = -1;
-//         } else {
-//             $currentSlideIndexStore = Math.max(0, oldSlideIndex - 1);
-//         }
-//     }
-// }
-// function cloneSlide(){
-//   if (!currentSlide) return false ;
-//     try {
-//       const clonedSlide = JSON.parse(JSON.stringify(currentSlide));
-//       clonedSlide.uuid = uuid();
-//       $slidesStore = [...slides, clonedSlide];
-//     } catch (error) {
-//       console.error('Failed to clone slide:', error);
-//       return false;
-//     }
-// }
-// getLast() {
-//       if (this.slides.length > 0) {
-//           return this.slides[this.slides.length-1];
-//       } else {
-//           return false;
-//       }
-//   }  
+  
 </script>
 
 <div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 pt-2 px-2 ' style="color:whitesmoke;">
@@ -64,9 +32,7 @@ export let endTime;
       <NavBtn2 title='Save' icon='💾'  clk={save} />
       <NavBtn2 title='Prev' icon="<<"  clk={prev} />
       <NavBtn2 title='Next' icon=">>"  clk={next} />
-    <NavBtn2 title='Log' icon='🖨️'  clk={()=>{console.log(
-      "export const presentationData = " + JSON.stringify(slides)
-      )}} />
+    <NavBtn2 title='Log' icon='🖨️'  clk={log} />
     
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} narration={assets.narration || null}
@@ -76,7 +42,7 @@ export let endTime;
   </div> 
 
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
-  {#if slides.length > 0}
+
     <span class='text-xs'>Start</span> 
     <div class='bg-gray-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white'  type="number" >
     {startTime}
@@ -90,12 +56,9 @@ export let endTime;
      max=3600 
      > 
 
-<!-- the + sign before +e.target.value consverts it into number-->
 <NavBtn2 title='Clone' icon='🐑'  clk= {()=>{}} />
-<NavBtn2 title='Delete' icon='🗑️'  clk={()=>{}} />
-<!-- <NavBtn2 title='Copy' icon={Icons.COPY}  clk={copySlide} /> -->
-    <!-- <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} /> -->
-    {/if}
+<NavBtn2 title='Delete' icon='🗑️'  clk={deleteFn} />
+ 
   </div>  
 </div>
 

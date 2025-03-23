@@ -36,6 +36,9 @@
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
     
+    function log(){
+      console.log("export const presentationData = " + JSON.stringify(slides)); 
+    }  
     function redraw(){
         currentSlideIndex = appEditor.getCurrentSlideIndex();
         currentSlide = appEditor.currentSlide;    
@@ -81,11 +84,33 @@ function shiftTimeLocal(val){
   appEditor.shiftTime();
   // console.log("slides",appEditor.slides);
 }
+
+// function cloneSlide(){
+//   if (!currentSlide) return false ;
+//     try {
+//       const clonedSlide = JSON.parse(JSON.stringify(currentSlide));
+//       clonedSlide.uuid = uuid();
+//       $slidesStore = [...slides, clonedSlide];
+//     } catch (error) {
+//       console.error('Failed to clone slide:', error);
+//       return false;
+//     }
+// }
+
+function deleteFn() {
+  appEditor.del();
+  redraw();
+}
 </script>
   
 {#if currentSlide}
-<Toolbar {prev} {next} {slides} bind:showSidePanel={showSidePanel} bind:show={show} 
-
+<Toolbar 
+{prev} 
+{next} 
+{log} 
+bind:showSidePanel={showSidePanel} 
+bind:show={show} 
+{deleteFn}
 bind:startTime={currentSlide.startTime}
 bind:endTime={currentSlide.endTime}
 {shiftTimeLocal}

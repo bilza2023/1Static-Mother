@@ -82,17 +82,23 @@ set currentSlide(index){
     if(index < 0 || index > this.slides.length - 1){return;}
     // if(this._currentSlideIndex == index){return;} //use it
     
+    try{
     // Store the old index before changing it
     const oldIndex = this._currentSlideIndex;
-    
     // Restore the old slide if it was a canvas
     this.restoreIfOldCurrentSlideIsCanvas(oldIndex);
-    
+    }catch(e){
+
+    }
     // Update the current slide index
     this._currentSlideIndex = index;
-    
-    // Save the new slide if it's a canvas
-    this.saveIfNewCurrentSlideIsCanvas(index);
+
+    try{
+        // Save the new slide if it's a canvas
+        this.saveIfNewCurrentSlideIsCanvas(index);
+    }catch(e){
+            
+    }
 }
 
 get currentSlide(){
@@ -110,7 +116,15 @@ prev() {
 getCurrentSlideIndex(){
     return this._currentSlideIndex;
 }
-
+del() {
+        const currentSlideIndex = this.getCurrentSlideIndex();
+        this.slides.splice(currentSlideIndex, 1);
+        if(this.slides.length > 0){
+            this.currentSlide = 0;
+        }else {
+            this.currentSlide = null;
+        }
+}
 }//SlideObj
 /////////////////////////////////
 
