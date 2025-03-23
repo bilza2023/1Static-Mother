@@ -2,37 +2,34 @@
  * This module know just about item literals where as Behaviour know about EditObject.
  *  HANDLES are itemdEsitor responsibility
  */
-//this.selectedItem.createHandles
-//this.itemsEditor.getEditObject(item.type);
-//.addItems(handles)
-//this.getAllHandles(this.itemsEditor.items)
-// this.selectedItem.updateHandles(handlesInItems);
+
+import type {ShapeItem} from "../../ShapeTypes";
 
 import Add from "./Add";
 ///////////////////////////////////////////////////////////////////////////////
 export default class ItemsEditor {
 
-    constructor(items = []) {
+    _items:ShapeItem[];
+    add:Add;
+
+    constructor(items:ShapeItem[]) {
         this._items = items;
         this.add = new Add(this._items);
     }
     
-    set items(items){
+    set items(items:ShapeItem[]){
         this._items = items;
     }
-    get items(){
+    get items():ShapeItem[]{
         return this._items;
     }
 
-    addItem(newItem){
+    addItem(newItem:ShapeItem){
         this._items.push(newItem);
     }
 
-    addItems(newItems){
-    this._items.push(...newItems);
-    }
         
-    addItems(newItems) {
+    addItems(newItems:ShapeItem[]) {
         if (Array.isArray(newItems)) {
             this._items.push(...newItems);
         } else {
@@ -50,7 +47,7 @@ export default class ItemsEditor {
         }
     }
 
-    clone(itemData) {
+    clone(itemData:ShapeItem) {
         
             const clonedItem = JSON.parse(JSON.stringify(itemData));
             clonedItem.uuid = this.generateUUID();
@@ -58,7 +55,7 @@ export default class ItemsEditor {
             return clonedItem;
     }
 
-    deleteFn(itemData) {
+    deleteFn(itemData:ShapeItem) {
         const uuid = itemData.uuid;
         const indexToRemove = this._items.findIndex(item => item.uuid === uuid);
         // If the item exists, remove it using splice
@@ -70,7 +67,7 @@ export default class ItemsEditor {
     }
     
     getAllHandles(){
-        let result = [];
+        let result:ShapeItem[] = [];
         for (let i = 0; i < this._items.length; i++) {
           const item =  this._items[i];
           if(item.flag && item.flag === "handle"){
@@ -80,7 +77,7 @@ export default class ItemsEditor {
         return result;
     } 
 
-    findItemByUUID(uuid) {
+    findItemByUUID(uuid:string) {
         return this._items.find(item => item.uuid === uuid);
     }
 

@@ -1,6 +1,7 @@
 
 <script lang="ts">
     import type{ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
+    import type { IAssets } from "$lib/assets/IAssets";
   import  loadImages from "../../lib/loadImages";
    import Assets from "../../lib/assets";
     import CanvasPlayer from "../../lib/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
@@ -45,7 +46,7 @@
         gridLineColor: '#685454'
       };  
 
-      let assets =null;
+      let assets:IAssets =null;
 
 onMount(async () => { 
     const imagesMap = await loadImages(images,imagesUrl);
