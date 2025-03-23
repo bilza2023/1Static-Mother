@@ -2,8 +2,8 @@
     export let slides;
     export let currentSlideIndex; // Direct binding instead of function call
     export let setCurrentSlide;
+    export let moveUp;
 
-    function moveUp() {console.log("move up");}
     function moveDown() {console.log("move down");}
 </script>
     

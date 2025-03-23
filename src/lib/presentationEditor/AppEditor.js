@@ -142,6 +142,35 @@ clone(){
     }
 }
 
+moveUp() {
+    const index = this.getCurrentSlideIndex();
+    if (index <= 0) return; // Can't move up if already at the top
+    
+    // Swap the slide with the one above it
+    [this.slides[index], this.slides[index-1]] = [this.slides[index-1], this.slides[index]];
+    
+      this.setCurrentSlide(index-1);
+}
+  
+moveDown(index) {
+    if (index >= slides.length - 1) return; // Can't move down if already at the bottom
+    
+    // Swap the slide with the one below it
+    [slides[index], slides[index+1]] = [slides[index+1], slides[index]];
+    
+    // Create a new reference to trigger reactivity
+    slides = [...slides];
+    
+    // Update the current slide index if needed
+    if (currentSlideIndex === index) {
+      appEditor.setCurrentSlide(index+1);
+    } else if (currentSlideIndex === index+1) {
+      appEditor.setCurrentSlide(index);
+    }
+    
+    redraw();
+  }
+
 }//SlideObj
 /////////////////////////////////
 

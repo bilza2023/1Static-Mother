@@ -91,6 +91,12 @@ function clone(){
   slides = appEditor.slides; 
   redraw();
 }
+function moveUp(){
+  // debugger;
+  appEditor.moveUp();
+  slides = appEditor.slides; 
+  redraw();
+}
 
 function deleteFn() {
   appEditor.del();
@@ -125,6 +131,7 @@ bind:endTime={currentSlide.endTime}
   <div class="side-panel">
     <SlidePanel 
         {slides} 
+        {moveUp}
         {currentSlideIndex}
         setCurrentSlide={(index) => {
             appEditor.setCurrentSlide(index);
