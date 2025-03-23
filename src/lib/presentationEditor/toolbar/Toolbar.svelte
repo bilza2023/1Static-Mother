@@ -15,6 +15,7 @@ export let showSidePanel;
 export let save=()=>{};
 export let log=()=>{};
 export let deleteFn;
+export let clone;
 export let soundFile=null;
 export let shiftTimeLocal;
 export let currentTime=0;
@@ -56,7 +57,7 @@ export let endTime;
      max=3600 
      > 
 
-<NavBtn2 title='Clone' icon='🐑'  clk= {()=>{}} />
+<NavBtn2 title='Clone' icon='🐑'  clk= {clone} />
 <NavBtn2 title='Delete' icon='🗑️'  clk={deleteFn} />
  
   </div>  

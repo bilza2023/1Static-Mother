@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+
     import SlidePicker from "./SlidePicker.svelte";
     import { onMount } from "svelte";
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
@@ -82,23 +83,18 @@
 function shiftTimeLocal(val){
   currentSlide.endTime = val;
   appEditor.shiftTime();
-  // console.log("slides",appEditor.slides);
 }
 
-// function cloneSlide(){
-//   if (!currentSlide) return false ;
-//     try {
-//       const clonedSlide = JSON.parse(JSON.stringify(currentSlide));
-//       clonedSlide.uuid = uuid();
-//       $slidesStore = [...slides, clonedSlide];
-//     } catch (error) {
-//       console.error('Failed to clone slide:', error);
-//       return false;
-//     }
-// }
+function clone(){
+  debugger;
+  appEditor.clone();
+  slides = appEditor.slides; 
+  redraw();
+}
 
 function deleteFn() {
   appEditor.del();
+  slides = appEditor.slides; 
   redraw();
 }
 </script>
@@ -108,9 +104,11 @@ function deleteFn() {
 {prev} 
 {next} 
 {log} 
+{clone}
+{assets}
+{deleteFn}
 bind:showSidePanel={showSidePanel} 
 bind:show={show} 
-{deleteFn}
 bind:startTime={currentSlide.startTime}
 bind:endTime={currentSlide.endTime}
 {shiftTimeLocal}

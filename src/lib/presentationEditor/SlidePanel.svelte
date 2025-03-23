@@ -1,5 +1,5 @@
 <script>
-    export let slides = [];
+    export let slides;
     export let currentSlideIndex; // Direct binding instead of function call
     export let setCurrentSlide;
 
