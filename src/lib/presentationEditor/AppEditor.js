@@ -18,7 +18,7 @@ setFirstSlide(){
     }
 }
 shiftTime() {
-    // debugger;
+    debugger;
     const MIN_DURATION = 2; // Minimum duration between startTime and endTime in seconds
     this.setFirstSlide();
     // Process all slides
@@ -80,6 +80,7 @@ setCurrentSlide(index){
 set currentSlide(index){
     // Check if the index is valid
     if(index < 0 || index > this.slides.length - 1){return;}
+    // if(this._currentSlideIndex == index){return;} //use it
     
     // Store the old index before changing it
     const oldIndex = this._currentSlideIndex;

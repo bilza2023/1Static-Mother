@@ -1,17 +1,15 @@
 <script>
     import SlidePicker from "./SlidePicker.svelte";
     import { onMount } from "svelte";
-    import {presentation} from "../../lib/presentation_from_db";    
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
     import AppEditor from "./AppEditor";
     import Toolbar from "./toolbar/Toolbar.svelte";    
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
-
     import  loadImages from "$lib/loadImages";
     import Assets from "$lib/assets";
-
-    export let slides = presentation.slides;
+////////////////////////////////////////////////////////////
+    export let slides;
     export let images = [];
     let background =  {
         uuid: "44455764hfghyjty6",
@@ -69,7 +67,7 @@
             if(slideType === 'Eqs'){slideType='eqs';}
             const newSlide = getNewSlide(slideType);
             slides.push(newSlide);
-            appEditor.currentSlide = slides.length - 1;
+            appEditor.currentSlide = slides.length - 1; // THIS IS ERROR
             currentSlideIndex = appEditor.getCurrentSlideIndex();
             currentSlide = appEditor.currentSlide;
             show = false;
