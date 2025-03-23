@@ -4,11 +4,12 @@ import TaleemCanvas from "./DrawModule/TaleemCanvas";
 import ItemsEditor from "./editorObjects/itemsEditor/ItemsEditor";
 import Create from "./DrawModule/Create";
 import Behaviour from "./editorObjects/Behaviour";
-import AddToolbar from "./addToolbar/AddToolbar.svelte"
 import EditorBehaviour from "./editorObjects/behaviours/EditorBehaviour";
 import HelloWorldBehaviour from "./editorObjects/behaviours/HelloWorldBehaviour";
 import ItemsMap from "./editorObjects/ItemsMap";
 import loadImages from "./loadImages";
+// ---------------svelte---------------------
+import AddToolbar from "./addToolbar/AddToolbar.svelte"
 // import ShapeItem from "./ShapeTypes.ts";
 export {
     // ShapeItem,

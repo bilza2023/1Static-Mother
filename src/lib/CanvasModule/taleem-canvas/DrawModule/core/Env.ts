@@ -1,12 +1,17 @@
 
 
-import Assets from "../../../../assets";
+import {IAssets} from "../../../../assets/IAssets";
+import {ImageLoadResult} from "../../../../assets/IImageLoadResult";
+import { BackgroundImageName } from "../../../../assets/loadBackgroundImages";
+import { SpriteName, Sprite } from "../../../../assets/loadSprites";
+import Icons from "../../../../assets/Icons.js";
+
 /////////////////////////////////////////////////////////////////////
   export default class Env {
   private ctx: CanvasRenderingContext2D;
-  private assets:Assets;
+  private assets:IAssets;
 /////////////////////////////////////////////////////////////////////
-  constructor(ctx: CanvasRenderingContext2D,assets:Assets) {
+  constructor(ctx: CanvasRenderingContext2D,assets:IAssets) {
     this.ctx = ctx;
     this.assets = assets;//From this point onwards every thing is env.assets.xyz..
   }
@@ -15,11 +20,11 @@ import Assets from "../../../../assets";
     return this.assets.images.get(name);
   }
 
-  public getBackgroundImage(name: string): string|undefined {    
+  public getBackgroundImage(name: BackgroundImageName): string|undefined {    
     return this.assets.backgroundImages.get(name);
   }
 
-  public getSprite(name: string): string | undefined {
+  public getSprite(name: SpriteName): Sprite | undefined {
     return this.assets.sprites.get(name);
   }
 

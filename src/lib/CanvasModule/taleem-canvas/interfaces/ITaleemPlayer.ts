@@ -1,13 +1,13 @@
 
-
 import { ItemsEditor, TaleemCanvas, Create } from "../index";
+import {BackgroundData} from "../itemsDataInterfaces/BackgroundData";
 
 export default interface ITaleemPlayer {
   canvas: TaleemCanvas;
   create: typeof Create;
   itemsEditor: ItemsEditor;
 
-  background: string;
+  background:BackgroundData;
 
   connect(eventHandlersObject: {
     itemsEditor?: ItemsEditor;

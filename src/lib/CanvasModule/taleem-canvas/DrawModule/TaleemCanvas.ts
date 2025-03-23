@@ -1,32 +1,31 @@
 
 import EventModule from "./core/EventModule.js";
-
-import Assets from "../../../assets";
+//24-MArch-2025: Since i an not using Class Assets rather an interface IAssets now this class is depencent on an interface (a contract) and not on a class.
+import {BackgroundData} from "../itemsDataInterfaces/BackgroundData";
+import {IAssets} from "../../../assets/IAssets.js";
 import itemsToDrawObjects from "./core/itemsToDrawObjects.js";
 import Env from "./core/Env.js";
-import loadImagesLocal from "./core/loadImagesLocal.js";
 import drawBg from "./core/drawBg.js";
-// import Add from "./Add.js";
 /**
  * The easiest way to edit an object in svelte is to make that object hold reference to a class-literal. The object will edit/chagne the class-literal and not the object its-self
  */
-// import InputModule from "../core/InputModule.js";
-
 /////////////////////////////////////////////////////////////////
 // This is a daul format Engine it can tale items (as in item-data-literals) which it converts into item-object and draw OR it can also take item-object DIRECTLY and draw them using setItemObjects. 
 // - The item "item-data-literal" are external to it, it just convert them into item-objects and use them. However it can take on item-objects directly as well.
-import ITaleemCanvas from "../interfaces/ITaleemCanvas.js";
 /////////////////////////////////////////////////////////////////
-export default class TaleemCanvas implements ITaleemCanvas  {
+export default class TaleemCanvas  {
 // Create has to be totally external since this has to be a subscriber app
 // The Editor and the Player must be seperate such that both take in itemData literals and the Static Player can also take directly itemObjects 
 // ===> THIS IS THE POINT THE STATIC PLAYER SHOULD BE ABLE TO TAKE IN DATA-ITEM-LITERALS AS WELL AS ITEM-OBJECTS SO THAT IT CAN PAIR WITH THE APP AS WELL AS THE EDITOR AND ITS SELF DOES NOT DO ANY EDITING (though the base class is same for all item-objects).
-eventModule:EventModule;
 canvas:HTMLCanvasElement;
 ctx:CanvasRenderingContext2D;
 env:Env; //assets with images
+eventModule:EventModule;
+bgData:BackgroundData;
+width:number;
+height:number;
 ///////////////////////////////////////////////////////////////
-  constructor(canvas :HTMLCanvasElement, ctx:CanvasRenderingContext2D,assets:Assets) { // no more incomming bacground has to be part of items but will BE counted as such yet just drawn  seperate. 
+  constructor(canvas :HTMLCanvasElement, ctx:CanvasRenderingContext2D,assets:IAssets) { // no more incomming bacground has to be part of items but will BE counted as such yet just drawn  seperate. 
     if (!canvas || !ctx) {
       console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");
       throw new Error("TaleemCanvas requires both `canvas` and `ctx`.");
@@ -34,7 +33,7 @@ env:Env; //assets with images
     this.canvas = canvas;
     this.ctx = ctx;
     this.env = new Env(this.ctx,assets);
-    // this.imagesUrl = '';
+    // if bgData is not set this is default
     this.bgData =  {
       uuid: "44456",
       type: 'background',  
@@ -58,17 +57,13 @@ env:Env; //assets with images
     ////////////////////////////////////////////////////////////////////////
     this.eventModule = new EventModule(this.canvas,this.itemObjects); // No longer passing items array
   }
-///////////////////////////////////////
-async loadImages(imagesArray){
-   this.env.images = await loadImagesLocal(imagesArray,this.imagesUrl);
-}
-///////////////////////////////////////
+
 set background(bg){//this fn needs improvement 
       this.bgData =  bg; 
 }
-  get background(){
-    return this.bgData;
-  }
+get background(){
+  return this.bgData;
+}
   set items(items){
     this.itemObjects = [];
     this.itemObjects = itemsToDrawObjects(items,this.env);

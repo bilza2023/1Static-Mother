@@ -5,7 +5,7 @@
  * - 23-March-2025 : I have added more typescript removed loadImages from here and now assets just get images on init/startup.
  * - 24-March-2025 : Everything is important and Everything is final 
 */
-
+import {BackgroundData} from "../itemsDataInterfaces/BackgroundData";
 import {ItemsEditor,TaleemCanvas,Create} from "../index";
 import ITaleemPlayer from "../interfaces/ITaleemPlayer";
 import {IAssets} from "../../../assets/IAssets";
@@ -17,14 +17,14 @@ export default class TaleemPlayer implements ITaleemPlayer {
     create: typeof Create;
     itemsEditor:ItemsEditor
 //////////////////////////////////////////////////////////////////////    
- constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D,assets:IAssets,items:ShapeItem){
+ constructor(canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D,assets:IAssets,items:ShapeItem[]){
     this.canvas = new TaleemCanvas(canvasElement, ctx,assets);
     this.create = Create; //Why needed??
     this.itemsEditor = new ItemsEditor(items);//it is items editor->Add.js is included inside
  }
 ///////////////////////////////////////////
-set background(bg){this.canvas.background =  bg;}
-get background(){return this.canvas.background;}
+set background(bg:BackgroundData){this.canvas.background =  bg;}
+get background():BackgroundData{return this.canvas.background;}
 //..........................................................
 
 //--This object is a wrapper object so just provide an interface
@@ -43,7 +43,7 @@ draw() {
     this.canvas.items = this.itemsEditor.items;
     this.canvas.draw();
 }
-drawNoEditor(items) {
+drawNoEditor(items:ShapeItem[]) {
     this.canvas.items = items;
     this.canvas.draw();
 }
