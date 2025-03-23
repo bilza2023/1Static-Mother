@@ -5,15 +5,14 @@
     import {presentationData} from "./presentationData";    
     
     let slides=null;
-    let slideExtra = {};
     
     onMount(async() => {
       slides = presentationData;
 
     });
-  
+    let images = [];
 </script>
 
 {#if slides}
-<Editor bind:slides={slides} bind:slideExtra={slideExtra}/>
+<Editor bind:slides={slides} {images}/>
 {/if}

@@ -12,6 +12,7 @@
 ////////////////////////////////////////////////////////////
     export let slides;
     export let images = [];
+    
     let background =  {
         uuid: "44455764hfghyjty6",
         type: 'background',  

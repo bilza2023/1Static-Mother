@@ -7,6 +7,8 @@
       export let assets;
       export let images;
       export let background;
+      export let slideStartTime;
+      export let slideEndTime;
       export let slideExtra;
       export let currentTime=0;//Only for Eqs Editor do not feed it to canvas 
       export let startTime;//Only for Eqs Editor do not feed it to canvas 
