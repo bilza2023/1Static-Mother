@@ -1,11 +1,11 @@
 
 <script lang="ts">
-     import type {CanvasItemType} from "../../lib/CanvasModule/interfaces/ICanvasItems";
-  import CanvasEditorMonolith from "../../lib/CanvasModule/svelte/CanvasEditorMonolith/CanvasEditorMonolith.svelte";
+     import type {ICanvasItemTypes} from "../../lib/CanvasModule/index";
+  import CanvasEditorMonolith from "../../lib/CanvasModule/svelte/CanvasEditorMonolith.svelte";
 import type {ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
 
 /////////////////////////////////////////////////////////////
-   let items:CanvasItemType[] = [
+   let items:ICanvasItemTypes[] = [
     {
     uuid: "abc",
     type: 'rectangle',

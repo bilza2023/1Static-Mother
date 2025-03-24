@@ -233,7 +233,7 @@ interface ITriangle extends IBaseCanvasItem {
 }
 
 // Export all interfaces as an array of types
-export  type CanvasItemType =
+export  type ICanvasItemTypes =
   | IAngle
   | ICircle
   | IDot

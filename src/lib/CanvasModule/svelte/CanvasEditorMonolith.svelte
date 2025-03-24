@@ -1,20 +1,20 @@
 
 
 <script lang="ts">
-    import type {CanvasItemType} from "../../interfaces/ICanvasItems";
-    import type { IAssets } from "../../../assets/IAssets";
-    import  Assets from "../../../assets/Assets";
-    import  loadImages from "../../../loadImages";
-    import  DrawEngineMonolith from "../../DrawMonolith/DrawEngineMonolith";
+    import type {ICanvasItemTypes} from "../index";
+    import type { IAssets } from "../../assets/IAssets";
+    import  Assets from "../../assets/Assets";
+    import  loadImages from "../../loadImages";
+    import  DrawEngineMonolith from "../DrawMonolith/DrawEngineMonolith";
 
     // import HelloWorldBehaviour from "../../lib/CanvasModule/Behaviours/HelloWorldBehaviour";
     import { onMount } from "svelte";
-    import EditorBehaviour from "../../Behaviours/EditorBehaviour";
+    import EditorBehaviour from "../Behaviours/EditorBehaviour";
     /////////////////////////////////////////////////////////////////--83lines
       let canvasElement:HTMLCanvasElement;
       let player:DrawEngineMonolith= null;
   /////////////////////////////////////////////////////////////
-  export let items:CanvasItemType[] = [
+  export let items:ICanvasItemTypes[] = [
       {
       uuid: "abc",
       type: 'rectangle',
