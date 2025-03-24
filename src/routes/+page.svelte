@@ -23,6 +23,7 @@
     
     <h1><b><a class="text-white" href="/canvas_editor">CanvasEditor.svelte</a></b></h1>
     <h1><b><a class="text-white" href="/canvas_player">canvas_player</a></b></h1>
+    <h1><b><a class="text-white" href="/monolith">monolith</a></b></h1>
     
 
 </div>
