@@ -17,7 +17,7 @@ export type ShapeItem =
   | SpriteData 
   | TextData 
   | TriangleData;
-k
+
 // You can also create more specific groupings if needed
 // export type GeometricShapeItem = 
 //   | CircleItemData 

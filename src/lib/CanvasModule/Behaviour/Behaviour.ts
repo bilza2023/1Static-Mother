@@ -2,18 +2,18 @@
  * The plan is this that itemsEditor know about item-literals where as Behaviour know about EditObjects, the Add.js know about both and create item-literal but return EditorObject.
  * 
  */
-import ItemsMap from "../taleem-canvas/editorObjects/ItemsMap";
-import CreateItem from "../taleem-canvas/DrawMonolith/CreateItem";
+import ItemsMap from "./ItemsMap";
+import CreateItem from "../core/CreateItem";
 import ItemsEditor from "./itemsEditor/ItemsEditor";
 
 export default class Behaviour {
 ///////////////////////////////////////////////////////
 create = CreateItem;  
-itemsEditor:ItemsEditorl  
+itemsEditor:ItemsEditor  
 callback:()=>void;  
 ///////////////////////////////////////////////////////  
 constructor(items,callback:()=>void){
-this.itemsEditor = new ItemsEditor(items);;
+this.itemsEditor = new ItemsEditor(items);
 this.callback = callback;
 this.create = CreateItem;//should NOT be removed.editor has to add handles etc
 
@@ -41,7 +41,7 @@ isHit(mouseX:number,mouseY:number){
   return null;
   }
 
-isHitMulti(mouseX, mouseY) {
+  isHitMulti(mouseX, mouseY) {
     const hitItems = [];
     
     for (let i = 0; i < this.itemsEditor.items.length; i++) {
@@ -57,7 +57,6 @@ isHitMulti(mouseX, mouseY) {
     
     return hitItems;
   }
-
 //Handles should be in itemsEditor
   isItemHandle(hitItem){
     if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){

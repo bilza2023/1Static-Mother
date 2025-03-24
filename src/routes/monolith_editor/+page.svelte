@@ -1,18 +1,11 @@
 
 <script lang="ts">
-  import type {ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
-  import type { IAssets } from "../../lib/assets/IAssets";
-  import  Assets from "../../lib/assets/Assets";
-  import  loadImages from "../../lib/loadImages";
-  import  DrawEngineMonolith from "../../lib/CanvasModule/taleem-canvas/DrawMonolith/DrawEngineMonolith"
-  // import HelloWorldBehaviour from "../../lib/CanvasModule/Behaviours/HelloWorldBehaviour";
-  import { onMount } from "svelte";
-  import EditorBehaviour from "../../lib/CanvasModule/Behaviours/EditorBehaviour";
-  /////////////////////////////////////////////////////////////////
-    let canvasElement:HTMLCanvasElement;
-    let player:DrawEngineMonolith= null;
+     import type {CanvasItemType} from "../../lib/CanvasModule/interfaces/ICanvasItems";
+  import CanvasEditorMonolith from "../../lib/CanvasModule/svelte/CanvasEditorMonolith/CanvasEditorMonolith.svelte";
+import type {ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
+
 /////////////////////////////////////////////////////////////
-let items:ShapeItem[] = [
+   let items:CanvasItemType[] = [
     {
     uuid: "abc",
     type: 'rectangle',
@@ -50,34 +43,13 @@ let items:ShapeItem[] = [
       gridLineColor: '#685454'
     }; 
     let assets=null; 
+
 /////////////////////////////////////////////////////////////
-
-function behaviourCallback(){
-  if(player){
-      player.draw(items,slideExtra);
-  }
-  console.log("behaviourCallback");
-}
-/////////////////////////////////////////////////////////////
-
-onMount(async () => {
-if (canvasElement) {
-  const imagesMap = await loadImages(images,imagesUrl);
-  //images are inside assets
-  assets = new Assets(imagesMap);
-        /////////////////////////////////////////////
-     
-        const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
-        player = new DrawEngineMonolith(canvasElement, ctx, assets);
-      //   player.background = background; // this is slideExtra
-      /////////////////--------BEHAVIOUR-------///////////////////////////
-      let hw = new EditorBehaviour(items,behaviourCallback);
-      player.connect(hw);
-      ////////////////////////////////////////////////////////////////////
-        player.draw(items,slideExtra);
-///////////////////
-}});
-
 </script>
 
-<canvas bind:this={canvasElement} ></canvas>
+<CanvasEditorMonolith
+{items}
+{images}
+{imagesUrl}
+{slideExtra}
+/>
