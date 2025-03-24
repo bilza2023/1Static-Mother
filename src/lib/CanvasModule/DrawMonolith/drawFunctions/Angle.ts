@@ -1,21 +1,21 @@
 
 
-export default function angle(data,ctx:CanvasRenderingContext2D){
+export default function angle(itemData,ctx:CanvasRenderingContext2D){
     
-        const startAngle = data.startAngle * (Math.PI / 180);
-        const endAngle = data.endAngle * (Math.PI / 180);
-        const x = data.x;
-        const y = data.y;
-        const radius = data.radius;
-        const ticks = data.ticks;
-        const color = data.color;
-        const lineWidth = data.lineWidth;
-        const showOrigin = data.showOrigin;
+        const startAngle = itemData.startAngle * (Math.PI / 180);
+        const endAngle = itemData.endAngle * (Math.PI / 180);
+        const x = itemData.x;
+        const y = itemData.y;
+        const radius = itemData.radius;
+        const ticks = itemData.ticks;
+        const color = itemData.color;
+        const lineWidth = itemData.lineWidth;
+        const showOrigin = itemData.showOrigin;
     
         ctx.save();
         ctx.strokeStyle = color;
         ctx.lineWidth = lineWidth;
-        ctx.globalAlpha = data.globalAlpha;
+        ctx.globalAlpha = itemData.globalAlpha;
     
         // Draw the arc
         ctx.beginPath();

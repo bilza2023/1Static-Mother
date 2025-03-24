@@ -5,8 +5,9 @@
  * 14 objects:24 March 2025
  */
 import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRectangle,ISprite,IText,ITriangle} from "../interfaces/ICanvasItems";
+import {IBackground} from "../interfaces/IBackground";
 
-export default class CreateItem {
+export default class Create {
     
 static angle():IAngle{
     {
@@ -255,7 +256,23 @@ static triangle():ITriangle{
         opacity: 1
     };
 }
-
+//////////////////////////////////
+static background():IBackground{
+    return {
+        uuid: uuid(),
+        type: 'background',  
+        backgroundColor: 'gray',
+        color: 'gray', //use this instead of backgroundColor
+        cellHeight: 25,
+        cellWidth: 25,
+        backgroundImage: null,
+        opacity: 1,
+        ///////////////////
+        showGrid: true,
+        gridLineWidth: 1,
+        gridLineColor: '#685454'
+      };
+}
 
 }//obj
 /////////////////////////////

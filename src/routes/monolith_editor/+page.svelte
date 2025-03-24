@@ -2,27 +2,10 @@
 <script lang="ts">
      import type {ICanvasItemTypes} from "../../lib/CanvasModule/index";
   import CanvasEditorMonolith from "../../lib/CanvasModule/svelte/CanvasEditorMonolith.svelte";
-import type {ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
-
+import AddToolbar from "../../lib/CanvasModule/svelte/addToolbar/AddToolbar.svelte";
+import {Create} from "../../lib/CanvasModule/index";
 /////////////////////////////////////////////////////////////
-   let items:ICanvasItemTypes[] = [
-    {
-    uuid: "abc",
-    type: 'rectangle',
-    name: 'rectangle001',
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-    rotation: 0,
-    filled: true,
-    lineWidth: 1,
-    dash: 0,
-    gap: 0,
-    color: "red",
-    globalAlpha: 1
-    }
-    ];
+   let items:ICanvasItemTypes[] = [];
    let images:string[] = [
       "atom.png",
       "baloons.png",
@@ -43,9 +26,17 @@ import type {ShapeItem} from "../../lib/CanvasModule/taleem-canvas/ShapeTypes";
       gridLineColor: '#685454'
     }; 
     let assets=null; 
+    // debugger;
 
+// function redraw(){items = [...items];}
 /////////////////////////////////////////////////////////////
+function callback(itemName){
+  const newItem = Create[itemName]();
+  items = [...items,newItem];
+}
+
 </script>
+<AddToolbar {callback} />
 
 <CanvasEditorMonolith
 {items}

@@ -53,7 +53,11 @@
       }; 
       let assets=null; 
   /////////////////////////////////////////////////////////////
-  
+ $:{
+  if(player){
+    player.draw(items,slideExtra);
+  }
+ } 
   function behaviourCallback(){
     if(player){
         player.draw(items,slideExtra);

@@ -3,7 +3,7 @@
  * 
  */
 import ItemsMap from "./ItemsMap";
-import CreateItem from "../core/CreateItem";
+import CreateItem from "../create/Create";
 import ItemsEditor from "./itemsEditor/ItemsEditor";
 
 export default class Behaviour {

@@ -2,8 +2,8 @@
 
 import DrawFunctionsMap from "./DrawFunctionsMap.js";
 import EventModule from "./EventModule.js";
-import {IAssets} from "../../assets/IAssets.js";
-import {BackgroundData} from "../interfaces/core/shapeTypes/itemsDataInterfaces/BackgroundData.js";
+import {IAssets} from "../../assets/IAssets.js"; //Global App level Interface
+import {IBackground,ICanvasItemTypes} from "../index.js";
 import Env from "./Env.js";
 import drawBg from "./drawBg.js";
 
@@ -14,7 +14,7 @@ canvas:HTMLCanvasElement;
 ctx:CanvasRenderingContext2D;
 env:Env; //assets with images
 eventModule:EventModule;
-bgData:BackgroundData;
+bgData:IBackground;
 width:number;
 height:number;
 assets:IAssets;
@@ -65,7 +65,7 @@ assets:IAssets;
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);  
  }
-  draw(items,background) {
+  draw(items:ICanvasItemTypes[],background:IBackground) {
     this.clear();
     
     drawBg(this.ctx,background,this.env,this.assets);

@@ -1,7 +1,18 @@
-import type {ICanvasItemTypes} from "./interfaces/ICanvasItems";
-import CanvasEditorMonolith from "./svelte/CanvasEditorMonolith.svelte"
 
+//Interfaces
+import type {ICanvasItemTypes} from "./interfaces/ICanvasItems";
+import type {IBackground} from "./interfaces/IBackground"
+//Core Js 
+import Create from "./create/Create";
+//svelte components
+import CanvasEditorMonolith from "./svelte/CanvasEditorMonolith.svelte"
+//////////////////////////////////////////////////////
 export {
+//interfaces
     ICanvasItemTypes,
-    CanvasEditorMonolith
+    IBackground,
+//core
+    Create,
+    // .svelte
+    CanvasEditorMonolith,
 }
