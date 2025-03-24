@@ -1,10 +1,10 @@
 
 //Any Event Manager on top of this is a wrapper.
-// this return a itemObject in case of click,dbl click , mouse over etc etc
+// this return a item in case of click,dbl click , mouse over etc etc
 export default class EventModule {
     constructor(canvas) {
       this.canvas = canvas;
-    
+    //allowed callbacks
       this.callbacks = {
         click: null,
         dblclick: null,
@@ -15,7 +15,7 @@ export default class EventModule {
   
       this.initListeners();
     }
-  
+  //just place pointers which will later be changed on connect
     initListeners() {
       this.canvas.addEventListener("click", (e) => this.handleEvent(e, "click"));
       this.canvas.addEventListener("dblclick", (e) => this.handleEvent(e, "dblclick"));
@@ -24,7 +24,7 @@ export default class EventModule {
       this.canvas.addEventListener("mouseup", (e) => this.handleEvent(e, "mouseup"));
     }
   
-  
+ //This is the function that is fired as response of EVERY MOUSE EVENT-->Just return x,y (x and y are changed according to canvas)with no item etc 
     handleEvent(event, type) {
       const rect = this.canvas.getBoundingClientRect();
       const mouseX = event.clientX - rect.left;
@@ -38,7 +38,7 @@ export default class EventModule {
         this.callbacks[type](mouseX,mouseY,type,event);//from here we get the hit-item 
       }
     }
-  
+  //This maps the user callbacks to 
     on(eventType, callback) {
       if (this.callbacks[eventType] !== undefined) {
         this.callbacks[eventType] = callback;

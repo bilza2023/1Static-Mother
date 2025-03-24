@@ -1,19 +1,19 @@
 
 
-import angle from "./drawFunctions/Angle";
-import circle from "./drawFunctions/Circle";
-import dot from "./drawFunctions/Dot";
-import ellipse from "./drawFunctions/Ellipse";
-import icon from "./drawFunctions/Icon";
-import image from "./drawFunctions/Image";
-import line from "./drawFunctions/Line";
-import list from "./drawFunctions/List";
-import piechart from "./drawFunctions/PieChart";
-import ray from "./drawFunctions/Ray";
-import rectangle from "./drawFunctions/Rectangle";
-import sprite from "./drawFunctions/Sprite";
-import text from "./drawFunctions/Text";
-import triangle from "./drawFunctions/Triangle";
+import angle from "./Angle";
+import circle from "./Circle";
+import dot from "./Dot";
+import ellipse from "./Ellipse";
+import icon from "./Icon";
+import image from "./Image";
+import line from "./Line";
+import list from "./List";
+import piechart from "./PieChart";
+import ray from "./Ray";
+import rectangle from "./Rectangle";
+import sprite from "./Sprite";
+import text from "./Text";
+import triangle from "./Triangle";
 /////////////////////////////////////
 const DrawFunctionsMap = new Map();
 DrawFunctionsMap.set('angle', angle);
