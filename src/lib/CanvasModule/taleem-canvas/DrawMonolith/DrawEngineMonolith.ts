@@ -75,7 +75,7 @@ assets:IAssets;
 
       if (typeof drawFunction === 'function') {
         this.ctx.save();//dont remove
-        drawFunction(item,this.ctx,this.assets);
+        drawFunction(item,this.ctx,this.env,this.assets);//I-C-E-A (Items,Ctx,Env,Assets)
         this.ctx.restore();//dont remove
       }
     });

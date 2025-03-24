@@ -9,7 +9,8 @@ export const nodes = [
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
 	() => import('./nodes/7'),
-	() => import('./nodes/8')
+	() => import('./nodes/8'),
+	() => import('./nodes/9')
 ];
 
 export const server_loads = [];
@@ -19,9 +20,10 @@ export const dictionary = {
 		"/canvas_editor": [3],
 		"/canvas_player": [4],
 		"/eqs_editor": [5],
-		"/monolith": [6],
-		"/presentation_editor": [7],
-		"/presentation_player": [8]
+		"/monolith_editor_helloWorld": [6],
+		"/monolith_player": [7],
+		"/presentation_editor": [8],
+		"/presentation_player": [9]
 	};
 
 export const hooks = {

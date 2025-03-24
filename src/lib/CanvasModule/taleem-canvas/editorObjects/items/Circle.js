@@ -1,6 +1,5 @@
 
 import BaseItem from './BaseItem.js';
-import uuid from './uuid.js';
 
 export default class Circle extends BaseItem {
   constructor(itemData) {

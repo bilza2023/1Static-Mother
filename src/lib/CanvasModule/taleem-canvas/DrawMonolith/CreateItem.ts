@@ -9,7 +9,7 @@ import {CanvasItemType,IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPi
 export default class CreateItem {
 
     
-static Angle():IAngle{
+static angle():IAngle{
     {
         return {
           uuid: uuid(),
@@ -29,7 +29,7 @@ static Angle():IAngle{
         };
 }  
 }
-static Circle():ICircle{
+static circle():ICircle{
     return {
         uuid: uuid(),
         type: 'circle',
@@ -48,7 +48,7 @@ static Circle():ICircle{
         opacity: 1
       };
 }
-static Dot():IDot{
+static dot():IDot{
     return {
         uuid: uuid(),
         type: 'dot',
@@ -63,7 +63,7 @@ static Dot():IDot{
         opacity: 1
       };
 }
-static Ellipse():IEllipse{
+static ellipse():IEllipse{
     return {
         uuid: uuid(),
         type: 'ellipse',
@@ -81,7 +81,7 @@ static Ellipse():IEllipse{
         opacity: 1
     };
 }
-static Icon():IIcon{
+static icon():IIcon{
     return {
         uuid: uuid(),
         type: 'icon',
@@ -102,7 +102,7 @@ static Icon():IIcon{
         opacity: 1
       };
 }
-static Image():IImage{
+static image():IImage{
     return {
         uuid: uuid(),
         type: 'image',
@@ -117,7 +117,7 @@ static Image():IImage{
         opacity: 1
     };
 }
-static Line():ILine{
+static line():ILine{
     return {
         uuid: uuid(),
         type: 'line',
@@ -134,7 +134,7 @@ static Line():ILine{
         opacity: 1
     };
 }
-static List():IList{
+static list():IList{
     return {
         uuid: uuid(),
         type: "list",
@@ -154,7 +154,7 @@ static List():IList{
         opacity: 1,
       };
 }
-static PieChart():IPieChart{
+static piechart():IPieChart{
     return {
         uuid: uuid(),
         type: "piechart",
@@ -174,7 +174,7 @@ static PieChart():IPieChart{
         opacity: 1,
       };
 }
-static Ray():IRay{
+static ray():IRay{
     return {
         uuid: uuid(),
         type: 'ray',
@@ -194,7 +194,7 @@ static Ray():IRay{
         opacity: 1
     };
 }
-static Rectangle():IRectangle{
+static rectangle():IRectangle{
     return {
         uuid: uuid(),
         type: 'rectangle',
@@ -212,7 +212,7 @@ static Rectangle():IRectangle{
         opacity: 1
       };
 }
-static Sprite():ISprite{
+static sprite():ISprite{
     return {
         uuid: uuid(),
         type: "sprite",
@@ -228,7 +228,7 @@ static Sprite():ISprite{
         opacity: 1,
       };
 }
-static Text():IText{
+static text():IText{
     return {
         uuid: uuid(),
         type: "text",
@@ -245,7 +245,7 @@ static Text():IText{
         height: 0
       };
 }
-static Triangle():ITriangle{
+static triangle():ITriangle{
     return {
         uuid: uuid(),
         type: 'triangle',
