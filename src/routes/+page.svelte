@@ -25,6 +25,7 @@
     <h1><b><a class="text-white" href="/canvas_player">canvas_player</a></b></h1>
     <h1><b><a class="text-white" href="/monolith_player">monolith_player</a></b></h1>
     <h1><b><a class="text-white" href="/monolith_editor_helloWorld">monolith_editor_helloWorld</a></b></h1>
+    <h1><b><a class="text-white" href="/monolith_editor">monolith_editor</a></b></h1>
     
 
 </div>

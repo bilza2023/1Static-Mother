@@ -42,6 +42,7 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
       const handlesInItems = this.itemsEditor.getAllHandles();
 
       this.selectedItem.updateHandles(handlesInItems);
+      this.callback();// I do not need gamellop due to this
     }
   }
   mousedown(mouseX,mouseY,type,event){
