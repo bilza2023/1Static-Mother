@@ -13,8 +13,7 @@ import {ICanvasItemTypes} from "./index";//local Moduel index
 ///////////////////////////////////////////////////////////////////////////////
 export default class ItemsEditor {
 
-
-static    removeAllHandles(items) {
+static  removeAllHandles(items) {
         for (let i = items.length - 1; i >= 0; i--) { 
             const item = items[i];
             if (item.flag && item.flag === "handle") {
@@ -31,7 +30,7 @@ static  clone(itemData:ICanvasItemTypes,items:ICanvasItemTypes[]) {
             return clonedItem;
     }
 
-static    deleteFn(itemData:ICanvasItemTypes,items:ICanvasItemTypes[]) {
+static  deleteFn(itemData:ICanvasItemTypes,items:ICanvasItemTypes[]) {
         const uuid = itemData.uuid;
         const indexToRemove = items.findIndex(item => item.uuid === uuid);
         // If the item exists, remove it using splice
@@ -51,7 +50,7 @@ static getAllHandles(items){
         return result;
     } 
 
-static    findItemByUUID(uuid:string,items:ICanvasItemTypes[]) {
+static  findItemByUUID(uuid:string,items:ICanvasItemTypes[]) {
         return items.find(item => item.uuid === uuid);
     }
 static isItemHandle(hitItem){

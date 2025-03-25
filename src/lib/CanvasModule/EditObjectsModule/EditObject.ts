@@ -1,4 +1,16 @@
 
+/**
+ * Edit Object: 25-March-2025
+ * This deals with converting item-literals into Edit Objects which has width and height (and x,y))thus we can find isHit.
+ * Contain the Edit Objects just to this class and do not use them independentely.
+ * The main objective of converting item-literals is to find 
+ *  1: isHit (for mouse selection etc).
+ *  2: Edit X and Y (animation etc).
+ * The Edit Object priovide a uniform interface inwhich each item has x,y,width and height all 4.
+ * Between the 2 pair of guaranteed variables x and y are absolutely important and any other 
+ * --whats else ??
+ *   
+ */
 import ItemsMap from "./ItemsMap";
 import { ICanvasItemTypes } from "../interfaces/ICanvasItems";
 // import BaseItem from "./BaseEditObject/BaseItem";

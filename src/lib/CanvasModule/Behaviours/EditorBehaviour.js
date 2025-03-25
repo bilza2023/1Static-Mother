@@ -9,7 +9,7 @@ constructor(items,callback){
   this.activeHandle = null;
   this.oldX = 0;
   this.oldY = 0;
-  //This can be moved to a seperate class
+//This can be moved to a seperate class
 this._selectedItem = null; // this selected item is just item literal no EditObject
 }
 /////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
     }
   }
   dblclick(mouseX,mouseY,type,event) {
-    // debugger;
+    debugger;
     const hitItem  = this.EditObject.isHitGetEditObj(items,mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
