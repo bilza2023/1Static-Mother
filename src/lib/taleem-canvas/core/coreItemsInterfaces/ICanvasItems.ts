@@ -170,7 +170,7 @@ interface IRay extends IBaseCanvasItem {
 interface IRectangle extends IBaseCanvasItem {
 
   uuid: string;
-  type: 'rectangle';
+  type: 'rectangle'; //type is not string 
   name: string;
   color: string;
   opacity: number;
