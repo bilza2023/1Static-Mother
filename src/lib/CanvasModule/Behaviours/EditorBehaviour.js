@@ -58,7 +58,7 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
   }
   dblclick(mouseX,mouseY,type,event) {
     // debugger;
-    const hitItem  = this.isHit(mouseX,mouseY);
+    const hitItem  = this.EditObject.isHitGetEditObj(items,mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
               //clear previous Handles    

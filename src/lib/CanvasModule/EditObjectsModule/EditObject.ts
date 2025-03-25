@@ -7,11 +7,10 @@ export default class EditObject{
 static getEditObject(type){ //type:?? this should be types of items
     return ItemsMap.get(type);
 }
-
 static isHitGetEditObj(items:ICanvasItemTypes[],mouseX:number,mouseY:number){
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      const EditItemObject = EditorObject.getEditObject(item.type);
+      const EditItemObject = EditObject.getEditObject(item.type);
       
       if(typeof EditItemObject !== "object") return null;
 
@@ -28,7 +27,7 @@ static isHitMultiGetEditObj(items:ICanvasItemTypes[],mouseX, mouseY) {
     
     for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const EditItemObject = EditorObject.getEditObject(item.type);
+    const EditItemObject = EditObject.getEditObject(item.type);
 
     if(typeof EditItemObject !== "object") return null;
 
@@ -45,7 +44,7 @@ static isHitMultiGetEditObj(items:ICanvasItemTypes[],mouseX, mouseY) {
 static isHit(items:ICanvasItemTypes[],mouseX:number,mouseY:number):ICanvasItemTypes|null{
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      const EditItemObject = EditorObject.getEditObject(item.type);
+      const EditItemObject = EditObject.getEditObject(item.type);
       
       if(typeof EditItemObject !== "object") return null;
 
@@ -62,7 +61,7 @@ static isHitMulti(items:ICanvasItemTypes[],mouseX, mouseY):ICanvasItemTypes[] | 
     
     for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const EditItemObject = EditorObject.getEditObject(item.type);
+    const EditItemObject = EditObject.getEditObject(item.type);
 
     if(typeof EditItemObject !== "object") return null;
 
@@ -75,6 +74,4 @@ static isHitMulti(items:ICanvasItemTypes[],mouseX, mouseY):ICanvasItemTypes[] | 
     }
     return hitItems;
 }
-
-
-}//EditorObject
+}//EditObject

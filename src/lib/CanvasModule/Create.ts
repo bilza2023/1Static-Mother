@@ -4,8 +4,8 @@
  * Every thing is important and Every thing is final.
  * 14 objects:24 March 2025
  */
-import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRectangle,ISprite,IText,ITriangle} from "../interfaces/ICanvasItems";
-import {IBackground} from "../interfaces/IBackground";
+import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRectangle,ISprite,IText,ITriangle} from "./interfaces/ICanvasItems";
+import {IBackground} from "./interfaces/IBackground";
 
 export default class Create {
     

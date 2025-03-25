@@ -17,9 +17,9 @@ export {
                 IBackground,
 //core JS
                 Create,
-                ItemsEditor,
+                ItemsEditor,//static util for item literals
                 EditObject, //The only place for EditoObjects and ItemsMap(orignal)
-                DrawEngineMonolith,//The main monolith draw engine
+                DrawEngineMonolith,//The main monolith draw engine (draw item literals)
                 Behaviour,
 // .svelte
                 CanvasEditorMonolith,//CanvasEditor using DrawEngineMonolith,Behaviour,itemsEditor
