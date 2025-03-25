@@ -1,47 +1,49 @@
-import BaseItem from './BaseItem.js';
-import uuid from "./uuid.js";
 
-export default class PieChart extends BaseItem {
+import BaseItem from '../BaseEditObject/BaseItem';
+
+export default class Circle extends BaseItem {
   constructor(itemData) {
     super(itemData);
   }
-/////////////////////////////////////////////////////////////////////////////////
-boundingRectangleWidth() {
-  return this.itemData.radius * 2;
-}
-boundingRectangleHeight() {
-  return this.itemData.radius * 2;
-}
-// Override bounding calculations for a circle.
-boundingRectangleX() {
-  return this.x - this.itemData.radius;
-}
-boundingRectangleY() {
-  return this.y - this.itemData.radius;
-}
+
+  boundingRectangleWidth() {
+    return this.itemData.radius * 2;
+  }
+  boundingRectangleHeight() {
+    return this.itemData.radius * 2;
+  }
+  
+  // Override bounding calculations for a circle.
+  boundingRectangleX() {
+    return this.x - this.itemData.radius;
+  }
+  boundingRectangleY() {
+    return this.y - this.itemData.radius;
+  }
+
   // Use radius to compute width and height.
-get width() {
-  return this.itemData.radius * 2;
-}
-set width(newWidth) {
-  const value = newWidth / 2;
-  if (value < 2){
-    this.itemData.radius = 2;
-  } else {
-    this.itemData.radius = value;
+  get width() {
+    return this.itemData.radius * 2;
   }
-}
-get height() {
-  return this.itemData.radius * 2;
-}
-set height(newHeight) {
-  const value = newWidth / 2;
-  if (value < 2){
-    this.itemData.radius = 2;
-  } else {
-    this.itemData.radius = value;
+  set width(newWidth) {
+    const value = newWidth / 2;
+    if (value < 2){
+      this.itemData.radius = 2;
+    } else {
+      this.itemData.radius = value;
+    }
   }
-}
+  get height() {
+    return this.itemData.radius * 2;
+  }
+  set height(newHeight) {
+    const value = newWidth / 2;
+    if (value < 2){
+      this.itemData.radius = 2;
+    } else {
+      this.itemData.radius = value;
+    }
+  }
 /////////////////////////////////////////////////////////////////////////////////
 createHandles(Create){
   const move =   this.getHandleData(Create,0, 0, "green", "move");
@@ -50,6 +52,7 @@ createHandles(Create){
   return [move , radius];
 }
 updateHandles(handles){
+//    debugger;
   
  if(Array.isArray(handles) && handles.length > 0){
     for (let i = 0; i < handles.length; i++) {
@@ -86,6 +89,7 @@ processHandle(handleProcessData){
       default:break;
     }
 }
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
-}///////////////
-
+}

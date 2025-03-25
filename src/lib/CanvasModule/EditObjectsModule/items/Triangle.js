@@ -1,5 +1,5 @@
-import BaseItem from './BaseItem.js';
-import uuid from './uuid.js';
+import BaseItem from '../BaseEditObject/BaseItem.js';
+
 
 export default class Triangle extends BaseItem {
     constructor(itemData) {

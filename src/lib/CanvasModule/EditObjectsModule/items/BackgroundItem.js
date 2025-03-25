@@ -1,5 +1,6 @@
 
-import BaseItem from './BaseItem.js';
+import BaseItem from '../BaseEditObject/BaseItem';
+
 import uuid from './uuid.js';
 
 export default class BackgroundItem extends BaseItem {

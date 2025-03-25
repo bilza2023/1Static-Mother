@@ -1,15 +1,11 @@
-import BaseItem from './BaseItem.js';
+import BaseItem from '../BaseEditObject/BaseItem.js';
 
-export default class TextItem extends BaseItem {
+
+export default class List extends BaseItem {
   constructor(itemData) {
     super(itemData);
-    // Calculate width/height immediately after construction
-    if (this.itemData.width === 0) {
-      this.estimateTextDimensions();
-    }
   }
 
-  
   // Estimation function for text width
   estimateTextWidth(text, fontSize, fontFamily) {
     // Font width factors (approximate average character width relative to font size)
@@ -101,12 +97,94 @@ export default class TextItem extends BaseItem {
     this.itemData.height = 0;  // Reset cache.
   }
 
+  get width() {
+    if (this.itemData.width === 0) {
+      const { text, fontSize, fontFamily } = this.itemData;
+      this.itemData.width = this.estimateTextWidth(text, fontSize, fontFamily);
+    }
+    return this.itemData.width;
+  }
+  
+  get height() {
+    if (this.itemData.height === 0) {
+      this.itemData.height = this.estimateTextHeight(this.itemData.fontSize);
+    }
+    return this.itemData.height;
+  }
+  /////////////////////////////////////////////////
+
+  // Estimation function for text width
+  estimateTextWidth(text, fontSize, fontFamily) {
+    // Font width factors (approximate average character width relative to font size)
+    const fontFactors = {
+      'Arial': 0.55,
+      'Times New Roman': 0.5,
+      'Courier New': 0.6,
+      'Georgia': 0.53,
+      'Verdana': 0.58,
+      'Helvetica': 0.55,
+      'Tahoma': 0.56,
+      'Trebuchet MS': 0.57,
+      'Impact': 0.6,
+      'Comic Sans MS': 0.6
+    };
+    
+    // Default factor if font not in our list
+    const factor = fontFactors[fontFamily] || 0.55;
+    
+    // Character-specific adjustments
+    let charCount = 0;
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      if (char.match(/[A-Z]/)) {
+        charCount += 1.2; // Capital letters are wider
+      } else if (char.match(/[mwWM]/)) {
+        charCount += 1.5; // Wider characters
+      } else if (char.match(/[il|.,;:()]/)) {
+        charCount += 0.5; // Narrow characters
+      } else if (char.match(/\s/)) {
+        charCount += 0.5; // Space
+      } else {
+        charCount += 1; // Normal characters
+      }
+    }
+    
+    return charCount * factor * fontSize;
+  }
+  
+  // Estimation function for text height
+  estimateTextHeight(fontSize) {
+    // For most fonts, line height is roughly 1.2x the font size
+    return fontSize * 1.2;
+  }
+  
+  // Estimate and set both width and height
+  estimateTextDimensions() {
+    const { text, fontSize, fontFamily } = this.itemData;
+    this.itemData.width = this.estimateTextWidth(text, fontSize, fontFamily);
+    this.itemData.height = this.estimateTextHeight(fontSize);
+    return { width: this.itemData.width, height: this.itemData.height };
+  }
+ 
+  // Use the estimation function for width.
+
+  boundingRectangleX() { return this.x; }
+  boundingRectangleY() { return this.y; }
+  
+  boundingRectangleWidth() {
+    return this.estimateTextWidth(text, fontSize, fontFamily);
+  }
+
+  boundingRectangleHeight() {
+    return this.height;
+  }
+
   /////////////////////////////////////////////////
   //For now just 1 item is selected at a moment no multi select.-itgets "Create"
   createHandles(Create){
     const handleMove =   this.getHandleData(Create,0, 0, "purple", "move");
     const fontSize =  this.getHandleData(Create,0, 0, "green", "fontSize");
-    
+    debugger;
     return [handleMove,fontSize];
   }
   //This is to be over-written but we still want to keep a copy of it as defaultUpdateHandles
@@ -159,5 +237,6 @@ export default class TextItem extends BaseItem {
           break;
       }
   }
-  /////////////////////////////////////////////////
+
+/////////////////////////////////////////
 }

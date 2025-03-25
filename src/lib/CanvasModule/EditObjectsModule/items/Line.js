@@ -1,9 +1,10 @@
-import BaseItem from './BaseItem.js';
-import uuid from './uuid.js';
+import BaseItem from '../BaseEditObject/BaseItem.js';
 
-export default class Ray extends BaseItem {
+
+export default class Line extends BaseItem {
     constructor(itemData) {
-        super(itemData );
+        super(itemData);
+        
     }
 
 
@@ -16,6 +17,7 @@ export default class Ray extends BaseItem {
     set width(newWidth) { this.itemData.x2 = this.itemData.x1 + newWidth; }
     get height() { return Math.abs(this.itemData.y2 - this.itemData.y1); }
     set height(newHeight) { this.itemData.y2 = this.itemData.y1 + newHeight; }
+/////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 createHandles(Create){
     const move =   this.getHandleData(Create,0, 0, "green", "moveLine");
@@ -67,7 +69,5 @@ createHandles(Create){
         default:break;
       }
   }
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////
 }
