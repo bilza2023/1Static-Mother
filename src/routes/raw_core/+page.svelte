@@ -37,7 +37,7 @@
 onMount(async () => {
 if (canvasElement) {
           /////////////////////////////////////////////
-          debugger;
+        //   debugger;
           const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
           const imagesMap = await loadImages(images,imagesUrl);
     //images are inside assets
@@ -47,6 +47,8 @@ if (canvasElement) {
 
           console.log("rectangle",rectangle);
           rectangle.draw(rectangle.create(),drawCtx,assets);
+          const rectangleEditObject = new rectangle.EditObj(rectangle.create());
+          console.log("rectangle Edit Object",rectangleEditObject);
         //   player = new TaleemPlayer(canvasElement, ctx, assets, items);
         //   player.background = background; // this is slideExtra
           ///////////////////////////////////////////////////////

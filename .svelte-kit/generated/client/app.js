@@ -22,12 +22,12 @@ export const dictionary = {
 		"/canvas_editor": [3],
 		"/canvas_player": [4],
 		"/eqs_editor": [5],
-		"/monolith_editor_full": [7],
-		"/monolith_editor_helloWorld": [8],
+		"/monolith_editor_helloWorld": [7],
 		"/monolith_editor": [6],
-		"/monolith_player": [9],
-		"/presentation_editor": [10],
-		"/presentation_player": [11]
+		"/monolith_player": [8],
+		"/presentation_editor": [9],
+		"/presentation_player": [10],
+		"/raw_core": [11]
 	};
 
 export const hooks = {

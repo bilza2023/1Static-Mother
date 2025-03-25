@@ -2,7 +2,7 @@
 
 import create from "./create";
 import draw from "./draw";
-import EditObj from "./editObj";
+import EditObj from "./EditObj";
 
 import { ICoreItemComponent } from "../../ICoreItemComponent";
 
@@ -10,5 +10,5 @@ export const Rectangle: ICoreItemComponent=  {
 
     create,
     draw,
-    editObject:EditObj
+    EditObj
 } 
