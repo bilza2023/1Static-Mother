@@ -11,7 +11,7 @@ export default function draw(item:ICircle,drawCtx: DrawCtx,assets:IAssets){
   drawCtx.ctx().lineWidth = item.lineWidth;
   drawCtx.ctx().globalAlpha = item.opacity;
   drawCtx.ctx().beginPath();
-  debugger;
+  // debugger;
   drawCtx.ctx().arc(item.x, item.y, item.radius, item.startAngle, item.endAngle);
   if (item.filled) {
     drawCtx.ctx().fillStyle = item.color;

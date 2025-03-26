@@ -46,10 +46,14 @@ let drawCtx = new DrawCtx(ctx,canvasElement);
 const rectangle = CoreItemsMap.get("rectangle");
 const circle = CoreItemsMap.get("circle");
 const angle = CoreItemsMap.get("angle");
+const triangle = CoreItemsMap.get("triangle");
+const text = CoreItemsMap.get("text");
 
-drawItem(rectangle);
-// drawItem(circle);
-drawItem(angle);
+// drawItem(rectangle);
+// drawItem(circle); ===> Not working
+// drawItem(angle);
+drawItem(triangle);
+drawItem(text);
           
 function drawItem(itemComponent){
   // debugger;

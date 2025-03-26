@@ -3,7 +3,7 @@ import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRe
 import BaseItem from '../../BaseEditObject/BaseItem';
 
 
-export default class Circle extends BaseItem {
+export default class EditObj extends BaseItem {
   constructor(itemData:ICircle) {
     super(itemData);
   }
