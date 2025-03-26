@@ -73,13 +73,11 @@ static arrayOfEditObjHasHandles(items:IHandleItem[]){
   }
   return response;
 }
-static getFirstHandleFromArrayOfEditObjs(items:IHandleItem[]){
+static getFirstHandleFromArrayOfEditObjs(items:IHandleItem[],hitItemMulti:IHandleItem[]){
     //before calling this fn use  arrayOfEditObjHasHandles 
-     for (let i = 0; i < items.length; i++) {
-       const item =   items[i];
-               if(item.flag && item.flag === "handle"){
-               return item;
-               }
+     for (let i = 0; i < hitItemMulti.length; i++) {
+       const item =  hitItemMulti[i];
+      if(item.flag && item.flag === "handle"){return item;}
      }
 }
      

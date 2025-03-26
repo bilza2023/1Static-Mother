@@ -31,11 +31,11 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
         deltaX,deltaY,
         isMouseXUp,isMouseYUp,
         x,y,
-        handleType : this.activeHandle.itemData.handleType
+        handleType : this.activeHandle.handleType
       }
       //finally
-        this.oldX = this.activeHandle.itemData.x; 
-        this.oldY = this.activeHandle.itemData.y; 
+        this.oldX = this.activeHandle.x; 
+        this.oldY = this.activeHandle.y; 
       //////////////////////////////////////////////////////////////////
       this.selectedItem.processHandle(handleProcessData);
       ///////////////////////////////////////////////////////
@@ -49,10 +49,10 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
     const hitItemMulti =  this.util.isHitMultiGetItems(this.items, mouseX, mouseY);
     if(hitItemMulti.length == 0 ){return;}
     // debugger; 
-    const hasHandles = this.arrayOfEditObjHasHandles(hitItemMulti);
+    const hasHandles = this.util.arrayOfEditObjHasHandles(hitItemMulti);
 
     if(hasHandles){
-      const handle = this.getFirstHandleFromArrayOfEditObjs(hitItemMulti)
+      const handle = this.util.getFirstHandleFromArrayOfEditObjs(this.items,hitItemMulti)
       this.activeHandle = handle; //The hit item is a handle and is active handle
     }
   }
@@ -99,7 +99,6 @@ set selectedItem(incommingSelectedItemEditorObject) {
   let handles = this._selectedItem.createHandles(this.create);//Ref to Create->this.create
         
   this.util.addItems(this.items,handles); //addItems is safe the array will not loose ref
-  debugger;
   const handlesInItems = this.util.getAllHandles(this.items);
   this._selectedItem.updateHandles(handlesInItems);
   this.callback(this.selectedItem);
@@ -109,25 +108,6 @@ get selectedItem() {
   return this._selectedItem;
 }
 
-arrayOfEditObjHasHandles(items){
-  let response = false;
-  for (let i = 0; i < items.length; i++) {
-    const item =   items[i];
-    if(item.flag && item.flag === "handle"){
-            response = true;
-    }
-  }
-  return response;
-}
-getFirstHandleFromArrayOfEditObjs(items){
- //before calling this fn use  arrayOfEditObjHasHandles 
-  for (let i = 0; i < items.length; i++) {
-    const item =   items[i];
-            if(item.flag && item.flag === "handle"){
-            return item;
-            }
-  }
-}
 ///////////////////////////////////////////////
 }//EventManager
 
