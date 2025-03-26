@@ -7,11 +7,11 @@ export default class Handle extends ParentBaseItem  {
   constructor(itemData) {
     super(itemData);
   }
-//For now just 1 item is selected at a moment no multi select.-itgets "Create"
-  createHandles(Create){
-    const handleMove =   this.getHandleData(Create,0, 0, "purple", "move");
-    const handleWidth =  this.getHandleData(Create,0, 0, "green", "width");
-    const handleHeight = this.getHandleData(Create,0, 0, "blue", "height");
+//For now just 1 item is selected at a moment no multi select.-itgets "create"
+  createHandles(create){
+    const handleMove =   this.getHandleData(create,0, 0, "purple", "move");
+    const handleWidth =  this.getHandleData(create,0, 0, "green", "width");
+    const handleHeight = this.getHandleData(create,0, 0, "blue", "height");
     
     return [handleMove,handleWidth,handleHeight];
   }
@@ -68,9 +68,9 @@ export default class Handle extends ParentBaseItem  {
           break;
       }
   }
-  getHandleData(Create,x,y,color,handleType){
+  getHandleData(create,x,y,color,handleType){
   
-    const handle = Create.rectangle();
+    const handle = create("rectangle");
       handle.x = x;
       handle.y = y;
       handle.width = 10;

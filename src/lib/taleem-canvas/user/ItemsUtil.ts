@@ -10,7 +10,9 @@ import {IHandleItem} from "./IHandleItem"
 
 export default class ItemsUtil{
 
-static addItems(incommingItems:ICanvasItemTypes[],items:ICanvasItemTypes[]){items.push(...incommingItems);} //into this.items array 
+static addItems(items:ICanvasItemTypes[],incommingItems:ICanvasItemTypes[]){
+  items.push(...incommingItems);
+} //into this.items array 
 
 // EditItemObject = this.getEditObject(item.type); //special
 static  removeAllHandles(items:IHandleItem[]) {
@@ -22,10 +24,10 @@ static  removeAllHandles(items:IHandleItem[]) {
     }
 }
 
-static  clone(itemData:ICanvasItemTypes,items:ICanvasItemTypes[]) {
+static  clone(item:ICanvasItemTypes,items:ICanvasItemTypes[]) {
     
-        const clonedItem = JSON.parse(JSON.stringify(itemData));
-        clonedItem.uuid = generateUUID();
+        const clonedItem = JSON.parse(JSON.stringify(item));
+        clonedItem.uuid = this.uuid();
         items.push(clonedItem);
         return clonedItem;
 }
@@ -65,7 +67,7 @@ static arrayOfEditObjHasHandles(items:IHandleItem[]){
     let response = false;
   for (let i = 0; i < items.length; i++) {
     const hitItem =   items[i];
-    if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
+    if(hitItem.flag && hitItem.flag === "handle"){
             response = true;
     }
   }
@@ -88,9 +90,9 @@ static getEditObject(type){ //type:?? this should be types of items
 static isHitGetEditObj(items:ICanvasItemTypes[],mouseX:number,mouseY:number){
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      const EditItemObject = EditObject.getEditObject(item.type);//****** */
+      const EditItemObject = this.getEditObject(item.type);//****** */
       
-      if(typeof EditItemObject !== "object") return null; 
+      // if(typeof EditItemObject !== "object") return null; 
 
       const editObj = new EditItemObject(item);
       const isHit = editObj.isHit(mouseX,mouseY);
@@ -105,15 +107,15 @@ static isHitMultiGetEditObjs(items:ICanvasItemTypes[],mouseX, mouseY) {
     
     for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const EditItemObject = EditObject.getEditObject(item.type);
+    const EditItemObject = this.getEditObject(item.type);
 
-    if(typeof EditItemObject !== "object") return null;
+    // if(typeof EditItemObject !== "object") return null;
 
     const editObj = new EditItemObject(item);
     const isHit = editObj.isHit(mouseX, mouseY);
     
     if (isHit === true) {
-        hitItems.push(editObj);
+        hitItems.push(editObj);//Error
     }
     }
     
@@ -122,9 +124,9 @@ static isHitMultiGetEditObjs(items:ICanvasItemTypes[],mouseX, mouseY) {
 static isHitGetItem(items:ICanvasItemTypes[],mouseX:number,mouseY:number):ICanvasItemTypes|null{
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      const EditItemObject = EditObject.getEditObject(item.type);
+      const EditItemObject = this.getEditObject(item.type);
       
-      if(typeof EditItemObject !== "object") return null;
+      // if(typeof EditItemObject !== "object") return null;
 
       const editObj = new EditItemObject(item);
       const isHit = editObj.isHit(mouseX,mouseY);
@@ -139,9 +141,9 @@ static isHitMultiGetItems(items:ICanvasItemTypes[],mouseX, mouseY):ICanvasItemTy
     
     for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const EditItemObject = EditObject.getEditObject(item.type);
+    const EditItemObject = this.getEditObject(item.type);
 
-    if(typeof EditItemObject !== "object") return null;
+    // if(typeof EditItemObject !== "object") return null;
 
     const editObj = new EditItemObject(item);
     const isHit = editObj.isHit(mouseX, mouseY);
@@ -151,6 +153,14 @@ static isHitMultiGetItems(items:ICanvasItemTypes[],mouseX, mouseY):ICanvasItemTy
     }
     }
     return hitItems;
+}
+
+static uuid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+  });
 }
 ///////////////////////
 

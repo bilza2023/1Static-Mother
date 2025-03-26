@@ -49,12 +49,12 @@ assets = new Assets(imagesMap);
 let drawCtx = new DrawCtx(ctx,canvasElement);
 
 items.push(CoreItemsMap.get("rectangle").create());
-items.push(CoreItemsMap.get("circle").create());
-items.push(CoreItemsMap.get("angle").create());
-items.push(CoreItemsMap.get("triangle").create());
-items.push(CoreItemsMap.get("text").create());
-items.push(CoreItemsMap.get("ellipse").create());
-items.push(CoreItemsMap.get("piechart").create());
+// items.push(CoreItemsMap.get("circle").create());
+// items.push(CoreItemsMap.get("angle").create());
+// items.push(CoreItemsMap.get("triangle").create());
+// items.push(CoreItemsMap.get("text").create());
+// items.push(CoreItemsMap.get("ellipse").create());
+// items.push(CoreItemsMap.get("piechart").create());
 // debugger;
 player = new Player(canvasElement,ctx,assets);
 

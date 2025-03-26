@@ -39,16 +39,16 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
       //////////////////////////////////////////////////////////////////
       this.selectedItem.processHandle(handleProcessData);
       ///////////////////////////////////////////////////////
-      const handlesInItems = this.itemsEditor.getAllHandles();
+      const handlesInItems = this.util.getAllHandles(this.items);
 
       this.selectedItem.updateHandles(handlesInItems);
       this.callback();// I do not need gamellop due to this
     }
   }
   mousedown(mouseX,mouseY,type,event){
-  // debugger; 
-    const hitItemMulti =  this.isHitMulti(mouseX, mouseY);
+    const hitItemMulti =  this.util.isHitMultiGetItems(this.items, mouseX, mouseY);
     if(hitItemMulti.length == 0 ){return;}
+    // debugger; 
     const hasHandles = this.arrayOfEditObjHasHandles(hitItemMulti);
 
     if(hasHandles){
@@ -57,23 +57,23 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
     }
   }
   dblclick(mouseX,mouseY,type,event) {
-    debugger;
-    const hitItem  = this.EditObject.isHitGetEditObj(items,mouseX,mouseY);
+    // debugger;
+    const hitItem  = this.util.isHitGetEditObj(this.items,mouseX,mouseY);
       if (hitItem){
             this.selectedItem = hitItem;
               //clear previous Handles    
-        this.itemsEditor.removeAllHandles();
+        this.util.removeAllHandles(this.items);
 
             let handles = this.selectedItem.createHandles(this.create);//Ref to Create->this.create
-            this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
+            this.util.addItems(this.items,handles); //addItems is safe the array will not loose ref
 
-            const handlesInItems = this.itemsEditor.getAllHandles();
+            const handlesInItems = this.util.getAllHandles(this.items);
             this.selectedItem.updateHandles(handlesInItems);
               //return selected item for use with dialogue box 
         this.callback(this.selectedItem);
     }else {
         this.selectedItem = null;
-        this.itemsEditor.removeAllHandles();
+        this.util.removeAllHandles(this.items);
         this.callback(null);
     }
   }
@@ -92,14 +92,15 @@ setItemToSelectedItem(item=null){
 ///////////////////////////////////////////////
 //why we need selected item internal  should the editro bahaviour have it ? 
 set selectedItem(incommingSelectedItemEditorObject) {
+ 
   if(incommingSelectedItemEditorObject == null){this._selectedItem =null;this.callback(null);return}
   
   this._selectedItem = incommingSelectedItemEditorObject;
   let handles = this._selectedItem.createHandles(this.create);//Ref to Create->this.create
         
-  this.itemsEditor.addItems(handles); //addItems is safe the array will not loose ref
-
-  const handlesInItems = this.itemsEditor.getAllHandles();
+  this.util.addItems(this.items,handles); //addItems is safe the array will not loose ref
+  debugger;
+  const handlesInItems = this.util.getAllHandles(this.items);
   this._selectedItem.updateHandles(handlesInItems);
   this.callback(this.selectedItem);
 }
@@ -108,22 +109,22 @@ get selectedItem() {
   return this._selectedItem;
 }
 
-arrayOfEditObjHasHandles(hitItems){
+arrayOfEditObjHasHandles(items){
   let response = false;
-  for (let i = 0; i < hitItems.length; i++) {
-    const hitItem =   hitItems[i];
-    if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
+  for (let i = 0; i < items.length; i++) {
+    const item =   items[i];
+    if(item.flag && item.flag === "handle"){
             response = true;
     }
   }
   return response;
 }
-getFirstHandleFromArrayOfEditObjs(hitItems){
+getFirstHandleFromArrayOfEditObjs(items){
  //before calling this fn use  arrayOfEditObjHasHandles 
-  for (let i = 0; i < hitItems.length; i++) {
-    const hitItem =   hitItems[i];
-            if(hitItem.itemData.flag && hitItem.itemData.flag === "handle"){
-            return hitItem;
+  for (let i = 0; i < items.length; i++) {
+    const item =   items[i];
+            if(item.flag && item.flag === "handle"){
+            return item;
             }
   }
 }
