@@ -1,11 +1,17 @@
 
+/**
+ * Created on 25-26 March-2025
+ * Objective to Provide utility functions for working with items (and EditObjects, for example converting items into EditObj).
+ * This object provide just static functions which take either "item" or "items" and act on them with no state. This is why it can provide both the functionality for items as well as for EditObj. 
+ * This object can be used on its own as independent level and is also used by "Behaviour" object. The purpose is the same to help in doing basic actions on items.
+ */
 import { CoreItemsMap,ICanvasItemTypes } from "../core";
 import {IHandleItem} from "./IHandleItem"
 
-export default class Helper{
-
+export default class ItemsUtil{
 
 static addItems(incommingItems:ICanvasItemTypes[],items:ICanvasItemTypes[]){items.push(...incommingItems);} //into this.items array 
+
 // EditItemObject = this.getEditObject(item.type); //special
 static  removeAllHandles(items:IHandleItem[]) {
     for (let i = items.length - 1; i >= 0; i--) { 
@@ -84,7 +90,7 @@ static isHitGetEditObj(items:ICanvasItemTypes[],mouseX:number,mouseY:number){
       const item = items[i];
       const EditItemObject = EditObject.getEditObject(item.type);//****** */
       
-      if(typeof EditItemObject !== "object") return null;
+      if(typeof EditItemObject !== "object") return null; 
 
       const editObj = new EditItemObject(item);
       const isHit = editObj.isHit(mouseX,mouseY);

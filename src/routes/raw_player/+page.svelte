@@ -8,6 +8,7 @@
     import Assets from "../../lib/taleem-canvas/core/assets/Assets"
     import loadImages from "../../lib/loadImages";
     import DrawCtx from "../../lib/taleem-canvas/core/DrawCtx";
+    import HelloWorldBehaviour from "../../lib/taleem-canvas/Behaviours/HelloWorldBehaviour";
     import EditorBehaviour from "../../lib/taleem-canvas/Behaviours/EditorBehaviour";
     /////////////////////////////////////////////////////////////////
      let items = [];
@@ -36,8 +37,6 @@
       let player:Player= null;
 /////////////////////////////////////////////////////////////
 function behaviourCallback(){
-  // console.log("behaviourCallback");
-  // items = [...items];
   if(player) player.draw(items);
 }
 onMount(async () => {
@@ -59,8 +58,10 @@ items.push(CoreItemsMap.get("piechart").create());
 // debugger;
 player = new Player(canvasElement,ctx,assets);
 
-let hw = new EditorBehaviour(items,behaviourCallback);
-player.connect(hw);
+// let hw = new HelloWorldBehaviour(items,behaviourCallback);
+// player.connect(hw);
+let editor = new EditorBehaviour(items,behaviourCallback);
+player.connect(editor);
 
 player.draw(items);
 ///////////////////
