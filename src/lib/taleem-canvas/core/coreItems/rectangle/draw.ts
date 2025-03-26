@@ -1,7 +1,7 @@
 
 import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRectangle,ISprite,IText,ITriangle} from "../../coreItemsInterfaces/ICanvasItems";
 
-import DrawCtx from "../../drawLayer/DrawCtx";
+import DrawCtx from "../../drawLayer-old/DrawCtx";
 import { IAssets } from "../../assets/IAssets";
 // (item,this.drawCtx,this.assets); //I-D-A (Items,DrawCtx,Assets)
 // change item to item

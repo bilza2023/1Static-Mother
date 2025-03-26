@@ -6,7 +6,7 @@
     import { onMount } from "svelte";
     import Assets from "../../lib/taleem-canvas/core/assets/Assets"
     import  loadImages from "../../lib/loadImages";
-    import DrawCtx from "../../lib/taleem-canvas/core/drawLayer/DrawCtx";
+    import DrawCtx from "../../lib/taleem-canvas/core/DrawCtx";
     /////////////////////////////////////////////////////////////////
      let items = [];
      let assets:Assets;
@@ -37,22 +37,28 @@
 onMount(async () => {
 if (canvasElement) {
           /////////////////////////////////////////////
-        //   debugger;
-          const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
-          const imagesMap = await loadImages(images,imagesUrl);
-    //images are inside assets
-    assets = new Assets(imagesMap);
-    let drawCtx = new DrawCtx(ctx,canvasElement);
-          const rectangle = CoreItemsMap.get("rectangle");
+const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
+const imagesMap = await loadImages(images,imagesUrl);
+assets = new Assets(imagesMap);
 
-          console.log("rectangle",rectangle);
-          rectangle.draw(rectangle.create(),drawCtx,assets);
-          const rectangleEditObject = new rectangle.EditObj(rectangle.create());
-          console.log("rectangle Edit Object",rectangleEditObject);
-        //   player = new TaleemPlayer(canvasElement, ctx, assets, items);
-        //   player.background = background; // this is slideExtra
-          ///////////////////////////////////////////////////////
-        //   player.drawNoEditor(items);
+let drawCtx = new DrawCtx(ctx,canvasElement);
+
+const rectangle = CoreItemsMap.get("rectangle");
+const circle = CoreItemsMap.get("circle");
+const angle = CoreItemsMap.get("angle");
+
+drawItem(rectangle);
+// drawItem(circle);
+drawItem(angle);
+          
+function drawItem(itemComponent){
+  // debugger;
+        const item = itemComponent.create();
+        itemComponent.draw(item,drawCtx,assets);
+        
+        const itemComponentEditObject = new itemComponent.EditObj(item);
+          console.log("itemComponentEditObject",itemComponentEditObject);
+}
 ///////////////////
 }});
 

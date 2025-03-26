@@ -5,13 +5,13 @@
  * - The assets should come with images loaded.
  * - 26-March-2025:This is purely drawEngine (object) now with no mouse eventhandlers.
  */
-import {IAssets} from "../../../assets/IAssets.js"; //Global App level Interface
+import {IAssets} from "../../assets/IAssets.js"; //Global App level Interface
 import {IBackground} from "../dataLayer/IBackground.js";//local Moduel index
 import {ICanvasItemTypes} from "../dataLayer/ICanvasItems.js";//local Moduel index
 
 import DrawFunctionsMap from "./DrawFunctionsMap.js";
-import DrawCtx from "./DrawCtx.js"; //just the ctx related methods
-import drawBg from "./drawBg"; //seperate
+import DrawCtx from "../core/DrawCtx.js"; //just the ctx related methods
+import drawBg from "./drawBg.js"; //seperate
 /////////////////////////////////////////////////////////////////
 export default class DrawEngineMonolith  {
 canvas:HTMLCanvasElement;
