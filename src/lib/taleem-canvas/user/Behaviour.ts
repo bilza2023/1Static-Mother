@@ -5,18 +5,24 @@ import { ICanvasItemTypes,CoreItemsMap,create } from "../core";//rename ICoreIte
 import ItemsUtil from "./ItemsUtil";
 export default class Behaviour {
 ///////////////////////////////////////////////////////
-items:ICanvasItemTypes;          //items  : The ref to items array
+items:ICanvasItemTypes[];          //items  : The ref to items array
 // ItemsMap:typeof CoreItemsMap;    //itemsMap
 create:typeof create;            //create:
 util:ItemsUtil;                  //itemsUtil:
 callback:()=>void;  
 ///////////////////////////////////////////////////////  
-constructor(items:ICanvasItemTypes,callback:()=>void){
+constructor(items:ICanvasItemTypes[],callback:()=>void){
 this.items = items;
 // this.ItemsMap = CoreItemsMap; //why ? let remove it for a while its too direct
 this.util = ItemsUtil;
 this.callback = callback;
 this.create = create;//should NOT be removed.editor has to add handles etc
+}
+///--26 March 2025 : ==> this function may need to be removed from here???/
+add(newItemType){
+ const newItem = this.create(newItemType);
+ this.items.push(newItem);
+ return newItem;
 }
 // Event handlers for processing Player mouse events //5 events 
 mousemove  (x , y , hitItem   , hitItemsUuids) {}

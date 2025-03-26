@@ -1,13 +1,13 @@
 <script>
     export let items;
     
-    export let setItemToSelectedItem = () => {}; // Default empty function
+    export let callback = () => {}; // Default empty function
     
     let selectedUuid = "";
     
     function handleChange(event) {
         selectedUuid = event.target.value;
-        setItemToSelectedItem(selectedUuid);
+        callback(selectedUuid);
     }
 </script>
 

@@ -2,7 +2,7 @@
 <script lang="ts">
     
     import Player from "../../lib/taleem-canvas/user/player/Player";
-
+    import create from "../../lib/taleem-canvas/core/create";
     import  CoreItemsMap from "../../lib/taleem-canvas/core/CoreItemsMap";
     import { onMount } from "svelte";
     import Assets from "../../lib/taleem-canvas/core/assets/Assets"
@@ -10,7 +10,11 @@
     import DrawCtx from "../../lib/taleem-canvas/core/DrawCtx";
     import HelloWorldBehaviour from "../../lib/taleem-canvas/Behaviours/HelloWorldBehaviour";
     import EditorBehaviour from "../../lib/taleem-canvas/Behaviours/EditorBehaviour";
+    import AddToolbar from "../../lib/CanvasModule/addToolbar/AddToolbar.svelte";
+    import SelectDropDown from "../../lib/CanvasModule/CanvasEditor/SelectDropDown.svelte";
+    import SelectedItemBasicDialogue from "../../lib/CanvasModule/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
     /////////////////////////////////////////////////////////////////
+//26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
      let items = [];
      let assets:Assets;
      let background =  {
@@ -35,9 +39,36 @@
     /////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;
       let player:Player= null;
+      let editor= null;
+      let selectedItem= null;
+      let itemsForDropDown = null;
 /////////////////////////////////////////////////////////////
-function behaviourCallback(){
-  if(player) player.draw(items);
+// $: {
+//   if(editor && editor.items){
+//     itemsForDropDown = editor.items;
+//   }
+// } 
+/////////////////////////////////////////////////////////////
+function setSeletecItem(incommingSelectedItem=null){
+
+  editor.selectedItem = incommingSelectedItem;
+  selectedItem = editor.selectedItem; 
+  if(player && editor) { 
+    itemsForDropDown = editor.items;
+    player.draw(editor.items);
+    }
+}
+function setSeletecItemByUUID(incommingUUID:string=""){
+//  debugger;
+//   const itemWithUUID = editor.items.find( item => item.uuid === incommingUUID);
+//   setSeletecItem(itemWithUUID);
+}
+
+function addNewItem(itemType){
+
+  const newItem = editor.add(itemType);
+  player.draw(editor.items);  
+  itemsForDropDown = editor.items;
 }
 onMount(async () => {
 if (canvasElement) {
@@ -46,27 +77,26 @@ const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
 const imagesMap = await loadImages(images,imagesUrl);
 assets = new Assets(imagesMap);
 
-let drawCtx = new DrawCtx(ctx,canvasElement);
-
-items.push(CoreItemsMap.get("rectangle").create());
-// items.push(CoreItemsMap.get("circle").create());
-// items.push(CoreItemsMap.get("angle").create());
-// items.push(CoreItemsMap.get("triangle").create());
-// items.push(CoreItemsMap.get("text").create());
-// items.push(CoreItemsMap.get("ellipse").create());
-// items.push(CoreItemsMap.get("piechart").create());
 // debugger;
 player = new Player(canvasElement,ctx,assets);
 
-// let hw = new HelloWorldBehaviour(items,behaviourCallback);
-// player.connect(hw);
-let editor = new EditorBehaviour(items,behaviourCallback);
+editor = new EditorBehaviour(items,setSeletecItem);
 player.connect(editor);
 
 player.draw(items);
+itemsForDropDown = editor.items;
 ///////////////////
-}});
+}
+});
 
   </script>
-
+<AddToolbar callback={addNewItem}/>
  <canvas bind:this={canvasElement} width="1000px" height="360px" ></canvas>
+
+ {#if itemsForDropDown}
+<SelectDropDown  items={itemsForDropDown} callback={setSeletecItemByUUID} />
+{/if}
+
+{#if selectedItem}
+<SelectedItemBasicDialogue {selectedItem} {images} />
+{/if}

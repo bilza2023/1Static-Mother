@@ -14,7 +14,6 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
 }
 /////////////////////////////////////////////////////////
   mousemove(x,y,type,event) {
-    
     if(!this.selectedItem){return;}
     //////////////////////////////////////////////////////////////
     if (this.activeHandle) {
@@ -24,7 +23,6 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
       const isMouseXUp = mouseDirectionXUp(x,this.oldX);
       const isMouseYUp = mouseDirectionYUp(y,this.oldY);
 
-// console.log("mouseDirectionXUp",mouseDirectionXUp);
       
       const handleProcessData = {
         handle : this.activeHandle,

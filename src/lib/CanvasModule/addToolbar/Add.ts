@@ -1,7 +1,7 @@
 
 
-import { ICanvasItemTypes } from "../../index";
-import {Create} from "../../index";
+import { ICanvasItemTypes } from "../../CanvasModule-legacy-important/index";
+import {Create} from "../../CanvasModule-legacy-important/index";
 
 
 export default class Add {
