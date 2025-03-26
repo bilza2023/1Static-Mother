@@ -3,7 +3,7 @@
 /////////////////////////////////////
 import DrawCtx from "./DrawCtx";
 import { IAssets } from "../../assets/IAssets";
-import {ICanvasItemTypes} from "./coreItemsInterfaces/ICanvasItems";
+import {ICanvasItemTypes} from "./interfaces/ICanvasItems";
 import BaseEditObject from "./BaseEditObject/BaseItem";
 
 interface ICoreItemComponent {

@@ -1,5 +1,5 @@
 
-import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRectangle,ISprite,IText,ITriangle} from "../../coreItemsInterfaces/ICanvasItems";
+import {IAngle,ICircle,IDot,IEllipse,IIcon,IImage,ILine,IList,IPieChart,IRay,IRectangle,ISprite,IText,ITriangle} from "../../interfaces/ICanvasItems";
 
 import DrawCtx from "../../DrawCtx";
 import { IAssets } from "../../assets/IAssets";
