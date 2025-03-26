@@ -6,7 +6,7 @@ import EditObj from "./EditObj";
 
 import { ICoreItemComponent } from "../../ICoreItemComponent";
 
-export const : ICoreItemComponent=  {
+export const PieChart: ICoreItemComponent=  {
 
     create,
     draw,

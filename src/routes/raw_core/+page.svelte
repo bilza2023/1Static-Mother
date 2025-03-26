@@ -49,6 +49,7 @@ const angle = CoreItemsMap.get("angle");
 const triangle = CoreItemsMap.get("triangle");
 const text = CoreItemsMap.get("text");
 const ellipse = CoreItemsMap.get("ellipse");
+const piechart = CoreItemsMap.get("piechart");
 
 drawItem(rectangle);
 drawItem(circle);// ===> Not working
@@ -56,6 +57,7 @@ drawItem(angle);
 drawItem(triangle);
 drawItem(text);
 drawItem(ellipse);
+drawItem(piechart);
           
 function drawItem(itemComponent){
   // debugger;

@@ -17,8 +17,8 @@ export default class EditObj extends BaseItem {
       return Math.max(this.itemData.y1, this.itemData.y2, this.itemData.y3) - this.boundingRectangleY();
   }
 
-  get width() { return this.boundingRectangleWidth(); }
-  get height() { return this.boundingRectangleHeight(); }
+  // get width() { return this.boundingRectangleWidth(); }
+  // get height() { return this.boundingRectangleHeight(); }
 
   boundingRectangleX() { return Math.min(this.itemData.x1, this.itemData.x2, this.itemData.x3); }
   boundingRectangleY() { return Math.min(this.itemData.y1, this.itemData.y2, this.itemData.y3); }
