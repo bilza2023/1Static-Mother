@@ -48,12 +48,14 @@ const circle = CoreItemsMap.get("circle");
 const angle = CoreItemsMap.get("angle");
 const triangle = CoreItemsMap.get("triangle");
 const text = CoreItemsMap.get("text");
+const ellipse = CoreItemsMap.get("ellipse");
 
-// drawItem(rectangle);
-// drawItem(circle); ===> Not working
-// drawItem(angle);
+drawItem(rectangle);
+drawItem(circle);// ===> Not working
+drawItem(angle);
 drawItem(triangle);
 drawItem(text);
+drawItem(ellipse);
           
 function drawItem(itemComponent){
   // debugger;
@@ -68,4 +70,4 @@ function drawItem(itemComponent){
 
   </script>
 
- <canvas bind:this={canvasElement} ></canvas>
+ <canvas bind:this={canvasElement} width="1000px" height="360px" ></canvas>

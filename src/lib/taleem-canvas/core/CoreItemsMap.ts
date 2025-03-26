@@ -3,7 +3,7 @@
 
 import {Angle} from "./coreItems/angle";
 import {Rectangle} from "./coreItems/rectangle";
-// import Ellipse from "./coreItems/Ellipse";
+import {Ellipse} from "./coreItems/ellipse";
 import {Circle} from "./coreItems/circle";
 // import {Dot} from "./coreItems/Dot";
 // import {Line} from "./coreItems/Line";
@@ -24,7 +24,7 @@ const CoreItemsMap = new Map();
 
 CoreItemsMap.set('angle', Angle);
 CoreItemsMap.set('rectangle', Rectangle);
-// CoreItemsMap.set('ellipse', Ellipse);
+CoreItemsMap.set('ellipse', Ellipse);
 CoreItemsMap.set('circle', Circle);
 // CoreItemsMap.set('dot', Dot);
 // CoreItemsMap.set('piechart', Piechart);
