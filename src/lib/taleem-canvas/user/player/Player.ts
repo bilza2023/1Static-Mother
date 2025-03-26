@@ -6,12 +6,12 @@
  */
 
 import {Assets,DrawCtx,ICanvasItemTypes,IBackground,CoreItemsMap} from "../../core"
-
-// import DrawFunctionsMap from "./DrawFunctionsMap.js";
 import drawBg from "./drawBg.js"; //seperate
+import EventModule from "./EventModule.js";
 /////////////////////////////////////////////////////////////////
 export default class DrawEngineMonolith  {
 canvas:HTMLCanvasElement;
+eventModule:EventModule;
 ctx:CanvasRenderingContext2D;
 drawCtx:DrawCtx; //Rename it to Renderer (this is only obj that holds CTX)
 bgData:IBackground;
@@ -22,28 +22,63 @@ assets:Assets;//assets with images
   constructor(canvas :HTMLCanvasElement, ctx:CanvasRenderingContext2D,assets:Assets) { 
     if (!canvas || !ctx) {console.error("TaleemCanvas requires both a canvas element and a 2D rendering context.");throw new Error("TaleemCanvas requires both `canvas` and `ctx`.");    }
     this.canvas = canvas;
+    this.eventModule = new EventModule(canvas); // No longer passing items array
     this.drawCtx = new DrawCtx(ctx,canvas);
     this.assets = assets;//These assets include "images" loaded
     this.width = 1000;this.height = 360;this.canvas.width = this.width;this.canvas.height = this.height;
   }
-  draw(items:ICanvasItemTypes[],background:IBackground) {
+  draw(items:ICanvasItemTypes[],background:IBackground | null=null) {
     this.drawCtx.clear();
+    if(background == null){background = defaultBackground()}
     drawBg(background,this.drawCtx,this.assets);
     items.forEach(item => {
       // debugger;
       const CoreItemComponent = CoreItemsMap.get(item.type);
       if (typeof CoreItemComponent.draw === 'function') {
         this.drawCtx.ctx().save();//dont remove
-/**
- * when ever i have time i will change the draw singature of drawFunction. it should be
- *  replace ctx and Env with drawCtx
- *      drawFunction(item,this.drawCtx,this.assets);//I-D-A (Items,DrawCtx,Assets)
- * DONE 26March 2025
- */
+
       CoreItemComponent.draw(item,this.drawCtx,this.assets); //I-D-A (Items,DrawCtx,Assets)
         this.drawCtx.ctx().restore();//dont remove
       }
     });
   }
 
+///////////////////////------Mouse Section--//////////////  
+onMouse(eventType, callback) {
+  this.eventModule.on(eventType, callback);
+}
+//connect is just an easy way of addMouseEvent (which adds to this.eventModule.on)
+connect(eventHandlersObject){
+  this.onMouse("click",     eventHandlersObject.click.bind(eventHandlersObject));
+  this.onMouse("dblclick",  eventHandlersObject.dblclick.bind(eventHandlersObject));
+  this.onMouse("mousemove", eventHandlersObject.mousemove.bind(eventHandlersObject));
+  this.onMouse("mouseup",   eventHandlersObject.mouseup.bind(eventHandlersObject));
+  this.onMouse("mousedown", eventHandlersObject.mousedown.bind(eventHandlersObject));
+  return true;
+}
+addMouseEvent(eventType,callback) {
+if (this.eventModule.callbacks[eventType] !== undefined) {
+  this.eventModule.on(eventType, callback);
+} else {
+  console.warn(`Event type "${eventType}" is not supported.`);
+}
+}
+////////////////////////////////////////////////////////  
+}//player
+
+
+function defaultBackground(){
+  return {
+    uuid: "44455764hfghyjty6",
+        type: 'background',  
+        backgroundColor: '#9cc19c',
+        cellHeight: 25,
+        cellWidth: 25,
+        backgroundImage: "black_mat",
+        opacity: 1,
+        color: "green",
+        showGrid: false,
+        gridLineWidth: 1,
+        gridLineColor: '#685454'
+  }
 }

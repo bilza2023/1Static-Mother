@@ -8,6 +8,7 @@
     import Assets from "../../lib/taleem-canvas/core/assets/Assets"
     import loadImages from "../../lib/loadImages";
     import DrawCtx from "../../lib/taleem-canvas/core/DrawCtx";
+    import EditorBehaviour from "../../lib/taleem-canvas/Behaviours/EditorBehaviour";
     /////////////////////////////////////////////////////////////////
      let items = [];
      let assets:Assets;
@@ -34,7 +35,11 @@
       let canvasElement:HTMLCanvasElement;
       let player:Player= null;
 /////////////////////////////////////////////////////////////
-
+function behaviourCallback(){
+  // console.log("behaviourCallback");
+  // items = [...items];
+  if(player) player.draw(items);
+}
 onMount(async () => {
 if (canvasElement) {
           /////////////////////////////////////////////
@@ -52,8 +57,12 @@ items.push(CoreItemsMap.get("text").create());
 items.push(CoreItemsMap.get("ellipse").create());
 items.push(CoreItemsMap.get("piechart").create());
 // debugger;
-player = new Player(canvasElement,ctx,assets);          
-player.draw(items,background);
+player = new Player(canvasElement,ctx,assets);
+
+let hw = new EditorBehaviour(items,behaviourCallback);
+player.connect(hw);
+
+player.draw(items);
 ///////////////////
 }});
 
