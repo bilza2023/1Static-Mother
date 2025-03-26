@@ -1,7 +1,10 @@
 
 import Behaviour from "../user/Behaviour";
-
+import BaseItem from "../core/BaseEditObject/BaseItem";
 export default class EditorBehaviour extends Behaviour {
+//////////////////////////////////////////////////////////////////////////////
+_selectedItemIndex:number;
+_selectedItem:BaseItem | null;
 //////////////////////////////////////////////////////////////////////////////
 constructor(items,callback){
   super(items,callback);
@@ -11,6 +14,14 @@ constructor(items,callback){
   this.oldY = 0;
 //This can be moved to a seperate class
 this._selectedItem = null; // this selected item is just item literal no EditObject
+this._selectedItemIndex = 0;
+}
+
+set selectedItemIndex(index){
+  this._selectedItemIndex = index;
+}
+get selectedItemIndex(){
+  return this.items[this._selectedItemIndex];
 }
 /////////////////////////////////////////////////////////
   mousemove(x,y,type,event) {
@@ -80,13 +91,15 @@ this._selectedItem = null; // this selected item is just item literal no EditObj
 ///////////////////////////////////////////////////////////////
 setItemToSelectedItem(item=null){
   if(item == null){this._selectedItem =null;this.callback(null);return}
- 
-  const EditItemObject = this.getEditObject(item.type);
-  const editObj = new EditItemObject(item);
-      this.selectedItem = editObj;
- 
+
+  const editObj = this.util.convertToEditObj(item);
+      this.selectedItem = editObj; 
 }
 
+setSeletecItemByUUID(incommingUUID:string=""){
+  const itemWithUUID = this.items.find( item => item.uuid === incommingUUID);
+  this.setItemToSelectedItem(itemWithUUID);
+}
 ///////////////////////////////////////////////
 //why we need selected item internal  should the editro bahaviour have it ? 
 set selectedItem(incommingSelectedItemEditorObject) {

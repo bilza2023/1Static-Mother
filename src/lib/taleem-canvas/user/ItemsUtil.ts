@@ -85,6 +85,11 @@ static getFirstHandleFromArrayOfEditObjs(items:IHandleItem[],hitItemMulti:IHandl
 static getEditObject(type){ //type:?? this should be types of items
     return CoreItemsMap.get(type).EditObj;//?????
 }
+static convertToEditObj(itemData){ //type:?? this should be types of items
+debugger;
+    const EditObj = CoreItemsMap.get(itemData.type).EditObj;//?????
+    return new EditObj(itemData);
+}
 static isHitGetEditObj(items:ICanvasItemTypes[],mouseX:number,mouseY:number){
     for (let i = 0; i < items.length; i++) {
       const item = items[i];

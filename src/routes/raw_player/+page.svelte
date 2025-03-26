@@ -58,11 +58,11 @@ function setSeletecItem(incommingSelectedItem=null){
     player.draw(editor.items);
     }
 }
-function setSeletecItemByUUID(incommingUUID:string=""){
-//  debugger;
-//   const itemWithUUID = editor.items.find( item => item.uuid === incommingUUID);
-//   setSeletecItem(itemWithUUID);
-}
+// function setSeletecItemByUUID(incommingUUID:string=""){
+// //  debugger;
+// //   const itemWithUUID = editor.items.find( item => item.uuid === incommingUUID);
+// //   setSeletecItem(itemWithUUID);
+// }
 
 function addNewItem(itemType){
 
@@ -93,8 +93,8 @@ itemsForDropDown = editor.items;
 <AddToolbar callback={addNewItem}/>
  <canvas bind:this={canvasElement} width="1000px" height="360px" ></canvas>
 
- {#if itemsForDropDown}
-<SelectDropDown  items={itemsForDropDown} callback={setSeletecItemByUUID} />
+ {#if itemsForDropDown && editor}
+<SelectDropDown  items={itemsForDropDown} callback={editor.setSeletecItemByUUID.bind(editor)} />
 {/if}
 
 {#if selectedItem}
