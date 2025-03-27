@@ -25,12 +25,20 @@
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };  
-    let appEditor = null;
+    let slidesEditor = null;
     ////////////////////////////////STATE///////////////////////////
-    // Create a reactive store for currentSlideIndex
-    let currentSlideIndex = 0;
     let assets = null;
+    /////////////////////////////////////////
     let currentSlide = null;
+    let slidesList = [];
+
+    $:{
+      currentSlide;
+
+      if(slidesEditor){
+        slidesList = slidesEditor.getSlidesListForPanel();
+      }
+    }
     let currentTime = 0; 
 
     export let slideExtra = {};
@@ -41,30 +49,28 @@
     function log(){
       console.log("export const presentationData = " + JSON.stringify(slides)); 
     }  
-    function redraw(){
-        currentSlideIndex = appEditor.getCurrentSlideIndex();
-        currentSlide = appEditor.currentSlide;    
-    }
     
     function next(){
-        appEditor.next();
-        currentSlideIndex = appEditor.getCurrentSlideIndex();
-        currentSlide = appEditor.currentSlide;
+        slidesEditor.next();
+        currentSlide = slidesEditor.getCurrentSlide();
     }
     
     function prev(){
-        appEditor.prev();
-        currentSlideIndex = appEditor.getCurrentSlideIndex();
-        currentSlide = appEditor.currentSlide;
+        slidesEditor.prev();
+        currentSlide = slidesEditor.getCurrentSlide();
     }
+    function setCurrentSlide(index) {
+          slidesEditor.currentSlideIndex = index;
+          currentSlide = slidesEditor.getCurrentSlide(); 
+            // redraw();
+        }
     
     onMount(async() => {
-        appEditor = new SlidesEditor(slides);//rename appEditor to slidesEditor
+        slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
         const imagesMap = await loadImages(images,'/images/');
         assets = new Assets(imagesMap);
-        appEditor.currentSlide = 0;
-        currentSlideIndex = appEditor.getCurrentSlideIndex();
-        currentSlide = appEditor.currentSlide;
+        currentSlide = slidesEditor.getCurrentSlide();
+        // debugger;
     });
   
     function addNew(slideType) {
@@ -72,9 +78,8 @@
             if(slideType === 'Eqs'){slideType='eqs';}
             const newSlide = getNewSlide(slideType);
             slides.push(newSlide);
-            appEditor.currentSlide = slides.length - 1; // THIS IS ERROR
-            currentSlideIndex = appEditor.getCurrentSlideIndex();
-            currentSlide = appEditor.currentSlide;
+            slidesEditor.Index = 0; // THIS IS ERROR
+            currentSlide = slidesEditor.getCurrentSlide();
             show = false;
         } catch (error) {
             console.error('Failed to add new slide:', error);
@@ -83,25 +88,25 @@
 
 function shiftTimeLocal(val){
   currentSlide.endTime = val;
-  appEditor.shiftTime();
+  slidesEditor.shiftTime();
 }
 
 function clone(){
   debugger;
-  appEditor.clone();
-  slides = appEditor.slides; 
+  slidesEditor.clone();
+  slides = slidesEditor.slides; 
   redraw();
 }
 function moveUp(){
   // debugger;
-  appEditor.moveUp();
-  slides = appEditor.slides; 
+  slidesEditor.moveUp();
+  slides = slidesEditor.slides; 
   redraw();
 }
 
 function deleteFn() {
-  appEditor.del();
-  slides = appEditor.slides; 
+  slidesEditor.del();
+  slides = slidesEditor.slides; 
   redraw();
 }
 </script>
@@ -131,13 +136,9 @@ bind:endTime={currentSlide.endTime}
   {#if showSidePanel}
   <div class="side-panel">
     <SlidePanel 
-        {slides} 
+        {slidesList} 
         {moveUp}
-        {currentSlideIndex}
-        setCurrentSlide={(index) => {
-            appEditor.setCurrentSlide(index);
-            redraw();
-        }}
+        {setCurrentSlide}
     />
   </div>
   {/if}
@@ -148,7 +149,7 @@ bind:endTime={currentSlide.endTime}
       slideStartTime={currentSlide.startTime}
       slideEndTime={currentSlide.endTime} 
       bind:slideExtra={slideExtra}
-      currentSldieType={currentSlide.type}
+      currentSlideType={currentSlide.type}
       {currentTime}
 
       {images}

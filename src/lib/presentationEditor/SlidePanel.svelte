@@ -1,17 +1,16 @@
 <script>
-    export let slides;
-    export let currentSlideIndex; // Direct binding instead of function call
+    export let slidesList;
     export let setCurrentSlide;
     export let moveUp;
 
     function moveDown() {console.log("move down");}
 </script>
     
-{#if slides && slides.length > 0}
-    {#each slides as item, itemIndex (itemIndex)}
+{#if slidesList && slidesList.length > 0}
+    {#each slidesList as item, itemIndex (itemIndex)}
         <div 
             class="stack-panel-item"
-            class:selected={itemIndex === currentSlideIndex}
+            class:selected={item.selected  == true}
         >
             <button 
                 class="stack-panel-selector" 

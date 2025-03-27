@@ -16,3 +16,11 @@
 {#if slides}
 <Editor bind:slides={slides} {images}/>
 {/if}
+
+
+
+<button on:click={()=>console.log("slides",slides) }
+style="color:white"  >Log Slides
+</button>
+<br>
+<!-- <button on:click={()=>console.log("Items.getItems()",items.getItems())}>Log Items.getItems()</button> -->

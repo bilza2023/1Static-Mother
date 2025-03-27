@@ -13,7 +13,7 @@
       export let currentTime=0;//Only for Eqs Editor do not feed it to canvas 
       export let startTime;//Only for Eqs Editor do not feed it to canvas 
       export let endTime;//Only for Eqs Editor do not feed it to canvas 
-      export let currentSldieType;//Only for Eqs Editor do not feed it to canvas 
+      export let currentSlideType;//Only for Eqs Editor do not feed it to canvas 
       export let soundUrl; //3-mar-2025
       export let audioData = '';
     //*********************LET**********************8*/    
@@ -22,7 +22,7 @@
   
     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <div tabindex="0">
-        {#if (currentSldieType).toLowerCase() == "canvas"}
+        {#if (currentSlideType).toLowerCase() == "canvas"}
           <CanvasEditor 
               bind:itemLiterals={items}             
               slideStartTime={startTime}
@@ -35,7 +35,7 @@
           />
         {/if}
         
-        {#if (currentSldieType).toLowerCase() == "eqs"}
+        {#if (currentSlideType).toLowerCase() == "eqs"}
         <!-- {currentSlide} -->
         <EqsEditor 
         bind:items={items}
