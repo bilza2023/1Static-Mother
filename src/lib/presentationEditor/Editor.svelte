@@ -8,33 +8,47 @@
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
     import type {ISlidesList} from "./ISlidesList";
+    import CanvasEditor from '../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte';
+    import EqsEditor from '../../lib/eqsModule/EqsEditor/EqsEditor.svelte';
   
     import type {IAssets} from "../taleem-canvas";
 ////////////////////////////////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
-    
-    let background =  {
-        uuid: "44455764hfghyjty6",
-        type: 'background',  
-        backgroundColor: '#9cc19c',
-        cellHeight: 25,
-        cellWidth: 25,
-        backgroundImage: "black_mat",
-        globalAlpha: 1,
-        showGrid: false,
-        gridLineWidth: 1,
-        gridLineColor: '#685454'
-      };  
+     
     let slidesEditor = null;
     ////////////////////////////////STATE///////////////////////////
     export let assets:IAssets;
     /////////////////////////////////////////
+      //export let items;
+      // export let startTime;//Only for Eqs Editor do not feed it to canvas 
+      // export let endTime;//Only for Eqs Editor do not feed it to canvas 
+      export let currentSlideType;//Only for Eqs Editor do not feed it to canvas 
+      // export let soundUrl; //3-mar-2025
+      // export let audioData = ''; /add here
+    /////////////////////////////////////////
     let currentSlide = null;
     let slidesList:ISlidesList[] = [];
+    //////////////--slide-vars///////////////////////////
+    let slideItems = null;
+    let slideStartTime = 0;
+    let slideEndTime = 0;
+    let slideSlideExtra = {};
+    
+    /////////////////////////////////////////
 
     $:{
-      currentSlide;
+    if(currentSlide ==null){
+      slideItems = [];
+      slideStartTime = 0;
+      slideEndTime = 9;
+      slideSlideExtra = 9;
+    }else {
+      slideItems = currentSlide.items;
+      slideStartTime = currentSlide.startTime;
+      slideEndTime = currentSlide.endTime;
+      slideSlideExtra = currentSlide.slideExtra;
+    }  
 
       if(slidesEditor){
         slidesList = slidesEditor.getSlidesListForPanel();
@@ -61,6 +75,7 @@
         currentSlide = slidesEditor.getCurrentSlide();
     }
     function setCurrentSlide(index) {
+      // debugger;
           slidesEditor.currentSlideIndex = index;
           currentSlide = slidesEditor.getCurrentSlide(); 
             // redraw();
@@ -137,18 +152,43 @@ bind:endTime={currentSlide.endTime}
   {/if}
   
   <div class={showSidePanel ? "main-content" : "main-content-full"}>
-    <SlidePicker
-      bind:items={currentSlide.items}
-      slideStartTime={currentSlide.startTime}
-      slideEndTime={currentSlide.endTime} 
-      bind:slideExtra={slideExtra}
-      currentSlideType={currentSlide.type}
+    <!-- <SlidePicker
+      bind:items=         {currentSlide.items}
+      slideStartTime=     {currentSlide.startTime}
+      slideEndTime=       {currentSlide.endTime} 
+      bind:slideExtra=    {slideExtra}
+      currentSlideType=   {currentSlide.type}
       {currentTime}
 
       {images}
       {assets}
       {background}
-    />
+    /> -->
+<!-- ///////////////////////////////////////////////////////////////////////     -->
+{#if currentSlide !==null} 
+<div >
+  
+          {#if (currentSlide.type).toLowerCase() == "canvas"}
+            <CanvasEditor 
+                bind:itemLiterals={slideItems}             
+                bind:background={slideSlideExtra}
+                {assets}
+                {images}
+            />
+          {/if}
+  
+          {#if (currentSlide.type).toLowerCase() == "eqs"}
+          <EqsEditor 
+                bind:items={slideItems}
+                slideStartTime={slideStartTime}
+                slideEndTime=  {slideEndTime}
+                bind:slideExtra={slideExtra}
+                {currentTime}
+          />
+          {/if}
+</div>
+{/if}
+<!-- ///////////////////////////////////////////////////////////////////////     -->
   </div>
 </div>
 {/if}

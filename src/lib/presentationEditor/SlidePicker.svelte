@@ -7,8 +7,8 @@
       export let assets;
       export let images;
       export let background;
-      export let slideStartTime;
-      export let slideEndTime;
+      // export let slideStartTime;
+      // export let slideEndTime;
       export let slideExtra;
       export let currentTime=0;//Only for Eqs Editor do not feed it to canvas 
       export let startTime;//Only for Eqs Editor do not feed it to canvas 
@@ -17,7 +17,9 @@
       export let soundUrl; //3-mar-2025
       export let audioData = '';
     //*********************LET**********************8*/    
-  
+  $:{
+    console.log("items", items);
+  }
     </script>
   
     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->

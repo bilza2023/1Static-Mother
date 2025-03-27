@@ -17,6 +17,7 @@
         uuid: "44455764hfghyjty6",
         type: 'background',  
         backgroundColor: '#9cc19c',
+        color: "gray",
         cellHeight: 25,
         cellWidth: 25,
         backgroundImage: "black_mat",
@@ -55,7 +56,7 @@ function setSelectedItemByMenu(index:number|null=null){
 function redraw(){
   if(player) { 
     itemsForDropDown = items.getItems();
-    player.draw(items.getItems());
+    player.draw(items.getItems(),background);
     }
 }
 function addNewItem(itemType){
