@@ -64,28 +64,43 @@ function addNewItem(itemType){
   itemsForDropDown = items.getItems();
   player.draw(items.getItems());  
 }
-onMount(async () => {
-if (canvasElement) {
-          /////////////////////////////////////////////
-const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
-const imagesMap = await loadImages(images,imagesUrl);
-assets = new Assets(imagesMap);
-items = new Items(itemLiterals);
-// debugger;
-player = new Player(canvasElement,ctx,assets);
 
-editor = new EditorBehaviour(items,setSeletecItem);
-player.connect(editor);
-
-player.draw(items.getItems());
-itemsForDropDown = items.getItems();
-
-setInterval(()=>{
-  if(player) { 
+function init(){
+  if (canvasElement) {
+    const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
+    items = new Items(itemLiterals);
+    player = new Player(canvasElement,ctx,assets);
+    editor = new EditorBehaviour(items,setSeletecItem);
+    player.connect(editor);
     itemsForDropDown = items.getItems();
     player.draw(items.getItems());
-    }
-},20);
+  }   //if (canvasElement) {
+}//init ends
+
+$:{
+  itemLiterals;
+ init();
+}
+onMount(async () => {
+if (canvasElement) {
+  // debugger;
+          /////////////////////////////////////////////
+// const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
+// items = new Items(itemLiterals);
+// debugger;
+// player = new Player(canvasElement,ctx,assets);
+
+// editor = new EditorBehaviour(items,setSeletecItem);
+// player.connect(editor);
+
+// itemsForDropDown = items.getItems();
+// player.draw(items.getItems());
+init();
+// setInterval(()=>{
+//   if(player) { 
+//     player.draw(items.getItems());
+//     }
+// },20);
 ///////////////////
 }
 });

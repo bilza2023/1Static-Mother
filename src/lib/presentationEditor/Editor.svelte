@@ -38,6 +38,7 @@
     /////////////////////////////////////////
 
     $:{
+      // debugger;
     if(currentSlide ==null){
       slideItems = [];
       slideStartTime = 0;
