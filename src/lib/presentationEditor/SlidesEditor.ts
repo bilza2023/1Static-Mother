@@ -1,7 +1,4 @@
 
-import {joinItemExtra,separateItemExtra} from "./canvasItemsUtil";
-
-
 export default class SlidesEditor{
 
 private  _currentSlideIndexPVT:number|null;
@@ -19,9 +16,6 @@ constructor(slides,slideExtra={}){
                 // this.currentSlide = null;
                 this.currentSlideIndex = null; // this should be null
             }
-    //////////////////////////////////
-    this.oldItems = null; 
-    this.record = null; 
 }
 setFirstSlide(){
     if(this.slides.length > 0){
@@ -52,62 +46,15 @@ shiftTime() {
         }
     }
 }
-///////////////////////
-saveIfNewCurrentSlideIsCanvas(slideIndex){
-    // Use the provided slideIndex instead of the current slide index
-    const newSlide = this.slides[slideIndex]; 
-    if(newSlide.type == "canvas"){
-        // Save the new slide's original items
-        this.oldItems = newSlide.items;
-        this.record = separateItemExtra(this.oldItems);
-        
-        // Transform the items for the canvas
-        const items = getTaleemCanvasItems(newSlide.items); 
-        newSlide.items = items; 
-    }
-}
-
-restoreIfOldCurrentSlideIsCanvas(slideIndex){
-    // Use the provided slideIndex instead of the current slide index
-    const oldSlide = this.slides[slideIndex];
-    if(oldSlide.type !== "canvas"){return}
-    if(!this.record || !this.oldItems){return;}
-    
-    // Restore the old slide's items
-    const jointedItems = joinItemExtra(this.record, oldSlide.items, this.oldItems);
-    oldSlide.items = jointedItems; 
-    
-    // Clear the saved state after restoring
-    // This is important for handling consecutive canvas slides
-    this.oldItems = null;
-    this.record = null;
-}
 
 get currentSlideIndex():number|null{
     // if(!this._currentSlideIndexPVT){this._currentSlideIndexPVT=null;}
     return this._currentSlideIndexPVT;
 }
 set currentSlideIndex(index:number|null){
-    try{
-        // debugger;
-    // Store the old index before changing it
-    const oldIndex = this.currentSlideIndex;
-    if(typeof oldIndex === "number"){
-        this.restoreIfOldCurrentSlideIsCanvas(oldIndex);
-    }
-    // Restore the old slide if it was a canvas
-    }catch(e){
-
-    }
-    // // Update the current slide index
+  
     this._currentSlideIndexPVT = index;
 
-    try{
-        // Save the new slide if it's a canvas
-        this.saveIfNewCurrentSlideIsCanvas(index);
-    }catch(e){
-            
-    }
 }
 
 getCurrentSlide():{}|null{
@@ -204,15 +151,15 @@ function getTaleemCanvasItems(appItems){
     }
     return taleemCanvasItems;
 }
-function uuid() {
-    // Generate a random 32-character hexadecimal string
-    const randomHex = () => Math.floor(Math.random() * 16).toString(16);
+// function uuid() {
+//     // Generate a random 32-character hexadecimal string
+//     const randomHex = () => Math.floor(Math.random() * 16).toString(16);
   
-    // Generate a UUID with the pattern "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      const r = randomHex();
-      const v = c === 'x' ? r : (r & 0x3) | 0x8; // For the 4th character, ensure it's 4
-      return v.toString(16);
-    });
-  }
+//     // Generate a UUID with the pattern "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+//     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+//       const r = randomHex();
+//       const v = c === 'x' ? r : (r & 0x3) | 0x8; // For the 4th character, ensure it's 4
+//       return v.toString(16);
+//     });
+//   }
   

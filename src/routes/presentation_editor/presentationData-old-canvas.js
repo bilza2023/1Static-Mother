@@ -7,7 +7,16 @@ export const presentationData = [
     "version": "basic",
     "template": "",
     "items": [
-     {
+      {
+        "uuid": "91ad766f-95a5-4f73-87a4-35fb9f7f6dfe",
+        "name": "text_196076e4",
+        "content": "",
+        "showAt": 0,
+        "hideAt": null,
+        "_id": {
+          "$oid": "67ac30a534a981cbd55d216f"
+        },
+        "itemExtra": {
           "uuid": "265125d8-e902-4c73-8f6c-a022f1708f20",
           "type": "text",
           "x": 110,
@@ -18,7 +27,7 @@ export const presentationData = [
           "color": "#d91212",
           "globalAlpha": 1
         }
-    
+      }
     ],
     "slideExtra": {
       "backgroundColor": "#edece9",
@@ -112,8 +121,13 @@ export const presentationData = [
     "type": "canvas",
     "template": "",
     "items": [
-    
-        {
+      {
+        "uuid": "7b08023b-830e-4f82-9d9d-5ecd85e16a01",
+        "name": "f92c8acd",
+        "content": "",
+        "showAt": 0,
+        "hideAt": null,
+        "itemExtra": {
           "uuid": "62f6b81f-a106-4b04-99ac-6125e12d13f6",
           "type": "ellipse",
           "name": "ellipse",
@@ -128,8 +142,15 @@ export const presentationData = [
           "filled": false,
           "color": "red",
           "globalAlpha": 1
+        }
       },
       {
+        "uuid": "0586114c-9cf5-4c23-83a9-a541f7d01047",
+        "name": "6f36df58",
+        "content": "",
+        "showAt": 0,
+        "hideAt": null,
+        "itemExtra": {
           "uuid": "324d883f-5b08-498a-b61c-18c14489e1f3",
           "type": "circle",
           "name": "circle",
@@ -145,6 +166,7 @@ export const presentationData = [
           "filled": true,
           "color": "red",
           "globalAlpha": 1
+        }
       }
     ],
     "slideExtra": {
