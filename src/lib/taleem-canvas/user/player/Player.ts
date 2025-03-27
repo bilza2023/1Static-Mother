@@ -25,7 +25,7 @@ assets:Assets;//assets with images
     this.eventModule = new EventModule(canvas); // No longer passing items array
     this.drawCtx = new DrawCtx(ctx,canvas);
     this.assets = assets;//These assets include "images" loaded
-    this.width = 1000;this.height = 360;this.canvas.width = this.width;this.canvas.height = this.height;
+    // this.width = 1000;this.height = 360;this.canvas.width = this.width;this.canvas.height = this.height;
   }
   draw(items:ICanvasItemTypes[],background:IBackground | null=null) {
     this.drawCtx.clear();
