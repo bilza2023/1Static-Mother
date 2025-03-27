@@ -29,7 +29,7 @@ export const dictionary = {
 		"/presentation_editor": [9],
 		"/presentation_player": [10],
 		"/raw_core": [11],
-		"/raw_player": [12]
+		"/raw_editor": [12]
 	};
 
 export const hooks = {

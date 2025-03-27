@@ -1,12 +1,13 @@
 
 <script>
   import  loadImages from "$lib/loadImages";
-   import Assets from "$lib/assets";
+
+  import {Player,Assets,Items} from "../../lib/taleem-canvas";
   // import {presentation} from "../../lib/presentation_from_db";    
     import CanvasEditor from "$lib/CanvasModule/CanvasEditor/CanvasEditor.svelte";
     import { onMount,onDestroy } from "svelte";
 
-    let items = [
+    let item_literals = [
       {
       uuid: "abc",
       type: 'rectangle',
@@ -46,9 +47,10 @@
       };  
 
       let assets =null;
+      let items =null;
 
 onMount(async () => { 
-
+    items = new Items(item_literals);
     const imagesMap = await loadImages(images,'/images/');
     assets = new Assets(imagesMap);
 });
@@ -57,7 +59,7 @@ onMount(async () => {
 
 <!-- images is different -->
 
-{#if assets}
+{#if assets && items}
       <CanvasEditor 
       {items}
       {images}
@@ -65,4 +67,11 @@ onMount(async () => {
       background={slideExtra}
       />
 {/if}
+
+<!-- 
+I have checked since i am sending "items Object" to the canvas Editor and not the items (with object-literals) the "items object" (which is being sent) AS WELL AS the item_literals maintain the reference. So we can just send  the item-literals directly to CanvasEditor BUT for now it works
+-->
+<!-- <button on:click={()=>console.log("Literals",item_literals)}>Log Item Literals</button>
+<br>
+<button on:click={()=>console.log("Items.getItems()",items.getItems())}>Log Items.getItems()</button> -->
 

@@ -1,0 +1,179 @@
+<script lang="ts">
+
+    import SlidePicker from "./SlidePicker.svelte";
+    import { onMount } from "svelte";
+    import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
+    import SlidesEditor from "./SlidesEditor";
+    import Toolbar from "./toolbar/Toolbar.svelte";    
+    import SlidePanel from "./SlidePanel.svelte";
+    import getNewSlide from "./addNewSlide/getNewSlide";
+    import  loadImages from "$lib/loadImages";
+    import Assets from "$lib/assets";
+////////////////////////////////////////////////////////////
+    export let slides;
+    export let images = [];
+    
+    let background =  {
+        uuid: "44455764hfghyjty6",
+        type: 'background',  
+        backgroundColor: '#9cc19c',
+        cellHeight: 25,
+        cellWidth: 25,
+        backgroundImage: "black_mat",
+        globalAlpha: 1,
+        showGrid: false,
+        gridLineWidth: 1,
+        gridLineColor: '#685454'
+      };  
+    let appEditor = null;
+    ////////////////////////////////STATE///////////////////////////
+    // Create a reactive store for currentSlideIndex
+    let currentSlideIndex = 0;
+    let assets = null;
+    let currentSlide = null;
+    let currentTime = 0; 
+
+    export let slideExtra = {};
+
+    let showSidePanel = true; // Add this to control side panel visibility
+    let show = false;
+    
+    function log(){
+      console.log("export const presentationData = " + JSON.stringify(slides)); 
+    }  
+    function redraw(){
+        currentSlideIndex = appEditor.getCurrentSlideIndex();
+        currentSlide = appEditor.currentSlide;    
+    }
+    
+    function next(){
+        appEditor.next();
+        currentSlideIndex = appEditor.getCurrentSlideIndex();
+        currentSlide = appEditor.currentSlide;
+    }
+    
+    function prev(){
+        appEditor.prev();
+        currentSlideIndex = appEditor.getCurrentSlideIndex();
+        currentSlide = appEditor.currentSlide;
+    }
+    
+    onMount(async() => {
+        appEditor = new SlidesEditor(slides);//rename appEditor to slidesEditor
+        const imagesMap = await loadImages(images,'/images/');
+        assets = new Assets(imagesMap);
+        appEditor.currentSlide = 0;
+        currentSlideIndex = appEditor.getCurrentSlideIndex();
+        currentSlide = appEditor.currentSlide;
+    });
+  
+    function addNew(slideType) {
+        try {
+            if(slideType === 'Eqs'){slideType='eqs';}
+            const newSlide = getNewSlide(slideType);
+            slides.push(newSlide);
+            appEditor.currentSlide = slides.length - 1; // THIS IS ERROR
+            currentSlideIndex = appEditor.getCurrentSlideIndex();
+            currentSlide = appEditor.currentSlide;
+            show = false;
+        } catch (error) {
+            console.error('Failed to add new slide:', error);
+        }
+    }
+
+function shiftTimeLocal(val){
+  currentSlide.endTime = val;
+  appEditor.shiftTime();
+}
+
+function clone(){
+  debugger;
+  appEditor.clone();
+  slides = appEditor.slides; 
+  redraw();
+}
+function moveUp(){
+  // debugger;
+  appEditor.moveUp();
+  slides = appEditor.slides; 
+  redraw();
+}
+
+function deleteFn() {
+  appEditor.del();
+  slides = appEditor.slides; 
+  redraw();
+}
+</script>
+  
+{#if currentSlide}
+<Toolbar 
+{prev} 
+{next} 
+{log} 
+{clone}
+{assets}
+{deleteFn}
+bind:showSidePanel={showSidePanel} 
+bind:show={show} 
+bind:startTime={currentSlide.startTime}
+bind:endTime={currentSlide.endTime}
+{shiftTimeLocal}
+/>
+{/if}  
+
+{#if show}
+  <NewSlidesDlg {addNew}/>
+{/if}
+
+{#if currentSlide}
+<div class="flex-container">
+  {#if showSidePanel}
+  <div class="side-panel">
+    <SlidePanel 
+        {slides} 
+        {moveUp}
+        {currentSlideIndex}
+        setCurrentSlide={(index) => {
+            appEditor.setCurrentSlide(index);
+            redraw();
+        }}
+    />
+  </div>
+  {/if}
+  
+  <div class={showSidePanel ? "main-content" : "main-content-full"}>
+    <SlidePicker
+      bind:items={currentSlide.items}
+      slideStartTime={currentSlide.startTime}
+      slideEndTime={currentSlide.endTime} 
+      bind:slideExtra={slideExtra}
+      currentSldieType={currentSlide.type}
+      {currentTime}
+
+      {images}
+      {assets}
+      {background}
+    />
+  </div>
+</div>
+{/if}
+    
+<style>
+  .flex-container {
+    display: flex;
+    width: 100%;
+  }
+  
+  .side-panel {
+    width: 7%;
+  }
+  
+  .main-content {
+    width: 93%;
+  }
+  
+  .main-content-full {
+    width: 100%;
+  }
+</style>

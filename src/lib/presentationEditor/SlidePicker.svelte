@@ -24,7 +24,7 @@
     <div tabindex="0">
         {#if (currentSldieType).toLowerCase() == "canvas"}
           <CanvasEditor 
-              bind:items={items}             
+              bind:itemLiterals={items}             
               slideStartTime={startTime}
               slideEndTime=  {endTime} 
               bind:slideExtra={slideExtra}
