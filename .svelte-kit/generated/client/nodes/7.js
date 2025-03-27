@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/monolith_editor_helloWorld/+page.svelte";
+export { default as component } from "../../../../src/routes/presentation_player/+page.svelte";

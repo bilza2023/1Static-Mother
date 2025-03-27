@@ -3,7 +3,7 @@
     import SlidePicker from "./SlidePicker.svelte";
     import { onMount } from "svelte";
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
-    import AppEditor from "./AppEditor";
+    import SlidesEditor from "./SlidesEditor";
     import Toolbar from "./toolbar/Toolbar.svelte";    
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
@@ -59,7 +59,7 @@
     }
     
     onMount(async() => {
-        appEditor = new AppEditor(slides);
+        appEditor = new SlidesEditor(slides);//rename appEditor to slidesEditor
         const imagesMap = await loadImages(images,'/images/');
         assets = new Assets(imagesMap);
         appEditor.currentSlide = 0;

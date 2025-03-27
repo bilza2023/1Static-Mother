@@ -1,5 +1,5 @@
 <script>
-  import Editor2 from "../../lib/presentationEditor/Editor2.svelte";
+  import Editor from "../../lib/presentationEditor/Editor.svelte";
 
     import { onMount } from "svelte";
     import {presentationData} from "./presentationData";    
@@ -14,5 +14,5 @@
 </script>
 
 {#if slides}
-<Editor2 bind:slides={slides} {images}/>
+<Editor bind:slides={slides} {images}/>
 {/if}
