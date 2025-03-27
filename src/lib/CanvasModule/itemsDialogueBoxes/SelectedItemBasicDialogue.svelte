@@ -21,41 +21,41 @@ export let images=[];
 
 
 {#if selectedItem && selectedItem.itemData.type=="rectangle"}
-    <RectangleDialogue  {selectedItem}  />
+    <RectangleDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 
 {#if selectedItem && selectedItem.itemData.type=="ellipse"}
-    <EllipseDialogue  {selectedItem}  />
+    <EllipseDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 
 {#if selectedItem && selectedItem.itemData.type=="circle"}
-    <CircleDialogue  {selectedItem}  />
+    <CircleDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 
 {#if selectedItem && selectedItem.itemData.type=="text"}
-    <TextDialogue  {selectedItem}  />
+    <TextDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 <!--///////////////////////////////////////////////////// -->
 {#if selectedItem && selectedItem.itemData.type=="image"}
-    <ImageDialogue  {selectedItem} {images} />
+    <ImageDialogue  bind:selectedItem={selectedItem} {images} />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="line"}
-    <LineDialogue  {selectedItem}  />
+    <LineDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="list"}
-    <ListDialogue  {selectedItem}  />
+    <ListDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="piechart"}
-    <PieChartDialogue  {selectedItem}  />
+    <PieChartDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="ray"}
-    <RayDialogue  {selectedItem}  />
+    <RayDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="sprite"}
-    <SpriteDialogue  {selectedItem}  />
+    <SpriteDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 {#if selectedItem && selectedItem.itemData.type=="triangle"}
-    <TriangleDialogue  {selectedItem}  />
+    <TriangleDialogue  bind:selectedItem={selectedItem}  />
 {/if}
 
 

@@ -3,26 +3,15 @@
 //This object saved a copy of items and try not to break the reference but it is not guaranteed. So when Behaviour is being used with Player then use player.draw(editor.items); 
 import { ICanvasItemTypes,CoreItemsMap,create } from "../core";//rename ICoreItemTypes
 import ItemsUtil from "./ItemsUtil";
+import Items from "./Items";
 export default class Behaviour {
 ///////////////////////////////////////////////////////
-items:ICanvasItemTypes[];          //items  : The ref to items array
-// ItemsMap:typeof CoreItemsMap;    //itemsMap
-create:typeof create;            //create:
-util:ItemsUtil;                  //itemsUtil:
+items:Items;          //items  : The ref to items array
 callback:()=>void;  
 ///////////////////////////////////////////////////////  
-constructor(items:ICanvasItemTypes[],callback:()=>void){
-this.items = items;
-// this.ItemsMap = CoreItemsMap; //why ? let remove it for a while its too direct
-this.util = ItemsUtil;
+constructor(items:Items,callback:()=>void){
+this.items = items; // This is Items OBject REFERENCE now 
 this.callback = callback;
-this.create = create;//should NOT be removed.editor has to add handles etc
-}
-///--26 March 2025 : ==> this function may need to be removed from here???/
-add(newItemType){
- const newItem = this.create(newItemType);
- this.items.push(newItem);
- return newItem;
 }
 // Event handlers for processing Player mouse events //5 events 
 mousemove  (x , y , hitItem   , hitItemsUuids) {}

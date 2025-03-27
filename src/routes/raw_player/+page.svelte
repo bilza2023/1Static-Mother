@@ -13,9 +13,10 @@
     import AddToolbar from "../../lib/CanvasModule/addToolbar/AddToolbar.svelte";
     import SelectDropDown from "../../lib/CanvasModule/CanvasEditor/SelectDropDown.svelte";
     import SelectedItemBasicDialogue from "../../lib/CanvasModule/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
+    import Items from "../../lib/taleem-canvas/user/Items"
     /////////////////////////////////////////////////////////////////
 //26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
-     let items = [];
+     let items = new Items([]);
      let assets:Assets;
      let background =  {
         uuid: "44455764hfghyjty6",
@@ -43,32 +44,29 @@
       let selectedItem= null;
       let itemsForDropDown = null;
 /////////////////////////////////////////////////////////////
-// $: {
-//   if(editor && editor.items){
-//     itemsForDropDown = editor.items;
-//   }
-// } 
-/////////////////////////////////////////////////////////////
-function setSeletecItem(incommingSelectedItem=null){
-
-  editor.selectedItem = incommingSelectedItem;
-  selectedItem = editor.selectedItem; 
-  if(player && editor) { 
-    itemsForDropDown = editor.items;
-    player.draw(editor.items);
+function setSeletecItem(){//communicate via functions not by sending data || data sending is forbidden... just edit data using fn
+// debugger;
+  selectedItem = items.getSelectedItem(); 
+  if(player) { 
+    itemsForDropDown = items.getItems();
+    player.draw(items.getItems());
     }
 }
-// function setSeletecItemByUUID(incommingUUID:string=""){
-// //  debugger;
-// //   const itemWithUUID = editor.items.find( item => item.uuid === incommingUUID);
-// //   setSeletecItem(itemWithUUID);
-// }
-
+function setSelectedItemByMenu(index:number|null=null){
+  
+  items.setSelectedItemByIndex(index);
+  setSeletecItem();
+}
+function redraw(){
+  if(player) { 
+    itemsForDropDown = items.getItems();
+    player.draw(items.getItems());
+    }
+}
 function addNewItem(itemType){
-
-  const newItem = editor.add(itemType);
-  player.draw(editor.items);  
-  itemsForDropDown = editor.items;
+  items.add(itemType);
+  itemsForDropDown = items.getItems();
+  player.draw(items.getItems());  
 }
 onMount(async () => {
 if (canvasElement) {
@@ -83,8 +81,15 @@ player = new Player(canvasElement,ctx,assets);
 editor = new EditorBehaviour(items,setSeletecItem);
 player.connect(editor);
 
-player.draw(items);
-itemsForDropDown = editor.items;
+player.draw(items.getItems());
+itemsForDropDown = items.getItems();
+
+setInterval(()=>{
+  if(player) { 
+    itemsForDropDown = items.getItems();
+    player.draw(items.getItems());
+    }
+},20);
 ///////////////////
 }
 });
@@ -93,10 +98,10 @@ itemsForDropDown = editor.items;
 <AddToolbar callback={addNewItem}/>
  <canvas bind:this={canvasElement} width="1000px" height="360px" ></canvas>
 
- {#if itemsForDropDown && editor}
-<SelectDropDown  items={itemsForDropDown} callback={editor.setSeletecItemByUUID.bind(editor)} />
+ {#if itemsForDropDown}
+<SelectDropDown  items={itemsForDropDown} callback={setSelectedItemByMenu} />
 {/if}
 
 {#if selectedItem}
-<SelectedItemBasicDialogue {selectedItem} {images} />
+<SelectedItemBasicDialogue bind:selectedItem={selectedItem} {images} />
 {/if}

@@ -3,23 +3,23 @@
     
     export let callback = () => {}; // Default empty function
     
-    let selectedUuid = "";
+    let selectedIndex = "";
     
     function handleChange(event) {
-        selectedUuid = event.target.value;
-        callback(selectedUuid);
+        selectedIndex = parseInt(event.target.value);
+        callback(selectedIndex);
     }
 </script>
 
 <table>
 <tr class="tr">
     <td class="td">
-        <select class="input" on:change={handleChange} value={selectedUuid}>
+        <select class="input" on:change={handleChange} value={selectedIndex}>
             <option value="">Select an item</option>
            
-            {#each items as item}
+            {#each items as item,index}
                {#if item.flag !== "handle"}     
-                <option value={item.uuid}>{item.name || item.type || item.uuid}</option>
+                <option value={index}>{item.name || item.type || item.uuid}</option>
                 {/if}
             {/each}
         </select>
