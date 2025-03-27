@@ -1,5 +1,5 @@
 <script lang="ts">
-
+    import type ISlide from "./ISlide";
     import SlidePicker from "./SlidePicker.svelte";
     import { onMount } from "svelte";
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
@@ -7,11 +7,12 @@
     import Toolbar from "./toolbar/Toolbar.svelte";    
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
-    import  loadImages from "$lib/loadImages";
-    import Assets from "$lib/assets";
+    import type {ISlidesList} from "./ISlidesList";
+  
+    import type {IAssets} from "../taleem-canvas";
 ////////////////////////////////////////////////////////////
-    export let slides;
-    export let images = [];
+    export let slides:ISlide[];
+    export let images:string[];
     
     let background =  {
         uuid: "44455764hfghyjty6",
@@ -27,10 +28,10 @@
       };  
     let slidesEditor = null;
     ////////////////////////////////STATE///////////////////////////
-    let assets = null;
+    export let assets:IAssets;
     /////////////////////////////////////////
     let currentSlide = null;
-    let slidesList = [];
+    let slidesList:ISlidesList[] = [];
 
     $:{
       currentSlide;
@@ -67,10 +68,7 @@
     
     onMount(async() => {
         slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
-        const imagesMap = await loadImages(images,'/images/');
-        assets = new Assets(imagesMap);
         currentSlide = slidesEditor.getCurrentSlide();
-        // debugger;
     });
   
     function addNew(slideType) {
@@ -92,22 +90,17 @@ function shiftTimeLocal(val){
 }
 
 function clone(){
-  debugger;
-  slidesEditor.clone();
-  slides = slidesEditor.slides; 
-  redraw();
+  slidesEditor.downUp();
+  currentSlide = slidesEditor.getCurrentSlide();
 }
 function moveUp(){
-  // debugger;
   slidesEditor.moveUp();
-  slides = slidesEditor.slides; 
-  redraw();
+  currentSlide = slidesEditor.getCurrentSlide(); 
 }
 
 function deleteFn() {
   slidesEditor.del();
-  slides = slidesEditor.slides; 
-  redraw();
+  currentSlide = slidesEditor.getCurrentSlide(); 
 }
 </script>
   

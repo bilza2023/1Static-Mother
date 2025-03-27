@@ -1,3 +1,9 @@
 import Assets from "./Assets";
+import type {IAssets} from "./IAssets";
 
-export default Assets;
+
+
+export {
+    Assets,
+    IAssets
+}

@@ -1,12 +1,14 @@
 
+import type ISlide from "./ISlide";
+import type {ISlidesList} from "./ISlidesList";
 export default class SlidesEditor{
 
 private  _currentSlideIndexPVT:number|null;
-private  slides:[{}];
+private  slides:ISlide[];
 private  slideExtra:{};
 // public   currentSlide:{}|null;
 
-constructor(slides,slideExtra={}){
+constructor(slides:ISlide[],slideExtra={}){
     this.slides = slides;
     this.slideExtra = slideExtra;
             if(this.slides.length > 0 ){
@@ -48,13 +50,10 @@ shiftTime() {
 }
 
 get currentSlideIndex():number|null{
-    // if(!this._currentSlideIndexPVT){this._currentSlideIndexPVT=null;}
     return this._currentSlideIndexPVT;
 }
 set currentSlideIndex(index:number|null){
-  
     this._currentSlideIndexPVT = index;
-
 }
 
 getCurrentSlide():{}|null{
@@ -68,21 +67,46 @@ getCurrentSlide():{}|null{
 
 getSlidesListForPanel(){
     // debugger;
-    const slidesList = [];
+    const slidesList:ISlidesList[] = [];
     for (let i = 0; i < this.slides.length; i++) {
         const slide = this.slides[i];
         let selected = false;
         if(this.currentSlideIndex == i){selected = true;}
-        slidesList.push({"type" : slide.type, "name" : slide.name , "selected" : selected });
+        const name = slide.name? slide.name : "No Name";
+        slidesList.push({"type" : slide.type, name , "selected" : selected });
     }
     return slidesList;
 }
 next() {
-    this.currentSlideIndex = this.currentSlideIndex +1  ;
+    if(this.currentSlideIndex == null){
+        if(this.slides.length > 1){
+            this.currentSlideIndex = 0;
+        }else{
+            this.currentSlideIndex = null;
+        }
+    }else {
+        if(this.currentSlideIndex < this.slides.length){
+            this.currentSlideIndex = this.currentSlideIndex +1  ;
+        }else {
+            this.currentSlideIndex = 0;
+        }
+    }
 }
 
 prev() {
-    this.currentSlideIndex = this.currentSlideIndex - 1  ;
+    if(this.currentSlideIndex == null){
+        if(this.slides.length > 1){
+            this.currentSlideIndex = 0;
+        }else{
+            this.currentSlideIndex = null;
+        }
+    }else {
+        if(this.currentSlideIndex > 0){
+            this.currentSlideIndex = this.currentSlideIndex -1  ;
+        }else {
+            //this.currentSlideIndex = 0;//nothing no round turn
+        }
+    }
 }
 
 // del() {
@@ -143,23 +167,3 @@ prev() {
 }//SlideObj
 /////////////////////////////////
 
-function getTaleemCanvasItems(appItems){
-    const taleemCanvasItems = [];
-    for (let i = 0; i < appItems.length; i++) {
-        const element = appItems[i];
-        taleemCanvasItems.push(element.itemExtra);
-    }
-    return taleemCanvasItems;
-}
-// function uuid() {
-//     // Generate a random 32-character hexadecimal string
-//     const randomHex = () => Math.floor(Math.random() * 16).toString(16);
-  
-//     // Generate a UUID with the pattern "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-//     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-//       const r = randomHex();
-//       const v = c === 'x' ? r : (r & 0x3) | 0x8; // For the 4th character, ensure it's 4
-//       return v.toString(16);
-//     });
-//   }
-  

@@ -3,7 +3,7 @@
     
     import {Player,Assets,Items} from "../../taleem-canvas";
     import { onMount } from "svelte";
-    import loadImages from "../../loadImages";
+    import loadImages from "../../taleem-canvas/loadImages";
     import EditorBehaviour from "../../taleem-canvas/Behaviours/EditorBehaviour";//???
     import AddToolbar from "../addToolbar/AddToolbar.svelte";
     import SelectDropDown from "./SelectDropDown.svelte";
