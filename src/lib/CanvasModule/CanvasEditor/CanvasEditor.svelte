@@ -37,6 +37,7 @@
       let canvasElement:HTMLCanvasElement;
       let player:Player= null;
       let editor= null;
+      let interval= null;
       let selectedItem= null;
       let itemsForDropDown = null;
 /////////////////////////////////////////////////////////////
@@ -67,6 +68,9 @@ function addNewItem(itemType){
 
 function init(){
   if (canvasElement) {
+    
+    if(interval) clearInterval(interval);
+
     const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
     items = new Items(itemLiterals);
     player = new Player(canvasElement,ctx,assets);
@@ -74,6 +78,13 @@ function init(){
     player.connect(editor);
     itemsForDropDown = items.getItems();
     player.draw(items.getItems());
+
+
+    interval = setInterval(()=>{
+      // if(player) { 
+        player.draw(items.getItems());
+        // }
+    },20);
   }   //if (canvasElement) {
 }//init ends
 
@@ -95,12 +106,8 @@ if (canvasElement) {
 
 // itemsForDropDown = items.getItems();
 // player.draw(items.getItems());
+
 init();
-// setInterval(()=>{
-//   if(player) { 
-//     player.draw(items.getItems());
-//     }
-// },20);
 ///////////////////
 }
 });
