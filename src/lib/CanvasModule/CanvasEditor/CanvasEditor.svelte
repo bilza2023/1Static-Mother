@@ -1,30 +1,20 @@
 
 <script lang="ts">
     
+import type { IBackground,ICanvasItemTypes } from "../../taleem-canvas";
     import {Player,Assets,Items} from "../../taleem-canvas";
     import { onMount } from "svelte";
     import EditorBehaviour from "../../taleem-canvas/Behaviours/EditorBehaviour";//???
     import AddToolbar from "../addToolbar/AddToolbar.svelte";
     import SelectDropDown from "./SelectDropDown.svelte";
     import SelectedItemBasicDialogue from "../itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
+    import {getCanvasBackground} from "../../taleem-canvas";
     /////////////////////////////////////////////////////////////////
 //26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
      export let itemLiterals; 
      let items:Items; 
      export let assets:Assets;
-     export let background =  {
-        uuid: "44455764hfghyjty6",
-        type: 'background',  
-        backgroundColor: '#9cc19c',
-        color: "gray",
-        cellHeight: 25,
-        cellWidth: 25,
-        backgroundImage: "black_mat",
-        opacity: 1,
-        showGrid: false,
-        gridLineWidth: 1,
-        gridLineColor: '#685454'
-      };
+     export let background:IBackground | null = null;
       export let images:string[]=[]; //This is for the drop down
     /////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;
@@ -39,7 +29,7 @@ function setSeletecItem(){//communicate via functions not by sending data || dat
   selectedItem = items.getSelectedItem(); 
   if(player) { 
     itemsForDropDown = items.getItems();
-    player.draw(items.getItems());
+    player.draw(items.getItems(),background);
     }
 }
 function setSelectedItemByMenu(index:number|null=null){
@@ -56,7 +46,7 @@ function redraw(){
 function addNewItem(itemType){
   items.add(itemType);
   itemsForDropDown = items.getItems();
-  player.draw(items.getItems());  
+  player.draw(items.getItems(),background);  
 }
 
 function init(){
@@ -64,18 +54,19 @@ function init(){
     
     if(interval) clearInterval(interval);
 
+    if(!background) background = getCanvasBackground();
     const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
     items = new Items(itemLiterals);
     player = new Player(canvasElement,ctx,assets);
     editor = new EditorBehaviour(items,setSeletecItem);
     player.connect(editor);
     itemsForDropDown = items.getItems();
-    player.draw(items.getItems());
+    player.draw(items.getItems(),background);
 
 
     interval = setInterval(()=>{
       // if(player) { 
-        player.draw(items.getItems());
+        player.draw(items.getItems(),background);
         // }
     },20);
   }   //if (canvasElement) {

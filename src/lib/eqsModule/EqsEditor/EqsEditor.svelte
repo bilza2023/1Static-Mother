@@ -22,7 +22,6 @@ $:{
   items = [...items];
   console.log("items changes",items);
 }
-// export let slideExtra; // slideExtra is not used in Eqs but it is available 
 
 // the only local variable
 let timingsError = false;

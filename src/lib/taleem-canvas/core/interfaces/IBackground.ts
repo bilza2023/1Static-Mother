@@ -4,7 +4,6 @@
 
 interface IBackground  {
     
-    uuid: string,
     type: 'background';
     color: string;
     opacity: number;

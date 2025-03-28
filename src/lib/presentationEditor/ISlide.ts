@@ -1,61 +1,55 @@
+import type { IBackground, ICanvasItemTypes } from "../taleem-canvas";
+import type IEqsItem from "../eqsModule/IEqsItem";
 
-interface ISlide {
-    uuid: string;
-    startTime: number;
-    endTime: number;
-    type: "canvas" | "eqs";
-    version: string;
-    template: string;
-    items: ICanvasItem[] | IEqsItem[]; // Use union type for items
-    slideExtra?: ISlideExtraCanvas | ISlideExtraEqs; // Use union type for slideExtra
-    name?: string;
-    _id?: {
-        $oid: string;
-    };
-}
-//////////////////////////////////////////////////////////////////////
-interface IEqsItem {
+interface IBaseSlide {
     uuid: string;
     name: string;
-    content: string;
-    showAt: number | null;
-    hideAt: number | null;
-    itemExtra: {
-        startTime?: number;
-        endTime?: number;
-        code: string;
-        type: string;
-        sp: any[]; // You might want to create a specific interface for 'sp' if you know its structure
-    };
-    _id?: string;
+    startTime: number;
+    endTime: number;
+    version: "basic";
+    template: string;
 }
 
-interface ICanvasItem {
-    uuid: string;
-    type: string; // e.g., "text", "ellipse", "circle"
-    x: number;
-    y: number;
-    [key: string]: any; // Allow other properties as they vary between item types
+interface ICanvasSlide extends IBaseSlide {
+    type: "canvas";
+    items: ICanvasItemTypes[];
+    slideExtra: IBackground;
 }
 
-interface ISlideExtraCanvas {
-    backgroundColor?: string;
-    canvasWidth?: number;
-    canvasHeight?: number;
-    cellHeight?: number;
-    cellWidth?: number;
-    bgImg?: string;
-    bgGlobalAlpha?: number;
-    xFactor?: number;
-    yFactor?: number;
-    showGrid?: boolean;
-    gridLineWidth?: number;
-    gridLineColor?: string;
-    imagesUrl?: string;
+interface IEqsSlide extends IBaseSlide {
+    type: "eqs";
+    items: IEqsItem[];
 }
 
-interface ISlideExtraEqs {
-    imagesUrl?: string; // Only imagesUrl is present in your example
+type ISlide = ICanvasSlide | IEqsSlide;
+
+// Type guard function
+function isCanvasSlide(slide: ISlide): slide is ICanvasSlide {
+    return slide.type === "canvas";
 }
 
-export default ISlide;
+function isEqsSlide(slide: ISlide): slide is IEqsSlide {
+    return slide.type === "eqs";
+}
+
+export {
+    IBaseSlide,
+    ISlide,
+    ICanvasSlide,
+    IEqsSlide,
+    isCanvasSlide,
+    isEqsSlide
+};
+
+
+// Usage example:
+// typescript
+// function processSlide(slide: ISlide) {
+//     if (isCanvasSlide(slide)) {
+//         // Typescript knows slide.items is ICanvasItemTypes[]
+//         // slide.slideExtra is available
+//     } else if (isEqsSlide(slide)) {
+//         // Typescript knows slide.items is IEqsItem[]
+//     }
+// }
+//

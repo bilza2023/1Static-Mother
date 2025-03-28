@@ -1,5 +1,6 @@
 <script lang="ts">
-    import type ISlide from "./ISlide";
+    
+    import type {ISlide} from "./ISlide";
     import { onMount } from "svelte";
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
     import SlidesEditor from "./SlidesEditor";
@@ -10,6 +11,7 @@
     import CanvasEditor from '../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte';
     import EqsEditor from '../../lib/eqsModule/EqsEditor/EqsEditor.svelte';
     import type {IAssets} from "../taleem-canvas";
+    import ISlideTypeAvailable from "./ISlideTypeAvailable";
 ////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
@@ -17,12 +19,10 @@
     export let assets:IAssets;
     /////////////////////////////////////////
     let slidesEditor = null;
-    let currentSlide = null;
+    let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
-    let slideItems = null;
     let slideStartTime = 0;
     let slideEndTime = 0;
-    let slideSlideExtra = {};
     let currentTime = 0; 
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
@@ -53,9 +53,8 @@ onMount(async() => {
     slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
     currentSlide = slidesEditor.getCurrentSlide();
 });
-function addNew(slideType) {
+function addNew(slideType:ISlideTypeAvailable) {
     try {
-        if(slideType === 'Eqs'){slideType='eqs';}
         const newSlide = getNewSlide(slideType);
         slides.push(newSlide);
         slidesEditor.Index = 0; // THIS IS ERROR
@@ -124,7 +123,8 @@ bind:endTime={slideEndTime}
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 {#if currentSlide !==null} 
 <div >
-          {#if (currentSlide.type).toLowerCase() == "canvas"}
+  <!-- the === make it type insertion now the type is also checked we can also use type guards -->
+          {#if (currentSlide.type) === "canvas"}
             <CanvasEditor 
                 bind:itemLiterals={currentSlide.items}             
                 bind:background={currentSlide.slideExtra}
@@ -133,12 +133,11 @@ bind:endTime={slideEndTime}
             />
           {/if}
   
-          {#if (currentSlide.type).toLowerCase() == "eqs"}
+          {#if (currentSlide.type) === "eqs"}
           <EqsEditor 
                 bind:items={currentSlide.items}
                 slideStartTime={slideStartTime}
                 slideEndTime=  {slideEndTime}
-                bind:slideExtra={currentSlide.slideExtra}
                 {currentTime}
           />
           {/if}
