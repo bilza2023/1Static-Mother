@@ -11,7 +11,8 @@
     import CanvasEditor from '../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte';
     import EqsEditor from '../../lib/eqsModule/EqsEditor/EqsEditor.svelte';
     import type {IAssets} from "../taleem-canvas";
-    import ISlideTypeAvailable from "./ISlideTypeAvailable";
+    import type ISlideTypeAvailable from "./ISlideTypeAvailable";
+    import type {IBackground} from "../../lib/taleem-canvas/index"
 ////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];

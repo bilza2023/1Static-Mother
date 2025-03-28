@@ -26,14 +26,13 @@ export const presentationData = [
       "canvasHeight": 360,
       "cellHeight": 25,
       "cellWidth": 25,
-      "bgImg": "black_mat",
+      "backgroundImage": "black_mat",
       "bgGlobalAlpha": 1,
       "xFactor": 0,
       "yFactor": 0,
       "showGrid": false,
       "gridLineWidth": 1,
       "gridLineColor": "gray",
-      "imagesUrl": "https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/"
     },
     "_id": {
       "$oid": "67a3822634a981cbd55d166d"
