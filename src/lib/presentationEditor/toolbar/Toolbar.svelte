@@ -19,8 +19,8 @@ export let clone;
 export let soundFile=null;
 export let shiftTimeLocal;
 export let currentTime=0;
-export let startTime;
-export let endTime;
+export let startTime=0;
+export let endTime=0;
   
 </script>
 

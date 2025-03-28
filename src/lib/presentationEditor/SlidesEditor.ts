@@ -85,7 +85,7 @@ next() {
             this.currentSlideIndex = null;
         }
     }else {
-        if(this.currentSlideIndex < this.slides.length){
+        if(this.currentSlideIndex < this.slides.length -1){
             this.currentSlideIndex = this.currentSlideIndex +1  ;
         }else {
             this.currentSlideIndex = 0;

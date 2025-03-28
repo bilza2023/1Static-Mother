@@ -113,7 +113,6 @@ function deleteFn() {
 }
 </script>
   
-{#if currentSlide}
 <Toolbar 
 {prev} 
 {next} 
@@ -123,34 +122,32 @@ function deleteFn() {
 {deleteFn}
 bind:showSidePanel={showSidePanel} 
 bind:show={show} 
-bind:startTime={currentSlide.startTime}
-bind:endTime={currentSlide.endTime}
+bind:startTime={slideStartTime}
+bind:endTime={slideEndTime}
 {shiftTimeLocal}
 />
-{/if}  
 
 {#if show}
   <NewSlidesDlg {addNew}/>
 {/if}
 
-{#if currentSlide}
 <div class="flex-container">
-  {#if showSidePanel}
-  <div class="side-panel">
-    <SlidePanel 
-        {slidesList} 
-        {moveUp}
-        {moveDown}
-        {setCurrentSlide}
-    />
-  </div>
-  {/if}
-  
-  <div class={showSidePanel ? "main-content" : "main-content-full"}>
+<!-- ////////////////////////////////SlidePanel///////////////////////////////////////     -->  
+      {#if showSidePanel}
+      <div class="side-panel">
+        <SlidePanel 
+            {slidesList} 
+            {moveUp}
+            {moveDown}
+            {setCurrentSlide}
+        />
+      </div>
+      {/if}
+
+ <div class={showSidePanel ? "main-content" : "main-content-full"}>
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 {#if currentSlide !==null} 
 <div >
-  
           {#if (currentSlide.type).toLowerCase() == "canvas"}
             <CanvasEditor 
                 bind:itemLiterals={slideItems}             
@@ -172,9 +169,9 @@ bind:endTime={currentSlide.endTime}
 </div>
 {/if}
 <!-- ///////////////////////////////////////////////////////////////////////     -->
-  </div>
 </div>
-{/if}
+</div>
+
     
 <style>
   .flex-container {
