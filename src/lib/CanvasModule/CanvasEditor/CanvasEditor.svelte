@@ -3,7 +3,6 @@
     
     import {Player,Assets,Items} from "../../taleem-canvas";
     import { onMount } from "svelte";
-    import loadImages from "../../taleem-canvas/loadImages";
     import EditorBehaviour from "../../taleem-canvas/Behaviours/EditorBehaviour";//???
     import AddToolbar from "../addToolbar/AddToolbar.svelte";
     import SelectDropDown from "./SelectDropDown.svelte";
@@ -26,13 +25,7 @@
         gridLineWidth: 1,
         gridLineColor: '#685454'
       };
-      export let images:string[] = [
-      "atom.png",
-      "baloons.png",
-      "activity1.jpg",
-      "drops.png"
-    ];
-    export let imagesUrl   = "/images/";
+      export let images:string[]=[]; //This is for the drop down
     /////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;
       let player:Player= null;
@@ -92,25 +85,8 @@ $:{
   itemLiterals;
  init();
 }
-onMount(async () => {
-if (canvasElement) {
-  // debugger;
-          /////////////////////////////////////////////
-// const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
-// items = new Items(itemLiterals);
-// debugger;
-// player = new Player(canvasElement,ctx,assets);
-
-// editor = new EditorBehaviour(items,setSeletecItem);
-// player.connect(editor);
-
-// itemsForDropDown = items.getItems();
-// player.draw(items.getItems());
-
-init();
-///////////////////
-}
-});
+//////////////////////////////////////////////////////
+onMount(async () => { if (canvasElement) init(); });
 
   </script>
 

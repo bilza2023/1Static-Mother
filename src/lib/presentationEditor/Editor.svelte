@@ -9,51 +9,30 @@
     import type {ISlidesList} from "./ISlidesList";
     import CanvasEditor from '../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte';
     import EqsEditor from '../../lib/eqsModule/EqsEditor/EqsEditor.svelte';
-  
     import type {IAssets} from "../taleem-canvas";
-////////////////////////////////////////////////////////////
+////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
-     
-    let slidesEditor = null;
     export let save:()=>void;
-    ////////////////////////////////STATE///////////////////////////
     export let assets:IAssets;
     /////////////////////////////////////////
+    let slidesEditor = null;
     let currentSlide = null;
     let slidesList:ISlidesList[] = [];
-    //////////////--slide-vars///////////////////////////
     let slideItems = null;
     let slideStartTime = 0;
     let slideEndTime = 0;
     let slideSlideExtra = {};
-    
-
-    $:{
-      // 
-    if(currentSlide ==null){
-      slideItems = [];
-      slideStartTime = 0;
-      slideEndTime = 9;
-      slideSlideExtra = 9;
-    }else {
-      slideItems = currentSlide.items;
-      slideStartTime = currentSlide.startTime;
-      slideEndTime = currentSlide.endTime;
-      slideSlideExtra = currentSlide.slideExtra;
-    }  
-
-      if(slidesEditor){
-        slidesList = slidesEditor.getSlidesListForPanel();
-      }
-    }
     let currentTime = 0; 
-
-    export let slideExtra = {};
-
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
-    
+   
+$:{
+  currentSlide;
+  if(slidesEditor){
+    slidesList = slidesEditor.getSlidesListForPanel();
+  }
+}
 function log(){
   console.log("export const presentationData = " + JSON.stringify(slides)); 
 }     
@@ -147,8 +126,8 @@ bind:endTime={slideEndTime}
 <div >
           {#if (currentSlide.type).toLowerCase() == "canvas"}
             <CanvasEditor 
-                bind:itemLiterals={slideItems}             
-                bind:background={slideSlideExtra}
+                bind:itemLiterals={currentSlide.items}             
+                bind:background={currentSlide.slideExtra}
                 {assets}
                 {images}
             />
@@ -159,7 +138,7 @@ bind:endTime={slideEndTime}
                 bind:items={currentSlide.items}
                 slideStartTime={slideStartTime}
                 slideEndTime=  {slideEndTime}
-                bind:slideExtra={slideExtra}
+                bind:slideExtra={currentSlide.slideExtra}
                 {currentTime}
           />
           {/if}

@@ -1,4 +1,19 @@
 
+interface ISlide {
+    uuid: string;
+    startTime: number;
+    endTime: number;
+    type: "canvas" | "eqs";
+    version: string;
+    template: string;
+    items: ICanvasItem[] | IEqsItem[]; // Use union type for items
+    slideExtra?: ISlideExtraCanvas | ISlideExtraEqs; // Use union type for slideExtra
+    name?: string;
+    _id?: {
+        $oid: string;
+    };
+}
+//////////////////////////////////////////////////////////////////////
 interface IEqsItem {
     uuid: string;
     name: string;
@@ -41,20 +56,6 @@ interface ISlideExtraCanvas {
 
 interface ISlideExtraEqs {
     imagesUrl?: string; // Only imagesUrl is present in your example
-}
-interface ISlide {
-    uuid: string;
-    startTime: number;
-    endTime: number;
-    type: "canvas" | "eqs";
-    version: string;
-    template: string;
-    items: ICanvasItem[] | IEqsItem[]; // Use union type for items
-    slideExtra?: ISlideExtraCanvas | ISlideExtraEqs; // Use union type for slideExtra
-    name?: string;
-    _id?: {
-        $oid: string;
-    };
 }
 
 export default ISlide;

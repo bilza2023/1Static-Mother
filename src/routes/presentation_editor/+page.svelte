@@ -1,7 +1,8 @@
 
 <script lang="ts">
+  //Since every thing is important so everything must be final.
+
   import { Assets,type IAssets,loadImages} from "../../lib/taleem-canvas";
-  // import type {IAssets} from "../taleem-canvas";
   import Editor from "../../lib/presentationEditor/Editor.svelte";
 
     import { onMount } from "svelte";
@@ -15,9 +16,9 @@
         "activity1.jpg",
         "drops.png"
       ];
-      let imagesUrl   = "/images/";
-
-    onMount(async() => {
+      
+      onMount(async() => {
+      let imagesUrl   = "/images/";//if needed take it out of onmount
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
       slides = presentationData;
@@ -31,5 +32,6 @@
 </script>
 
 {#if slides}
+<!-- The editor has images loaded in assets BUT "images" array is being sent for dropdown we can also use the images in the assets????   --ASS-I---->
 <Editor bind:slides={slides} {assets} {images} {save}/>
 {/if}
