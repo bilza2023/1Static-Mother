@@ -147,7 +147,18 @@ export const presentationData = [
       }
     ],
     "slideExtra": {
-      "imagesUrl": "https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/"
+     "backgroundColor": "#edece9",
+      "canvasWidth": 1000,
+      "canvasHeight": 360,
+      "cellHeight": 25,
+      "cellWidth": 25,
+      "backgroundImage": "black_mat",
+      "bgGlobalAlpha": 1,
+      "xFactor": 0,
+      "yFactor": 0,
+      "showGrid": false,
+      "gridLineWidth": 1,
+      "gridLineColor": "gray",
     }
   },
   {

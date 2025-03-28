@@ -22,6 +22,7 @@ export default function drawBg(item,drawCtx,assets) {
 ////////////////////////////////////////////////////////////////////
 
 function drawBgImage(drawCtx,item,assets) {
+  // debugger;
   const base64String = assets.getBackgroundImage(item.backgroundImage);
 
   if (!base64String || typeof base64String !== "string") {
