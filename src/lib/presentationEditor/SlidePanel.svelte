@@ -43,7 +43,7 @@
         </div>
     {/each}
 {:else}
-    <div class="stack-panel-empty">No items</div>
+    <div class="stack-panel-empty">No Slides</div>
 {/if}
   
     

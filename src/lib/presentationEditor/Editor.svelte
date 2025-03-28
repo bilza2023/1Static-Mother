@@ -54,29 +54,26 @@
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
     
-    function log(){
-      console.log("export const presentationData = " + JSON.stringify(slides)); 
-    }  
-      
-    function next(){
-        slidesEditor.next();
-        currentSlide = slidesEditor.getCurrentSlide();
-    }
-    
-    function prev(){
-        slidesEditor.prev();
-        currentSlide = slidesEditor.getCurrentSlide();
-    }
-    function setCurrentSlide(index) {
-          slidesEditor.currentSlideIndex = index;
-          currentSlide = slidesEditor.getCurrentSlide(); 
-        }
-    
-    onMount(async() => {
-        slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
-        currentSlide = slidesEditor.getCurrentSlide();
-    });
-  
+function log(){
+  console.log("export const presentationData = " + JSON.stringify(slides)); 
+}     
+function next(){
+slidesEditor.next();
+currentSlide = slidesEditor.getCurrentSlide();
+}
+function prev(){
+slidesEditor.prev();
+currentSlide = slidesEditor.getCurrentSlide();
+}
+function setCurrentSlide(index) {
+  slidesEditor.currentSlideIndex = index;
+  currentSlide = slidesEditor.getCurrentSlide(); 
+}
+/////////////////////////////////    
+onMount(async() => {
+    slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
+    currentSlide = slidesEditor.getCurrentSlide();
+});
 function addNew(slideType) {
     try {
         if(slideType === 'Eqs'){slideType='eqs';}
@@ -89,12 +86,11 @@ function addNew(slideType) {
         console.error('Failed to add new slide:', error);
     }
 }
-
 function shiftTimeLocal(val){
+  if(!currentSlide || currentSlide == null){return}
   currentSlide.endTime = val;
   slidesEditor.shiftTime();
 }
-
 function clone(){
   slidesEditor.clone();
   currentSlide = slidesEditor.getCurrentSlide();
@@ -107,7 +103,6 @@ function moveDown(){
   slidesEditor.moveDown();
   currentSlide = slidesEditor.getCurrentSlide(); 
 }
-
 function deleteFn() {
   slidesEditor.del();
   currentSlide = slidesEditor.getCurrentSlide(); 
@@ -161,7 +156,7 @@ bind:endTime={slideEndTime}
   
           {#if (currentSlide.type).toLowerCase() == "eqs"}
           <EqsEditor 
-                bind:items={slideItems}
+                bind:items={currentSlide.items}
                 slideStartTime={slideStartTime}
                 slideEndTime=  {slideEndTime}
                 bind:slideExtra={slideExtra}

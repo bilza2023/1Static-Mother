@@ -6,7 +6,6 @@ export default function getNewItem( itemExtra = {} , name='',content='') {
       const firstSegment = uuidValue.split('-')[0];
       name = firstSegment;
     }
-    
   return {
       uuid: uuid() , //added on 31-may 2024 --not used yet 
       name , 
@@ -29,3 +28,6 @@ function uuid() {
       return v.toString(16);
     });
   }
+
+
+ 

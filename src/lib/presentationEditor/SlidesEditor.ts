@@ -25,7 +25,7 @@ setFirstSlide(){
     }
 }
 shiftTime() {
-    debugger;
+    if(this.slides.length < 1){return;}
     const MIN_DURATION = 2; // Minimum duration between startTime and endTime in seconds
     this.setFirstSlide();
     // Process all slides

@@ -17,10 +17,12 @@ export let slideStartTime;
 export let slideEndTime;
 
 $:{
+  // debugger;
   items;
-  // updateTimings();
+  items = [...items];
+  console.log("items changes",items);
 }
-export let slideExtra; // slideExtra is not used in Eqs but it is available 
+// export let slideExtra; // slideExtra is not used in Eqs but it is available 
 
 // the only local variable
 let timingsError = false;
@@ -59,13 +61,16 @@ function moveDownEq(index) {
 }
 
 function delEq(index) {
+  // debugger;
   items = [...items.slice(0, index), ...items.slice(index + 1)];
 }
 
 
 function addEq(i=0) {
-  const newItem = getNewItem();
-  items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
+  if(items){
+    const newItem = getNewItem( {"startTime": 0,"endTime": 10,"code": "Text Item","type": "text","sp": []}, "newItem" , "Text");
+    items = [...items,newItem];
+  }
 }
 function setFakeTimings() {
     if (items.length === 0) return;
@@ -149,12 +154,18 @@ function updateTimings() {
   items = [...items];
 }
 ////////////////////////////
+onMount(async() => {
+    //  debugger;
+  items;
+  console.log("items changes",items);
+    });
+////////////////////////////"type": "text","sp": []
 
 </script>
 
 <div class="bg-gray-800 w-full  text-white min-h-screen p-4 m-0 ">
 
-{#if timingsError}
+{#if timingsError}"type": "text","sp": []
 <h1 class="w-full text-center bg-orange-400 rounded-md px-2 text-lg">Timings Error {timingsErrorMessage}</h1>
 {/if}
 
