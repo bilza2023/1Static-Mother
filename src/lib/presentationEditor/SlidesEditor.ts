@@ -109,61 +109,89 @@ prev() {
     }
 }
 
-// del() {
-//     // debugger;
-//         const currentSlideIndex = this.getCurrentSlideIndex();
-//         this.slides.splice(currentSlideIndex, 1);
-//         if(this.slides.length > 0){
-//             this.currentSlide = 0;
-//         }else {
-//             this.currentSlide = null;
-//         }
-// //  console.log("Remaining Items" , this.slides.length);        
-// }
+del(): boolean {
+    // Check if a slide is currently selected
+    if (this.currentSlideIndex === null) return false;
 
-// clone(){
-//     if (!this.currentSlide) return false ;
-//     try {
-//       const currentSlideIndex = this.getCurrentSlideIndex();  
-//       const clonedSlide = JSON.parse(JSON.stringify(this.slides[currentSlideIndex]));
-//       clonedSlide.uuid = uuid();
-//       this.slides = [...this.slides, clonedSlide];
-//     //   console.log("cloned slides" , this.slides);//23 March 2025 : Every thing is important
-//     } catch (error) {
-//       console.error('Failed to clone slide:', error);
-//       return false;
-//     }
-// }
+    // Remove the current slide from the array
+    this.slides.splice(this.currentSlideIndex, 1);
 
-// moveUp() {
-//     const index = this.getCurrentSlideIndex();
-//     if (index <= 0) return; // Can't move up if already at the top
-    
-//     // Swap the slide with the one above it
-//     [this.slides[index], this.slides[index-1]] = [this.slides[index-1], this.slides[index]];
-    
-//       this.setCurrentSlide(index-1);
-// }
-  
-// moveDown(index) {
-//     if (index >= slides.length - 1) return; // Can't move down if already at the bottom
-    
-//     // Swap the slide with the one below it
-//     [slides[index], slides[index+1]] = [slides[index+1], slides[index]];
-    
-//     // Create a new reference to trigger reactivity
-//     slides = [...slides];
-    
-//     // Update the current slide index if needed
-//     if (currentSlideIndex === index) {
-//       appEditor.setCurrentSlide(index+1);
-//     } else if (currentSlideIndex === index+1) {
-//       appEditor.setCurrentSlide(index);
-//     }
-    
-//     redraw();
-//   }
+    // Adjust current slide index after deletion
+    if (this.slides.length > 0) {
+        // If slides remain, set to the first slide or adjust to previous index
+        this.currentSlideIndex = Math.min(this.currentSlideIndex, this.slides.length - 1);
+    } else {
+        // If no slides remain, set to null
+        this.currentSlideIndex = null;
+    }
+
+    return true;
+}
+clone(): boolean {
+    // Check if a slide is currently selected
+    if (this.currentSlideIndex === null) return false;
+
+    try {
+        // Deep clone the current slide
+        const clonedSlide = JSON.parse(JSON.stringify(this.slides[this.currentSlideIndex]));
+        
+        // Generate a new unique identifier for the cloned slide
+        clonedSlide.uuid = uuid();
+
+        // Add the cloned slide to the array
+        this.slides.push(clonedSlide);
+
+        // Optionally, set the cloned slide as the current slide
+        this.currentSlideIndex = this.slides.length - 1;
+
+        return true;
+    } catch (error) {
+        console.error('Failed to clone slide:', error);
+        return false;
+    }
+}
+
+moveUp(): boolean {
+    // Check if a slide is currently selected
+    if (this.currentSlideIndex === null || this.currentSlideIndex <= 0) return false;
+
+    // Swap the current slide with the one above it
+    const tempSlide = this.slides[this.currentSlideIndex - 1];
+    this.slides[this.currentSlideIndex - 1] = this.slides[this.currentSlideIndex];
+    this.slides[this.currentSlideIndex] = tempSlide;
+
+    // Update the current slide index
+    this.currentSlideIndex -= 1;
+
+    return true;
+}
+
+moveDown(): boolean {
+    // Check if a slide is currently selected
+    if (this.currentSlideIndex === null || this.currentSlideIndex >= this.slides.length - 1) return false;
+
+    // Swap the current slide with the one below it
+    const tempSlide = this.slides[this.currentSlideIndex + 1];
+    this.slides[this.currentSlideIndex + 1] = this.slides[this.currentSlideIndex];
+    this.slides[this.currentSlideIndex] = tempSlide;
+
+    // Update the current slide index
+    this.currentSlideIndex += 1;
+
+    return true;
+}
 
 }//SlideObj
 /////////////////////////////////
 
+function uuid() {
+    // Generate a random 32-character hexadecimal string
+    const randomHex = () => Math.floor(Math.random() * 16).toString(16);
+  
+    // Generate a UUID with the pattern "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = randomHex();
+      const v = c === 'x' ? r : (r & 0x3) | 0x8; // For the 4th character, ensure it's 4
+      return v.toString(16);
+    });
+  }

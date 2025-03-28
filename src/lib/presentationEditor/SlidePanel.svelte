@@ -2,8 +2,8 @@
     export let slidesList;
     export let setCurrentSlide;
     export let moveUp;
+    export let moveDown;
 
-    function moveDown() {console.log("move down");}
 </script>
     
 {#if slidesList && slidesList.length > 0}
@@ -18,9 +18,11 @@
             >
                 {String(item.type || '').toUpperCase().slice(0, 7)}
             </button>
-            
+
             <div class="stack-panel-actions">
-                <div class="stack-panel-move-buttons">
+                
+                <div class="stack-panel-move-buttons" style="min-height:15px">
+                    {#if item.selected  == true}
                     <button 
                         class="stack-panel-move-button"
                         on:click={moveDown}
@@ -34,8 +36,10 @@
                     >
                     ↑
                     </button>
+                {/if}
                 </div>
             </div>
+
         </div>
     {/each}
 {:else}
@@ -59,7 +63,7 @@
     }
     
     .stack-panel-item:hover {
-        background-color: rgba(255, 0, 0, 0.2);
+        background-color: rgb(201, 175, 109);
     }
     
     .stack-panel-selector {

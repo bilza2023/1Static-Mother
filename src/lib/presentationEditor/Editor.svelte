@@ -1,6 +1,5 @@
 <script lang="ts">
     import type ISlide from "./ISlide";
-    import SlidePicker from "./SlidePicker.svelte";
     import { onMount } from "svelte";
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
     import SlidesEditor from "./SlidesEditor";
@@ -20,13 +19,6 @@
     ////////////////////////////////STATE///////////////////////////
     export let assets:IAssets;
     /////////////////////////////////////////
-      //export let items;
-      // export let startTime;//Only for Eqs Editor do not feed it to canvas 
-      // export let endTime;//Only for Eqs Editor do not feed it to canvas 
-      export let currentSlideType;//Only for Eqs Editor do not feed it to canvas 
-      // export let soundUrl; //3-mar-2025
-      // export let audioData = ''; /add here
-    /////////////////////////////////////////
     let currentSlide = null;
     let slidesList:ISlidesList[] = [];
     //////////////--slide-vars///////////////////////////
@@ -35,10 +27,9 @@
     let slideEndTime = 0;
     let slideSlideExtra = {};
     
-    /////////////////////////////////////////
 
     $:{
-      // debugger;
+      // 
     if(currentSlide ==null){
       slideItems = [];
       slideStartTime = 0;
@@ -76,10 +67,8 @@
         currentSlide = slidesEditor.getCurrentSlide();
     }
     function setCurrentSlide(index) {
-      // debugger;
           slidesEditor.currentSlideIndex = index;
           currentSlide = slidesEditor.getCurrentSlide(); 
-            // redraw();
         }
     
     onMount(async() => {
@@ -87,18 +76,18 @@
         currentSlide = slidesEditor.getCurrentSlide();
     });
   
-    function addNew(slideType) {
-        try {
-            if(slideType === 'Eqs'){slideType='eqs';}
-            const newSlide = getNewSlide(slideType);
-            slides.push(newSlide);
-            slidesEditor.Index = 0; // THIS IS ERROR
-            currentSlide = slidesEditor.getCurrentSlide();
-            show = false;
-        } catch (error) {
-            console.error('Failed to add new slide:', error);
-        }
+function addNew(slideType) {
+    try {
+        if(slideType === 'Eqs'){slideType='eqs';}
+        const newSlide = getNewSlide(slideType);
+        slides.push(newSlide);
+        slidesEditor.Index = 0; // THIS IS ERROR
+        currentSlide = slidesEditor.getCurrentSlide();
+        show = false;
+    } catch (error) {
+        console.error('Failed to add new slide:', error);
     }
+}
 
 function shiftTimeLocal(val){
   currentSlide.endTime = val;
@@ -106,11 +95,15 @@ function shiftTimeLocal(val){
 }
 
 function clone(){
-  slidesEditor.downUp();
+  slidesEditor.clone();
   currentSlide = slidesEditor.getCurrentSlide();
 }
 function moveUp(){
   slidesEditor.moveUp();
+  currentSlide = slidesEditor.getCurrentSlide(); 
+}
+function moveDown(){
+  slidesEditor.moveDown();
   currentSlide = slidesEditor.getCurrentSlide(); 
 }
 
@@ -147,24 +140,13 @@ bind:endTime={currentSlide.endTime}
     <SlidePanel 
         {slidesList} 
         {moveUp}
+        {moveDown}
         {setCurrentSlide}
     />
   </div>
   {/if}
   
   <div class={showSidePanel ? "main-content" : "main-content-full"}>
-    <!-- <SlidePicker
-      bind:items=         {currentSlide.items}
-      slideStartTime=     {currentSlide.startTime}
-      slideEndTime=       {currentSlide.endTime} 
-      bind:slideExtra=    {slideExtra}
-      currentSlideType=   {currentSlide.type}
-      {currentTime}
-
-      {images}
-      {assets}
-      {background}
-    /> -->
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 {#if currentSlide !==null} 
 <div >
