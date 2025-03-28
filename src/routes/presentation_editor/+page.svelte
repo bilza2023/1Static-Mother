@@ -23,10 +23,13 @@
       slides = presentationData;
 
     });
+
+    function save(){
+      console.log("slides" , slides); 
+    }
   
 </script>
 
 {#if slides}
-<Editor bind:slides={slides} {assets} {images}/>
+<Editor bind:slides={slides} {assets} {images} {save}/>
 {/if}
-

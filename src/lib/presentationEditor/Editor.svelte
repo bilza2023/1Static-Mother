@@ -16,6 +16,7 @@
     export let images:string[];
      
     let slidesEditor = null;
+    export let save:()=>void;
     ////////////////////////////////STATE///////////////////////////
     export let assets:IAssets;
     /////////////////////////////////////////
@@ -56,7 +57,7 @@
     function log(){
       console.log("export const presentationData = " + JSON.stringify(slides)); 
     }  
-    
+      
     function next(){
         slidesEditor.next();
         currentSlide = slidesEditor.getCurrentSlide();
@@ -117,6 +118,7 @@ function deleteFn() {
 {prev} 
 {next} 
 {log} 
+{save}
 {clone}
 {assets}
 {deleteFn}
