@@ -11,7 +11,7 @@ export default function getCanvasBackground():IBackground{
     backgroundColor: "gray",
     cellHeight: 25,
     cellWidth: 25,
-    backgroundImage:  null,
+    backgroundImage:  "black_mat",
     ///////////////////
     showGrid: false,
     gridLineWidth: 1,

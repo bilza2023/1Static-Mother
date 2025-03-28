@@ -28,8 +28,8 @@ export let endTime=0;
  
   <div class='flex justify-start items-center gap-1'>
     
+    <NavBtn2 title='Slide' icon='💡'  clk={()=>show = !show} />
     <NavBtn2 title='SP' icon='🚪'  clk={()=>showSidePanel = !showSidePanel} />
-      <NavBtn2 title='Slide' icon='💡'  clk={()=>show = !show} />
       <NavBtn2 title='Save' icon='💾'  clk={save} />
       <NavBtn2 title='Prev' icon="<<"  clk={prev} />
       <NavBtn2 title='Next' icon=">>"  clk={next} />
