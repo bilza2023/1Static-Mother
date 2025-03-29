@@ -9,7 +9,7 @@ import type {ICanvasItemTypes} from "./core/interfaces/ICanvasItems";
 import type {IBackground} from "./core/interfaces/IBackground";
 import loadImages from "./loadImages";
 import getCanvasBackground from "./core/getCanvasBackground";
-
+import create from "./core/create";
 type AvailableItems = Parameters<typeof CoreItemsMap.set>[0];
 
 export{
@@ -17,6 +17,7 @@ export{
     Assets,
     Items,
     loadImages,
+    create,
     getCanvasBackground,
     type IAssets,
     type IBackground,

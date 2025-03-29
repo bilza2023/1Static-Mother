@@ -12,7 +12,7 @@ import type { IBackground,ICanvasItemTypes } from "../../taleem-canvas";
      let items:Items; 
      export let assets:Assets;
      export let background:IBackground | null = null;
-      export let images:string[]=[]; //This is for the drop down
+      // export let images:string[]=[]; //This is for the drop down
     /////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;
       let player:Player= null;

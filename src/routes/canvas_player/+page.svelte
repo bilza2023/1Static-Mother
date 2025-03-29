@@ -1,12 +1,12 @@
 
 <script>
   
-    import {Player,Assets,Items,loadImages} from "../../lib/taleem-canvas";
+    import {Player,Assets,Items,loadImages,create} from "../../lib/taleem-canvas";
       
       import CanvasPlayer from "../../lib/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
       import { onMount,onDestroy } from "svelte";
   
-      let item_literals = [
+      let items = [
         {
         uuid: "abc",
         type: 'rectangle',
@@ -46,25 +46,32 @@
         };  
   
         let assets =null;
-        let items =null;
   
   onMount(async () => { 
-      items = new Items(item_literals);
+    //   items = new Items(item_literals);
       const imagesMap = await loadImages(images,'/images/');
       assets = new Assets(imagesMap);
   });
   
+//   function createNew(){
+//     // debugger;
+//     const rect = create("rectangle");
+//     rect.x = Math.random() * 1000;
+//     rect.y = Math.random() * 340;
+//     items = [...items,rect];
+
+//   }
   </script>
   
   <!-- images is different -->
   
   {#if assets && items}
         <CanvasPlayer 
-        {items}
+        itemLiterals={items}
         {images}
         {assets}
         background={slideExtra}
         />
   {/if}
   
-  
+  <!-- <button on:click={createNew}>Add</button> -->
