@@ -49,6 +49,18 @@ function addNewItem(itemType){
   player.draw(items.getItems(),background);  
 }
 
+function log(){
+  console.log("items",items.getItems());
+
+}
+function clone(){
+  items.clone();
+
+}
+function deleteFn(){
+  items.del();
+
+}
 function init(){
   if (canvasElement) {
     
@@ -65,13 +77,17 @@ function init(){
 
 
     interval = setInterval(()=>{
-      // if(player) { 
+      if(player) { 
+        itemsForDropDown = items.getItems();
         player.draw(items.getItems(),background);
-        // }
+        }
     },20);
   }   //if (canvasElement) {
 }//init ends
 
+function update(){
+
+}
 $:{
   itemLiterals;
  init();
@@ -83,7 +99,7 @@ onMount(async () => { if (canvasElement) init(); });
 
 <div class="container">
   <div class="left-panel">
-    <AddToolbar callback={addNewItem}/>
+    <AddToolbar callback={addNewItem} {clone} {deleteFn} {log}/>
     <canvas bind:this={canvasElement} width="800px" height="360px"   ></canvas>
   </div>
   <div class="right-panel">

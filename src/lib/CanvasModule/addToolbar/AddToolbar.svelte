@@ -3,9 +3,9 @@
 
     export let callback;
     // debugger;
-    // export let clone;
-    // export let deleteFn;
-    // export let log;
+    export let clone;
+    export let deleteFn;
+    export let log;
 
 </script>
 
@@ -30,9 +30,10 @@
     </div>
 
     <div class="innerDiv paddingRight">
-        <!-- <SmallBtnToolbar clk={clone} icon='🐑' title="Clone"/>
+        <!-- <SmallBtnToolbar clk={()=>{}} icon='-' title=""/> -->
+        <SmallBtnToolbar clk={clone} icon='🐑' title="Clone"/>
         <SmallBtnToolbar clk={deleteFn} icon='🗑️' title="Delete" />
-        <SmallBtnToolbar clk={log} icon='🖨️' title="Log" /> -->
+        <SmallBtnToolbar clk={log} icon='🖨️' title="Log" />
     </div>
 
 </div>

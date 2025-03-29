@@ -21,8 +21,8 @@
       let imagesUrl   = "/images/";//if needed take it out of onmount
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
-      // slides = presentationData;
-      slides = []; //fresh presentation
+      slides = presentationData;
+      // slides = []; //fresh presentation
 
     });
 
