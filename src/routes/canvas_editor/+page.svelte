@@ -1,8 +1,7 @@
 
 <script>
-  import  loadImages from "$lib/loadImages";
 
-  import {Player,Assets,Items} from "../../lib/taleem-canvas";
+  import {Player,Assets,Items,loadImages} from "../../lib/taleem-canvas";
   // import {presentation} from "../../lib/presentation_from_db";    
     import CanvasEditor from "$lib/CanvasModule/CanvasEditor/CanvasEditor.svelte";
     import { onMount,onDestroy } from "svelte";

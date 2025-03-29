@@ -1,45 +1,108 @@
 
 <script lang="ts">
-    import type {ShapeItem} from "../taleem-canvas/ShapeTypes";
-    import type { IAssets } from "../../assets/IAssets";
-    import  {TaleemPlayer} from "../taleem-canvas";
+    
+import type { IBackground,ICanvasItemTypes } from "../../taleem-canvas";
+    import {Player,Assets,Items} from "../../taleem-canvas";
     import { onMount } from "svelte";
+    import EditorBehaviour from "../../taleem-canvas/Behaviours/EditorBehaviour";//???
+    import {getCanvasBackground} from "../../taleem-canvas";
     /////////////////////////////////////////////////////////////////
-    export let items:ShapeItem[]  = [];
-    export let assets:IAssets;
-    export let background =  {
-        uuid: "44455764hfghyjty6",
-        type: 'background',  
-        backgroundColor: '#9cc19c',
-        cellHeight: 25,
-        cellWidth: 25,
-        backgroundImage: "black_mat",
-        globalAlpha: 1,
-        showGrid: false,
-        gridLineWidth: 1,
-        gridLineColor: '#685454'
-      };
+//26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
+     export let itemLiterals; 
+     let items:Items; 
+     export let assets:Assets;
+     export let background:IBackground | null = null;
+      export let images:string[]=[]; //This is for the drop down
     /////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;
-      let player:TaleemPlayer= null;
+      let player:Player= null;
+      let editor= null;
+      let interval= null;
+      let selectedItem= null;
+      let itemsForDropDown = null;
 /////////////////////////////////////////////////////////////
+function setSeletecItem(){//communicate via functions not by sending data || data sending is forbidden... just edit data using fn
+// debugger;
+  selectedItem = items.getSelectedItem(); 
+  if(player) { 
+    itemsForDropDown = items.getItems();
+    player.draw(items.getItems(),background);
+    }
+}
+function setSelectedItemByMenu(index:number|null=null){
+  
+  items.setSelectedItemByIndex(index);
+  setSeletecItem();
+}
+function redraw(){
+  if(player) { 
+    itemsForDropDown = items.getItems();
+    player.draw(items.getItems(),background);
+    }
+}
+
+
+function init(){
+  if (canvasElement) {
+    
+    if(interval) clearInterval(interval);
+
+    if(!background) background = getCanvasBackground();
+    const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
+    items = new Items(itemLiterals);
+    player = new Player(canvasElement,ctx,assets);
+    editor = new EditorBehaviour(items,setSeletecItem);
+    player.connect(editor);
+    itemsForDropDown = items.getItems();
+    player.draw(items.getItems(),background);
+
+
+    interval = setInterval(()=>{
+      if(player) { 
+        itemsForDropDown = items.getItems();
+        player.draw(items.getItems(),background);
+        }
+    },20);
+  }   //if (canvasElement) {
+}//init ends
+
+
 $:{
-  if(items && player){
-    player.drawNoEditor(items);
-  }
-} 
-onMount(async () => {
-if (canvasElement) {
-          /////////////////////////////////////////////
-          // debugger;
-          const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
-          player = new TaleemPlayer(canvasElement, ctx, assets, items);
-          player.background = background; // this is slideExtra
-          ///////////////////////////////////////////////////////
-          player.drawNoEditor(items);
-///////////////////
-}});
+  itemLiterals;
+ init();
+}
+//////////////////////////////////////////////////////
+onMount(async () => { if (canvasElement) init(); });
 
   </script>
 
- <canvas bind:this={canvasElement} ></canvas>
+<div class="container">
+    <canvas bind:this={canvasElement} width="800px" height="360px"   ></canvas>
+
+</div>
+
+<style>
+
+  .container {
+    display: flex;
+    
+    width: 100%;
+    gap: 0px;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .left-panel {
+    width: 80%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .right-panel {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    margin: 0px;
+  }
+</style>
