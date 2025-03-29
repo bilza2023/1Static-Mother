@@ -5,17 +5,16 @@ import {Angle} from "./coreItems/angle";
 import {Rectangle} from "./coreItems/rectangle";
 import {Ellipse} from "./coreItems/ellipse";
 import {Circle} from "./coreItems/circle";
-// import {Dot} from "./coreItems/Dot";
-// import {Line} from "./coreItems/Line";
-// import {List} from "./coreItems/List";
-// import {Icon} from "./coreItems/Icon";
-// import {ImageItem} from "./coreItems/ImageItem";
+import {Line} from "./coreItems/line";
 import {PieChart} from "./coreItems/piechart";
-// import {Ray} from "./coreItems/Ray";
-// import {Sprite} from "./coreItems/Sprite";
+import {Ray} from "./coreItems/ray";
 import {Text} from "./coreItems/text";
 import {Triangle} from "./coreItems/triangle";
-// // import Lines from "./coreItems/Lines";
+import {Dot} from "./coreItems/dot";
+import {List} from "./coreItems/list";
+// import {Icon} from "./coreItems/icon";
+import {Image} from "./coreItems/image";
+import {Sprite} from "./coreItems/sprite";
 
 //////////////////////////////////////////////
 import {ICoreItemComponent} from "./ICoreItemComponent";
@@ -26,16 +25,17 @@ CoreItemsMap.set('angle', Angle);
 CoreItemsMap.set('rectangle', Rectangle);
 CoreItemsMap.set('ellipse', Ellipse);
 CoreItemsMap.set('circle', Circle);
-// CoreItemsMap.set('dot', Dot);
+CoreItemsMap.set('dot', Dot);
 CoreItemsMap.set('piechart', PieChart);
 CoreItemsMap.set('triangle', Triangle);
 CoreItemsMap.set('text', Text);
+CoreItemsMap.set('ray', Ray);
+CoreItemsMap.set('line', Line);
+CoreItemsMap.set('list', List);
+CoreItemsMap.set('sprite', Sprite);
+CoreItemsMap.set('image', Image);
+
 // CoreItemsMap.set('icon', Icon);
-// CoreItemsMap.set('ray', Ray);
-// CoreItemsMap.set('line', Line);
-// CoreItemsMap.set('list', List);
-// CoreItemsMap.set('sprite', Sprite);
-// CoreItemsMap.set('image', ImageItem);
 
 
 export default CoreItemsMap;

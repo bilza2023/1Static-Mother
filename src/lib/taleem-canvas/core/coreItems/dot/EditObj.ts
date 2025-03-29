@@ -38,7 +38,7 @@ get height() {
   return this.itemData.radius * 2;
 }
 set height(newHeight) {
-  const value = newWidth / 2;
+  const value = newHeight / 2;
   if (value < 2){
     this.itemData.radius = 2;
   } else {

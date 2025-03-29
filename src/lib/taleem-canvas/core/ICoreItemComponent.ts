@@ -9,7 +9,7 @@ import BaseEditObject from "./BaseEditObject/BaseItem";
 interface ICoreItemComponent {
 
     create : ()=>ICanvasItemTypes,
-    EditObject :BaseEditObject,
+    EditObj :BaseEditObject,
     draw:(item:ICanvasItemTypes,drawCtx:DrawCtx,assets:IAssets)=>void    
    
    }

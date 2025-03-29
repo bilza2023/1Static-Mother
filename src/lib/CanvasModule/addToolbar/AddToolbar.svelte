@@ -17,11 +17,12 @@
 <SmallBtnToolbar clk={() => callback("text")} icon='📃' title="Text"/>
   <SmallBtnToolbar clk={() => callback("line")} icon='➖' title="Line"/>
 <SmallBtnToolbar clk={() => callback("triangle")} icon='🔺' title="Tri"/>
+<SmallBtnToolbar clk={() => callback("angle")} icon='∠' title="Angle"/>
 <SmallBtnToolbar clk={() => callback("ray")} icon='🌅' title="Ray"/>
 <SmallBtnToolbar clk={() => callback("dot")} icon='🌸' title="Dot"/>
 
   <SmallBtnToolbar clk={() => callback("list")} icon='📜' title="List"/>
-<SmallBtnToolbar clk={() => callback("icon")} icon='🏃' title="icon"/>
+<!-- <SmallBtnToolbar clk={() => callback("icon")} icon='🏃' title="icon"/> -->
 <SmallBtnToolbar clk={() => callback("sprite")} icon='🕹️' title="Sprite"/>
 <SmallBtnToolbar clk={() => callback("image")} icon='🗺️' title="Image"/>
 <SmallBtnToolbar clk={() => callback("piechart")} icon='🍕' title="Pie"/>
