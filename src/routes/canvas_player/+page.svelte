@@ -53,14 +53,14 @@
       assets = new Assets(imagesMap);
   });
   
-//   function createNew(){
-//     // debugger;
-//     const rect = create("rectangle");
-//     rect.x = Math.random() * 1000;
-//     rect.y = Math.random() * 340;
-//     items = [...items,rect];
+  function createNew(){
+    // debugger;
+    const rect = create("rectangle");
+    rect.x = Math.random() * 1000;
+    rect.y = Math.random() * 340;
+    items = [...items,rect];
 
-//   }
+  }
   </script>
   
   <!-- images is different -->
@@ -74,4 +74,4 @@
         />
   {/if}
   
-  <!-- <button on:click={createNew}>Add</button> -->
+  <button on:click={createNew}>Add</button>

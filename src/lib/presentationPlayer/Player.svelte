@@ -1,82 +1,130 @@
-<script>
-    import SlidePicker from "./SlidePicker.svelte";
-    import { onMount } from "svelte";
- 
-    import  loadImages from "$lib/loadImages";
-    import Assets from "$lib/assets";
-    import separateItemExtra from "./separateItemExtra";
-    export let slides = presentation.slides;
-    export let images = [];
-    let background =  {
-        uuid: "44455764hfghyjty6",
-        type: 'background',  
-        backgroundColor: '#9cc19c',
-        cellHeight: 25,
-        cellWidth: 25,
-        backgroundImage: "black_mat",
-        globalAlpha: 1,
-        showGrid: false,
-        gridLineWidth: 1,
-        gridLineColor: '#685454'
-      };  
-    let appEditor = null;
-    ////////////////////////////////STATE///////////////////////////
-    let currentSlideIndex = 0;
-    let assets = null;
-    let currentSlide = null;
-    let currentTime = 0; 
-
-    export let slideExtra = {};
-
-    let showSidePanel = true; // Add this to control side panel visibility
+<script lang="ts">
     
-function setCurrentSlide(index){
-  // debugger;
-    if(index >= 0 && index < slides.length -1  ){
-      currentSlide = slides[index];
-        if(currentSlide.type == "canvas"){
-          currentSlide.items = separateItemExtra(currentSlide.items);              
-        }
-    }
+    import type {ISlide} from "./ISlide";
+    import { onMount } from "svelte";
+    import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
+    import SlidesEditor from "./SlidesEditor";
+    import Toolbar from "./toolbar/Toolbar.svelte";    
+    import SlidePanel from "./SlidePanel.svelte";
+    import getNewSlide from "./addNewSlide/getNewSlide";
+    import type {ISlidesList} from "./ISlidesList";
+    import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
+    import EqPlayer from '../eqsModule/EqPlayer/EqPlayer.svelte';
+    import type {IAssets} from "../taleem-canvas";
+    import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
+////////////////////////////--ASS-I--////////////////////////////////
+    export let slides:ISlide[];
+    export let images:string[];
+    export let save:()=>void;
+    export let assets:IAssets;
+    /////////////////////////////////////////
+    let slidesEditor = null;
+    let currentSlide:ISlide | null = null;
+    let slidesList:ISlidesList[] = [];
+    let slideStartTime = 0;
+    let slideEndTime = 0;
+    let interval = 0;
+    let currentTime = 0; 
+    let showSidePanel = true; // Add this to control side panel visibility
+    let show = false;
+   
+$:{
+  currentSlide;
+  if(slidesEditor){
+    slidesList = slidesEditor.getSlidesListForPanel();
+  }
 }
+function log(){
+  console.log("export const presentationData = " + JSON.stringify(slides)); 
+}     
 
+function setCurrentSlide(index) {
+  slidesEditor.currentSlideIndex = index;
+  currentSlide = slidesEditor.getCurrentSlide(); 
+}
+/////////////////////////////////    
 onMount(async() => {
-  const imagesMap = await loadImages(images,'/images/');
-  assets = new Assets(imagesMap);
-  setCurrentSlide(0);
+    slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
+    currentSlide = slidesEditor.getCurrentSlide();
 });
-  
-  function next(){
-    currentSlideIndex++;
-    setCurrentSlide(currentSlideIndex);
+
+function clone(){
+  slidesEditor.clone();
+  currentSlide = slidesEditor.getCurrentSlide();
+}
+function moveUp(){
+  slidesEditor.moveUp();
+  currentSlide = slidesEditor.getCurrentSlide(); 
+}
+function moveDown(){
+  slidesEditor.moveDown();
+  currentSlide = slidesEditor.getCurrentSlide(); 
 }
 
+
+
+function start(){
+  // debugger;
+  interval = setInterval(gameloop,1000);
+  currentTime = 0;
+}
+function stop(){if(interval)clearInterval(interval)}
+function gameloop(){
+  currentTime += 1;
+  if(currentTime > 5){setCurrentSlide(1);}
+}
 </script>
 
-
-{#if currentSlide && assets}
-<div class="flex-container">
-  
-  <div class={showSidePanel ? "main-content" : "main-content-full"}>
-    <SlidePicker
-      bind:items={currentSlide.items}
-      slideStartTime={currentSlide.startTime}
-      slideEndTime={currentSlide.endTime} 
-      bind:slideExtra={slideExtra}
-      currentSldieType={currentSlide.type}
-      {currentTime}
-
-      {images}
-      {assets}
-      {background}
-    />
+<!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  
+<div style="color:white">
+  <span>{currentTime}</span>
+    <button on:click={start}>Start</button>
+    <button on:click={stop}>Stop</button>
   </div>
+
+<div class="flex-container">
+<!-- ////////////////////////////////SlidePanel///////////////////////////////////////     -->  
+      {#if showSidePanel}
+      <div class="side-panel">
+        <SlidePanel 
+            {slidesList} 
+            {moveUp}
+            {moveDown}
+            {setCurrentSlide}
+        />
+      </div>
+      {/if}
+
+ <div class={showSidePanel ? "main-content" : "main-content-full"}>
+<!-- ///////////////////////////////////////////////////////////////////////     -->
+{#if currentSlide !==null} 
+<div >
+  <!-- the === make it type insertion now the type is also checked we can also use type guards -->
+          {#if (currentSlide.type) === "canvas"}
+            <CanvasPlayer 
+                bind:itemLiterals={currentSlide.items}             
+                bind:background={currentSlide.slideExtra}
+                {assets}
+                {images}
+            />
+          {/if}
+  
+          {#if (currentSlide.type) === "eqs"}
+          <EqPlayer 
+                bind:items={currentSlide.items}
+                slideStartTime={slideStartTime}
+                slideEndTime=  {slideEndTime}
+                {currentTime}
+          />
+          {/if}
+</div>
+{/if}
+<!-- ///////////////////////////////////////////////////////////////////////     -->
+</div>
 </div>
 
-{/if}
-    
-<button style="color:white" on:click={next}>Next</button>
 
+    
 <style>
   .flex-container {
     display: flex;
