@@ -2,11 +2,11 @@
 <script lang="ts">
     // import type {ShapeItem} from "../taleem-canvas/ShapeTypes";
     // import type { IAssets } from "../../assets/IAssets";
-    import  CoreItemsMap from "../../lib/taleem-canvas/core/CoreItemsMap";
+    import  CoreItemsMap from "../../lib/taleemApp/taleem-canvas/core/CoreItemsMap";
     import { onMount } from "svelte";
-    import Assets from "../../lib/taleem-canvas/core/assets/Assets"
-    import  loadImages from "../../lib/taleem-canvas/loadImages";
-    import DrawCtx from "../../lib/taleem-canvas/core/DrawCtx";
+    import Assets from "../../lib/taleemApp/taleem-canvas/core/assets/Assets"
+    import  loadImages from "../../lib/taleemApp/taleem-canvas/loadImages";
+    import DrawCtx from "../../lib/taleemApp/taleem-canvas/core/DrawCtx";
     /////////////////////////////////////////////////////////////////
      let items = [];
      let assets:Assets;

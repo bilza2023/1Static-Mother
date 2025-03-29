@@ -2,8 +2,8 @@
 <script lang="ts">
   //Since every thing is important so everything must be final.
 
-  import { Assets,type IAssets,loadImages} from "../../lib/taleem-canvas";
-  import Player from "../../lib/presentationPlayer/Player.svelte";
+  import { Assets,type IAssets,loadImages} from "../../lib/taleemApp/taleem-canvas";
+  import Player from "../../lib/taleemApp/presentationPlayer/Player.svelte";
 
     import { onMount } from "svelte";
     import {presentationData} from "./presentationData";    

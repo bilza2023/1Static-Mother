@@ -1,9 +1,9 @@
 
 <script>
   
-    import {Player,Assets,Items,loadImages,create} from "../../lib/taleem-canvas";
+    import {Player,Assets,Items,loadImages,create} from "../../lib/taleemApp/taleem-canvas";
       
-      import CanvasPlayer from "../../lib/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
+      import CanvasPlayer from "../../lib/taleemApp/CanvasModule/CanvasPlayer/CanvasPlayer.svelte";
       import { onMount,onDestroy } from "svelte";
   
       let items = [

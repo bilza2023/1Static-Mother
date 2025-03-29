@@ -1,19 +1,19 @@
 
 <script lang="ts">
     
-    import Player from "../../lib/taleem-canvas/user/player/Player";
-    import create from "../../lib/taleem-canvas/core/create";
-    import  CoreItemsMap from "../../lib/taleem-canvas/core/CoreItemsMap";
+    import Player from "../../lib/taleemApp/taleem-canvas/user/player/Player";
+    import create from "../../lib/taleemApp/taleem-canvas/core/create";
+    import  CoreItemsMap from "../../lib/taleemApp/taleem-canvas/core/CoreItemsMap";
     import { onMount } from "svelte";
-    import Assets from "../../lib/taleem-canvas/core/assets/Assets"
-    import {loadImages} from "../../lib/taleem-canvas";
-    import DrawCtx from "../../lib/taleem-canvas/core/DrawCtx";
-    import HelloWorldBehaviour from "../../lib/taleem-canvas/Behaviours/HelloWorldBehaviour";
-    import EditorBehaviour from "../../lib/taleem-canvas/Behaviours/EditorBehaviour";
-    import AddToolbar from "../../lib/CanvasModule/addToolbar/AddToolbar.svelte";
-    import SelectDropDown from "../../lib/CanvasModule/CanvasEditor/SelectDropDown.svelte";
-    import SelectedItemBasicDialogue from "../../lib/CanvasModule/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
-    import Items from "../../lib/taleem-canvas/user/Items"
+    import Assets from "../../lib/taleemApp/taleem-canvas/core/assets/Assets"
+    import {loadImages} from "../../lib/taleemApp/taleem-canvas";
+    import DrawCtx from "../../lib/taleemApp/taleem-canvas/core/DrawCtx";
+    import HelloWorldBehaviour from "../../lib/taleemApp/taleem-canvas/Behaviours/HelloWorldBehaviour";
+    import EditorBehaviour from "../../lib/taleemApp/taleem-canvas/Behaviours/EditorBehaviour";
+    import AddToolbar from "../../lib/taleemApp/CanvasModule/addToolbar/AddToolbar.svelte";
+    import SelectDropDown from "../../lib/taleemApp/CanvasModule/CanvasEditor/SelectDropDown.svelte";
+    import SelectedItemBasicDialogue from "../../lib/taleemApp/CanvasModule/itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
+    import Items from "../../lib/taleemApp/taleem-canvas/user/Items"
     /////////////////////////////////////////////////////////////////
 //26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
      let items = new Items([]);

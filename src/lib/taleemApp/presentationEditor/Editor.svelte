@@ -8,8 +8,8 @@
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
     import type {ISlidesList} from "./ISlidesList";
-    import CanvasEditor from '../../lib/CanvasModule/CanvasEditor/CanvasEditor.svelte';
-    import EqsEditor from '../../lib/eqsModule/EqsEditor/EqsEditor.svelte';
+    import CanvasEditor from '../CanvasModule/CanvasEditor/CanvasEditor.svelte';
+    import EqsEditor from '../eqsModule/EqsEditor/EqsEditor.svelte';
     import type {IAssets} from "../taleem-canvas";
     import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
 ////////////////////////////--ASS-I--////////////////////////////////
