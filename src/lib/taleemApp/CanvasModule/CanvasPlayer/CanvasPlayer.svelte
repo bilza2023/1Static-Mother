@@ -76,33 +76,5 @@ onMount(async () => { if (canvasElement) init(); });
 
   </script>
 
-<div class="container">
-    <canvas bind:this={canvasElement} width="800px" height="360px"   ></canvas>
+    <canvas bind:this={canvasElement}></canvas>
 
-</div>
-
-<style>
-
-  .container {
-    display: flex;
-    
-    width: 100%;
-    gap: 0px;
-    padding: 0px;
-    margin: 0px;
-  }
-
-  .left-panel {
-    width: 80%;
-    padding: 0px;
-    margin: 0px;
-  }
-
-  .right-panel {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-    margin: 0px;
-  }
-</style>

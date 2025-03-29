@@ -11,6 +11,7 @@
     <br/>
     <br/>
 <div class="text-white">
+    <h1><b><a class="text-white" href="/static_slides">static_slides</a></b></h1>
     <h1><b><a class="text-white" href="/presentation_editor">presentation_editor</a></b></h1>
     <h1><b><a class="text-white" href="/presentation_player">presentation_player</a></b></h1>
     <br>

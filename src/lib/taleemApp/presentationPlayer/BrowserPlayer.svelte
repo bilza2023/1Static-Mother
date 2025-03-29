@@ -3,7 +3,6 @@
     import type {ISlide} from "./ISlide";
     import { onMount } from "svelte";
     import SlidesEditor from "./SlidesEditor";
-    import SlidePanel from "./SlidePanel.svelte";
     import type {ISlidesList} from "./ISlidesList";
     import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
     import EqPlayer from '../eqsModule/EqPlayer/EqPlayer.svelte';
@@ -14,21 +13,25 @@
     /////////////////////////////////////////
     let slidesEditor = null;
     let currentSlide:ISlide | null = null;
-    let slidesList:ISlidesList[] = [];
-    let slideStartTime = 0;
-    let slideEndTime = 0;
-    let interval = 0;
-    let currentTime = 0; 
-    let showSidePanel = true; // Add this to control side panel visibility
-    let show = false;
-   
+    let currentSlideIndex = 0;
+  
 $:{
   currentSlide;
-
 }
 
+function next(){
+slidesEditor.next();
+currentSlide = slidesEditor.getCurrentSlide();
+currentSlideIndex = slidesEditor.currentSlideIndex;
+}
+function prev(){
+slidesEditor.prev();
+currentSlide = slidesEditor.getCurrentSlide();
+currentSlideIndex = slidesEditor.currentSlideIndex;
+}
 function setCurrentSlide(index) {
   slidesEditor.currentSlideIndex = index;
+  currentSlideIndex = index;
   currentSlide = slidesEditor.getCurrentSlide(); 
 }
 /////////////////////////////////    
@@ -37,52 +40,24 @@ onMount(async() => {
     currentSlide = slidesEditor.getCurrentSlide();
 });
 
-
-function moveUp(){
-  slidesEditor.moveUp();
-  currentSlide = slidesEditor.getCurrentSlide(); 
-}
-function moveDown(){
-  slidesEditor.moveDown();
-  currentSlide = slidesEditor.getCurrentSlide(); 
-}
-
-
-
-function start(){
-  // debugger;
-  interval = setInterval(gameloop,1000);
-  currentTime = 0;
-}
-function stop(){if(interval)clearInterval(interval)}
-function gameloop(){
-  currentTime += 1;
-  if(currentTime > 5){setCurrentSlide(1);}
-}
-function next(){
-slidesEditor.next();
-currentSlide = slidesEditor.getCurrentSlide();
-}
-function prev(){
-slidesEditor.prev();
-currentSlide = slidesEditor.getCurrentSlide();
-}
 </script>
 
 <!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  
-<div style="color:white">
-  <span>{currentTime}</span>
-    <button on:click={prev}>&lt;&lt;</button>
-    <button on:click={next}>&gt;&gt;</button>
-    <button on:click={start}>Start</button>
-    <button on:click={start}>Start</button>
-    <button on:click={stop}>Stop</button>
+{#if slidesEditor && slidesEditor.slides}
+    <div class="slidesList">
+        <span class="slidesitem"   >Current Slide = {currentSlideIndex}</span>
+        <button class="slidesitem"   on:click={prev}>&lt;&lt;</button>
+        <button class="slidesitem"   on:click={next}>&gt;&gt;</button>   
+    {#each slidesEditor.slides as slide,index}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <button class="slidesitem" on:click={()=>setCurrentSlide(index)}>{slide.type}</button>
+    {/each}
 </div>
+{/if}
 
-<div class="">
-<!-- ////////////////////////////////SlidePanel///////////////////////////////////////     -->  
-      
-
+<!-- ///////////////////////////////////////////////////////////////////////     -->
+<div class="container"> 
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 {#if currentSlide !==null} 
   <!-- the === make it type insertion now the type is also checked we can also use type guards -->
@@ -98,13 +73,37 @@ currentSlide = slidesEditor.getCurrentSlide();
           {#if (currentSlide.type) === "eqs"}
           <EqPlayer 
                 bind:items={currentSlide.items}
-                slideStartTime={slideStartTime}
-                slideEndTime=  {slideEndTime}
-                {currentTime}
+                slideStartTime={currentSlide.startTime}
+                slideEndTime=  {currentSlide.endTime}
+                currentTime=0
           />
           {/if}
 {/if}
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 </div>
 
-
+<style>
+    .container {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Optional: If you want the container to take full width */
+    /* If you want to limit the max width */
+    /* max-width: 1200px; */
+    }
+    .slidesList{
+        display: flex;
+        padding:2px;
+        color:white;
+    }
+    .slidesitem {
+        font-size: small;
+        padding:2px;
+        padding-left:4px;
+        margin-left:4px;
+        padding-right:4px;
+        margin-right:4px;
+        background-color: darkslategrey;
+        border-radius: 20px;
+    }
+</style>

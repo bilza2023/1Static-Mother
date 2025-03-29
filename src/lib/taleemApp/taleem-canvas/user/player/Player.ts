@@ -15,8 +15,9 @@ eventModule:EventModule;
 ctx:CanvasRenderingContext2D;
 drawCtx:DrawCtx; //Rename it to Renderer (this is only obj that holds CTX)
 bgData:IBackground;
-width:number;
-height:number;
+aspectRatio:number;
+_width:number;
+_height:number;
 assets:Assets;//assets with images
 ///////////////////////////////////////////////////////////////
   constructor(canvas :HTMLCanvasElement, ctx:CanvasRenderingContext2D,assets:Assets) { 
@@ -25,8 +26,33 @@ assets:Assets;//assets with images
     this.eventModule = new EventModule(canvas); // No longer passing items array
     this.drawCtx = new DrawCtx(ctx,canvas);
     this.assets = assets;//These assets include "images" loaded
-    this.width = 940;this.height = 360;this.canvas.width = this.width;this.canvas.height = this.height;
+    ////
+    this.aspectRatio = 16 / 9; //do not move
+    this.canvas.style.width =  "1200px" ;
+    this.canvas.style.height = "360px";
+    this.canvas.width = 1200; // Important: set the drawing surface width
+    this.canvas.height = 360; // Important: set the drawing surface height
+    // this._width = 1000;
+    // this.width = 1000; = 360;
   }
+  set width(wd:number){
+  this._width = wd;
+  this.canvas.style.width =  this._width+"px" ;
+  this._height = this._width / this.aspectRatio;
+  this.canvas.style.height = this._height+"px";
+  this.canvas.width = this._width;
+  this.canvas.height = this._height;
+  }
+  get width(){
+ return this._width;
+  }
+  set height(wd:number){
+ //do nothing since height is also set with the width
+  }
+  get height(){
+  return this._height;
+  }
+
   draw(items:ICanvasItemTypes[],background:IBackground | null=null) {
     this.drawCtx.clear();
     if(background == null){background = defaultBackground()}
