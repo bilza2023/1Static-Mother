@@ -1,29 +1,27 @@
-<script lang="ts">
-    
-    import type {ISlide} from "./ISlide";
-    import { onMount } from "svelte";
-    import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
-    import EqPlayer from '../eqsModule/EqPlayer/EqPlayer.svelte';
-    import type {IAssets} from "../taleem-canvas";
-    import SoundPlayer from "./SoundPlayer";
-  import PlayerToolbar from "./PlayerToolbar.svelte";
-  import getCurrentSlide from "./getCurrentSlide";
-////////////////////////////--ASS-I--////////////////////////////////
+<script lang="ts">   
+import type {ISlide} from "./ISlide";
+import { onMount } from "svelte";
+import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
+import EqPlayer from '../eqsModule/EqPlayer/EqPlayer.svelte';
+import type {IAssets} from "../taleem-canvas";
+import SoundPlayer from "./SoundPlayer";
+import PlayerToolbar from "./PlayerToolbar.svelte";
+import getCurrentSlide from "./getCurrentSlide";
+////////////////////////////--AS////////////////////////////////
     export let slides:ISlide[];
-    export let assets:IAssets;
-    /////////////////////////////////////////
-    let currentSlide:ISlide | null = null;
-  
+    export let assets:IAssets; //assets to have images loaded
+    export let soundFileName = '/sounds/music.opus'; //default music sound
+/////////////////////////////////////////
+    let currentSlide:ISlide | null = null;  
     let interval = 0;
     let totalTime = 300;//default presentation end time
-    let currentTime = 0; 
-    let soundPlayer = new SoundPlayer('/sounds/music.opus');
-   
+    let currentTime = 0; //just for reactivity and match it with soundPlayer/Time player
+    let soundPlayer = new SoundPlayer(soundFileName);
+///Main reactivity       
 $:{
   currentTime;
   currentSlide = getCurrentSlide(currentTime , slides);
 }
-
 /////////////////////////////////    
 onMount(async() => {
   if(slides.length > 0){
@@ -31,29 +29,25 @@ onMount(async() => {
   }
     currentSlide = getCurrentSlide(currentTime , slides);
 });
-
 function jumpTo(timeMs:number){ 
-  // debugger;
-  soundPlayer.jumpTo(timeMs)
-  currentTime = soundPlayer.getCurrentTime();
+//   soundPlayer.jumpTo(timeMs)
+//   currentTime = soundPlayer.getCurrentTime();
+//   // debugger;
 }
 function start(){ 
   interval = setInterval(gameloop,20);
   soundPlayer.start();
   currentTime = soundPlayer.getCurrentTime();
 }
-
 function stop(){
   if(interval)clearInterval(interval);
   soundPlayer.stop();
   currentTime = 0;
 }
-
 function gameloop(){
-  // debugger;
+  //just update the currentTime
   currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
 }
-
 </script>
 
 <!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  

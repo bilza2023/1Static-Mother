@@ -8,10 +8,6 @@ export default class SoundPlayer {
     private _pausedAt: number | null;
     private _soundDuration: number;
 
-    /**
-     * Creates a new SoundPlayer instance that loads and controls an audio file
-     * @param soundPath Path to the .opus audio file to load
-     */
     constructor(soundPath: string) {
         this._sound = null;
         this._startTime = null;
@@ -70,7 +66,7 @@ export default class SoundPlayer {
         
         // Convert from milliseconds to seconds for Howler's seek method
         this._sound.seek(validTime / 1000);
-        
+                
         // Update our time tracking
         if (this._startTime !== null) {
           const currentTime = Date.now();
