@@ -4,6 +4,7 @@
   import Player from "../../lib/taleemApp/presentationPlayer/Player.svelte";
   import { onMount } from "svelte";
   import {presentationData} from "./presentationData";
+  
 //////////////////////////////
     let slides=null;
     let assets:IAssets | null =null;
