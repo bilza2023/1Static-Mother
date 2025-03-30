@@ -6,7 +6,7 @@
   - the player will have setCurrentTime (old set pulse) to set time at run time (in player)
   - Editor will need currentTime (from sound file) to sync animation with it.
   - Acrually player and editor both need currentTime but in player it does not go to player-core where as in editor it can go a bit deep ??
-  - do not move currentTime to store since i do not want to share in across.
+  - do not move currentTime to store since i do not want to share it across.
   */  
   import EqPlayerCore from './EqPlayerCore.svelte';
   import {itemsStore} from "./store";

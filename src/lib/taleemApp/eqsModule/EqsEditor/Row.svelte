@@ -5,7 +5,7 @@
   import EqPart from "./EqPart/EqPart.svelte"; 
   import LowerToolBar from "./EqPart/LowerToolBar.svelte";
 
-    export let currentTime = 0 ;
+    export let currentTime;
     export let item;
     export let updateTimings;
     export let i;
@@ -35,8 +35,13 @@
    
     
     <div class="w-1/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">
-    <AddTime bind:item={item} {currentTime} {updateTimings} isFirst={i==0 ? true : false}/>
-    </div>
+    <!-- <AddTime bind:item={item} {currentTime} {updateTimings} isFirst={i==0 ? true : false}/> -->
+                <input 
+                class="text-xs bg-gray-800 text-white" style="width:70px"
+                type='number' 
+                bind:value={item.itemExtra.startTime} 
+                />    
+</div>
 
 
     <div class="w-10/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">

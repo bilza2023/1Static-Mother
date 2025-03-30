@@ -11,7 +11,7 @@ import Row from './Row.svelte';
 
 // export let just items and currentTime which is required for Editor only
 export let items;
-export let currentTime=0;
+export let currentTime=0; //current time if not given is zero ..correct ????
 
 export let slideStartTime;
 export let slideEndTime;
@@ -20,7 +20,7 @@ $:{
   // debugger;
   items;
   items = [...items];
-  console.log("items changes",items);
+  // console.log("items changes",items);
 }
 
 // the only local variable
@@ -72,91 +72,91 @@ function addEq(i=0) {
   }
 }
 function setFakeTimings() {
-    if (items.length === 0) return;
+    // if (items.length === 0) return;
     
-    timingsError = false;
-    timingsErrorMessage = '';
+    // timingsError = false;
+    // timingsErrorMessage = '';
     
-    const FIXED_DURATION = 5; // 5 seconds for each item
+    // const FIXED_DURATION = 5; // 5 seconds for each item
     
-    // Set first item start time
-    items[0].itemExtra.startTime = slideStartTime;
+    // // Set first item start time
+    // items[0].itemExtra.startTime = slideStartTime;
     
-    // Assign 5-second intervals
-    for (let i = 0; i < items.length; i++) {
-        items[i].itemExtra.startTime = slideStartTime + (i * FIXED_DURATION);
-        items[i].itemExtra.endTime = slideStartTime + ((i + 1) * FIXED_DURATION);
-    }
+    // // Assign 5-second intervals
+    // for (let i = 0; i < items.length; i++) {
+    //     items[i].itemExtra.startTime = slideStartTime + (i * FIXED_DURATION);
+    //     items[i].itemExtra.endTime = slideStartTime + ((i + 1) * FIXED_DURATION);
+    // }
     
-    // Calculate if the last item's end time exceeds slide end time
-    const lastItemEndTime = items[items.length - 1].itemExtra.endTime;
+    // // Calculate if the last item's end time exceeds slide end time
+    // const lastItemEndTime = items[items.length - 1].itemExtra.endTime;
     
-    if (lastItemEndTime > slideEndTime) {
-        timingsError = true;
-        timingsErrorMessage = `Items with ${FIXED_DURATION}-second duration exceed slide duration. Please adjust slide duration or item timings.`;
-    } else if (lastItemEndTime < slideEndTime) {
-        timingsError = true;
-        timingsErrorMessage = `Items with ${FIXED_DURATION}-second duration don't reach slide end time. Please adjust slide duration or item timings.`;
-    }
+    // if (lastItemEndTime > slideEndTime) {
+    //     timingsError = true;
+    //     timingsErrorMessage = `Items with ${FIXED_DURATION}-second duration exceed slide duration. Please adjust slide duration or item timings.`;
+    // } else if (lastItemEndTime < slideEndTime) {
+    //     timingsError = true;
+    //     timingsErrorMessage = `Items with ${FIXED_DURATION}-second duration don't reach slide end time. Please adjust slide duration or item timings.`;
+    // }
     
-    items = [...items];
+    // items = [...items];
 }
 function updateTimings() {
-  timingsError = false;
-  timingsErrorMessage = '';
-  if (items.length === 0) return false;
+  // timingsError = false;
+  // timingsErrorMessage = '';
+  // if (items.length === 0) return false;
     
-  // Force first item to match slide start time
-  items[0].itemExtra.startTime = slideStartTime;
+  // // Force first item to match slide start time
+  // items[0].itemExtra.startTime = slideStartTime;
 
-  // Existing logic for consecutive items --> let i = 1;
-  for (let i = 1; i < items.length; i++) {
-    items[i-1].itemExtra.endTime = items[i].itemExtra.startTime;
-  }
+  // // Existing logic for consecutive items --> let i = 1;
+  // for (let i = 1; i < items.length; i++) {
+  //   items[i-1].itemExtra.endTime = items[i].itemExtra.startTime;
+  // }
 
-  // Force last item to match slide end time
-  items[items.length - 1].itemExtra.endTime = slideEndTime;
+  // // Force last item to match slide end time
+  // items[items.length - 1].itemExtra.endTime = slideEndTime;
 
-  // Check for all possible timing errors
-  for (let i = 0; i < items.length; i++) {
-    // Check for negative durations
-    if (items[i].itemExtra.endTime < items[i].itemExtra.startTime) {
-      timingsError = true;
-      timingsErrorMessage = `Item ${i + 1} has end time before its start time`;
-      break;
-    }
+  // // Check for all possible timing errors
+  // for (let i = 0; i < items.length; i++) {
+  //   // Check for negative durations
+  //   if (items[i].itemExtra.endTime < items[i].itemExtra.startTime) {
+  //     timingsError = true;
+  //     timingsErrorMessage = `Item ${i + 1} has end time before its start time`;
+  //     break;
+  //   }
 
-    // Check if any item starts before slide start
-    if (items[i].itemExtra.startTime < slideStartTime) {
-      timingsError = true;
-      timingsErrorMessage = `Item ${i + 1} starts before slide start time`;
-      break;
-    }
+  //   // Check if any item starts before slide start
+  //   if (items[i].itemExtra.startTime < slideStartTime) {
+  //     timingsError = true;
+  //     timingsErrorMessage = `Item ${i + 1} starts before slide start time`;
+  //     break;
+  //   }
 
-    // Check if any item ends after slide end
-    if (items[i].itemExtra.endTime > slideEndTime) {
-      timingsError = true;
-      timingsErrorMessage = `Item ${i + 1} ends after slide end time`;
-      break;
-    }
+  //   // Check if any item ends after slide end
+  //   if (items[i].itemExtra.endTime > slideEndTime) {
+  //     timingsError = true;
+  //     timingsErrorMessage = `Item ${i + 1} ends after slide end time`;
+  //     break;
+  //   }
 
-    // Check sequence timing (except for last item)
-    if (i < items.length - 1) {
-      if (items[i].itemExtra.startTime >= items[i + 1].itemExtra.startTime) {
-        timingsError = true;
-        timingsErrorMessage = `Item ${i + 1} starts at or after item ${i + 2}'s start time`;
-        break;
-      }
-    }
-  }
+  //   // Check sequence timing (except for last item)
+  //   if (i < items.length - 1) {
+  //     if (items[i].itemExtra.startTime >= items[i + 1].itemExtra.startTime) {
+  //       timingsError = true;
+  //       timingsErrorMessage = `Item ${i + 1} starts at or after item ${i + 2}'s start time`;
+  //       break;
+  //     }
+  //   }
+  // }
 
-  items = [...items];
+  // items = [...items];
 }
 ////////////////////////////
 onMount(async() => {
     //  debugger;
   items;
-  console.log("items changes",items);
+  // console.log("items changes",items);
     });
 ////////////////////////////"type": "text","sp": []
 
@@ -202,3 +202,5 @@ onMount(async() => {
     
   <!-- oage end -->
 </div>
+
+<!-- 204 lines start -->
