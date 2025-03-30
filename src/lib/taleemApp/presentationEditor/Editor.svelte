@@ -21,8 +21,8 @@
     let slidesEditor = null;
     let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
-    let slideStartTime = 0;
-    let slideEndTime = 0;
+    // let slideStartTime = 0;
+    // let slideEndTime = 0;
     let currentTime = 0; 
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
@@ -86,7 +86,7 @@ function deleteFn() {
   currentSlide = slidesEditor.getCurrentSlide(); 
 }
 </script>
-  
+{#if currentSlide}  
 <Toolbar 
 {prev} 
 {next} 
@@ -97,10 +97,11 @@ function deleteFn() {
 {deleteFn}
 bind:showSidePanel={showSidePanel} 
 bind:show={show} 
-bind:startTime={slideStartTime}
-bind:endTime={slideEndTime}
+bind:startTime={currentSlide.startTime}
+bind:endTime=  {currentSlide.endTime}
 {shiftTimeLocal}
 />
+{/if}
 
 {#if show}
   <NewSlidesDlg {addNew}/>
@@ -136,8 +137,8 @@ bind:endTime={slideEndTime}
           {#if (currentSlide.type) === "eqs"}
           <EqsEditor 
                 bind:items={currentSlide.items}
-                slideStartTime={slideStartTime}
-                slideEndTime=  {slideEndTime}
+                slideStartTime={currentSlide.startTime}
+                slideEndTime=  {currentSlide.endTime}
                 {currentTime}
           />
           {/if}
