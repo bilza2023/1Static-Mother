@@ -3,7 +3,7 @@
   import { Assets,type IAssets,loadImages} from "../../lib/taleemApp/taleem-canvas";
   import Player from "../../lib/taleemApp/presentationPlayer/Player.svelte";
   import { onMount } from "svelte";
-  import {presentationData} from "./presentationData";
+  // import {presentationData} from "./presentationData";
   
 //////////////////////////////
     let slides=null;
@@ -12,9 +12,12 @@
     let imagesUrl   = "/images/";//if needed take it out of onmount
 ////////////////////////////////      
       onMount(async() => {
+        // debugger
+        let presentationData =   localStorage.getItem("editorPresentation");
+        // console.warn("slides saved in local storage under name editorPresentation "); 
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
-      slides = presentationData;
+      slides = JSON.parse(presentationData);
     });
 </script>
 {#if slides}

@@ -27,7 +27,8 @@
     });
 
     function save(){
-      console.log("slides" , slides); 
+      localStorage.setItem("editorPresentation" , JSON.stringify(slides));
+      console.warn("slides saved in local storage under name editorPresentation "); 
     }
   
 </script>
