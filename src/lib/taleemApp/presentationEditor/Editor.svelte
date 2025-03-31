@@ -10,9 +10,11 @@
     import CanvasEditor from '../CanvasModule/CanvasEditor/CanvasEditor.svelte';
     import EqsEditor from '../eqsModule/EqsEditor/EqsEditor.svelte';
     import type {IAssets} from "../taleem-canvas";
+    import getSlidesListForPanel from "./getSlidesListForPanel";
     import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
     // import SlidesEditor from "./SlidesEditor";
     import SlidesEditor2 from "./SlidesEditor2";
+    import PBSSlides from "../app/PBSSlides";
 ////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
@@ -20,38 +22,49 @@
     export let assets:IAssets;
     /////////////////////////////////////////
     let slidesEditor = null;
+    let currentSlideIndex=0;
     let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
     // let slideStartTime = 0;
     // let slideEndTime = 0;
+    let pbs = null; 
     let currentTime = 0; 
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
    
 $:{
   currentSlide;
-  if(slidesEditor){
-    slidesList = slidesEditor.getSlidesListForPanel();//valid
-  }
+  currentSlideIndex
+  slidesList = getSlidesListForPanel(slides,currentSlideIndex);//valid
+
 }
 function log(){
   console.log("export const presentationData = " + JSON.stringify(slides)); 
 }     
 function next(){
-slidesEditor.next();
-currentSlide = slidesEditor.getCurrentSlide();
+  if(currentSlideIndex < slides.length -1 )currentSlideIndex +=1;
+let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+if (r){currentSlide=r;}
+// currentSlide = slidesEditor.getCurrentSlide();
 }
 function prev(){
-slidesEditor.prev();
-currentSlide = slidesEditor.getCurrentSlide();
+// slidesEditor.prev();
+if(currentSlideIndex>0)currentSlideIndex -=1;
+
+let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+if (r){currentSlide=r;}
+// currentSlide = slidesEditor.getCurrentSlide();
 }
 function setCurrentSlide(index) {
-  slidesEditor.currentSlideIndex = index;
-  currentSlide = slidesEditor.getCurrentSlide(); 
+  currentSlideIndex =index;
+let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+if (r){currentSlide=r;}
 }
 /////////////////////////////////    
 onMount(async() => {
-  debugger;
+/////////////////////////////////////////////////////////////////////////
+    pbs = new PBSSlides(slides);
+
     slidesEditor = new SlidesEditor2(slides);//rename slidesEditor to slidesEditor
     currentSlide = slidesEditor.getCurrentSlide();
 });
@@ -175,3 +188,4 @@ bind:endTime=  {currentSlide.endTime}
     width: 100%;
   }
 </style>
+

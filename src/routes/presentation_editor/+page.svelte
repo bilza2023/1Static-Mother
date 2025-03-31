@@ -6,7 +6,7 @@
   import Editor from "../../lib/taleemApp/presentationEditor/Editor.svelte";
 
     import { onMount } from "svelte";
-    import {presentationData} from "./presentationData";    
+    // import {presentationData} from "./presentationData";    
     
     let slides=null;
     let assets:IAssets | null =null;
@@ -21,6 +21,7 @@
       let imagesUrl   = "/images/";//if needed take it out of onmount
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
+      let presentationData =  JSON.parse(localStorage.getItem("editorPresentation"));
       slides = presentationData;
       // slides = []; //fresh presentation
 

@@ -7,42 +7,42 @@
         
           export let items = []; 
           export let assets; 
-          export let slideStartTime = 0;
+          // let isSelected = false;
           export let currentTime = 0;
           export let setPulse = ()=>{console.log("setPulse..add custom code");};
+
   $:{
     currentTime;
 
+  }        
+
+  function isSelected(currentTime,index){
+// debugger;
+  if(index < 0 || index > items.length -1){return false;} 
+    const startTime = getStartTime(index);
+    const endTime =   getEndTime  (index);
+    if(currentTime >= startTime && currentTime < endTime){return true}
+    else {return false;}
+    
   }
-  function isSelected(itemExtra) {
-  // debugger;
-  if (itemExtra.startTime <= currentTime && itemExtra.endTime > currentTime) {
-     
-      return true;
-  } else {
-      return false;
-  }
+
+function getStartTime(index){
+  let startTime =0;
+        for (let i = 0; i < index; i++) {
+            const item = items[i];
+            startTime += item.itemExtra.endTime;
+        }
+        return startTime;
 }
-// function get(currentTime:number=0):IPBSItem |null{
+function getEndTime(index){
+  let startTime =0;
+        for (let i = 0; i < index; i++) {
+            const item = items[i];
+            startTime += item.itemExtra.endTime;
+        }
+        return startTime + items[index].itemExtra.endTime;
+}
 
-// const elapsedTime = currentTime - this.startTime;
-// const totalPeriod = this.getTotalPeriod();
-
-// if (elapsedTime > totalPeriod) {
-//     return null; 
-// }
-
-// let cumulativeTime = 0;
-
-// for (const item of this.pbs) {
-//     if (elapsedTime >= cumulativeTime && elapsedTime < cumulativeTime + item.endTime) {
-//         return item;
-//     }
-//     cumulativeTime += item.endTime; // should be item.period
-// }
-
-// return null; // Should not reach here in normal operation.
-// }
   </script>
   {#if items && assets}
 
@@ -62,7 +62,7 @@
               </div>
               
               <div
-                class={ isSelected(item.itemExtra)
+                class={ isSelected(currentTime,index)
                  ? 'focused w-full text-center' : 'nonFocused w-full text-center'}
               >
                 <CodeTxt eq={item} />

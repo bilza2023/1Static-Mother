@@ -39,18 +39,18 @@ prev() {
         }
 }
 
-getSlidesListForPanel(){
-    // debugger;
-    const slidesList = [];
-    for (let i = 0; i < this.slides.length; i++) {
-        const slide = this.slides[i];
-        let selected = false;
-        if(this.currentSlideIndex == i){selected = true;}
-        const name = slide.name? slide.name : "No Name";
-        slidesList.push({"type" : slide.type, name , "selected" : selected });
-    }
-    return slidesList;
-}
+// getSlidesListForPanel(){
+//     // debugger;
+//     const slidesList = [];
+//     for (let i = 0; i < this.slides.length; i++) {
+//         const slide = this.slides[i];
+//         let selected = false;
+//         if(this.currentSlideIndex == i){selected = true;}
+//         const name = slide.name? slide.name : "No Name";
+//         slidesList.push({"type" : slide.type, name , "selected" : selected });
+//     }
+//     return slidesList;
+// }
 
 
 del(): boolean {
