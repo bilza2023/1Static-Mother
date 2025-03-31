@@ -12,15 +12,16 @@ import Row from './Row.svelte';
 // export let just items and currentTime which is required for Editor only
 export let items;
 export let currentTime=0; //current time if not given is zero ..correct ????
-
 export let slideStartTime;
 export let slideEndTime;
 
 $:{
-  // debugger;
-  items;
-  items = [...items];
-  // console.log("items changes",items);
+  if(items.length > 0){
+    items[0].itemExtra.startTime = slideStartTime;
+  }
+  if(items.length > 0){
+    items[items.length -1 ].itemExtra.endTime = slideEndTime;
+  }
 }
 
 // the only local variable
@@ -102,55 +103,60 @@ function setFakeTimings() {
     // items = [...items];
 }
 function updateTimings() {
-  // timingsError = false;
-  // timingsErrorMessage = '';
-  // if (items.length === 0) return false;
+  timingsError = false;
+  timingsErrorMessage = '';
+  if (items.length === 0) return false;
     
-  // // Force first item to match slide start time
-  // items[0].itemExtra.startTime = slideStartTime;
+  // Force first item to match slide start time
+  items[0].itemExtra.startTime = slideStartTime;
 
-  // // Existing logic for consecutive items --> let i = 1;
-  // for (let i = 1; i < items.length; i++) {
-  //   items[i-1].itemExtra.endTime = items[i].itemExtra.startTime;
-  // }
+  // Existing logic for consecutive items --> let i = 1;
+  for (let i = 1; i < items.length; i++) {
+    items[i-1].itemExtra.endTime = items[i].itemExtra.startTime;
+  }
 
-  // // Force last item to match slide end time
-  // items[items.length - 1].itemExtra.endTime = slideEndTime;
+  // Force last item to match slide end time
+  items[items.length - 1].itemExtra.endTime = slideEndTime;
 
-  // // Check for all possible timing errors
-  // for (let i = 0; i < items.length; i++) {
-  //   // Check for negative durations
-  //   if (items[i].itemExtra.endTime < items[i].itemExtra.startTime) {
-  //     timingsError = true;
-  //     timingsErrorMessage = `Item ${i + 1} has end time before its start time`;
-  //     break;
-  //   }
+  items = [...items];
+}
 
-  //   // Check if any item starts before slide start
-  //   if (items[i].itemExtra.startTime < slideStartTime) {
-  //     timingsError = true;
-  //     timingsErrorMessage = `Item ${i + 1} starts before slide start time`;
-  //     break;
-  //   }
+function timingErrors(){
+  /////////////////////////////////////////////////////////////////////
+  // Check for all possible timing errors
+  // i + 2 since i is already + 1
+  for (let i = 0; i < items.length; i++) {
+    // Check for negative durations
+    if (items[i].itemExtra.endTime < items[i].itemExtra.startTime) {
+      timingsError = true;
+      timingsErrorMessage = `Item ${i + 2} has end time before its start time`;
+      break;
+    }
 
-  //   // Check if any item ends after slide end
-  //   if (items[i].itemExtra.endTime > slideEndTime) {
-  //     timingsError = true;
-  //     timingsErrorMessage = `Item ${i + 1} ends after slide end time`;
-  //     break;
-  //   }
+    // Check if any item starts before slide start
+    if (items[i].itemExtra.startTime < slideStartTime) {
+      timingsError = true;
+      timingsErrorMessage = `Item ${i + 2} starts before slide start time`;
+      break;
+    }
 
-  //   // Check sequence timing (except for last item)
-  //   if (i < items.length - 1) {
-  //     if (items[i].itemExtra.startTime >= items[i + 1].itemExtra.startTime) {
-  //       timingsError = true;
-  //       timingsErrorMessage = `Item ${i + 1} starts at or after item ${i + 2}'s start time`;
-  //       break;
-  //     }
-  //   }
-  // }
+    // Check if any item ends after slide end
+    if (items[i].itemExtra.endTime > slideEndTime) {
+      timingsError = true;
+      timingsErrorMessage = `Item ${i + 2} ends after slide end time`;
+      break;
+    }
 
-  // items = [...items];
+    // Check sequence timing (except for last item)
+    if (i < items.length - 1) {
+      if (items[i].itemExtra.startTime >= items[i + 1].itemExtra.startTime) {
+        timingsError = true;
+        timingsErrorMessage = `Item ${i + 2} starts at or after item ${i + 2}'s start time`;
+        break;
+      }
+    }
+  }
+
 }
 ////////////////////////////
 onMount(async() => {
@@ -164,8 +170,9 @@ onMount(async() => {
 
 <div class="bg-gray-800 w-full  text-white min-h-screen p-4 m-0 ">
 
-{#if timingsError}"type": "text","sp": []
-<h1 class="w-full text-center bg-orange-400 rounded-md px-2 text-lg">Timings Error {timingsErrorMessage}</h1>
+{#if timingsError}
+<h1 class="error_div w-full text-center bg-red-800 rounded-md px-2 text-lg">
+ Timings Error: {timingsErrorMessage}</h1>
 {/if}
 
   <TopToolbar add={addEq} {setFakeTimings}/>
@@ -204,3 +211,11 @@ onMount(async() => {
 </div>
 
 <!-- 204 lines start -->
+
+<style>
+  .error_div {
+    border: 2px solid yellow;
+    margin:8px;
+    padding: 2px;
+  }
+</style>

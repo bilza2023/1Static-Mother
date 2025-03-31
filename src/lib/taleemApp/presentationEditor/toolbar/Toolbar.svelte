@@ -46,22 +46,22 @@ export let endTime=0;
 
     <span class='text-xs'>Start</span> 
     <div class='bg-gray-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white'  type="number" >
-    <!-- {startTime} -->
+    {startTime}
 
-
-    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" bind:value={startTime} /> 
+<!-- 
+    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" bind:value={startTime} />  -->
 
     </div>
     
     <span class='text-xs'>End</span>
     
-    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" bind:value={endTime} />
+    <!-- <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" bind:value={endTime} /> -->
 
-    <!-- <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" value={endTime} 
+    <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" value={endTime} 
     on:input={(e) => shiftTimeLocal(+e.target.value)} 
      min=0 
      max=3600 
-     >  -->
+     > 
 
 <NavBtn2 title='Clone' icon='🐑'  clk= {clone} />
 <NavBtn2 title='Delete' icon='🗑️'  clk={deleteFn} />

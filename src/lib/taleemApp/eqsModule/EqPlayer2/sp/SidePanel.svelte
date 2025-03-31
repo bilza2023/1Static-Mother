@@ -2,38 +2,38 @@
    //@ts-nocheck
    import { onMount } from 'svelte';
    import ImgCodeTxt from "./ImgCodeTxt.svelte";
-   import { itemsStore } from "../store";
+
    
+   export let items;
    export let currentTime;
-   export let slideExtra;
    export let assets;
+
    
-   let currentItem;
+   let currentItem = null;
    
-   $:{
-      currentTime;
-      for (let i = 0; i < $itemsStore.length; i++) {
-          const item = $itemsStore[i];
-          if (currentTime >= item.itemExtra.startTime && currentTime < item.itemExtra.endTime) {
-              currentItem = item;
-              console.log("currentItem", currentItem);
-          }
-      }
-   }
+ $:{
+  currentTime;
+  for (let index = 0; index < items.length; index++) {
+    const item = items[index];
+    const itemExtra = item.itemExtra;
+    if (itemExtra.startTime <= currentTime && itemExtra.endTime > currentTime) { 
+      currentItem = item;
+    }  
+  }
+} 
    </script>
-   
    <div class="eq-display">
      {#if currentItem}  
        <div class="item-container">
          {#if currentItem.itemExtra.sp.length > 0}    
            {#each currentItem.itemExtra.sp as eq}  
-             <ImgCodeTxt {eq} {slideExtra} {assets}/>         
+             <ImgCodeTxt {eq}  {assets}/>         
            {/each}
          {/if}
        </div>
      {/if}
    </div>
-   
+
    <style>
      .eq-display {
        display: flex;

@@ -1,38 +1,29 @@
 <script>
-  /**
-   * 17-Nov-2024 
-  This is Just a go-through component just for currentTime to change items.
-  - There should not be currentTime inside any Player since the Player has to do nothing with time , another layer/function should edit the data and player should just play it.
-  - the player will have setCurrentTime (old set pulse) to set time at run time (in player)
-  - Editor will need currentTime (from sound file) to sync animation with it.
-  - Acrually player and editor both need currentTime but in player it does not go to player-core where as in editor it can go a bit deep ??
-  - do not move currentTime to store since i do not want to share it across.
-  */  
-  import EqPlayerCore from './EqPlayerCore.svelte';
-  import {itemsStore} from "./store";
+  import EqPanel from './EqPanel.svelte';
+  import SidePanel from './sp/SidePanel.svelte';
         
           export let items = []; 
-          export let slideExtra; 
           export let assets; 
           export let currentTime = 0;
           export let setPulse = ()=>{console.log("setPulse..add custom code");};
   
-  $:{
-    //--no more items beyond this point-- however if the items change as loading a new file. the we can react to it...
-    items;
-    itemsStore.set(items);
-    // console.log("items ::::::===>>>>>>>>>",items);
-  }     
-  
   </script>
+  {#if items && assets}
+
+  <div class="eq-player-wrapper">
+    <div class="eq-player-main">
+      <!-- Main content with EqPanel -->
+      <div class="eq-panel">
+        <EqPanel bind:items={items} {setPulse} {currentTime} />
+      </div>
   
-  <EqPlayerCore   
-  
-    {slideExtra}
-    {currentTime}
-    {setPulse}
-    {assets}
-  />      
+      <div class="side-panel">
+        <SidePanel {currentTime}  {assets} {items}/>
+      </div>
+    </div>
+  </div>
+       
+  {/if}
 
   <style>
     .eq-player {
@@ -42,4 +33,37 @@
       height: 100%;
       overflow: hidden;
     }
+    .eq-player-wrapper {
+    background-color: #2d2d2d; /* Replacing bg-gray-800 */
+    color: white; /* Replacing text-white */
+    width: 100%;
+    min-height: 100vh; /* Replacing min-h-screen */
+    margin: 0;
+    padding: 0;
+  }
+
+  .eq-player-main {
+    display: flex; /* Replacing flex */
+    padding: 0.5rem; /* Replacing px-2 */
+    border-radius: 0.375rem; /* Replacing rounded-md */
+    background-color: #1a1a1a; /* Replacing bg-gray-900 */
+  }
+
+  .eq-panel {
+    width: 66.6667%; /* Replacing w-8/12 */
+    min-height: 100vh; /* Replacing min-h-screen */
+    max-height: 100vh; /* Replacing max-h-screen */
+    margin: 0;
+    padding: 0.5rem; /* Replacing p-2 */
+    overflow-x: auto;
+  }
+
+  .side-panel {
+    width: 33.3333%; /* Replacing w-4/12 */
+    min-height: 100vh; /* Replacing min-h-screen */
+    margin-top: 0.5rem; /* Replacing mt-2 */
+    padding: 0.5rem; /* Replacing p-2 */
+    background-color: #1b1601; /* Replacing bg-yellow-950 */
+    color: #f3c978; /* Replacing text-yellow-300 */
+  }
   </style>

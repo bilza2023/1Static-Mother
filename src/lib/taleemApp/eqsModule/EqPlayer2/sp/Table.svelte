@@ -6,7 +6,7 @@
 
   onMount(()=>{
     parsedData = JSON.parse(code);
-    console.log('table-mounted',parsedData);
+    // console.log('table-mounted',parsedData);
   });
 
 $:{

@@ -53,9 +53,19 @@ onMount(async() => {
     slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
     currentSlide = slidesEditor.getCurrentSlide();
 });
+function getNewSlideStartTime(slides){
+  if(slides.length>0){
+    return slides[slides.length -1].endTime;
+  }else {
+    return 0;
+  }
+}
 function addNew(slideType:ISlideTypeAvailable) {
     try {
         const newSlide = getNewSlide(slideType);
+        const startTime = getNewSlideStartTime(slides);
+        newSlide.startTime = startTime;
+        newSlide.endTime = newSlide.startTime + 10 ;
         slides.push(newSlide);
         slidesEditor.Index = 0; // THIS IS ERROR
         currentSlide = slidesEditor.getCurrentSlide();

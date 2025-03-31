@@ -1,3 +1,7 @@
+
+this is a simple svelte component which gives seleceted style to the current item based
+on item.itemData.startTime , end time and currentTime
+
 <script>
   // edited on 17-Nov-2024
   import CodeTxt from './CodeTxt.svelte';
@@ -5,15 +9,14 @@
   export let currentTime;
   export let items;
   export let setPulse;
- 
-  function isSelected(itemExtra) {
-  // debugger;
-  if (itemExtra.startTime <= currentTime && itemExtra.endTime > currentTime) {
-     
+
+function isSelected(item){
+  debugger;
+    if(item.itemExtra.startTime <= currentTime && item.itemExtra.endTime > currentTime ){
       return true;
-  } else {
+    }else {
       return false;
-  }
+    }
 }
 </script>
   
@@ -28,7 +31,7 @@
       </div>
       
       <div
-        class={ isSelected(item.itemExtra)
+        class={ (item.itemExtra.startTime <= currentTime && item.itemExtra.endTime > currentTime )
          ? 'focused w-full text-center' : 'nonFocused w-full text-center'}
       >
         <CodeTxt eq={item} />

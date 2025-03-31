@@ -7,10 +7,10 @@
     
     export let eq;
     export let assets;
-    export let slideExtra;
 
     onMount(async() => {
-      console.log("assets.presentationImages", assets.presentationImages);
+      // debugger;
+      console.log("assets",assets.images.get("baloons.png").img);
     });
     </script>
     
@@ -25,22 +25,20 @@
         </div>
       {/if}
 
-      {#if eq.type == 'img' || eq.type == 'image'}
-      {#if assets.presentationImages.has(eq.code)}
-        <div class="image-box">
-          {@html assets.presentationImages.get(eq.code)?.outerHTML || `<p>Image ${eq.code} could not be rendered.</p>`}
-        </div>
-      {:else}
-        <p class="text-box">Image {eq.code} not found.</p>
-      {/if}
+
+{#if assets}
+      {#if eq.type === 'img' || eq.type === 'image'}
+      <div class="image-box">
+        {#if assets.images.has(eq.code) && assets.images.get(eq.code).img.src}
+          <img src={assets.images.get(eq.code).img.src} alt={eq.code}  />
+        {:else}
+          <p>Image {eq.code} not found.</p>
+        {/if}
+      </div>
     {/if}
+{/if}
     
-    
-    
-    
-    
-    
-    
+  
       {#if eq.type == 'table' || eq.type == 'tbl'}
         <Table code={eq.code} />
       {/if}

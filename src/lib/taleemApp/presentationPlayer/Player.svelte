@@ -2,7 +2,7 @@
 import type {ISlide} from "./ISlide";
 import { onMount } from "svelte";
 import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
-import EqPlayer from '../eqsModule/EqPlayer/EqPlayer.svelte';
+import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
 import type {IAssets} from "../taleem-canvas";
 import SoundPlayer from "./SoundPlayer";
 import PlayerToolbar from "./PlayerToolbar.svelte";
@@ -24,6 +24,7 @@ $:{
 }
 /////////////////////////////////    
 onMount(async() => {
+  // debugger;
   if(slides.length > 0){
     totalTime = slides[slides.length -1].endTime;
   }
@@ -67,9 +68,8 @@ function gameloop(){
           {#if (currentSlide.type) === "eqs"}
           <EqPlayer 
                 bind:items={currentSlide.items}
-                slideStartTime={currentSlide.startTime}
-                slideEndTime=  {currentSlide.endTime}
                 {currentTime}
+                {assets}
           />
           {/if}
 {/if}
