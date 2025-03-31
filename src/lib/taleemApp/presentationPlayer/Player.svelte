@@ -23,10 +23,12 @@ import PeriodBasedSystem from "./PeriodBasedSystem";
 $:{
   currentTime;
   if(pbs){ currentSlide = pbs.get(currentTime); }
+  //Period for Eq Slide
+
 }
 /////////////////////////////////    
 onMount(async() => {
-  // debugger;
+  
   if(slides.length > 0){
     totalTime = slides[slides.length -1].endTime;
   }
@@ -71,6 +73,7 @@ function gameloop(){
           {#if (currentSlide.type) === "eqs"}
           <EqPlayer 
                 bind:items={currentSlide.items}
+                slideStartTime = {currentSlide.startTime}
                 {currentTime}
                 {assets}
           />

@@ -1,12 +1,39 @@
-<script>
+
+<script lang="ts">
+
   import EqPanel from './EqPanel.svelte';
   import SidePanel from './sp/SidePanel.svelte';
         
           export let items = []; 
           export let assets; 
+          export let slideStartTime = 0;
           export let currentTime = 0;
           export let setPulse = ()=>{console.log("setPulse..add custom code");};
+  $:{
+    currentTime;
+
+  }
   
+// function get(currentTime:number=0):IPBSItem |null{
+
+// const elapsedTime = currentTime - this.startTime;
+// const totalPeriod = this.getTotalPeriod();
+
+// if (elapsedTime > totalPeriod) {
+//     return null; 
+// }
+
+// let cumulativeTime = 0;
+
+// for (const item of this.pbs) {
+//     if (elapsedTime >= cumulativeTime && elapsedTime < cumulativeTime + item.endTime) {
+//         return item;
+//     }
+//     cumulativeTime += item.endTime; // should be item.period
+// }
+
+// return null; // Should not reach here in normal operation.
+// }
   </script>
   {#if items && assets}
 

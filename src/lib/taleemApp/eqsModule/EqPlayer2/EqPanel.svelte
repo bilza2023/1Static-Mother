@@ -37,7 +37,6 @@
   {/each}
 </div>
 
-<div class="h-32"></div>
 
 <style>
 .focused {
