@@ -6,7 +6,8 @@ import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
 import type {IAssets} from "../taleem-canvas";
 import SoundPlayer from "./SoundPlayer";
 import PlayerToolbar from "./PlayerToolbar.svelte";
-import getCurrentSlide from "./getCurrentSlide";
+// import getCurrentSlide from "./getCurrentSlide";
+import PeriodBasedSystem from "./PeriodBasedSystem";
 ////////////////////////////--AS////////////////////////////////
     export let slides:ISlide[];
     export let assets:IAssets; //assets to have images loaded
@@ -14,13 +15,14 @@ import getCurrentSlide from "./getCurrentSlide";
 /////////////////////////////////////////
     let currentSlide:ISlide | null = null;  
     let interval = 0;
+    let pbs = null;
     let totalTime = 300;//default presentation end time
     let currentTime = 0; //just for reactivity and match it with soundPlayer/Time player
     let soundPlayer = new SoundPlayer(soundFileName);
 ///Main reactivity       
 $:{
   currentTime;
-  currentSlide = getCurrentSlide(currentTime , slides);
+  if(pbs){ currentSlide = pbs.get(currentTime); }
 }
 /////////////////////////////////    
 onMount(async() => {
@@ -28,7 +30,8 @@ onMount(async() => {
   if(slides.length > 0){
     totalTime = slides[slides.length -1].endTime;
   }
-    currentSlide = getCurrentSlide(currentTime , slides);
+  pbs = new PeriodBasedSystem(slides);
+    currentSlide = pbs.get(currentTime);
 });
 function jumpTo(timeMs:number){ 
 //   soundPlayer.jumpTo(timeMs)
