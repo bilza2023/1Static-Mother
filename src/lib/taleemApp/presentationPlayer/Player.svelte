@@ -7,7 +7,9 @@ import type {IAssets} from "../taleem-canvas";
 import SoundPlayer from "./SoundPlayer";
 import PlayerToolbar from "./PlayerToolbar.svelte";
 // import getCurrentSlide from "./getCurrentSlide";
-import PeriodBasedSystem from "./PeriodBasedSystem";
+// import PeriodBasedSystem from "./PeriodBasedSystem";
+// import getPBSItem from "./PBSObject";
+import PBSObject from "./PBSObject";
 ////////////////////////////--AS////////////////////////////////
     export let slides:ISlide[];
     export let assets:IAssets; //assets to have images loaded
@@ -20,40 +22,42 @@ import PeriodBasedSystem from "./PeriodBasedSystem";
     let currentTime = 0; //just for reactivity and match it with soundPlayer/Time player
     let soundPlayer = new SoundPlayer(soundFileName);
 ///Main reactivity       
-$:{
-  currentTime;
-  if(pbs){ currentSlide = pbs.get(currentTime); }
-  //Period for Eq Slide
 
-}
 /////////////////////////////////    
 onMount(async() => {
-  
-  if(slides.length > 0){
-    totalTime = slides[slides.length -1].endTime;
-  }
-  pbs = new PeriodBasedSystem(slides);
-    currentSlide = pbs.get(currentTime);
+  // debugger;
+  pbs = new PBSObject(slides); 
+ totalTime = pbs.getTotalPeriod();
+   currentSlide = pbs.getCurrentItem(0,0);
+    
 });
-function jumpTo(timeMs:number){ 
-//   soundPlayer.jumpTo(timeMs)
-//   currentTime = soundPlayer.getCurrentTime();
-//   // debugger;
-}
 function start(){ 
   interval = setInterval(gameloop,20);
   soundPlayer.start();
   currentTime = soundPlayer.getCurrentTime();
 }
+
+function gameloop(){
+  if(pbs){
+  // debugger;
+  currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
+  currentSlide = pbs.getCurrentItem(currentTime,0);
+  //auto stop log awaited
+  if(currentTime > totalTime){stop();}
+  }
+}
+function jumpTo(timeMs:number){ 
+//   soundPlayer.jumpTo(timeMs)
+//   currentTime = soundPlayer.getCurrentTime();
+//   // debugger;
+}
+
 function stop(){
   if(interval)clearInterval(interval);
   soundPlayer.stop();
   currentTime = 0;
 }
-function gameloop(){
-  //just update the currentTime
-  currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
-}
+
 </script>
 
 <!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  

@@ -1,7 +1,8 @@
 
 <script lang="ts">
 
-  import EqPanel from './EqPanel.svelte';
+  // import EqPanel from './EqPanel.svelte';
+  import CodeTxt from './CodeTxt.svelte';
   import SidePanel from './sp/SidePanel.svelte';
         
           export let items = []; 
@@ -13,7 +14,15 @@
     currentTime;
 
   }
-  
+  function isSelected(itemExtra) {
+  // debugger;
+  if (itemExtra.startTime <= currentTime && itemExtra.endTime > currentTime) {
+     
+      return true;
+  } else {
+      return false;
+  }
+}
 // function get(currentTime:number=0):IPBSItem |null{
 
 // const elapsedTime = currentTime - this.startTime;
@@ -41,7 +50,27 @@
     <div class="eq-player-main">
       <!-- Main content with EqPanel -->
       <div class="eq-panel">
-        <EqPanel bind:items={items} {setPulse} {currentTime} />
+        <!-- <EqPanel bind:items={items} {setPulse} {currentTime} /> -->
+        <div class="flex flex-col space-y-2 w-full">
+          {#each items as item, index}
+            <button
+              class="flex w-full items-center"
+              on:click={() => setPulse(item.itemExtra.startTime)}
+            >
+              <div class="m-1 p-1 rounded-2xl text-sm bg-stone-600">
+                {index + 1}
+              </div>
+              
+              <div
+                class={ isSelected(item.itemExtra)
+                 ? 'focused w-full text-center' : 'nonFocused w-full text-center'}
+              >
+                <CodeTxt eq={item} />
+              </div>
+            </button>
+          {/each}
+        </div>
+        <!-- <EqPanel bind:items={items} {setPulse} {currentTime} /> -->
       </div>
   
       <div class="side-panel">
@@ -53,6 +82,27 @@
   {/if}
 
   <style>
+.focused {
+  background-color: rgb(2, 63, 2);
+  color: white;
+  border: 2px solid red;
+  padding: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1.5em;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.nonFocused {
+  background-color: grey;
+  padding: 2px;
+  margin: 2px;
+  font-size: 1.25em;
+  transition: all 0.3s ease;
+}
+
     .eq-player {
       display: flex;
       flex-direction: column;

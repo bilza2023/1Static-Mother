@@ -3,20 +3,29 @@ interface IPBSItem {
     endTime: number;//replace with period when data fixed
 }
 
-export default class PeriodBasedSystem {
-    private pbs: IPBSItem[];
-   
+export default class PBSObject{
 
-    constructor(pbsArray: IPBSItem[]) {
-        this.pbs = pbsArray;
-    }
+ private   pbs:IPBSItem[];
+  
+ constructor(pbs:IPBSItem[]){
+    this.pbs = pbs;
 
-    getTotalPeriod(): number {
+}
+    
+getTotalPeriod(): number {
         return this.pbs.reduce((total, item) => total + item.endTime, 0);
-    }
-//always return item 1 since it is need of App/slide
+}
 
-get(currentTime:number=0,startTime:number=0):IPBSItem |null{
+getItemStartTime(itemIndex:number,currentTime:number=0){
+    debugger;
+    let startTime = 0;
+    for (let i = 0; i < itemIndex; i++) {
+        const pbsItem = this.pbs[i];
+        startTime += pbsItem.endTime; //period
+    }
+    return startTime;
+}
+getCurrentItem(startTime:number=0 , currentTime:number=0):IPBSItem |null{
 
     const elapsedTime = currentTime - startTime;
     ////////////////////////
@@ -37,4 +46,5 @@ get(currentTime:number=0,startTime:number=0):IPBSItem |null{
     return null; // Should not reach here in normal operation.
 }
 
-}
+
+}//class ends

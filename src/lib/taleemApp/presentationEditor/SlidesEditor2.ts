@@ -1,73 +1,47 @@
 
-import type ISlide from "./ISlide";
-import type {ISlidesList} from "./ISlidesList";
+
+import type {ISlide} from "./ISlide";
+// import type {ISlidesList} from "./ISlidesList";
+////////////////////////////////////////////////////
 export default class SlidesEditor{
 
-private  _currentSlideIndexPVT:number|null;
-private  slides:ISlide[];
-private  slideExtra:{};
-// public   currentSlide:{}|null;
+private  currentSlideIndex:number;
+private slides:ISlide[];
 
-constructor(slides:ISlide[],slideExtra={}){
+constructor(slides:ISlide[]){
     this.slides = slides;
-    this.slideExtra = slideExtra;
-            if(this.slides.length > 0 ){
-                // this.currentSlide = this.slides[0];
-                this.currentSlideIndex = 0;
-            }else{
-                // this.currentSlide = null;
-                this.currentSlideIndex = null; // this should be null
-            }
-}
-setFirstSlide(){
-    if(this.slides.length > 0){
-        this.slides[0].startTime = 0;
-    }
-}
-// shiftTime() {
-//     if(this.slides.length < 1){return;}
-//     const MIN_DURATION = 2; // Minimum duration between startTime and endTime in seconds
-//     this.setFirstSlide();
-//     // Process all slides
-//     for (let i = 0; i < this.slides.length; i++) {
-//         const currentSlide = this.slides[i];
-
-//         // Ensure minimum duration for current slide
-//             const currentDuration = currentSlide.endTime - currentSlide.startTime;
-//             if (currentDuration < MIN_DURATION) {
-//                 currentSlide.endTime = currentSlide.startTime + MIN_DURATION;
-//             }
-
-//         // If not the first slide, eliminate gaps with previous slide
-//         if (i > 0) {
-//             const prevSlide = this.slides[i - 1];
-//                 const timeDifference = Math.abs(currentSlide.endTime - currentSlide.startTime);
-//                 currentSlide.startTime = prevSlide.endTime;
-//                 currentSlide.endTime = currentSlide.startTime + timeDifference;
-                
-//         }
-//     }
-// }
-
-get currentSlideIndex():number|null{
-    return this._currentSlideIndexPVT;
-}
-set currentSlideIndex(index:number|null){
-    this._currentSlideIndexPVT = index;
+    this.currentSlideIndex = 0;
 }
 
-getCurrentSlide():{}|null{
-    // debugger;
-    if(this.currentSlideIndex === null){
-        return null;
-    }else {
-        return this.slides[this.currentSlideIndex];
-    }
+set currentIndex(index:number){
+ this.currentSlideIndex = index;
+}
+
+get currentIndex(){
+  return this.currentSlideIndex;
+}
+
+getCurrentSlide():ISlide|null{
+ return this.slides[this.currentSlideIndex]
+}
+
+next() {
+        if(this.currentSlideIndex < this.slides.length -1){
+            this.currentSlideIndex = this.currentSlideIndex +1  ;
+        }else {
+            this.currentSlideIndex = 0;
+        }
+}
+
+prev() {
+        if(this.currentSlideIndex > 0){
+            this.currentSlideIndex = this.currentSlideIndex -1  ;
+        }
 }
 
 getSlidesListForPanel(){
     // debugger;
-    const slidesList:ISlidesList[] = [];
+    const slidesList = [];
     for (let i = 0; i < this.slides.length; i++) {
         const slide = this.slides[i];
         let selected = false;
@@ -77,37 +51,7 @@ getSlidesListForPanel(){
     }
     return slidesList;
 }
-next() {
-    if(this.currentSlideIndex == null){
-        if(this.slides.length > 1){
-            this.currentSlideIndex = 0;
-        }else{
-            this.currentSlideIndex = null;
-        }
-    }else {
-        if(this.currentSlideIndex < this.slides.length -1){
-            this.currentSlideIndex = this.currentSlideIndex +1  ;
-        }else {
-            this.currentSlideIndex = 0;
-        }
-    }
-}
 
-prev() {
-    if(this.currentSlideIndex == null){
-        if(this.slides.length > 1){
-            this.currentSlideIndex = 0;
-        }else{
-            this.currentSlideIndex = null;
-        }
-    }else {
-        if(this.currentSlideIndex > 0){
-            this.currentSlideIndex = this.currentSlideIndex -1  ;
-        }else {
-            //this.currentSlideIndex = 0;//nothing no round turn
-        }
-    }
-}
 
 del(): boolean {
     // Check if a slide is currently selected
@@ -182,6 +126,7 @@ moveDown(): boolean {
 }
 
 }//SlideObj
+/////////////////////////////////
 /////////////////////////////////
 
 function uuid() {

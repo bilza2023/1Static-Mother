@@ -3,7 +3,6 @@
     import type {ISlide} from "./ISlide";
     import { onMount } from "svelte";
     import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
-    import SlidesEditor from "./SlidesEditor";
     import Toolbar from "./toolbar/Toolbar.svelte";    
     import SlidePanel from "./SlidePanel.svelte";
     import getNewSlide from "./addNewSlide/getNewSlide";
@@ -12,6 +11,8 @@
     import EqsEditor from '../eqsModule/EqsEditor/EqsEditor.svelte';
     import type {IAssets} from "../taleem-canvas";
     import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
+    // import SlidesEditor from "./SlidesEditor";
+    import SlidesEditor2 from "./SlidesEditor2";
 ////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
@@ -30,7 +31,7 @@
 $:{
   currentSlide;
   if(slidesEditor){
-    slidesList = slidesEditor.getSlidesListForPanel();
+    slidesList = slidesEditor.getSlidesListForPanel();//valid
   }
 }
 function log(){
@@ -50,7 +51,8 @@ function setCurrentSlide(index) {
 }
 /////////////////////////////////    
 onMount(async() => {
-    slidesEditor = new SlidesEditor(slides);//rename slidesEditor to slidesEditor
+  debugger;
+    slidesEditor = new SlidesEditor2(slides);//rename slidesEditor to slidesEditor
     currentSlide = slidesEditor.getCurrentSlide();
 });
 function getNewSlideStartTime(slides){
@@ -67,18 +69,15 @@ function addNew(slideType:ISlideTypeAvailable) {
         newSlide.startTime = startTime;
         newSlide.endTime = newSlide.startTime + 10 ;
         slides.push(newSlide);
-        slidesEditor.Index = 0; // THIS IS ERROR
+        // slidesEditor.Index = 0; // THIS IS ERROR
+        slidesEditor.currentIndex = slidesEditor.slides.length -1; 
         currentSlide = slidesEditor.getCurrentSlide();
-        show = false;
+        // show = false;
     } catch (error) {
         console.error('Failed to add new slide:', error);
     }
 }
-function shiftTimeLocal(val){
-  if(!currentSlide || currentSlide == null){return}
-  currentSlide.endTime = val;
-  slidesEditor.shiftTime();
-}
+
 function clone(){
   slidesEditor.clone();
   currentSlide = slidesEditor.getCurrentSlide();
@@ -102,14 +101,13 @@ function deleteFn() {
 {next} 
 {log} 
 {save}
+{currentTime}
 {clone}
 {assets}
 {deleteFn}
 bind:showSidePanel={showSidePanel} 
 bind:show={show} 
-bind:startTime={currentSlide.startTime}
 bind:endTime=  {currentSlide.endTime}
-{shiftTimeLocal}
 />
 {/if}
 
