@@ -36,7 +36,10 @@
   <span class="time">{currentTime}/{totalTime}</span>
 
   <div class="scrollbar-container">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="scrollbar-track" on:click={handleScroll}>
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div
         class="scrollbar-thumb"
         style="left: {scrollPosition}%"

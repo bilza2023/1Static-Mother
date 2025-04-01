@@ -10,30 +10,38 @@
     import CanvasEditor from '../CanvasModule/CanvasEditor/CanvasEditor.svelte';
     import EqsEditor from '../eqsModule/EqsEditor/EqsEditor.svelte';
     import type {IAssets} from "../taleem-canvas";
+    import SoundPlayer from "../app/SoundPlayer";
     import getSlidesListForPanel from "./getSlidesListForPanel";
     import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
     import PBSSlides from "../app/PBSSlides";
     import {del,clone as cloneFn,moveDown as moveDownFn,moveUp as moveUpFn} from "./slideEditFunctions";
+    import PlayerToolbar from "../app/PlayerToolbar.svelte";
 ////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
     export let save:()=>void;
     export let assets:IAssets;
+    export let soundFileName = '/sounds/music.opus'; //default music sound
     /////////////////////////////////////////
     let currentSlideIndex=0;
+    let interval=null;
     let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
     // let slideStartTime = 0;
     let pbs = null; 
+    let totalTime = 0; 
     let currentTime = 0; 
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
+    let soundPlayer = new SoundPlayer(soundFileName);
    
 $:{
   currentSlide;
-  currentSlideIndex
+  currentSlideIndex;
+  if(pbs){
+  totalTime = pbs.getTotalPeriod();
   slidesList = getSlidesListForPanel(slides,currentSlideIndex);//valid
-
+  }
 }
 
 /////////////////////////////////    
@@ -101,7 +109,32 @@ function deleteFn() {
   del(currentSlideIndex,slides);
   prev();
 }
+function jumpTo(timeMs:number){ 
+//   soundPlayer.jumpTo(timeMs)
+//   currentTime = soundPlayer.getCurrentTime();
+//   // debugger;
+}
+function start(){ 
+  interval = setInterval(gameloop,20);
+  soundPlayer.start();
+  currentTime = soundPlayer.getCurrentTime();
+}
+function stop(){
+  if(interval)clearInterval(interval);
+  soundPlayer.stop();
+  currentTime = 0;
+}
+function gameloop(){
+   currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
+}
 </script>
+
+<!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  
+{#if soundPlayer}
+<PlayerToolbar {currentTime} {start} {stop} {totalTime} />
+{/if}
+<!-- ///////////////////////////////////////////////////////////////////////     -->
+
 {#if currentSlide}  
 <Toolbar 
 {prev} 
@@ -117,6 +150,8 @@ bind:show={show}
 bind:endTime=  {currentSlide.endTime}
 />
 {/if}
+
+
 
 {#if show}
   <NewSlidesDlg {addNew}/>

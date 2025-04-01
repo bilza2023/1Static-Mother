@@ -4,8 +4,8 @@ import { onMount } from "svelte";
 import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
 import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
 import type {IAssets} from "../taleem-canvas";
-import SoundPlayer from "./SoundPlayer";
-import PlayerToolbar from "./PlayerToolbar.svelte";
+import SoundPlayer from "../app/SoundPlayer";
+import PlayerToolbar from "../app/PlayerToolbar.svelte";
 import getCurentSlide from "./getCurrentSlide";
 import PBSSlides from "../app/PBSSlides";
 ////////////////////////////--AS////////////////////////////////
