@@ -1,53 +1,44 @@
 <script>
   export let currentTime = 0;
   export let totalTime = 0;
- 
+
   export let start;
   export let stop;
   export let jumpTo;
 
-  // Compute scrollbar position based on currentTime
-  $: scrollPosition = ((currentTime/1000) / totalTime) * 100;
+  let scrollPosition = 0;
 
-  function handleScroll(event) {
-    // const rect = event.currentTarget.getBoundingClientRect();
-    // const clickX = event.clientX - rect.left;
-    // const trackWidth = rect.width;
-    // const newPercentage = clickX / trackWidth;
-    // const newTime = newPercentage * totalTime;
-    // jumpTo(newTime);
+  $: if (totalTime > 0) {
+    scrollPosition = (currentTime / totalTime) * 100;
+  } else {
+    scrollPosition = 0;
   }
 
-  function handleDrag(event) {
-      // const rect = event.currentTarget.getBoundingClientRect();
-      // const trackWidth = rect.width;
-      // const newPercentage = event.offsetX / trackWidth;
-      // const newTime = newPercentage * totalTime;
-      // jumpTo(newTime);
+  function handleInput(event) {
+    const newValue = parseFloat(event.target.value);
+    if (totalTime > 0) {
+      currentTime = (newValue / 100) * totalTime;
+      if (jumpTo) {
+        jumpTo(currentTime);
+      }
+    }
   }
 </script>
 
 <div class="toolbar">
-  <!-- <button on:click={prev}>&lt;&lt;</button> -->
-  <!-- <button on:click={next}>&gt;&gt;</button> -->
   <button on:click={start}>Start</button>
   <button on:click={stop}>Stop</button>
 
-  <span class="time">{currentTime}/{totalTime}</span>
+  <span class="time">{parseInt(currentTime)}/{totalTime}</span>
 
-  <div class="scrollbar-container">
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="scrollbar-track" on:click={handleScroll}>
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <div
-        class="scrollbar-thumb"
-        style="left: {scrollPosition}%"
-        draggable="true"
-        on:drag={handleDrag}
-      ></div>
-    </div>
-  </div>
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value={scrollPosition}
+    class="custom-range"
+    on:input={handleInput}
+  />
 </div>
 
 <style>
@@ -84,27 +75,31 @@
     background-color: #444;
   }
 
-  .scrollbar-container {
+  .custom-range {
     flex-grow: 1;
-    margin-left: 4px;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    outline: none;
+    margin: 0;
   }
 
-  .scrollbar-track {
-    position: relative;
-    height: 4px;
-    background-color: #333;
-    border-radius: 2px;
-    width: 100%;
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
     cursor: pointer;
   }
 
-  .scrollbar-thumb {
-    position: absolute;
-    height: 8px;
+  .custom-range::-moz-range-thumb {
     width: 8px;
-    top: -2px;
-    background-color: #fff;
+    height: 8px;
+    background: #fff;
     border-radius: 50%;
-    transform: translateX(-50%);
+    cursor: pointer;
   }
 </style>

@@ -26,16 +26,14 @@ export let endTime;
  
   <div class='flex justify-start items-center gap-1'>
     
-    <NavBtn2 title='Slide' icon='💡'  clk={()=>show = !show} />
-    <NavBtn2 title='SP' icon='🚪'  clk={()=>showSidePanel = !showSidePanel} />
-      <NavBtn2 title='Save' icon='💾'  clk={save} />
-      <NavBtn2 title='Prev' icon="<<"  clk={prev} />
-      <NavBtn2 title='Next' icon=">>"  clk={next} />
-    <NavBtn2 title='Log' icon='🖨️'  clk={log} />
-    <NavBtn2 title='Log' icon='📢'  clk={()=>showSoundBar =!showSoundBar } />
+    <NavBtn2 title='Slide'  icon='💡'  clk={()=>show = !show}                   />
+    <NavBtn2 title='SP'     icon='🚪'  clk={()=>showSidePanel = !showSidePanel} />
+    <NavBtn2 title='Save'   icon='💾'  clk={save}                               />
+    <NavBtn2 title='Prev'   icon="<<"  clk={prev}                               />
+    <NavBtn2 title='Next'   icon=">>"  clk={next}                               />
+    <NavBtn2 title='Log'    icon='🖨️'  clk={log}                                />
+    <NavBtn2 title='Sound'  icon='📢'  clk={()=>showSoundBar =!showSoundBar }   />
     
-
-
   </div> 
 
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
@@ -44,7 +42,6 @@ export let endTime;
     <span class='text-xs'>Start</span> 
     <div class='bg-gray-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white'  type="number" >
     {startTime}
-    
     </div>
     
     <span class='text-xs'>End</span>
@@ -54,7 +51,7 @@ export let endTime;
      max=3600 
      >    
 
-<NavBtn2 title='Clone' icon='🐑'  clk= {clone} />
+<NavBtn2 title='Clone'  icon='🐑'  clk= {clone} />
 <NavBtn2 title='Delete' icon='🗑️'  clk={deleteFn} />
  
   </div>  

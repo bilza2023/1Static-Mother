@@ -49,10 +49,13 @@ function gameloop(){
   if(currentTime > totalTime){stop();}
   }
 }
+
 function jumpTo(timeMs:number){ 
-//   soundPlayer.jumpTo(timeMs)
-//   currentTime = soundPlayer.getCurrentTime();
-//   // debugger;
+  soundPlayer.jumpTo(timeMs)
+  currentTime = soundPlayer.getCurrentTime();
+  console.log("jumping",timeMs);
+  console.log("return current time",currentTime);
+  // debugger;
 }
 
 function stop(){
@@ -88,6 +91,7 @@ function stop(){
 {/if}
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 </div>
+<div style="color:white">{currentTime}</div>
 
 <style>
    .container {

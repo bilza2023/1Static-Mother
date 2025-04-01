@@ -61,22 +61,10 @@ export default class SoundPlayer {
     jumpTo(timeMs: number): void {
         if (!this._sound) return;
         
-        // Make sure the time is within the sound's duration
         const validTime = Math.max(0, Math.min(timeMs, this._soundDuration));
-        
-        // Convert from milliseconds to seconds for Howler's seek method
         this._sound.seek(validTime / 1000);
                 
-        // Update our time tracking
-        if (this._startTime !== null) {
-          const currentTime = Date.now();
-          this._startTime = currentTime - validTime - this._pausedTime;
-          
-          // If we were paused, update the pause time to the new position
-          if (this._pausedAt !== null) {
-            this._pausedAt = this._startTime + validTime + this._pausedTime;
-          }
-        }
+
       }
     /**
      * Starts or resumes playback of the sound
