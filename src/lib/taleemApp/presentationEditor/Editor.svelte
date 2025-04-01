@@ -32,6 +32,7 @@
   let currentSlideType:string = "canvas";
   let currentSlideStartTime = 0;
   let currentSlideEndTime = 0;
+  let currentSlideDuration = 0;
 
   let interval = null;
   let slidesList: ISlidesList[] = [];
@@ -60,6 +61,7 @@
       currentSlideEndTime = currentSlideStartTime + currentSlide.endTime;
 
       currentSlideType = currentSlide.type;
+      currentSlideDuration = currentSlideEndTime - currentSlideStartTime;
     }
   }
 
@@ -124,8 +126,8 @@
     }
   }
 function setEqSlideLength(){ //setEqSlideDuration
-  // debugger;
-  //getSlideEndTime authmatically addes currentSlideStartTime 
+  debugger;
+  currentSlideDuration = pbs.getEqSlidePeriod(slides[currentSlideIndex]); 
 currentSlideEndTime = pbs.getSlideEndTime(currentSlideIndex);  
 }
   function clone() {
@@ -180,6 +182,7 @@ currentSlideEndTime = pbs.getSlideEndTime(currentSlideIndex);
     {deleteFn}
     {setSlideDuration}
     {currentSlideStartTime}
+    {currentSlideDuration}
     {currentSlideEndTime}
     {currentSlideType}
     bind:showSidePanel

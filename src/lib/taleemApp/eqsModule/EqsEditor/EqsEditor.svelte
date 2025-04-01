@@ -18,7 +18,6 @@ export let currentSlideStartTime;
 export let currentSlideEndTime;
 
 function getItemStartTime(i){
-  debugger;
   const rez = PBDItem.getSlideStartTime(i,items);
   return  rez;
   }

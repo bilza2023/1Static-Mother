@@ -12,6 +12,7 @@
   export let showSidePanel;
   export let currentSlideStartTime;
   export let currentSlideEndTime;
+  export let currentSlideDuration;
   export let currentSlideType;
   
   export let save=()=>{};
@@ -65,8 +66,10 @@
 {/if}
     
 {#if currentSlideType=="eqs"}
-    <input disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 
-    border-gray-600 text-center'  type="number" bind:value={endTime} min=0 max=3600 >    
+    <div disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 
+    border-gray-600 text-center'  type="number">
+    {currentSlideDuration}
+  </div>    
 {/if}
 
   
