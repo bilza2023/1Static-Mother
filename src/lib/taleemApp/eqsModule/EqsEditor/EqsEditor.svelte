@@ -8,21 +8,24 @@ import TopToolbar from './TopToolbar.svelte';
 import getNewItem from "../getNewItem";
 import Row from './Row.svelte';
   import { onMount } from 'svelte';
-
+  import PBDItem from "../../app/PBDItem";
 // export let just items and currentTime which is required for Editor only
 export let items;
 export let currentTime=0; //current time if not given is zero ..correct ????
-export let slideStartTime;
-// export let slideEndTime;
+export let setEqSlideLength;
 
-// $:{
-//   if(items.length > 0){
-//     items[0].itemExtra.startTime = slideStartTime;
-//   }
-//   if(items.length > 0){
-//     items[items.length -1 ].itemExtra.endTime = slideEndTime;
-//   }
-// }
+export let currentSlideStartTime;
+export let currentSlideEndTime;
+
+function getItemStartTime(i){
+  debugger;
+  const rez = PBDItem.getSlideStartTime(i,items);
+  return  rez;
+  }
+  function getItemEndTime(i){
+    const rez = PBDItem.getSlideEndTime(i,items);
+    return  rez;
+  }
 
 // the only local variable
 let timingsError = false;
@@ -116,7 +119,12 @@ onMount(async() => {
     {delEq}
     {moveUpEq} 
     {moveDownEq}
-    {setEqType}  
+    {setEqType}
+{currentSlideStartTime}
+{currentSlideEndTime}
+    {setEqSlideLength}
+ItemStartTime = {getItemStartTime(i)}      
+ItemEndTime = {getItemEndTime(i)}      
     />
 
   {/each}

@@ -1,11 +1,16 @@
 <script>
 //   import {onMount} from 'svelte';  
   import SidePanel from "./SidePanel/SidePanel.svelte";
-  import AddTime from "./AddTime.svelte";
+  import { onMount } from "svelte";
   import EqPart from "./EqPart/EqPart.svelte"; 
   import LowerToolBar from "./EqPart/LowerToolBar.svelte";
 
     export let currentTime;
+    export let currentSlideStartTime;
+    export let currentSlideEndTime;
+    
+    let accumulatedDuration=0;
+
     export let item;
     export let i;
    
@@ -14,12 +19,16 @@
     export let moveUpEq; 
     export let moveDownEq; 
     export let setEqType;
+    export let setEqSlideLength;//
+    export let ItemStartTime;//
+    export let ItemEndTime;//
 
     let open = false;
    
     // Compute if there are items in the sp array
     $: hasItems = item?.itemExtra?.sp?.length > 0;
-   
+
+
 
    </script>
    
@@ -29,11 +38,26 @@
     
     <div class="w-1/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">
 
+<!--New code  -->
+<span class='text-xs rounded-md'>Start</span>
+<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{ItemStartTime}</div>
+<!-- currentSlideStartTime -->
+<!-- currentSlideEndTime -->
+<span class='text-xs rounded-md'>End</span>
+<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{ItemEndTime}</div>
+
+<span class='text-xs rounded-md'>Duration</span>
                 <input 
-                class="text-xs bg-gray-800 text-white" style="width:70px"
+                min="0"
+                max="3600"
+                class="text-xs bg-red-900 text-white text-center rounded-md" 
+                style="width:70px"
                 type='number' 
                 bind:value={item.itemExtra.endTime} 
-                />     
+                on:change={() => setEqSlideLength(item.itemExtra.endTime)}
+              /> 
+
+
 </div>
 
 

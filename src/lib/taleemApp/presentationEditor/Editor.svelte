@@ -55,7 +55,7 @@
       if (currentSlideIndex > 0) {
         currentSlideStartTime = pbs.getSlideEndTime(currentSlideIndex - 1);
       } else {
-        currentSlideIndex = 0;
+        currentSlideStartTime = 0;
       }
       currentSlideEndTime = currentSlideStartTime + currentSlide.endTime;
 
@@ -123,6 +123,11 @@
       currentSlide.endTime = currentTime - currentSlideStartTime;
     }
   }
+function setEqSlideLength(){ //setEqSlideDuration
+  // debugger;
+  //getSlideEndTime authmatically addes currentSlideStartTime 
+currentSlideEndTime = pbs.getSlideEndTime(currentSlideIndex);  
+}
   function clone() {
     cloneFn(currentSlideIndex, slides);
     next();
@@ -213,9 +218,10 @@
         {#if currentSlide.type === "eqs"}
           <EqsEditor
             bind:items={currentSlide.items}
-            slideStartTime={pbs.getSlideStartTime(currentSlideIndex)}
-            slideEndTime={currentSlide.endTime}
+            currentSlideStartTime ={currentSlideStartTime}
+            currentSlideEndTime =  {currentSlideEndTime}
             {currentTime}
+            {setEqSlideLength}
           />
         {/if}
       </div>
