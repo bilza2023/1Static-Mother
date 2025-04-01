@@ -15,13 +15,13 @@
     // import SlidesEditor from "./SlidesEditor";
     import SlidesEditor2 from "./SlidesEditor2";
     import PBSSlides from "../app/PBSSlides";
+    import {del,clone as cloneFn,moveDown as moveDownFn,moveUp as moveUpFn} from "./slideEditFunctions";
 ////////////////////////////--ASS-I--////////////////////////////////
     export let slides:ISlide[];
     export let images:string[];
     export let save:()=>void;
     export let assets:IAssets;
     /////////////////////////////////////////
-    let slidesEditor = null;
     let currentSlideIndex=0;
     let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
@@ -45,15 +45,13 @@ function next(){
   if(currentSlideIndex < slides.length -1 )currentSlideIndex +=1;
 let r = pbs.getCurrentItemByIndex(currentSlideIndex);
 if (r){currentSlide=r;}
-// currentSlide = slidesEditor.getCurrentSlide();
 }
 function prev(){
-// slidesEditor.prev();
 if(currentSlideIndex>0)currentSlideIndex -=1;
 
 let r = pbs.getCurrentItemByIndex(currentSlideIndex);
 if (r){currentSlide=r;}
-// currentSlide = slidesEditor.getCurrentSlide();
+
 }
 function setCurrentSlide(index) {
   currentSlideIndex =index;
@@ -65,8 +63,8 @@ onMount(async() => {
 /////////////////////////////////////////////////////////////////////////
     pbs = new PBSSlides(slides);
 
-    slidesEditor = new SlidesEditor2(slides);//rename slidesEditor to slidesEditor
-    currentSlide = slidesEditor.getCurrentSlide();
+    // slidesEditor = new SlidesEditor2(slides);//rename slidesEditor to slidesEditor
+    currentSlide = pbs.getCurrentItemByIndex(currentSlideIndex);
 });
 function getNewSlideStartTime(slides){
   if(slides.length>0){
@@ -82,9 +80,9 @@ function addNew(slideType:ISlideTypeAvailable) {
         newSlide.startTime = startTime;
         newSlide.endTime = newSlide.startTime + 10 ;
         slides.push(newSlide);
-        // slidesEditor.Index = 0; // THIS IS ERROR
-        slidesEditor.currentIndex = slidesEditor.slides.length -1; 
-        currentSlide = slidesEditor.getCurrentSlide();
+    
+    
+        currentSlide = pbs.getCurrentItemByIndex(slides.length-1)
         // show = false;
     } catch (error) {
         console.error('Failed to add new slide:', error);
@@ -92,20 +90,20 @@ function addNew(slideType:ISlideTypeAvailable) {
 }
 
 function clone(){
-  slidesEditor.clone();
-  currentSlide = slidesEditor.getCurrentSlide();
+  cloneFn(currentSlideIndex,slides);
+next();
 }
 function moveUp(){
-  slidesEditor.moveUp();
-  currentSlide = slidesEditor.getCurrentSlide(); 
+  moveUpFn(currentSlideIndex,slides);
+  prev();
 }
 function moveDown(){
-  slidesEditor.moveDown();
-  currentSlide = slidesEditor.getCurrentSlide(); 
+  moveDownFn(currentSlideIndex,slides);
+  next();
 }
 function deleteFn() {
-  slidesEditor.del();
-  currentSlide = slidesEditor.getCurrentSlide(); 
+  del(currentSlideIndex,slides);
+  prev();
 }
 </script>
 {#if currentSlide}  
