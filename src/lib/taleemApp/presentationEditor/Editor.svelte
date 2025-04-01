@@ -29,6 +29,7 @@
   /////////////////////////////////////////
   let currentSlideIndex = 0;
   let currentSlide: ISlide | null = null;
+  let currentSlideType:string = "canvas";
   let currentSlideStartTime = 0;
   let currentSlideEndTime = 0;
 
@@ -57,6 +58,8 @@
         currentSlideIndex = 0;
       }
       currentSlideEndTime = currentSlideStartTime + currentSlide.endTime;
+
+      currentSlideType = currentSlide.type;
     }
   }
 
@@ -114,13 +117,7 @@
       console.error("Failed to add new slide:", error);
     }
   }
-  // function setSlideEndTime(incommingEndTime = 0) {
-  //   // debugger;
-  //   if (currentSlide) {
-  //     //endTime is duration/period :: ==>>
-  //     currentSlide.endTime = currentTime - currentSlideStartTime;
-  //   }
-  // }
+
   function setSlideDuration() {
     if (currentSlide) {
       currentSlide.endTime = currentTime - currentSlideStartTime;
@@ -179,6 +176,7 @@
     {setSlideDuration}
     {currentSlideStartTime}
     {currentSlideEndTime}
+    {currentSlideType}
     bind:showSidePanel
     bind:show
     bind:showSoundBar

@@ -12,6 +12,7 @@
   export let showSidePanel;
   export let currentSlideStartTime;
   export let currentSlideEndTime;
+  export let currentSlideType;
   
   export let save=()=>{};
   export let log=()=>{};
@@ -20,7 +21,6 @@
   export let setSlideDuration;
   export let currentTime;
   export let showSoundBar;
-  export let startTime=0;
   export let endTime;
     
   </script>
@@ -51,16 +51,24 @@
     <div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
     >{currentSlideEndTime}</div>
 
-    <span class='text-xs'>Length</span>
-    <input class='bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white text-center'  type="number" bind:value={endTime} 
-     min=0 
-     max=3600 
-     >    
 
-     <span class='text-xs'>End At</span>
+    <span class='text-xs'>Length</span>
+
+{#if currentSlideType=="canvas"}
+    <input class='bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white text-center'  type="number" bind:value={endTime} min=0 max=3600 >    
+
+    <span class='text-xs'>End At</span>
     <button class="bg-red-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white"
     on:click={setSlideDuration}
     >{currentTime}</button>
+    
+{/if}
+    
+{#if currentSlideType=="eqs"}
+    <input disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-white text-center'  type="number" bind:value={endTime} min=0 max=3600 >    
+{/if}
+
+  
   </div>  
   <!-- /////////////////////////////////////////////////////////////////////////// -->
   
