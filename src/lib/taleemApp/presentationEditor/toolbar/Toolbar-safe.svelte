@@ -1,0 +1,90 @@
+<script >
+//@ts-nocheck
+import NavBtn2 from './NavBtn2.svelte';
+import uuid from "../addNewSlide/uuid.js";
+import TimeManager from './TimeManager.svelte';
+
+//////////////////////////////////////////////////////////////
+export let next;
+export let prev;
+//////////////////////////////////////////////////////////////
+export let show;
+export let showSidePanel;
+export let currentSlideStartTime;
+export let currentSlideEndTime;
+
+export let save=()=>{};
+export let log=()=>{};
+export let deleteFn;
+export let clone;
+export let setSlideEndTime;
+export let currentTime;
+export let showSoundBar;
+export let startTime=0;
+export let endTime;
+  
+</script>
+
+<div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 pt-2 px-2 ' style="color:whitesmoke;">
+ 
+  <div class='flex justify-start items-center gap-1'>
+    
+    <NavBtn2 title='Slide'  icon='💡'  clk={()=>show = !show}                   />
+    <NavBtn2 title='SP'     icon='🚪'  clk={()=>showSidePanel = !showSidePanel} />
+    <NavBtn2 title='Save'   icon='💾'  clk={save}                               />
+    <NavBtn2 title='Prev'   icon="<<"  clk={prev}                               />
+    <NavBtn2 title='Next'   icon=">>"  clk={next}                               />
+    <NavBtn2 title='Log'    icon='🖨️'  clk={log}                                />
+    <NavBtn2 title='Sound'  icon='📢'  clk={()=>showSoundBar =!showSoundBar }   />
+    
+  </div> 
+
+<!-- /////////////////////////////////////////////////////////////////////////// -->
+<div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
+
+<!-- do not set start since tops are fixed set end -->
+  <span class='text-xs'>Start At</span> 
+  
+  <div class="bg-blue-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white"
+  >{currentSlideStartTime}</div>
+  
+
+  <span class='text-xs'>End</span>
+ 
+  <button class="bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white"
+  on:click={setSlideEndTime}
+  >{currentSlideEndTime}</button>
+ 
+  ,
+
+  <input type="number" class="bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white"
+  on:input={()=>setSlideEndTime()}   />
+  
+  <span class='text-xs'>Duration</span>
+  
+  <input class='bg-gray-500 text-white p-0 px-1  m-0 rounded-md border-2 border-white text-center '  type="number" bind:value={endTime} 
+   min=0 
+   max=3600 
+   >    
+
+</div>  
+<!-- /////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+  <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
+
+<NavBtn2 title='Clone'  icon='🐑'  clk= {clone} />
+<NavBtn2 title='Delete' icon='🗑️'  clk={deleteFn} />
+ 
+  </div>  
+</div>
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 <script lang="ts">   
 import type {ISlide} from "./ISlide";
 import { onMount } from "svelte";
-import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
-import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
+  import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
+  import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
 import type {IAssets} from "../taleem-canvas";
 import SoundPlayer from "../app/SoundPlayer";
 import PlayerToolbar from "../app/PlayerToolbar.svelte";
@@ -21,32 +21,41 @@ import PBSSlides from "../app/PBSSlides";
     let currentTime = 0; //just for reactivity and match it with soundPlayer/Time player
     let soundPlayer = new SoundPlayer(soundFileName);
 ///Main reactivity       
-
+$:{
+        currentTime;
+  if(soundPlayer){
+  currentSlide = getCurentSlide(currentTime,slides);
+  if(currentTime > totalTime){stop();}
+  }
+}
 /////////////////////////////////    
 onMount(async() => {
   pbs = new PBSSlides(slides);
   totalTime = pbs.getTotalPeriod();
   
  slides =  pbs.periodToStartEnd();
- console.log("static",slides);
 // debugger;
    currentSlide = getCurentSlide(0,slides);
     
 });
-function start(){ 
+
+function start(){
+  if(interval){clearInterval(interval);} 
   interval = setInterval(gameloop,20);
   soundPlayer.start();
   currentTime = soundPlayer.getCurrentTime();
 }
 
+function stop(){
+  if(interval)clearInterval(interval);
+  soundPlayer.stop();
+  currentTime = 0;
+}
+
 function gameloop(){
-  if(pbs){
-  // debugger;
+  if(soundPlayer){
   currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
-  currentSlide = getCurentSlide(currentTime,slides);
-  // console.log("currentSlideIndex",currentSlideIndex)
-  //auto stop log awaited
-  if(currentTime > totalTime){stop();}
+  // if(currentTime > totalTime){stop();}
   }
 }
 
@@ -58,17 +67,10 @@ function jumpTo(timeMs:number){
   // debugger;
 }
 
-function stop(){
-  if(interval)clearInterval(interval);
-  soundPlayer.stop();
-  currentTime = 0;
-}
-
 </script>
-
 <!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  
 <PlayerToolbar {currentTime} {start} {stop} {totalTime} {jumpTo}/>
-<!-- ///////////////////////////////////////////////////////////////////////     -->
+<!-- //////////////////////////////////////////////////////////////////////////////     -->
 <div class="container">
 {#if currentSlide !==null} 
   <!-- the === make it type insertion now the type is also checked we can also use type guards -->
