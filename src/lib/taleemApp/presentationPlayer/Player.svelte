@@ -25,11 +25,11 @@ import PBSSlides from "../app/PBSSlides";
 /////////////////////////////////    
 onMount(async() => {
   pbs = new PBSSlides(slides);
+  totalTime = pbs.getTotalPeriod();
   
  slides =  pbs.periodToStartEnd();
  console.log("static",slides);
 // debugger;
-//  totalTime = pbs.getTotalPeriod();
    currentSlide = getCurentSlide(0,slides);
     
 });

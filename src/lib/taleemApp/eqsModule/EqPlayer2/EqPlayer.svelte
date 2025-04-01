@@ -17,7 +17,7 @@ function isSelected(item){
     return true;
   }else {
     // debugger;
-    console.log("currentTime",currentTime,"item",item, "false");
+    // console.log("currentTime",currentTime,"item",item, "false");
     return false;
   }
 }
