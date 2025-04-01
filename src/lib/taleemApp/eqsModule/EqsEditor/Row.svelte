@@ -7,7 +7,6 @@
 
     export let currentTime;
     export let item;
-    export let updateTimings;
     export let i;
    
     export let addEq; 
@@ -22,12 +21,6 @@
     $: hasItems = item?.itemExtra?.sp?.length > 0;
    
 
-
-    // onMount(async() =>{
-        // console.log("ok");
-        // debugger;
-
-    // });
    </script>
    
    <div class="flex w-full  justify-center text-lg rounded-md gap-2">
@@ -35,12 +28,7 @@
    
     
     <div class="w-1/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">
-    <!-- <AddTime bind:item={item} {currentTime} {updateTimings} isFirst={i==0 ? true : false}/> -->
-                <!-- <input 
-                class="text-xs bg-gray-800 text-white" style="width:70px"
-                type='number' 
-                bind:value={item.itemExtra.startTime} 
-                />    -->
+
                 <input 
                 class="text-xs bg-gray-800 text-white" style="width:70px"
                 type='number' 

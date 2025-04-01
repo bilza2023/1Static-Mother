@@ -42,7 +42,8 @@ function gameloop(){
   if(pbs){
   // debugger;
   currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
-  currentSlide = pbs.getCurrentItemByIndex(currentSlideIndex);
+  currentSlide = pbs.getCurrentItem(currentTime);
+  console.log("currentSlideIndex",currentSlideIndex)
   //auto stop log awaited
   if(currentTime > totalTime){stop();}
   }
