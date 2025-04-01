@@ -2,65 +2,27 @@
   import CodeTxt from './CodeTxt.svelte';
   import SidePanel from './sp/SidePanel.svelte';
 
-  export let items;
-  export let assets;
-  export let slideStartTime;
-  export let currentTime = 0;
-  export let setPulse = () => {
-    console.log('setPulse..add custom code');
+  export let items: any[]; // Assuming 'items' is an array of objects
+  export let assets: any; // Assuming 'assets' is an object
+  export let currentTime: number = 0;
+
+  export let setPulse = (time: number) => {
+    console.log('setPulse..add custom code', time);
   };
-  let slideElapsedTime = 0;
-  let selectedIndex: number | null = null;
-  let selectedStates: boolean[] = []; // Reactive array to store selected states
 
-  $: {
-    currentTime;
-    slideElapsedTime = currentTime - slideStartTime;
-    console.log('slideElapsedTime', slideElapsedTime);
-
-    selectedIndex = null;
-    if (items) {
-      selectedStates = items.map((_, index) => {
-        const selected = isSelected(index);
-        if (selected) {
-          selectedIndex = index;
-        }
-        return selected;
-      });
-    }
-    console.log('Selected Index: ', selectedIndex);
+function isSelected(item){
+  
+  if(currentTime >= item.itemExtra.startTime   && currentTime < item.itemExtra.calcEndTime ){
+  console.log("currentTime",currentTime,"item",item, "true");
+    return true;
+  }else {
+    // debugger;
+    console.log("currentTime",currentTime,"item",item, "false");
+    return false;
   }
+}
 
-  function isSelected(index) {
-    if (index < 0 || index > items.length - 1) {
-      return false;
-    }
-    const startTime = getStartTime(index);
-    const endTime = getEndTime(index);
-    if (slideElapsedTime >= startTime && slideElapsedTime < endTime) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
-  function getStartTime(index) {
-    let startTime = 0;
-    for (let i = 0; i < index; i++) {
-      const item = items[i];
-      startTime += item.itemExtra.endTime;
-    }
-    return startTime;
-  }
-
-  function getEndTime(index) {
-    let startTime = 0;
-    for (let i = 0; i < index; i++) {
-      const item = items[i];
-      startTime += item.itemExtra.endTime;
-    }
-    return startTime + items[index].itemExtra.endTime;
-  }
 </script>
 
 {#if items && assets}
@@ -71,14 +33,14 @@
           {#each items as item, index}
             <button
               class="flex w-full items-center"
-              on:click={() => setPulse(item.itemExtra.startTime)}
+              on:click={() => setPulse(getStartTime(index))} 
             >
               <div class="m-1 p-1 rounded-2xl text-sm bg-stone-600">
                 {index + 1}
               </div>
 
               <div
-                class={selectedStates[index]
+                class={isSelected(item)
                   ? 'focused w-full text-center'
                   : 'nonFocused w-full text-center'}
               >
@@ -90,12 +52,11 @@
       </div>
 
       <div class="side-panel">
-        <SidePanel {currentTime} {assets} {items} {selectedIndex} />
+        <SidePanel {currentTime} {assets} {items}  />
       </div>
     </div>
   </div>
 {/if}
-
 
 <style>
   .focused {

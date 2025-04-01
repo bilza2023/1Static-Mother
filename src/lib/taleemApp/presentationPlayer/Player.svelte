@@ -6,9 +6,7 @@ import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
 import type {IAssets} from "../taleem-canvas";
 import SoundPlayer from "./SoundPlayer";
 import PlayerToolbar from "./PlayerToolbar.svelte";
-// import getCurrentSlide from "./getCurrentSlide";
-// import PeriodBasedSystem from "./PeriodBasedSystem";
-// import getPBSItem from "./PBSObject";
+import getCurentSlide from "./getCurrentSlide";
 import PBSSlides from "../app/PBSSlides";
 ////////////////////////////--AS////////////////////////////////
     export let slides:ISlide[];
@@ -26,10 +24,13 @@ import PBSSlides from "../app/PBSSlides";
 
 /////////////////////////////////    
 onMount(async() => {
-  // debugger;
   pbs = new PBSSlides(slides);
- totalTime = pbs.getTotalPeriod();
-   currentSlide = pbs.getCurrentItem(0,0);
+  
+ slides =  pbs.periodToStartEnd();
+ console.log("static",slides);
+// debugger;
+//  totalTime = pbs.getTotalPeriod();
+   currentSlide = getCurentSlide(0,slides);
     
 });
 function start(){ 
@@ -42,8 +43,8 @@ function gameloop(){
   if(pbs){
   // debugger;
   currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
-  currentSlide = pbs.getCurrentItem(currentTime);
-  console.log("currentSlideIndex",currentSlideIndex)
+  currentSlide = getCurentSlide(currentTime,slides);
+  // console.log("currentSlideIndex",currentSlideIndex)
   //auto stop log awaited
   if(currentTime > totalTime){stop();}
   }
@@ -77,7 +78,7 @@ function stop(){
           {/if}
   
           {#if (currentSlide.type) === "eqs"}
-          <EqPlayer 
+          <EqPlayer  
                 bind:items={currentSlide.items}
                 slideStartTime={pbs.getSlideStartTime(currentSlideIndex)}
                 {currentTime}
