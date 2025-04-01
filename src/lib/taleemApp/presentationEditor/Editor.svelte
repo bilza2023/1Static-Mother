@@ -12,8 +12,6 @@
     import type {IAssets} from "../taleem-canvas";
     import getSlidesListForPanel from "./getSlidesListForPanel";
     import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
-    // import SlidesEditor from "./SlidesEditor";
-    import SlidesEditor2 from "./SlidesEditor2";
     import PBSSlides from "../app/PBSSlides";
     import {del,clone as cloneFn,moveDown as moveDownFn,moveUp as moveUpFn} from "./slideEditFunctions";
 ////////////////////////////--ASS-I--////////////////////////////////
@@ -26,7 +24,6 @@
     let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
     // let slideStartTime = 0;
-    // let slideEndTime = 0;
     let pbs = null; 
     let currentTime = 0; 
     let showSidePanel = true; // Add this to control side panel visibility
@@ -38,34 +35,34 @@ $:{
   slidesList = getSlidesListForPanel(slides,currentSlideIndex);//valid
 
 }
+
+/////////////////////////////////    
+onMount(async() => {
+/////////////////////////////////////////////////////////////////////////
+    pbs = new PBSSlides(slides);
+    currentSlide = pbs.getCurrentItemByIndex(currentSlideIndex);
+});
+///////////////////////////////////////////
+
 function log(){
   console.log("export const presentationData = " + JSON.stringify(slides)); 
 }     
 function next(){
   if(currentSlideIndex < slides.length -1 )currentSlideIndex +=1;
-let r = pbs.getCurrentItemByIndex(currentSlideIndex);
-if (r){currentSlide=r;}
+  let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+  if (r){currentSlide=r;}
 }
 function prev(){
-if(currentSlideIndex>0)currentSlideIndex -=1;
+  if(currentSlideIndex>0)currentSlideIndex -=1;
 
-let r = pbs.getCurrentItemByIndex(currentSlideIndex);
-if (r){currentSlide=r;}
-
+  let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+  if (r){currentSlide=r;}
 }
 function setCurrentSlide(index) {
   currentSlideIndex =index;
 let r = pbs.getCurrentItemByIndex(currentSlideIndex);
 if (r){currentSlide=r;}
 }
-/////////////////////////////////    
-onMount(async() => {
-/////////////////////////////////////////////////////////////////////////
-    pbs = new PBSSlides(slides);
-
-    // slidesEditor = new SlidesEditor2(slides);//rename slidesEditor to slidesEditor
-    currentSlide = pbs.getCurrentItemByIndex(currentSlideIndex);
-});
 function getNewSlideStartTime(slides){
   if(slides.length>0){
     return slides[slides.length -1].endTime;
@@ -80,7 +77,6 @@ function addNew(slideType:ISlideTypeAvailable) {
         newSlide.startTime = startTime;
         newSlide.endTime = newSlide.startTime + 10 ;
         slides.push(newSlide);
-    
     
         currentSlide = pbs.getCurrentItemByIndex(slides.length-1)
         // show = false;
@@ -148,6 +144,7 @@ bind:endTime=  {currentSlide.endTime}
             <CanvasEditor 
                 bind:itemLiterals={currentSlide.items}             
                 bind:background={currentSlide.slideExtra}
+                
                 {assets}
                 {images}
             />
@@ -156,7 +153,7 @@ bind:endTime=  {currentSlide.endTime}
           {#if (currentSlide.type) === "eqs"}
           <EqsEditor 
                 bind:items={currentSlide.items}
-                slideStartTime={currentSlide.startTime}
+                slideStartTime={pbs.getSlideStartTime(currentSlideIndex)}
                 slideEndTime=  {currentSlide.endTime}
                 {currentTime}
           />

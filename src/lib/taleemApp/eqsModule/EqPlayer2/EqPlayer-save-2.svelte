@@ -10,25 +10,24 @@
     console.log('setPulse..add custom code');
   };
   let slideElapsedTime = 0;
-  let selectedIndex: number | null = null;
-  let selectedStates: boolean[] = []; // Reactive array to store selected states
+  let selectedIndex: number | null = null; // Global variable to store selected index
 
   $: {
     currentTime;
     slideElapsedTime = currentTime - slideStartTime;
     console.log('slideElapsedTime', slideElapsedTime);
 
-    selectedIndex = null;
+    // Loop through items and find the selected one
+    selectedIndex = null; // Reset selectedIndex on each currentTime change
     if (items) {
-      selectedStates = items.map((_, index) => {
-        const selected = isSelected(index);
-        if (selected) {
-          selectedIndex = index;
+      for (let i = 0; i < items.length; i++) {
+        if (isSelected(i)) {
+          selectedIndex = i;
+          break; // Stop looping once the selected item is found
         }
-        return selected;
-      });
+      }
     }
-    console.log('Selected Index: ', selectedIndex);
+    console.log("Selected Index: ", selectedIndex);
   }
 
   function isSelected(index) {
@@ -78,7 +77,7 @@
               </div>
 
               <div
-                class={selectedStates[index]
+                class={isSelected(index)
                   ? 'focused w-full text-center'
                   : 'nonFocused w-full text-center'}
               >
@@ -95,7 +94,6 @@
     </div>
   </div>
 {/if}
-
 
 <style>
   .focused {

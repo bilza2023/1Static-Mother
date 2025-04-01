@@ -9,13 +9,14 @@ import PlayerToolbar from "./PlayerToolbar.svelte";
 // import getCurrentSlide from "./getCurrentSlide";
 // import PeriodBasedSystem from "./PeriodBasedSystem";
 // import getPBSItem from "./PBSObject";
-import PBSObject from "./PBSObject";
+import PBSSlides from "../app/PBSSlides";
 ////////////////////////////--AS////////////////////////////////
     export let slides:ISlide[];
     export let assets:IAssets; //assets to have images loaded
     export let soundFileName = '/sounds/music.opus'; //default music sound
 /////////////////////////////////////////
     let currentSlide:ISlide | null = null;  
+    let currentSlideIndex = 0;
     let interval = 0;
     let pbs = null;
     let totalTime = 300;//default presentation end time
@@ -26,7 +27,7 @@ import PBSObject from "./PBSObject";
 /////////////////////////////////    
 onMount(async() => {
   // debugger;
-  pbs = new PBSObject(slides); 
+  pbs = new PBSSlides(slides);
  totalTime = pbs.getTotalPeriod();
    currentSlide = pbs.getCurrentItem(0,0);
     
@@ -41,7 +42,7 @@ function gameloop(){
   if(pbs){
   // debugger;
   currentTime = parseInt(soundPlayer.getCurrentTime()/1000);
-  currentSlide = pbs.getCurrentItem(currentTime,0);
+  currentSlide = pbs.getCurrentItemByIndex(currentSlideIndex);
   //auto stop log awaited
   if(currentTime > totalTime){stop();}
   }
@@ -77,7 +78,7 @@ function stop(){
           {#if (currentSlide.type) === "eqs"}
           <EqPlayer 
                 bind:items={currentSlide.items}
-                slideStartTime = {currentSlide.startTime}
+                slideStartTime={pbs.getSlideStartTime(currentSlideIndex)}
                 {currentTime}
                 {assets}
           />
