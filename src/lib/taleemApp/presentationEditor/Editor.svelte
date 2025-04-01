@@ -27,12 +27,13 @@
     let interval=null;
     let currentSlide:ISlide | null = null;
     let slidesList:ISlidesList[] = [];
-    // let slideStartTime = 0;
+
     let pbs = null; 
     let totalTime = 0; 
     let currentTime = 0; 
     let showSidePanel = true; // Add this to control side panel visibility
     let show = false;
+    let showSoundBar = true;
     let soundPlayer = new SoundPlayer(soundFileName);
    
 $:{
@@ -130,7 +131,7 @@ function gameloop(){
 </script>
 
 <!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->  
-{#if soundPlayer}
+{#if soundPlayer &&  showSoundBar}
 <PlayerToolbar {currentTime} {start} {stop} {totalTime} />
 {/if}
 <!-- ///////////////////////////////////////////////////////////////////////     -->
@@ -147,6 +148,7 @@ function gameloop(){
 {deleteFn}
 bind:showSidePanel={showSidePanel} 
 bind:show={show} 
+bind:showSoundBar={showSoundBar} 
 bind:endTime=  {currentSlide.endTime}
 />
 {/if}

@@ -1,7 +1,6 @@
 <script >
 //@ts-nocheck
 import NavBtn2 from './NavBtn2.svelte';
-import SoundButtons from './SoundButtons.svelte';
 import uuid from "../addNewSlide/uuid.js";
 import TimeManager from './TimeManager.svelte';
 
@@ -10,15 +9,14 @@ export let next;
 export let prev;
 //////////////////////////////////////////////////////////////
 export let show;
-export let assets;
 export let showSidePanel;
 
 export let save=()=>{};
 export let log=()=>{};
 export let deleteFn;
 export let clone;
-export let soundFile=null;
 export let currentTime;
+export let showSoundBar;
 export let startTime=0;
 export let endTime;
   
@@ -34,11 +32,9 @@ export let endTime;
       <NavBtn2 title='Prev' icon="<<"  clk={prev} />
       <NavBtn2 title='Next' icon=">>"  clk={next} />
     <NavBtn2 title='Log' icon='🖨️'  clk={log} />
+    <NavBtn2 title='Log' icon='📢'  clk={()=>showSoundBar =!showSoundBar } />
     
-{#if soundFile}
-<SoundButtons  {soundFile}  bind:currentTime={currentTime} narration={assets.narration || null}
-  />    
-{/if}
+
 
   </div> 
 
