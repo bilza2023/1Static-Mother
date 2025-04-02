@@ -53,9 +53,10 @@
     >{currentSlideEndTime}</div>
 
 
-    <span class='text-xs'>Length</span>
+  
 
 {#if currentSlideType=="canvas"}
+<span class='text-xs'>Length</span>
     <input class='bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white text-center'  type="number" bind:value={endTime} min=0 max=3600 >    
 
     <span class='text-xs'>End At</span>
@@ -66,10 +67,10 @@
 {/if}
     
 {#if currentSlideType=="eqs"}
-    <div disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 
+    <!-- <div disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 
     border-gray-600 text-center'  type="number">
     {currentSlideDuration}
-  </div>    
+  </div>     -->
 {/if}
 
   

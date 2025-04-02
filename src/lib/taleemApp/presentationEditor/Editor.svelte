@@ -12,7 +12,7 @@
   import SoundPlayer from "../app/SoundPlayer";
   import getSlidesListForPanel from "./getSlidesListForPanel";
   import type ISlideTypeAvailable from "./ISlideTypeAvailable"; //canvas | eqs
-  import PBSSlides from "../app/PBSSlides";
+  import SlideEditor from "./SlideEditor";
   import {
     del,
     clone as cloneFn,
@@ -26,18 +26,19 @@
   export let save: () => void;
   export let assets: IAssets;
   export let soundFileName = "/sounds/music.opus"; //default music sound
-  /////////////////////////////////////////
-  let currentSlideIndex = 0;
+  /////////////////CURRENT SLIDE////////////////////////
   let currentSlide: ISlide | null = null;
+  let currentSlideIndex = 0;
   let currentSlideType:string = "canvas";
   let currentSlideStartTime = 0;
   let currentSlideEndTime = 0;
   let currentSlideDuration = 0;
 
+  ///////////////////////////////////////////////////////////////
   let interval = null;
   let slidesList: ISlidesList[] = [];
 
-  let pbs = null;
+
   let totalTime = 0;
   let currentTime = 0;
   let showSidePanel = true; // Add this to control side panel visibility
@@ -49,12 +50,12 @@
     ///THE MAIN REACTIVE STATEMENT
     currentSlide;
     currentSlideIndex;
-    if (pbs) {
-      totalTime = pbs.getTotalPeriod();
+    if (currentSlide && slides) {
+      totalTime = SlideEditor.getTotalPeriod(slides);
       slidesList = getSlidesListForPanel(slides, currentSlideIndex); //valid
 
       if (currentSlideIndex > 0) {
-        currentSlideStartTime = pbs.getSlideEndTime(currentSlideIndex - 1);
+        currentSlideStartTime = SlideEditor.getSlideEndTime(currentSlideIndex - 1,slides);
       } else {
         currentSlideStartTime = 0;
       }
@@ -68,8 +69,12 @@
   /////////////////////////////////
   onMount(async () => {
     /////////////////////////////////////////////////////////////////////////
-    pbs = new PBSSlides(slides);
-    currentSlide = pbs.getCurrentItemByIndex(currentSlideIndex);
+    if(slides.length > 0){
+      currentSlide = slides[currentSlideIndex];
+    }else {
+      currentSlide = null;
+    }
+
   });
   ///////////////////////////////////////////
 
@@ -78,7 +83,7 @@
   }
   function next() {
     if (currentSlideIndex < slides.length - 1) currentSlideIndex += 1;
-    let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+    let r = slides[currentSlideIndex];
     if (r) {
       currentSlide = r;
     }
@@ -86,14 +91,14 @@
   function prev() {
     if (currentSlideIndex > 0) currentSlideIndex -= 1;
 
-    let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+    let r = slides[currentSlideIndex];
     if (r) {
       currentSlide = r;
     }
   }
   function setCurrentSlide(index) {
     currentSlideIndex = index;
-    let r = pbs.getCurrentItemByIndex(currentSlideIndex);
+    let r = slides[currentSlideIndex];
     if (r) {
       currentSlide = r;
     }
@@ -112,9 +117,7 @@
       newSlide.startTime = startTime;
       newSlide.endTime = newSlide.startTime + 10;
       slides.push(newSlide);
-
-      currentSlide = pbs.getCurrentItemByIndex(slides.length - 1);
-      // show = false;
+      currentSlide = slides[slides.length - 1];// show = false;
     } catch (error) {
       console.error("Failed to add new slide:", error);
     }
@@ -126,9 +129,8 @@
     }
   }
 function setEqSlideLength(){ //setEqSlideDuration
-  debugger;
-  currentSlideDuration = pbs.getEqSlidePeriod(slides[currentSlideIndex]); 
-currentSlideEndTime = pbs.getSlideEndTime(currentSlideIndex);  
+  currentSlideDuration = SlideEditor.getSlidePeriod(currentSlideIndex,slides); 
+currentSlideEndTime = SlideEditor.getSlideEndTime(currentSlideIndex,slides);  
 }
   function clone() {
     cloneFn(currentSlideIndex, slides);
