@@ -9,6 +9,7 @@ import getNewItem from "../getNewItem";
 import Row from './Row.svelte';
   import { onMount } from 'svelte';
   import PBDItem from "../../app/PBDItem";
+
 // export let just items and currentTime which is required for Editor only
 export let items;
 export let currentTime=0; //current time if not given is zero ..correct ????
@@ -17,14 +18,32 @@ export let setEqSlideLength;
 export let currentSlideStartTime;
 export let currentSlideEndTime;
 
+function manageEqItems(){
+  if(!items) return;
+
+   let mainStartingTime = currentSlideStartTime;
+// debugger;
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        item.itemExtra.startTime = mainStartingTime;
+        item.itemExtra.calcEndTime = item.itemExtra.startTime + item.itemExtra.endTime;
+        mainStartingTime = item.itemExtra.calcEndTime;
+    }
+}
+
+onMount(async () => {
+        setInterval(manageEqItems,300);
+});
+
 function getItemStartTime(i){
+
   const rez = PBDItem.getSlideStartTime(i,items);
   return  rez;
   }
   function getItemEndTime(i){
     const rez = PBDItem.getSlideEndTime(i,items);
     return  rez;
-  }
+}
 
 // the only local variable
 let timingsError = false;
@@ -119,13 +138,9 @@ onMount(async() => {
     {moveUpEq} 
     {moveDownEq}
     {setEqType}
-{currentSlideStartTime}
-{currentSlideEndTime}
-    {setEqSlideLength}
-ItemStartTime = {getItemStartTime(i)}      
-ItemEndTime = {getItemEndTime(i)}      
-    />
 
+    {setEqSlideLength}  
+    />
   {/each}
   </div>
     

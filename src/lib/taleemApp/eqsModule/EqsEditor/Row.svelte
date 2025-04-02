@@ -1,15 +1,8 @@
 <script>
 //   import {onMount} from 'svelte';  
   import SidePanel from "./SidePanel/SidePanel.svelte";
-  import { onMount } from "svelte";
   import EqPart from "./EqPart/EqPart.svelte"; 
   import LowerToolBar from "./EqPart/LowerToolBar.svelte";
-
-    export let currentTime;
-    export let currentSlideStartTime;
-    export let currentSlideEndTime;
-    
-    let accumulatedDuration=0;
 
     export let item;
     export let i;
@@ -20,8 +13,7 @@
     export let moveDownEq; 
     export let setEqType;
     export let setEqSlideLength;//
-    export let ItemStartTime;//
-    export let ItemEndTime;//
+  
 
     let open = false;
    
@@ -40,11 +32,11 @@
 
 <!--New code  -->
 <span class='text-xs rounded-md'>Start</span>
-<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{ItemStartTime}</div>
+<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{item.itemExtra.startTime}</div>
 <!-- currentSlideStartTime -->
 <!-- currentSlideEndTime -->
 <span class='text-xs rounded-md'>End</span>
-<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{ItemEndTime}</div>
+<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{item.itemExtra.calcEndTime}</div>
 
 <span class='text-xs rounded-md'>Duration</span>
                 <input 
@@ -68,8 +60,7 @@
         {setEqType} />    
     </div>
 
-
-    <!-- <div class="w-4/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">Display</div> -->
+<!-- ///////////////////////////////SIDE PANEL ////////////////// -->
     <div class="w-1/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">
            <button 
                class="p-1 rounded-md m-1 {hasItems ? 'bg-orange-900' : 'bg-gray-400'}" 
