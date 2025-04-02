@@ -20,10 +20,10 @@
     moveUp as moveUpFn,
   } from "./slideEditFunctions";
   import PlayerToolbar from "../app/PlayerToolbar.svelte";
-  // import periodToStartEndStyle from "../app/periodToStartEndStyle"
+  import TimeManager from "./timeManager/TimeManager.svelte";
 
   ////////////////////////////--ASS-I--////////////////////////////////
-  export let slides: ISlide[];
+  export let slides: ISlide[]=[];
   export let images: string[];
   export let save: () => void;
   export let assets: IAssets;
@@ -45,7 +45,8 @@
   let currentTime = 0;
   let showSidePanel = true; // Add this to control side panel visibility
   let show = false;
-  let showSoundBar = true;
+  let showSoundBar = false;
+  let showTimeManager = false;
   let soundPlayer = new SoundPlayer(soundFileName);
 
   $: {
@@ -175,27 +176,32 @@ function setEqSlideLength(){ //setEqSlideDuration
   }
 </script>
 
-<!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->
-{#if soundPlayer && showSoundBar}
-  <PlayerToolbar {currentTime} {start} {stop} {totalTime} />
-{/if}
-<!-- ///////////////////////////////////////////////////////////////////////     -->
-{#if currentSlide}
   <Toolbar
     {prev}
     {next}
     {log}
     {save}
-    {currentTime}
     {clone}
     {deleteFn}
-    {setSlideDuration}
-    {currentSlideStartTime}
-    {currentSlideEndTime}
-    {currentSlideType}
     bind:showSidePanel
     bind:show
     bind:showSoundBar
+    bind:showTimeManager
+  />
+
+
+<!-- ////////////////////////////////Toolbar///////////////////////////////////////     -->
+{#if soundPlayer && showSoundBar}
+  <PlayerToolbar {currentTime} {start} {stop} {totalTime} />
+{/if}
+<!-- ///////////////////////////////////////////////////////////////////////     -->
+
+{#if currentSlide && showTimeManager}
+  <TimeManager
+    {currentTime}
+    {setSlideDuration}
+    {currentSlideStartTime}
+    {currentSlideType}
     bind:endTime={currentSlide.endTime}
   />
 {/if}

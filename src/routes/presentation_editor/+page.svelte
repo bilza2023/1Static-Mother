@@ -24,8 +24,8 @@
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
       let presentationData =  JSON.parse(localStorage.getItem("editorPresentation"));
-      slides = presentationData;
-      // slides = []; //fresh presentation
+      // slides = presentationData;
+      slides = []; //fresh presentation
 
     });
 

@@ -12,34 +12,16 @@
    
       {
         title: 'Slide Zero',
-        comments: 'The vibrant city at night.',
+        comments: 'First Try.',
         imageUrl: 'slide0.png',
         url: 'slide0'
       },
       {
-        title: 'Forest Path',
-        comments: 'A serene path through the woods.',
-        imageUrl: 'wood.jpg',
-                url: ''
-      },
-      {
-        title: 'Beach Sunset',
-        comments: 'A stunning sunset at the beach.',
-        imageUrl: 'atom.png',
-                url: ''
-      },
-      {
-        title: 'Abstract Art',
-        comments: 'Modern and abstract artwork.',
-        imageUrl: 'banners.png',
-                url: ''
-      },
-      {
-        title: 'Coffee Time',
-        comments: 'Relaxing with a cup of coffee.',
-        imageUrl: 'drops.png',
-                url: ''
-      },
+        title: 'Title 01',
+        comments: 'Testing...',
+        imageUrl: 'title01.png',
+        url: 'title01'
+      }
     ];
   </script>
   
