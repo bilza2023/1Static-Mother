@@ -67,14 +67,6 @@
 <div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
 >{currentSlideStartTime}</div>
 
- <span class='text-xs'>End</span>
-    <div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
-    >{currentSlideEndTime}</div>
-
-    <!-- <div disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 
-    border-gray-600 text-center'  type="number">
-    {currentSlideDuration}
-  </div>     -->
 {/if}
 
   
