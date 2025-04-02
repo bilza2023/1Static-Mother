@@ -20,11 +20,11 @@
    
  <div class='flex justify-start items-center gap-1'>
       
+   <NavBtn2 title='SP'     icon='🚪' clk={()=>showSidePanel = !showSidePanel}      />
   <NavBtn2 title='Slide'  icon='💡'  clk={()=>show = !show}                        />
-  <NavBtn2 title='SP'     icon='🚪'  clk={()=>showSidePanel = !showSidePanel}      />
-  <NavBtn2 title='Save'   icon='💾'  clk={save}                                    />
   <NavBtn2 title='Prev'   icon="<<"  clk={prev}                                    />
   <NavBtn2 title='Next'   icon=">>"  clk={next}                                    />
+  <NavBtn2 title='Save'   icon='💾'  clk={save}                                    />
   <NavBtn2 title='Log'    icon='🖨️'  clk={log}                                     />
   <NavBtn2 title='Sound'  icon='📢'  clk={()=>showSoundBar =!showSoundBar }        />
   <NavBtn2 title='Time'   icon='⏱️'  clk={()=>showTimeManager =!showTimeManager }  />

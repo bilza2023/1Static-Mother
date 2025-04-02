@@ -51,6 +51,10 @@ function init(){
     const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
     items = new Items(itemLiterals);
     player = new Player(canvasElement,ctx,assets);
+
+    const leftPanelWidth = canvasElement.parentElement.clientWidth;
+      // Set the width of the canvas through the Player instance
+      player.width = leftPanelWidth;
     editor = new EditorBehaviour(items,setSeletecItem);
     player.connect(editor);
     itemsForDropDown = items.getItems();

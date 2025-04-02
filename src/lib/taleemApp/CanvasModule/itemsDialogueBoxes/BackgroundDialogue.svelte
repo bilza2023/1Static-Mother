@@ -27,7 +27,6 @@
     
 <div class="container">
     <h1 class="input" style="text-align: center;">Background</h1>
-
     
     <table class="table">
        <InputColor caption="Color" bind:value={background.backgroundColor} /> 
@@ -36,11 +35,15 @@
 
        <InputCheckbox caption="Grid" bind:value={background.showGrid}/>
 
-
        <InputNumber caption="Grid Width" bind:value={background.gridLineWidth}
        config={{min:1, max:50, step:1}} /> 
 
-       <InputSelect caption="Images" bind:value={background.backgroundImage} options={backgroundImages} />
+       <InputSelect 
+            caption="Images" 
+            bind:value={background.backgroundImage} 
+            options={backgroundImages}
+            defaultOption="Select" 
+       />
 
 <!--      
        tthese 2 points are not working fine so remove for now
@@ -50,12 +53,8 @@
     
                <InputNumber caption="Cell Width" bind:value={background.cellWidth}
             config={{min:1, max:500, step:1}} /> 
--->
-
-    
-      
-        
-        <InputNumber caption="Visibility" bind:value={background.globalAlpha}
+-->     
+        <InputNumber caption="Opacity" bind:value={background.opacity}
             config={{min:0, max:1, step:0.1}} />
     </table> 
 </div><!--container-->    

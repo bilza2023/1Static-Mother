@@ -8,6 +8,7 @@
   import AddToolbar from "../addToolbar/AddToolbar.svelte";
   import SelectDropDown from "./SelectDropDown.svelte";
   import SelectedItemBasicDialogue from "../itemsDialogueBoxes/SelectedItemBasicDialogue.svelte";
+  import BackgroundDialogue from "../itemsDialogueBoxes/BackgroundDialogue.svelte";
   import {getCanvasBackground} from "../../taleem-canvas";
 /////////////////////////////////////////////////////////////////
 //26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
@@ -72,9 +73,7 @@ function init(){
     const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
     items = new Items(itemLiterals);
     player = new Player(canvasElement,ctx,assets);
-     debugger;
     const leftPanelWidth = canvasElement.parentElement.clientWidth;
-      // Set the width of the canvas through the Player instance
       player.width = leftPanelWidth;
 
     editor = new EditorBehaviour(items,setSeletecItem);
@@ -130,6 +129,8 @@ onMount(() => {
       {/if}
       {#if selectedItem}
         <SelectedItemBasicDialogue bind:selectedItem={selectedItem} {images} />
+      {:else}
+        <BackgroundDialogue bind:background={background}/>
       {/if}
     </div>
   </div>
@@ -160,45 +161,3 @@ onMount(() => {
     }
   </style>
   
-<!-- 
-<div class="container">
-  <div class="left-panel">
-    <AddToolbar callback={addNewItem} {clone} {deleteFn} {log}/>
-    <canvas bind:this={canvasElement} width="800px" height="360px"   ></canvas>
-  </div>
-  <div class="right-panel">
-    
-    {#if itemsForDropDown}
-    <SelectDropDown  items={itemsForDropDown} callback={setSelectedItemByMenu} />
-    {/if}
-    {#if selectedItem}
-  <SelectedItemBasicDialogue bind:selectedItem={selectedItem} {images} />
-    {/if}
-  </div>
-</div>
-
-<style>
-
-  .container {
-    display: flex;
-    
-    width: 100%;
-    gap: 0px;
-    padding: 0px;
-    margin: 0px;
-  }
-
-  .left-panel {
-    width: 80%;
-    padding: 0px;
-    margin: 0px;
-  }
-
-  .right-panel {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-    margin: 0px;
-  }
-</style> -->

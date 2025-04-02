@@ -2,27 +2,29 @@
     export let caption = "";
     export let value = "";
     export let options = [];
+    export let defaultOption = "-- Select an option --"; // Add this line
     
     function handleChange(event) {
         value = event.target.value;
     }
 </script>
 
-
 <tr class="tr">
     <td class="td">{caption}</td>
     <td class="td">
-  
         <select class="input" on:change={handleChange} value={value}>
+            <!-- Add the default option -->
+            <option value="">{defaultOption}</option>
+            
             {#each options as option}
                 <option value={option}>{option}</option>
             {/each}
+            
             <!-- Allow custom font family input -->
             {#if !options.includes(value) && value}
                 <option value={value}>{value} (Custom)</option>
             {/if}
         </select>
-
     </td>
 </tr>
 
