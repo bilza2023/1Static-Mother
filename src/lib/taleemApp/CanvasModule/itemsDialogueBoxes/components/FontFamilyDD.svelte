@@ -2,14 +2,22 @@
     export let value;
   
     const options = [
-      "Times New Roman",
-      "Courier New",
-      "Georgia",
-      "Verdana",
-      "Tahoma",
-      "Trebuchet MS",
-      "Impact",
-      "Gill Sans",
+  "Arial", 
+  "Helvetica", 
+  "Times New Roman", 
+  "Times", 
+  "Courier New", 
+  "Courier", 
+  "Verdana", 
+  "Georgia", 
+  "Palatino", 
+  "Garamond", 
+  "Bookman", 
+  "Comic Sans MS", 
+  "Trebuchet MS", 
+  "Arial Black", 
+  "Impact",
+  "Tahoma"
     ];
   
     function handleInput(e) {

@@ -1,9 +1,10 @@
 
 <script>
-import InputCheckbox from "./components/InputCheckbox.svelte";   
+import InputTextArea from "./components/InputTextArea.svelte";   
 import InputColor    from "./components/InputColor.svelte";   
 import InputNumber   from "./components/InputNumber.svelte";   
 import InputText     from "./components/InputText.svelte";   
+import FontFamilyDD     from "./components/FontFamilyDD.svelte";   
 
 export let selectedItem;
 
@@ -20,20 +21,24 @@ export let selectedItem;
 <InputColor    caption="Color"      bind:value={selectedItem.itemData.color} />
 
 
-<InputNumber   caption="Start Angle" bind:value={selectedItem.itemData.startAngle}  
-config={{min:0, max:8, step:0.25}}/>
+<InputTextArea caption="Data"     bind:value={selectedItem.itemData.listArray}/>
+<FontFamilyDD caption="fontFamily"     bind:value={selectedItem.itemData.fontFamily}/>
 
-<InputNumber   caption="End Angle" bind:value={selectedItem.itemData.endAngle}  
-config={{min:0, max:8, step:0.25}}/>
 
-<InputNumber   caption="Line Width" bind:value={selectedItem.itemData.lineWidth}  
-config={{min:1, max:50, step:1}}/>
-<InputCheckbox caption="Filled"     bind:value={selectedItem.itemData.filled}/>
-<InputNumber   caption="dash"       bind:value={selectedItem.itemData.dash}
-config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="gap"        bind:value={selectedItem.itemData.gap}
-config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
+<InputNumber   caption="fontSize" bind:value={selectedItem.itemData.fontSize}  
+config={{min:2, max:200, step:1}}/>
+
+<InputNumber   caption="indentation" bind:value={selectedItem.itemData.indentation}  
+config={{min:0, max:200, step:1}}/>
+
+<InputNumber   caption="lineGap" bind:value={selectedItem.itemData.lineGap}  
+config={{min:0, max:200, step:1}}/>
+
+
+<!-- : ["First item","Second item","Third item"], -->
+
+
+<InputNumber   caption="Opacity" bind:value={selectedItem.itemData.opacity}
 config={{min:0, max:1, step:0.1}}/>
 
 </table>

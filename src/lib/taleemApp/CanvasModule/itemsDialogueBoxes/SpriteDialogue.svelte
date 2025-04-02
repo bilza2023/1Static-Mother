@@ -50,8 +50,9 @@
         <InputSelect caption="Sheets" bind:value={selectedItem.itemData.src} options={sheets} />
         <InputSelect caption="Options" bind:value={selectedItem.itemData.selectedItem} options={spriteOptions} />
         
+   
         
-        <InputNumber caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
+        <InputNumber caption="Opacity" bind:value={selectedItem.itemData.opacity}
             config={{min:0, max:1, step:0.1}} />
     </table>
 </div><!--container-->    

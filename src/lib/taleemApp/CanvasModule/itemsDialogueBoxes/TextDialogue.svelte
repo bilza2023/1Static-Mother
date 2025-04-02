@@ -6,6 +6,7 @@ import InputColor    from "./components/InputColor.svelte";
 import InputNumber   from "./components/InputNumber.svelte";   
 import InputText     from "./components/InputText.svelte";   
 
+// import {fontFamilies} from "./components/fontFamilies"
 // Common font families
 const fontFamilies = [
   "Arial", 

@@ -4,6 +4,7 @@ import InputCheckbox from "./components/InputCheckbox.svelte";
 import InputColor    from "./components/InputColor.svelte";   
 import InputNumber   from "./components/InputNumber.svelte";   
 import InputText     from "./components/InputText.svelte";   
+import InputTextArea from "./components/InputTextArea.svelte";   
 
 export let selectedItem;
 
@@ -17,24 +18,22 @@ export let selectedItem;
     
 
 <InputText     caption="Name"       bind:value={selectedItem.itemData.name}  />
-<InputColor    caption="Color"      bind:value={selectedItem.itemData.color} />
 
+<InputNumber   caption="Radius" bind:value={selectedItem.itemData.radius}  
+config={{min:1, max:500, step:1}}/>
 
-<InputNumber   caption="Start Angle" bind:value={selectedItem.itemData.startAngle}  
-config={{min:0, max:8, step:0.25}}/>
+<InputTextArea caption="Data"     bind:value={selectedItem.itemData.data}/>
 
-<InputNumber   caption="End Angle" bind:value={selectedItem.itemData.endAngle}  
-config={{min:0, max:8, step:0.25}}/>
+<InputCheckbox caption="Labels"     bind:value={selectedItem.itemData.showLabels}/>
 
-<InputNumber   caption="Line Width" bind:value={selectedItem.itemData.lineWidth}  
-config={{min:1, max:50, step:1}}/>
-<InputCheckbox caption="Filled"     bind:value={selectedItem.itemData.filled}/>
-<InputNumber   caption="dash"       bind:value={selectedItem.itemData.dash}
-config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="gap"        bind:value={selectedItem.itemData.gap}
-config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
+<InputNumber   caption="Label font" bind:value={selectedItem.itemData.labelFontSize}  
+config={{min:1, max:300, step:1}}/>
+
+<InputNumber   caption="Opacity" bind:value={selectedItem.itemData.opacity}  
 config={{min:0, max:1, step:0.1}}/>
+
+<InputColor     caption="Label Color"       bind:value={selectedItem.itemData.labelColor}  />
+
 
 </table>
 
