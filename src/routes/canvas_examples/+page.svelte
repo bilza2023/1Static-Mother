@@ -1,112 +1,121 @@
-
-<script>
-  import CanvasSlidePlayer from "../../lib/taleemApp/CanvasModule/CanvasPlayer/CanvasSlidePlayer.svelte";
-  // let slideData =   localStorage.getItem("editorPresentation");
-  let slide = { 
-  items :[
-    {
-        "uuid": "ea3ad9f5-ad94-4481-801b-0b3a7cf776ed",
-        "type": "rectangle",
-        "name": "rectangle001",
-        "x": 786.1041641235352,
-        "y": 37,
-        "width": 100,
-        "height": 100,
-        "rotation": 0,
-        "filled": true,
-        "lineWidth": 1,
-        "dash": 0,
-        "gap": 0,
-        "color": "#0634ea",
-        "opacity": 1
-    },
-    {
-        "uuid": "6ea2b43a-038a-4845-9fe8-21802c225ff8",
-        "type": "rectangle",
-        "name": "rectangle001",
-        "x": 100,
-        "y": 100,
-        "width": 100,
-        "height": 100,
-        "rotation": 0,
-        "filled": true,
-        "lineWidth": 1,
-        "dash": 0,
-        "gap": 0,
-        "color": "red",
-        "opacity": 1
-    },
-    {
-        "uuid": "66bdd33c-d094-4069-bea5-c278a2a94d57",
-        "type": "ray",
-        "name": "ray-001",
-        "x1": 202.517727023573,
-        "y1": 143.3976056426273,
-        "x2": 771.1041641235352,
-        "y2": 85,
-        "arrowWidth": 8,
-        "arrowHeight": 12,
-        "startArrow": true,
-        "endArrow": true,
-        "lineWidth": 2,
-        "dash": 0,
-        "gap": 0,
-        "color": "red",
-        "opacity": 1
-    },
-    {
-        "uuid": "f406a49d-f34d-4f52-95bc-acce7b1b267d",
-        "type": "triangle",
-        "name": "tiangle-001",
-        "x1": 538.3206966375109,
-        "y1": 220.1289903904103,
-        "x2": 488.32069663751025,
-        "y2": 320.12899039041076,
-        "x3": 638.3206966375109,
-        "y3": 320.12899039041076,
-        "rotation": 0,
-        "lineWidth": 2,
-        "filled": true,
-        "dash": 0,
-        "gap": 0,
-        "color": "red",
-        "opacity": 1
-    },
-    {
-        "uuid": "828aea4f-a55c-488a-8b46-81cdddeefb07",
-        "type": "text",
-        "x": 441.10416412353516,
-        "y": 138,
-        "text": "Connection",
-        "name": "text-001",
-        "fontSize": 30,
-        "rotation": 30,
-        "fontFamily": "Arial",
-        "color": "#dae90c",
-        "opacity": 1,
-        "width": 143.55,
-        "height": 36
+<script lang="ts">
+    interface Card {
+      title: string;
+      comments: string;
+      imageUrl: string;
+      url: string;
     }
-],
-slideExtra : {
-    "type": "background",
-    "color": "gray",
-    "opacity": 1,
-    "backgroundColor": "gray",
-    "cellHeight": 25,
-    "cellWidth": 25,
-    "backgroundImage": "black_mat",
-    "showGrid": false,
-    "gridLineWidth": 1,
-    "gridLineColor": "black"
-}
-  }
+  const imageUrlRoutePath = "/thunbnails_canvas_slides/";
+  const pathUrl = "/canvas_slides/?slide=";
 
-</script>
+    const cards: Card[] = [
+   
+      {
+        title: 'Slide Zero',
+        comments: 'The vibrant city at night.',
+        imageUrl: 'slide0.png',
+        url: 'slide0'
+      },
+      {
+        title: 'Forest Path',
+        comments: 'A serene path through the woods.',
+        imageUrl: 'wood.jpg',
+                url: ''
+      },
+      {
+        title: 'Beach Sunset',
+        comments: 'A stunning sunset at the beach.',
+        imageUrl: 'atom.png',
+                url: ''
+      },
+      {
+        title: 'Abstract Art',
+        comments: 'Modern and abstract artwork.',
+        imageUrl: 'banners.png',
+                url: ''
+      },
+      {
+        title: 'Coffee Time',
+        comments: 'Relaxing with a cup of coffee.',
+        imageUrl: 'drops.png',
+                url: ''
+      },
+    ];
+  </script>
+  
 
-{#if slide}
-<CanvasSlidePlayer {slide} />
-{/if}
+  <div class="flex flex-wrap gap-6 p-6">
+    {#each cards as card}
+    <a href={pathUrl + card.url} >
+      <div
+        class="rounded-lg border border-gray-700 p-4 w-72 shadow-md transition-transform transform hover:scale-105 hover:shadow-lg"
+      >
+        <img
+          src={imageUrlRoutePath +card.imageUrl}
+          alt={card.title}
+          class="rounded-md mb-4 w-full h-40 object-cover"
+        />
+        <h3 class="text-lg font-semibold mb-2">{card.title}</h3>
+        <p class="text-sm text-gray-400">{card.comments}</p>
+      </div>
+    </a>
+    {/each}
+  </div>
 
-
-
+  <style lang="postcss">
+    /* Using Tailwind CSS classes for styling */
+    .flex {
+      display: flex;
+    }
+    .flex-wrap {
+      flex-wrap: wrap;
+    }
+    .gap-6 {
+      gap: 1.5rem;
+    }
+    .p-6 {
+      padding: 1.5rem;
+    }
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+    .border {
+      border-width: 1px;
+    }
+    .border-gray-700 {
+      border-color: rgb(55 65 81);
+    }
+    .w-72 {
+      width: 18rem;
+    }
+    .text-lg {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+    .font-semibold {
+      font-weight: 600;
+    }
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    .text-sm {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+    .text-gray-400 {
+      color: rgb(156 163 175);
+    }
+    .shadow-md {
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+    .transition-transform {
+      transition-property: transform, box-shadow;
+      transition-duration: 0.3s;
+    }
+    .hover\:scale-105:hover {
+      transform: scale(1.05);
+    }
+    .hover\:shadow-lg:hover{
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+  </style>
