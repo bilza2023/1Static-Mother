@@ -6,20 +6,18 @@
   export let assets: any; // Assuming 'assets' is an object
   export let currentTime: number = 0;
 
+  let currentItem = null;
   export let setPulse = (time: number) => {
-    console.log('setPulse..add custom code', time);
+    // console.log('setPulse..add custom code', time);
   };
 
 function isSelected(item){
+if(currentTime >= item.itemExtra.startTime   && currentTime < item.itemExtra.calcEndTime ){
+  currentItem = item;
+return true;
+}else {return false;
   
-  if(currentTime >= item.itemExtra.startTime   && currentTime < item.itemExtra.calcEndTime ){
-  console.log("currentTime",currentTime,"item",item, "true");
-    return true;
-  }else {
-    // debugger;
-    // console.log("currentTime",currentTime,"item",item, "false");
-    return false;
-  }
+}
 }
 
 
@@ -33,7 +31,7 @@ function isSelected(item){
           {#each items as item, index}
             <button
               class="flex w-full items-center"
-              on:click={() => setPulse(getStartTime(index))} 
+              on:click={() => {}} 
             >
               <div class="m-1 p-1 rounded-2xl text-sm bg-stone-600">
                 {index + 1}
@@ -52,7 +50,7 @@ function isSelected(item){
       </div>
 
       <div class="side-panel">
-        <SidePanel {currentTime} {assets} {items}  />
+        <SidePanel {assets}  {currentItem}/>
       </div>
     </div>
   </div>

@@ -3,24 +3,9 @@
    import { onMount } from 'svelte';
    import ImgCodeTxt from "./ImgCodeTxt.svelte";
 
-   
-   export let items;
-   export let currentTime;
+   export let currentItem=null;
    export let assets;
 
-   
-   let currentItem = null;
-   
- $:{
-  currentTime;
-  for (let index = 0; index < items.length; index++) {
-    const item = items[index];
-    const itemExtra = item.itemExtra;
-    if (itemExtra.startTime <= currentTime && itemExtra.endTime > currentTime) { 
-      currentItem = item;
-    }  
-  }
-} 
    </script>
    <div class="eq-display">
      {#if currentItem}  

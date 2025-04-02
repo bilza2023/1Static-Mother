@@ -85,7 +85,6 @@ function jumpTo(timeMs:number){
           {#if (currentSlide.type) === "eqs"}
           <EqPlayer  
                 bind:items={currentSlide.items}
-                slideStartTime={pbs.getSlideStartTime(currentSlideIndex)}
                 {currentTime}
                 {assets}
           />
