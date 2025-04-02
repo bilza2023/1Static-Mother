@@ -5,10 +5,9 @@
   import { Assets,type IAssets,loadImages} from "../../lib/taleemApp/taleem-canvas";
   import Editor from "../../lib/taleemApp/presentationEditor/Editor.svelte";
   import presentationChecker from "../../lib/taleemApp/app/presentationChecker";
-    import { onMount } from "svelte";
-    import periodToStartEndStyle from "../../lib/taleemApp/app/periodToStartEndStyle";
+  import { onMount } from "svelte";
+  import periodToStartEndStyle from "../../lib/taleemApp/app/periodToStartEndStyle";
   import { toast } from "@zerodevx/svelte-toast";
-    // import {presentationData} from "./presentationData";    
     
     let slides=null;
     let assets:IAssets | null =null;
@@ -24,8 +23,8 @@
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
       let presentationData =  JSON.parse(localStorage.getItem("editorPresentation"));
-      // slides = presentationData;
-      slides = []; //fresh presentation
+      slides = presentationData;//this is from local storage
+      // slides = []; //fresh presentation
 
     });
 

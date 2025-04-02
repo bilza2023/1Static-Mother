@@ -92,7 +92,7 @@ function jumpTo(timeMs:number){
 {/if}
 <!-- ///////////////////////////////////////////////////////////////////////     -->
 </div>
-<div style="color:white">{currentTime}</div>
+<!-- <div style="color:white">{currentTime}</div> -->
 
 <style>
    .container {
