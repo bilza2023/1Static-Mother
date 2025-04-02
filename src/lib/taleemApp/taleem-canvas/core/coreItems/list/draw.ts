@@ -6,6 +6,13 @@ import { IAssets } from "../../assets/IAssets";
 // (item,this.drawCtx,this.assets); //I-D-A (Items,DrawCtx,Assets)
 //drawCtx.ctx()
 export default function draw(item:IList,drawCtx: DrawCtx,assets:IAssets){
+
+//////////////////////////////////////////////////////////  
+  if (typeof  item.listArray === 'string') {   
+        item.listArray = JSON.parse(item.listArray);
+  }
+//////////////////////////////////////////////////////////  
+
     drawCtx.ctx().globalAlpha = item.opacity;
     drawCtx.ctx().fillStyle = item.color;
     drawCtx.ctx().font = `${item.fontSize}px ${item.fontFamily}`;

@@ -104,7 +104,6 @@ export default class EditObj extends BaseItem {
     createHandles(Create){
       const handleMove =   this.getHandleData(Create,0, 0, "purple", "move");
       const fontSize =  this.getHandleData(Create,0, 0, "green", "fontSize");
-      debugger;
       return [handleMove,fontSize];
     }
     //This is to be over-written but we still want to keep a copy of it as defaultUpdateHandles

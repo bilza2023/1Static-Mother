@@ -23,7 +23,7 @@
     stringValue = e.target.value;
     
     try {
-      debugger;
+      // debugger;
       // Try to parse the string back to an object
       // value = JSON.parse(stringValue);
       value = e.target.value;
