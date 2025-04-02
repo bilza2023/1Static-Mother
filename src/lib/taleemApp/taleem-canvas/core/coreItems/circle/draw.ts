@@ -10,6 +10,14 @@ export default function draw(item:ICircle,drawCtx: DrawCtx,assets:IAssets){
   drawCtx.ctx().save();
   drawCtx.ctx().lineWidth = item.lineWidth;
   drawCtx.ctx().globalAlpha = item.opacity;
+
+
+  if (item.dash > 0 || item.gap > 0) {
+    drawCtx.ctx().setLineDash([item.dash, item.gap]);
+  } else {
+    drawCtx.ctx().setLineDash([]);
+  }
+
   drawCtx.ctx().beginPath();
   // debugger;
   drawCtx.ctx().arc(item.x, item.y, item.radius, item.startAngle, item.endAngle);

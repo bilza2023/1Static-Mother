@@ -19,13 +19,6 @@ export let selectedItem;
 <InputText     caption="Name"       bind:value={selectedItem.itemData.name}  />
 <InputColor    caption="Color"      bind:value={selectedItem.itemData.color} />
 
-
-<InputNumber   caption="Start Angle" bind:value={selectedItem.itemData.startAngle}  
-config={{min:0, max:8, step:0.25}}/>
-
-<InputNumber   caption="End Angle" bind:value={selectedItem.itemData.endAngle}  
-config={{min:0, max:8, step:0.25}}/>
-
 <InputNumber   caption="Line Width" bind:value={selectedItem.itemData.lineWidth}  
 config={{min:1, max:50, step:1}}/>
 <InputCheckbox caption="Filled"     bind:value={selectedItem.itemData.filled}/>
@@ -33,7 +26,7 @@ config={{min:1, max:50, step:1}}/>
 config={{min:1, max:50, step:1}}/>
 <InputNumber   caption="gap"        bind:value={selectedItem.itemData.gap}
 config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
+<InputNumber   caption="opacity" bind:value={selectedItem.itemData.opacity}
 config={{min:0, max:1, step:0.1}}/>
 
 </table>

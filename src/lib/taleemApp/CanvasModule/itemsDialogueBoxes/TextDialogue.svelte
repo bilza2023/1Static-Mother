@@ -50,7 +50,7 @@ config={{min:5, max:250, step:0.5}}/>
 <!-- <InputText     caption="fontFamily"       bind:value={selectedItem.itemData.fontFamily}  /> -->
 <InputText     caption="name"       bind:value={selectedItem.itemData.name}  />
 
-<InputNumber   caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
+<InputNumber   caption="opacity" bind:value={selectedItem.itemData.opacity}
 config={{min:0, max:1, step:0.1}}/>
 
 </table>

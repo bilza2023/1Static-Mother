@@ -24,7 +24,7 @@ config={{min:1, max:50, step:1}}/>
 config={{min:1, max:50, step:1}}/>
 <InputNumber   caption="gap"        bind:value={selectedItem.itemData.gap}
 config={{min:1, max:50, step:1}}/>
-<InputNumber   caption="Visibility" bind:value={selectedItem.itemData.globalAlpha}
+<InputNumber   caption="Opacity" bind:value={selectedItem.itemData.opacity}
 config={{min:0, max:1, step:0.1}}/>
 
 </table>
