@@ -20,6 +20,8 @@
     moveUp as moveUpFn,
   } from "./slideEditFunctions";
   import PlayerToolbar from "../app/PlayerToolbar.svelte";
+  // import periodToStartEndStyle from "../app/periodToStartEndStyle"
+
   ////////////////////////////--ASS-I--////////////////////////////////
   export let slides: ISlide[];
   export let images: string[];
@@ -69,6 +71,7 @@
 
   /////////////////////////////////
   onMount(async () => {
+    setInterval(gameloop,300);
     /////////////////////////////////////////////////////////////////////////
     if(slides.length > 0){
       currentSlide = slides[currentSlideIndex];
@@ -130,8 +133,10 @@
     }
   }
 function setEqSlideLength(){ //setEqSlideDuration
-  currentSlideDuration = SlideEditor.getSlidePeriod(currentSlideIndex,slides); 
-currentSlideEndTime = SlideEditor.getSlideEndTime(currentSlideIndex,slides);  
+  // debugger;
+  // slides = periodToStartEndStyle(slides);
+  // debugger;
+  currentSlideEndTime = SlideEditor.getSlideEndTime(currentSlideIndex,slides);
 }
   function clone() {
     cloneFn(currentSlideIndex, slides);
@@ -166,6 +171,8 @@ currentSlideEndTime = SlideEditor.getSlideEndTime(currentSlideIndex,slides);
   }
   function gameloop() {
     currentTime = parseInt(soundPlayer.getCurrentTime() / 1000);
+    // slides = periodToStartEndStyle(slides);
+
   }
 </script>
 
@@ -185,7 +192,6 @@ currentSlideEndTime = SlideEditor.getSlideEndTime(currentSlideIndex,slides);
     {deleteFn}
     {setSlideDuration}
     {currentSlideStartTime}
-    {currentSlideDuration}
     {currentSlideEndTime}
     {currentSlideType}
     bind:showSidePanel

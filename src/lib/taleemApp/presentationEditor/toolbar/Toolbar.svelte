@@ -12,7 +12,6 @@
   export let showSidePanel;
   export let currentSlideStartTime;
   export let currentSlideEndTime;
-  export let currentSlideDuration;
   export let currentSlideType;
   
   export let save=()=>{};
@@ -44,29 +43,34 @@
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
   
   <!-- do not set start since tops are fixed set end -->
-    <span class='text-xs'>Start</span> 
-    <div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
-    >{currentSlideStartTime}</div>
-    
-    <span class='text-xs'>End</span>
-    <div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
-    >{currentSlideEndTime}</div>
-
-
-  
 
 {#if currentSlideType=="canvas"}
-<span class='text-xs'>Length</span>
-    <input class='bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white text-center'  type="number" bind:value={endTime} min=0 max=3600 >    
+<span class='text-xs'>Start</span> 
+<div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
+>{currentSlideStartTime}</div>
+
 
     <span class='text-xs'>End At</span>
     <button class="bg-red-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white"
     on:click={setSlideDuration}
     >{currentTime}</button>
+
     
+
+<span class='text-xs'>Length</span>
+<input class='bg-green-900 text-white p-0 px-4 m-0 rounded-md border-2 border-white text-center'  type="number" bind:value={endTime} min=0 max=3600 >    
+
 {/if}
     
 {#if currentSlideType=="eqs"}
+<span class='text-xs'>Start</span> 
+<div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
+>{currentSlideStartTime}</div>
+
+ <span class='text-xs'>End</span>
+    <div class="bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 border-gray-600"
+    >{currentSlideEndTime}</div>
+
     <!-- <div disabled class='bg-gray-700 text-white p-0 px-4 m-0 rounded-md border-2 
     border-gray-600 text-center'  type="number">
     {currentSlideDuration}
