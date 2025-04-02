@@ -117,9 +117,8 @@
   function addNew(slideType: ISlideTypeAvailable) {
     try {
       const newSlide = getNewSlide(slideType);
-      const startTime = getNewSlideStartTime(slides);
-      newSlide.startTime = startTime;
-      newSlide.endTime = newSlide.startTime + 10;
+      newSlide.startTime = 0;
+      newSlide.endTime =  10;//this is period
       slides.push(newSlide);
       currentSlide = slides[slides.length - 1];// show = false;
     } catch (error) {
@@ -242,8 +241,9 @@ function setEqSlideLength(){ //setEqSlideDuration
   </div>
 </div>
 
-<div style="color:white">{currentTime}</div>
+<!-- <div style="color:white">{currentTime}</div> -->
 
+<!-- 246 lines 2 Apr 2025 -->
 <!-- 199 lines 1 Apr 2025 -->
 
 <style>
