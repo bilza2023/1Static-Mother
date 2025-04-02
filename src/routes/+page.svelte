@@ -16,6 +16,7 @@
     <h1><b><a class="text-white" href="/presentation_player">presentation_player</a></b></h1>
     <br>
     <h1><b><a class="text-white" href="/eqs_editor">eqs_editor</a></b></h1>
+    <h1><b><a class="text-white" href="/canvas_examples">canvasExamples</a></b></h1>
     <br/>
     <br/>
     <br/>

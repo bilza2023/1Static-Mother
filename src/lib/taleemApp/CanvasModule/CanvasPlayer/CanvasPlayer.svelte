@@ -9,9 +9,9 @@ import type { IBackground,ICanvasItemTypes } from "../../taleem-canvas";
     /////////////////////////////////////////////////////////////////
 //26-March-2025:When we use Bahaviour then the "items" array is not used rather we use editor.items. so we can even remove/localize "items" array in onmount    
      export let itemLiterals; 
-     let items:Items; 
      export let assets:Assets;
      export let background:IBackground | null = null;
+     let items:Items; 
       // export let images:string[]=[]; //This is for the drop down
     /////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;

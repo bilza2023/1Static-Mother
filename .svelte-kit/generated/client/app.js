@@ -20,14 +20,14 @@ export const server_loads = [];
 export const dictionary = {
 		"/": [2],
 		"/canvas_editor": [3],
-		"/canvas_player": [4],
-		"/eqs_editor": [5],
-		"/presentation_editor": [6],
-		"/presentation_player": [7],
-		"/raw_core": [8],
-		"/raw_editor": [9],
-		"/static_slides": [10],
-		"/videos": [11]
+		"/canvas_examples": [4],
+		"/canvas_player": [5],
+		"/eqs_editor": [6],
+		"/presentation_editor": [7],
+		"/presentation_player": [8],
+		"/raw_core": [9],
+		"/raw_editor": [10],
+		"/static_slides": [11]
 	};
 
 export const hooks = {
