@@ -13,17 +13,12 @@
     const cards: Card[] = [
    
       {
-        title: 'Slide Zero',
+        title: 'Presentation Zero',
         comments: 'First Try.',
-        imageUrl: 'slide0.png',
-        url: 'slide0'
+        imageUrl: 'presentationZero.png',
+        url: 'presentationZero'
       },
-      {
-        title: 'Title 01',
-        comments: 'Testing...',
-        imageUrl: 'title01.png',
-        url: 'title01'
-      }
+      
     ];
   </script>
   

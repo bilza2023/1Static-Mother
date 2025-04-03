@@ -4,7 +4,7 @@
         title: 'Presentations',
         image: 'presentation.jpeg',
         comments: 'Presentation templates',
-        url : "presentations_page_index?slide=slide0"
+        url : "presentations_index?slide=slide0"
       },
 
       {
