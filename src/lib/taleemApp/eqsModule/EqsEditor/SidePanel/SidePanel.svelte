@@ -9,8 +9,9 @@
   import VerticalBtns from "./VerticalBtns.svelte";
   import Table from "./Table.svelte";
   import TableCode from "./TableCode.svelte";
-
+  import InputSelect from "./InputSelect.svelte";
   export let item;
+  export let imagesDBList;
 
   function moveUp(j) {
     if (j <= 0) return;
@@ -59,7 +60,7 @@
     <textarea class="bg-stone-900 rounded-md w-5/12 mx-auto"
       bind:value={sp.code}></textarea>
     <div class="bg-stone-900 rounded-md w-5/12 mx-auto">
-      <CodeTxt eq={sp}/>
+      <CodeTxt eq={sp} />
     </div>
     <div class='w-2/12'>
       <VerticalBtns {moveUp} {moveDown} {del} {j}/>
@@ -87,7 +88,8 @@
 
   {#if sp.type === 'img' || sp.type === 'image'}
   <div class="flex justify-center rounded-md w-8/12 mx-auto mb-4 mt-2 gap-1">
-    <input type="text" class="bg-stone-900 rounded-md w-10/12 mx-auto" bind:value={sp.code}/>
+    <!-- <input type="text" class="" bind:value={sp.code}/> -->
+     <InputSelect class="bg-stone-900 rounded-md w-10/12 mx-auto" caption="Available Images" options={imagesDBList} bind:value={sp.code} />
     <div class='w-2/12'>
       <VerticalBtns {moveUp} {moveDown} {del} {j}/>
     </div>

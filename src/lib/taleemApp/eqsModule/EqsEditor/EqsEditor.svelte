@@ -16,7 +16,7 @@ export let currentTime=0; //current time if not given is zero ..correct ????
 export let setEqSlideLength;
 
 export let currentSlideStartTime;
-export let currentSlideEndTime;
+export let imagesDBList;
 
 function manageEqItems(){
   if(!items) return;
@@ -138,7 +138,7 @@ onMount(async() => {
     {moveUpEq} 
     {moveDownEq}
     {setEqType}
-
+{imagesDBList}
     {setEqSlideLength}  
     />
   {/each}

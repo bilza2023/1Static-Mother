@@ -13,6 +13,7 @@ import TriangleDialogue from "./TriangleDialogue.svelte";
 import TextDialogue from "./TextDialogue.svelte";
 
 export let selectedItem;
+export let imagesDBList=[];
 export let images=[];
 </script>
 
@@ -35,10 +36,11 @@ export let images=[];
 {#if selectedItem && selectedItem.itemData.type=="text"}
     <TextDialogue  bind:selectedItem={selectedItem}  />
 {/if}
-<!--///////////////////////////////////////////////////// -->
+<!--//////////////////////////////imagesDBList/////////////////////// -->
 {#if selectedItem && selectedItem.itemData.type=="image"}
-    <ImageDialogue  bind:selectedItem={selectedItem} {images} />
+    <ImageDialogue  bind:selectedItem={selectedItem} {images} {imagesDBList}/>
 {/if}
+
 {#if selectedItem && selectedItem.itemData.type=="line"}
     <LineDialogue  bind:selectedItem={selectedItem}  />
 {/if}

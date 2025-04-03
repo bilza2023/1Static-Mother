@@ -1,5 +1,5 @@
 <script lang="ts">   
-import type {ISlide} from "./ISlide";
+import type {ISlide} from "../app/ISlide";
 import { onMount } from "svelte";
   import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
   import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';

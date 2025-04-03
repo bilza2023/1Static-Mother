@@ -1,4 +1,8 @@
 
+interface IEqSpItem {
+    code : string;
+    type : "code" | "text" | "heading" | "image" | "table" | "tableCode";
+}
 
 interface IEqsItem {
     uuid: string;
@@ -11,7 +15,7 @@ interface IEqsItem {
         endTime?: number;
         code: string;
         type: string;
-        sp: any[]; // You might want to create a specific interface for 'sp' if you know its structure
+        sp: IEqSpItem[]; // You might want to create a specific interface for 'sp' if you know its structure
     };
 
 }

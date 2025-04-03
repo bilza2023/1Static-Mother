@@ -7,6 +7,8 @@
     
     export let selectedItem;  
     export let images;  
+    export let imagesDBList=[];  
+
 
 </script>
     
@@ -17,7 +19,9 @@
         
         <InputText caption="name" bind:value={selectedItem.itemData.name} />
        
-        <InputSelect caption="Options" bind:value={selectedItem.itemData.src} options={images} />
+        <InputSelect caption="Images" bind:value={selectedItem.itemData.src} options={images} />
+       
+        <InputSelect caption="Available" bind:value={selectedItem.itemData.src} options={imagesDBList} />
         
         
         <InputNumber caption="Opacity" bind:value={selectedItem.itemData.opacity}

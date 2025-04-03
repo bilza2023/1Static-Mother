@@ -13,6 +13,7 @@
     export let moveDownEq; 
     export let setEqType;
     export let setEqSlideLength;//
+    export let imagesDBList;//imagesDBList
   
 
     let open = false;
@@ -72,5 +73,5 @@
    </div>
    
    {#if open}
-   <SidePanel bind:item={item} />
+   <SidePanel bind:item={item} {imagesDBList}/>
    {/if}

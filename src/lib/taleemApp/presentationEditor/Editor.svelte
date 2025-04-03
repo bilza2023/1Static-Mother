@@ -1,6 +1,6 @@
 <script lang="ts">
   // Import necessary types and functions
-  import type { ISlide } from "./ISlide";
+  import type { ISlide } from "../app/ISlide";
   import { onMount } from "svelte";
   import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
   import Toolbar from "./toolbar/Toolbar.svelte";
@@ -21,6 +21,7 @@
   // --- Props ---
   export let slides: ISlide[] = [];
   export let images: string[];
+  export let imagesDBList: string[];
   export let save: () => void;
   export let assets: IAssets;
   export let soundFileName = "/sounds/music.opus"; // Default sound file
@@ -183,56 +184,6 @@
   <NewSlidesDlg {addNew} />
 {/if}
 
-<!-- <div class="flex-container"> -->
-  <!-- {#if showSidePanel}
-    <div class="side-panel">
-      <SlidePanel {slidesList} {moveUp} {moveDown} {setCurrentSlide} />
-    </div>
-  {/if} -->
-<!-- 
-  <div class={showSidePanel ? "main-content" : "main-content-full"}>
-    {#if currentSlide !== null}
-      <div>
-        {#if currentSlide.type === "canvas"}
-          <CanvasEditor
-            bind:itemLiterals={currentSlide.items}
-            bind:background={currentSlide.slideExtra}
-            {assets}
-            {images}
-          />
-        {/if}
-        {#if currentSlide.type === "eqs"}
-          <EqsEditor
-            bind:items={currentSlide.items}
-            currentSlideStartTime={currentSlideStartTime}
-            currentSlideEndTime={currentSlideEndTime}
-            {currentTime}
-            {setEqSlideLength}
-          />
-        {/if}
-      </div>
-    {/if}
-  </div>
-</div> -->
-
-<!-- <style>
-  .flex-container {
-    display: flex;
-    width: 100%;
-  }
-
-  .side-panel {
-    width: 7%;
-  }
-
-  .main-content {
-    width: 93%;
-  }
-
-  .main-content-full {
-    width: 100%;
-  }
-</style> -->
 
 
 <div class="flex-container">
@@ -251,15 +202,16 @@
             bind:background={currentSlide.slideExtra}
             {assets}
             {images}
+            {imagesDBList}
           />
         {/if}
         {#if currentSlide.type === "eqs"}
           <EqsEditor
             bind:items={currentSlide.items}
             currentSlideStartTime={currentSlideStartTime}
-            currentSlideEndTime={currentSlideEndTime}
             {currentTime}
             {setEqSlideLength}
+            {imagesDBList}
           />
         {/if}
       </div>

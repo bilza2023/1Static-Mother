@@ -17,6 +17,7 @@
      export let assets:Assets;
      export let background:IBackground | null = null;
      export let images:string[]=[]; //This is for the drop down
+     export let imagesDBList:string[]=[]; //This is for the drop down
 /////////////////////////////////////////////////////////////////////
       let canvasElement:HTMLCanvasElement;
       let player:Player= null;
@@ -128,7 +129,7 @@ onMount(() => {
         <SelectDropDown items={itemsForDropDown} callback={setSelectedItemByMenu} />
       {/if}
       {#if selectedItem}
-        <SelectedItemBasicDialogue bind:selectedItem={selectedItem} {images} />
+        <SelectedItemBasicDialogue bind:selectedItem={selectedItem} {images} {imagesDBList}/>
       {:else}
         <BackgroundDialogue bind:background={background}/>
       {/if}
