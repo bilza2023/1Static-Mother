@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Canvas Demo</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        #canvas-container {
+            width: 80%;
+            max-width: 800px;
+            border: 2px solid #444;
+            margin: 20px 0;
+        }
+        
+        canvas {
+            background-color: #333;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .info {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            max-width: 800px;
+        }
+        
+        .dimensions {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .dimensions div {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Responsive Canvas Demo</h1>
+    
+    <div id="canvas-container">
+        <canvas id="myCanvas"></canvas>
+    </div>
+    
+    <div class="dimensions">
+        <div>
+            <p>Canvas Style Dimensions:</p>
+            <p id="styleDimensions">Width: 0px, Height: 0px</p>
+        </div>
+        <div>
+            <p>Canvas Rendering Dimensions:</p>
+            <p id="renderingDimensions">Width: 0px, Height: 0px</p>
+        </div>
+    </div>
+    
+    <div class="info">
+        <h2>About This Demo</h2>
+        <p>This demonstrates a responsive canvas that maintains its internal drawing proportions when resized.</p>
+        <p>Try resizing your browser window to see how the canvas responds.</p>
+    </div>
+
+    <script>
+        // Get canvas elements
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('canvas-container');
+        
+        // Aspect ratio to maintain
+        const ASPECT_RATIO = 16 / 9;
+        
+        // Original design dimensions
+        const ORIGINAL_WIDTH = 800;
+        const ORIGINAL_HEIGHT = ORIGINAL_WIDTH / ASPECT_RATIO;
+        
+        // Display elements
+        const styleDimensions = document.getElementById('styleDimensions');
+        const renderingDimensions = document.getElementById('renderingDimensions');
+        
+        // Simple drawing function for a red rectangle in the center
+        function drawRectangle() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Drawing a centered rectangle with fixed size relative to original dimensions
+            const rectWidth = ORIGINAL_WIDTH * 0.5;  // 50% of original width
+            const rectHeight = ORIGINAL_HEIGHT * 0.5; // 50% of original height
+            
+            // Position the rectangle in the center
+            const x = (canvas.width - rectWidth) / 2;
+            const y = (canvas.height - rectHeight) / 2;
+            
+            // Draw the rectangle
+            ctx.fillStyle = '#FF4444';
+            ctx.fillRect(x, y, rectWidth, rectHeight);
+            
+            // Draw border
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(x, y, rectWidth, rectHeight);
+            
+            // Add text
+            ctx.fillStyle = 'white';
+            ctx.font = `${canvas.width * 0.03}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillText('Responsive Canvas', canvas.width / 2, canvas.height * 0.2);
+        }
+        
+        // Function to resize canvas while maintaining aspect ratio
+        function resizeCanvas() {
+            // Get the container's width
+            const containerWidth = container.clientWidth;
+            
+            // Set canvas style dimensions to fill the container
+            canvas.style.width = `${containerWidth}px`;
+            canvas.style.height = `${containerWidth / ASPECT_RATIO}px`;
+            
+            // Set the canvas rendering dimensions
+            // This is crucial for maintaining drawing quality
+            canvas.width = containerWidth;
+            canvas.height = containerWidth / ASPECT_RATIO;
+            
+            // Update dimensions display
+            styleDimensions.textContent = `Width: ${canvas.style.width}, Height: ${canvas.style.height}`;
+            renderingDimensions.textContent = `Width: ${canvas.width}px, Height: ${canvas.height}px`;
+            
+            // Redraw with new dimensions
+            drawRectangle();
+        }
+        
+        // Initial resize and draw
+        resizeCanvas();
+        
+        // Handle window resize
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+</body>
+</html>

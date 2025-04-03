@@ -22,7 +22,7 @@
       ];
    
       onMount(async() => {
-        debugger;
+       
       let imagesUrl   = "/images/";//if needed take it out of onmount
       let presentationData =  JSON.parse(localStorage.getItem("editorPresentation"));
       

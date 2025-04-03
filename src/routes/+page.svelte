@@ -36,7 +36,7 @@
   
   <div class="bg-gray-800 text-white p-0 m-0 ">
    
-    <h1 class="text-4xl font-bold text-center py-4 shadow-md bg-gradient-to-r from-purple-800 to-indigo-600 rounded-lg m-0 pt-4 mb-20">
+    <h1 class="text-4xl font-bold text-center py-4 shadow-md bg-gradient-to-r from-blue-800 to-indigo-800 rounded-lg m-0 pt-4 mb-20">
       Taleem App
     </h1>
   

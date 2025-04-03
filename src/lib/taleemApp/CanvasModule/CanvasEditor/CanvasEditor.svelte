@@ -74,6 +74,7 @@ function init(){
     const ctx:CanvasRenderingContext2D = canvasElement.getContext("2d");
     items = new Items(itemLiterals);
     player = new Player(canvasElement,ctx,assets);
+    
     const leftPanelWidth = canvasElement.parentElement.clientWidth;
       player.width = leftPanelWidth;
 

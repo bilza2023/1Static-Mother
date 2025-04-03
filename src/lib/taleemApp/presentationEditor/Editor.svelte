@@ -64,7 +64,7 @@
     }
   }
 
-  // --- Lifecycle Hooks ---
+////////////////////////////////////////////////////////////////////////////////////
   onMount(async () => {
     setInterval(gameloop, 300);
     if (slides.length > 0) {
@@ -96,6 +96,7 @@
 
   function addNew(slideType: ISlideTypeAvailable) {
     try {
+      
       const newSlide = getNewSlide(slideType);
       newSlide.startTime = 0;
       newSlide.endTime = 10; // Default period
@@ -147,7 +148,16 @@
     soundPlayer.stop();
     currentTime = 0;
   }
+  function paste(){
+    const incommingSlide =  JSON.parse( localStorage.getItem("canvas_slide_template") );
+    const slide = getNewSlide("canvas");
+    slide.items = incommingSlide.items;
+    slide.slideExtra = incommingSlide.slideExtra;
+    slide.endTime = 10;
+    slides.push(slide);
+    currentSlide = slides[slides.length - 1];
 
+  }
   function gameloop() {
     currentTime = parseInt(soundPlayer.getCurrentTime() / 1000);
   }
@@ -159,6 +169,7 @@
   {log}
   {save}
   {clone}
+  {paste}
   {deleteFn}
   bind:showSidePanel
   bind:show

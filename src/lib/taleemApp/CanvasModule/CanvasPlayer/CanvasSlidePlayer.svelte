@@ -13,7 +13,7 @@ import { onMount } from "svelte";
          let imagesUrl   = "/images/";//if needed take it out of onmount
 ////////////////////////////////////////////////////////////////////////
 onMount(async () => {
-    debugger;
+    // debugger;
 const imagesMap = await loadImages(images,imagesUrl);
 assets = new Assets(imagesMap)
 items = slide.items;

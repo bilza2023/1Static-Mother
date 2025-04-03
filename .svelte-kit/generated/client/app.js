@@ -29,8 +29,8 @@ export const dictionary = {
 		"/eqs_editor": [7],
 		"/presentation_editor": [8],
 		"/presentation_player": [9],
-		"/presentations_page_index": [11],
-		"/presentations_page": [10],
+		"/presentations_index": [11],
+		"/presentations": [10],
 		"/raw_core": [12],
 		"/raw_editor": [13],
 		"/static_slides": [14]

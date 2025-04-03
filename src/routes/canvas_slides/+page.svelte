@@ -3,18 +3,15 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores'; // Import the page store
   import { get } from 'svelte/store'; // Import get to retrieve the page store value.
+  import Toolbar from "./toolbar/Toolbar.svelte";
+  import { toast} from '@zerodevx/svelte-toast';
 
   let slide = null;
   let slideName = '';
-
+//////////////////////////////////////////////////////////
   onMount(async () => {
-    // Access the URL query parameters
     const queryParams = get(page).url.searchParams;
-
-    // Get the slide name from the query parameter
     slideName = queryParams.get('slide');
-    // slideName = "slide0";
-
     if (slideName) {
         try {
             // dynamically import the slide data
@@ -24,10 +21,17 @@
         }
     }
   });
+function copy(){
+  // debugger;
+  localStorage.setItem("canvas_slide_template", JSON.stringify(slide) );
+  toast.push("copied!");
+}  
 </script>
 
-{#if slide}
-  <CanvasSlidePlayer {slide} />
+{#if slide }
+  <Toolbar  {copy} />
+  <CanvasSlidePlayer  {slide} />
+
 {:else if slideName}
     <p>Slide {slideName} could not be loaded</p>
 {:else}

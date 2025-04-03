@@ -11,6 +11,7 @@
   export let log=()=>{};
   export let deleteFn;
   export let clone;
+  export let paste;
   export let showSoundBar;
   export let showTimeManager;
     
@@ -36,6 +37,7 @@
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
   
   <NavBtn2 title='Clone'  icon='🐑'  clk= {clone} />
+  <NavBtn2 title='Paste'  icon='📋'  clk={paste} />
   <NavBtn2 title='Delete' icon='🗑️'  clk={deleteFn} />
    
   </div>  
