@@ -10,6 +10,7 @@
   
   import getPresentationImages from "../../lib/taleemApp/app/getPresentationImages/getPresentationImages"
   import { toast } from "@zerodevx/svelte-toast";
+  import {imagesDBList} from "../../lib/taleemApp/app/imagesDBList";
     
     let slides=null;
     let assets:IAssets | null =null;
@@ -19,10 +20,7 @@
         "activity1.jpg",
         "drops.png"
       ];
-    let imagesDBList = [
-    "mad_scientist.jpg"
-    ]; 
-
+   
       onMount(async() => {
         debugger;
       let imagesUrl   = "/images/";//if needed take it out of onmount
