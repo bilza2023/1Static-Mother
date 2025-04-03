@@ -4,39 +4,39 @@
         title: 'Presentations',
         image: 'presentation.jpeg',
         comments: 'Presentation templates',
-        url : ""
+        url : "presentations_page_index?slide=slide0"
       },
 
       {
         title: 'The Editor',
         image: 'magic.jpeg',
         comments: 'Edit presentations',
-        url : ""
+        url : "presentation_editor"
       },
       {
         title: 'The Player',
         image: 'player.jpeg',
         comments: 'Play presentations',
-        url : ""
-      },
-      {
-        title: 'Experimentation',
-        image: 'exp.jpeg',
-        comments: 'Testing new features',
-        url : ""
+        url : "presentation_player"
       },
       {
         title: 'Canvas Slides',
         image: 'canvas.jpeg',
         comments: 'Examples of canvas slides',
-        url : "canvas_examples"
-      }
+        url : "canvas_slides_index"
+      },
+      // {
+      //   title: 'Experimentation',
+      //   image: 'exp.jpeg',
+      //   comments: 'Testing new features',
+      //   url : ""
+      // }
     ];
   </script>
   
   <div class="bg-gray-800 text-white p-0 m-0 ">
    
-    <h1 class="text-4xl font-bold text-center py-4 shadow-md bg-gradient-to-r from-purple-800 to-indigo-600 rounded-lg m-0 pt-4">
+    <h1 class="text-4xl font-bold text-center py-4 shadow-md bg-gradient-to-r from-purple-800 to-indigo-600 rounded-lg m-0 pt-4 mb-20">
       Taleem App
     </h1>
   

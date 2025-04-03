@@ -1,1 +1,0 @@
-to  have a page of canvas slides which can be copied from here I can use this as templates , just copy and paste from here.
