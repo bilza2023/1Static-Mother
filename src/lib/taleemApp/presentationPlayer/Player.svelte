@@ -42,6 +42,8 @@ onMount(async() => {
 function start(){
   if(interval){clearInterval(interval);} 
   interval = setInterval(gameloop,20);
+  debugger;
+  soundPlayer.volume = 0.01;
   soundPlayer.start();
   currentTime = soundPlayer.getCurrentTime();
 }

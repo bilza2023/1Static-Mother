@@ -19,6 +19,12 @@ export default class SoundPlayer {
         this._loadSound(soundPath);
     }
 
+    set volume(vol){
+        this._sound.volume(vol);
+    }
+    get volume(){
+        return this._sound.volume();
+    }
     /**
      * Loads the sound file and sets up necessary event handlers
      * @param soundPath Path to the audio file
