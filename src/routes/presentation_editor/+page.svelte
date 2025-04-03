@@ -11,6 +11,7 @@
   import getPresentationImages from "../../lib/taleemApp/app/getPresentationImages/getPresentationImages"
   import { toast } from "@zerodevx/svelte-toast";
   import {imagesDBList} from "../../lib/taleemApp/app/imagesDBList";
+  import ProjectToolbar from "../../ProjectToolbar.svelte";
     
     let slides=null;
     let assets:IAssets | null =null;
@@ -30,7 +31,7 @@
       images = [...images,...imagesFromSlides]; //imp
 
       const imagesMap = await loadImages(images,imagesUrl);
-      assets = new Assets(imagesMap)
+      assets = new Assets(imagesMap);
       slides = presentationData;//this is from local storage
       // slides = []; //fresh presentation
 
@@ -50,7 +51,7 @@
     }
   
 </script>
-
+<ProjectToolbar />
 {#if slides}
 <!-- The editor has images loaded in assets BUT "images" array is being sent for dropdown we can also use the images in the assets????   --ASS-I---->
 <Editor bind:slides={slides} {assets} {images} {save} {imagesDBList}/>

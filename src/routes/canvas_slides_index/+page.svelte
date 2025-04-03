@@ -1,11 +1,13 @@
 <script lang="ts">
+  import ProjectToolbar from "../../ProjectToolbar.svelte";
+
     interface Card {
       title: string;
       comments: string;
       imageUrl: string;
       url: string;
     }
-  const imageUrlRoutePath = "/thunbnails_canvas_slides/";
+  const imageUrlRoutePath = "/thunbnails_slides/";
   const pathUrl = "/canvas_slides/?slide=";
 
     const cards: Card[] = [
@@ -21,11 +23,17 @@
         comments: 'Testing...',
         imageUrl: 'title01.png',
         url: 'title01'
+      },
+      {
+        title: 'three_points_and_a_pic',
+        comments: 'three_points_and_a_pic',
+        imageUrl: 'three_points_and_a_pic.png',
+        url: 'three_points_and_a_pic'
       }
     ];
   </script>
   
-
+<ProjectToolbar />
   <div class="flex flex-wrap gap-6 p-6">
     {#each cards as card}
     <a href={pathUrl + card.url} >

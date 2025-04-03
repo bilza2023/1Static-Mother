@@ -5,6 +5,7 @@
   import { onMount } from "svelte";
  
   import getPresentationImages from "../../lib/taleemApp/app/getPresentationImages/getPresentationImages"
+  import ProjectToolbar from "../../ProjectToolbar.svelte";
 //////////////////////////////
     let slides=null;
     let assets:IAssets | null =null;
@@ -26,6 +27,7 @@
       slides = presentationData;
     });
 </script>
+<ProjectToolbar />
 {#if slides && assets}
 <!----ASS-I-(just AS assets,slides and no images, save)--->
 <Player slides={slides} {assets}  />
