@@ -27,24 +27,30 @@ assets:Assets;//assets with images
     this.drawCtx = new DrawCtx(ctx,canvas);
     this.assets = assets;//These assets include "images" loaded
     ////
-    this.aspectRatio = 16 / 9; //do not move
-// 3-Apr-2025 ::==>>  I think this is the issue, THE CANVAS SHOULD ALWAYS HAVE SAME RESOLUTION. I think the images saved is also effected by canvas resolution. Different resolution will give different results.   
-    this.canvas.style.width =  "1200px" ;
-    this.canvas.style.height = "360px";
-    this.canvas.width = 1200; // Important: set the drawing surface width
-    this.canvas.height = 360; // Important: set the drawing surface height
-    // this._width = 1000;
-    // this.width = 1000; = 360;
+
   }
-  set width(wd:number){
-  // this._width = wd;
-  // this.canvas.style.width =  this._width+"px" ;
-  // // this._height = this._width / this.aspectRatio;
-  // this._height = 360; // setting width and height in same func is bad idea
-  // this.canvas.style.height = this._height+"px";
-  // this.canvas.width = this._width;
-  // this.canvas.height = this._height;
+
+  resize(wd:number){
+    this.aspectRatio = 850 / 360; //do not move
+    this.canvas.width = wd; // Important: set the drawing surface width
+    this.canvas.height = wd/this.aspectRatio; // Important: set the drawing surface height
+    this.canvas.style.width = this.canvas.width +  "px" ;
+    this.canvas.style.height = this.canvas.height + "px";
   }
+//   set width(wd:number){
+// // debugger;
+//   this._width = wd;
+//   this._height = this._width / this.aspectRatio;
+
+//   this.canvas.width = wd;
+//   this.canvas.height = this.canvas.width/ this.aspectRatio;
+
+//   this.canvas.style.width =  this.canvas.width+"px" ;
+//   this.canvas.style.height = this.canvas.height+"px";
+//   // this.canvas.style.width =  (this.canvas.width/2+"px") ;
+//   // this.canvas.style.height = (this.canvas.height/2+"px");
+
+//   }
   get width(){
  return this._width;
   }
