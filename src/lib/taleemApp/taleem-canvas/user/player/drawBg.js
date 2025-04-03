@@ -12,7 +12,8 @@ export default function drawBg(item,drawCtx,assets) {
     drawCtx.ctx().fillRect(0, 0, width, height);
     // ✅ Draw grid if enabled
 
-    if (item.backgroundImage !== null) {
+    if (item.backgroundImage) {
+      // debugger;
       drawBgImage(drawCtx,item,assets);
     }
     if (item.showGrid) {

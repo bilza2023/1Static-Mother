@@ -134,7 +134,14 @@
 
   function deleteFn() {
     del(currentSlideIndex, slides);
-    prev();
+    if(slides.length > 0){
+      prev();
+    }else {
+      slides = [];
+      currentSlide = null;
+      currentSlideIndex = null;
+      slidesList = getSlidesListForPanel(slides, currentSlideIndex);
+    }
   }
 
   function start() {
@@ -205,7 +212,7 @@
   {/if}
 
   <div class="main-content">
-    {#if currentSlide !== null}
+    {#if currentSlide }
       <div>
         {#if currentSlide.type === "canvas"}
           <CanvasEditor

@@ -29,6 +29,18 @@
         comments: 'three_points_and_a_pic',
         imageUrl: 'three_points_and_a_pic.png',
         url: 'three_points_and_a_pic'
+      },
+      {
+        title: 'venn_diagram',
+        comments: 'venn_diagram',
+        imageUrl: 'venn_diagram.png',
+        url: 'venn_diagram'
+      },
+      {
+        title: 'venn_diagram2',
+        comments: 'venn_diagram2',
+        imageUrl: 'venn_diagram2.png',
+        url: 'venn_diagram2'
       }
     ];
   </script>
