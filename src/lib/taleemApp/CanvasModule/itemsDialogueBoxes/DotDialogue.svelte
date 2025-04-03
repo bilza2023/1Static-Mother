@@ -19,21 +19,19 @@ export let selectedItem;
 
 <InputText     caption="Name"       bind:value={selectedItem.itemData.name}  />
 <InputColor    caption="Color"      bind:value={selectedItem.itemData.color} />
+<InputColor    caption="textColor"      bind:value={selectedItem.itemData.textColor} />
 
+<InputText     caption="Label"       bind:value={selectedItem.itemData.label}  />
 
-<InputTextArea caption="Data"     bind:value={selectedItem.itemData.listArray}/>
-<FontFamilyDD caption="fontFamily"     bind:value={selectedItem.itemData.fontFamily}/>
-
-
-<InputNumber   caption="fontSize" bind:value={selectedItem.itemData.fontSize}  
-config={{min:2, max:200, step:1}}/>
-
-<InputNumber   caption="indentation" bind:value={selectedItem.itemData.indentation}  
+<InputNumber   caption="labelX" bind:value={selectedItem.itemData.labelX}  
+config={{min:-200, max:200, step:1}}/>
+<InputNumber   caption="labelY" bind:value={selectedItem.itemData.labelY}  
 config={{min:-200, max:200, step:1}}/>
 
-<InputNumber   caption="lineGap" bind:value={selectedItem.itemData.lineGap}  
-config={{min:0, max:200, step:1}}/>
-
+<InputNumber   caption="textSize" bind:value={selectedItem.itemData.textSize}  
+config={{min:2, max:500, step:1}}/>
+<InputNumber   caption="radius" bind:value={selectedItem.itemData.radius}  
+config={{min:2, max:500, step:1}}/>
 
 <!-- : ["First item","Second item","Third item"], -->
 

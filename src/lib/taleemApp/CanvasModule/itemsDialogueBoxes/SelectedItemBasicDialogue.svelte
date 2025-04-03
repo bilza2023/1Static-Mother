@@ -11,6 +11,7 @@ import RayDialogue from "./RayDialogue.svelte";
 import SpriteDialogue from "./SpriteDialogue.svelte";
 import TriangleDialogue from "./TriangleDialogue.svelte";
 import TextDialogue from "./TextDialogue.svelte";
+import DotDialogue from "./DotDialogue.svelte";
 
 export let selectedItem;
 export let imagesDBList=[];
@@ -20,6 +21,10 @@ export let images=[];
 <div class="container">
 <!-- ///////////////////////////////////////////////////// -->
 
+
+{#if selectedItem && selectedItem.itemData.type=="dot"}
+    <DotDialogue  bind:selectedItem={selectedItem}  />
+{/if}
 
 {#if selectedItem && selectedItem.itemData.type=="rectangle"}
     <RectangleDialogue  bind:selectedItem={selectedItem}  />

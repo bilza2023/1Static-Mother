@@ -6,7 +6,7 @@ import { IAssets } from "../../assets/IAssets";
 // (item,this.drawCtx,this.assets); //I-D-A (Items,DrawCtx,Assets)
 //drawCtx.ctx()
 export default function draw(item:IList,drawCtx: DrawCtx,assets:IAssets){
-
+// debugger;
 //////////////////////////////////////////////////////////  
   if (typeof  item.listArray === 'string') {   
         item.listArray = JSON.parse(item.listArray);

@@ -5,7 +5,11 @@
   export let config={min:0 , max:100, step:1};
 
   function handleInput(event) {
-        value = event.target.value;
+    let incomming = event.target.value;
+    if(typeof incomming == "string"){
+        incomming = Number(incomming);
+    } 
+        value = incomming;
   }
   // $: valueWithoutDecimal = value ? Math.trunc(value) : value;
 </script>

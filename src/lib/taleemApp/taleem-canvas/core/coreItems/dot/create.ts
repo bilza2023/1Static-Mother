@@ -5,13 +5,15 @@ export default function create():IDot{
     return {
       uuid: uuid(),
       type: 'dot',
-      name: 'dot',
+      name: 'dot-01',
       x: 100,
       y: 100,
       label: "label",
+      labelX: 25,
+      labelY: 25,
       radius: 5,
       textColor: "yellowbezier",
-      textSize: 40,
+      textSize: 30,
       color: "red",
       opacity: 1
       };
