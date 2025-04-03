@@ -1,7 +1,7 @@
 <script >
   //@ts-nocheck
   import NavBtn2 from './NavBtn2.svelte';
-  import TimeManager from '../timeManager/TimeManager.svelte';
+  import NavAnchor from './NavAnchor.svelte';
   
   export let next;
   export let prev;
@@ -29,6 +29,7 @@
   <NavBtn2 title='Log'    icon='🖨️'  clk={log}                                     />
   <NavBtn2 title='Sound'  icon='📢'  clk={()=>showSoundBar =!showSoundBar }        />
   <NavBtn2 title='Time'   icon='⏱️'  clk={()=>showTimeManager =!showTimeManager }  />
+  <NavAnchor title='Player' icon='🚀'  url="/presentation_player"  />
       
   </div> 
   
