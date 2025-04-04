@@ -41,6 +41,13 @@
         comments: 'venn_diagram2',
         imageUrl: 'venn_diagram2.png',
         url: 'venn_diagram2'
+      
+      },
+      {
+        title: 'circles',
+        comments: 'circles',
+        imageUrl: 'circles.png',
+        url: 'circles'
       }
     ];
   </script>
