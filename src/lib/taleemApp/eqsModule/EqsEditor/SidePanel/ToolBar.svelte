@@ -4,15 +4,9 @@
   export let item;
 
   function getEqsSpItem(type){
+    // debugger;
     const spItem = Eqs.getEqsSpItem(type);
-
-    item = {
-      ...item,
-      itemExtra: {
-        ...item.itemExtra,
-        sp: [...item.itemExtra.sp, spItem]
-      }
-    };
+    item.sp = [...item.sp,spItem];
   }
 </script>
 

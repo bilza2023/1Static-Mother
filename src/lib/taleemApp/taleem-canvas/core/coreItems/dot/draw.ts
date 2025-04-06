@@ -35,7 +35,7 @@ export default function draw(item:IDot,drawCtx: DrawCtx,assets:IAssets){
     );
     drawCtx.ctx().fillStyle = color;
     drawCtx.ctx().fill();
-  
+//   debugger;
     // Draw the label with the correct text color
     drawCtx.ctx().font = `${textSize}px Arial`;
     drawCtx.ctx().fillStyle = textColor; // Set text color

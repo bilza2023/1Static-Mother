@@ -13,6 +13,7 @@ export default function getNewItem( itemExtra = {} , name='',content='') {
       showAt :0, 
       hideAt :null, //added on 31-may 2024 --not used yet
       itemExtra,
+      // {"startTime": 0,"endTime": 10,"code": "Text Item","type": "text","sp": []}
   };
   
 }

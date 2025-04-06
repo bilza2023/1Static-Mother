@@ -97,7 +97,6 @@
 
   function addNew(slideType: ISlideTypeAvailable) {
     try {
-      
       const newSlide = getNewSlide(slideType);
       newSlide.startTime = 0;
       newSlide.endTime = 10; // Default period

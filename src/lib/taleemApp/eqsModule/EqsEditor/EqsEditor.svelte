@@ -8,6 +8,7 @@ import TopToolbar from './TopToolbar.svelte';
 import getNewItem from "../getNewItem";
 import Row from './Row.svelte';
   import { onMount } from 'svelte';
+  import uuid from "./uuid"
   import PBDItem from "../../app/PBDItem";
 
 // export let just items and currentTime which is required for Editor only
@@ -89,7 +90,18 @@ function delEq(index) {
 
 function addEq(i=0) {
   if(items){
-    const newItem = getNewItem( {"startTime": 0,"endTime": 10,"code": "Text Item","type": "text","sp": []}, "newItem" , "Text");
+    const newItem = {
+      uuid: uuid() , //added on 31-may 2024 --not used yet 
+      name :"newItem", 
+      content :"Text", 
+      showAt :0, 
+      hideAt :null, 
+      startTime: 0,
+      endTime: 10,
+      code: "Text Item",
+      type: "text",
+      sp: []
+    }
     items = [...items,newItem];
   }
 }

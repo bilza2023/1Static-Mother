@@ -14,19 +14,19 @@
   import ProjectToolbar from "../../ProjectToolbar.svelte";
 
   let slides = null;
+  let presentation = null;
   let assets: IAssets | null = null;
   let images = ["atom.png", "baloons.png", "activity1.jpg", "drops.png"];
 
   onMount(async () => {
 
-    
     const incomming = await ajaxGet(
-      "http://localhost:5000/read/9fa36910-c90e-4742-b0ed-fbe7350a8269"
+      "http://localhost:5000/read/cb03316d-4484-4c2d-9611-4eea48dc7e37"
     );
 
     if (incomming.ok) {
-      const presentation = await incomming.json();
-      debugger;
+      presentation = await incomming.json();
+      // debugger;
 
       // console.log("presentation", presentation);
 
@@ -54,9 +54,27 @@
     //   return;
     // }
     // localStorage.setItem("editorPresentation", JSON.stringify(slides));
+    const eqSlidesData = [];
+    const canvasSlidesData = [];
 
-   const result = await ajaxPost("http://localhost:5000/update")
-   if (result.ok) { 
+    for (let i = 0; i < presentation.slides.length; i++) {
+      const slide =   presentation.slides[i];
+      if(slide.type == "canvas"){
+        canvasSlidesData.push(slide);
+      }
+      if(slide.type == "eqs"){
+        eqSlidesData.push(slide);
+      }
+    }
+
+   const result = await ajaxPost("http://localhost:5000/update",{
+        "presentationId"   : presentation.id ,
+        "presentationData" : presentation ,
+        eqSlidesData,
+        canvasSlidesData ,
+   })
+   if (result.ok) {
+    // debugger; 
     toast.push("saved!");
    }
   }
