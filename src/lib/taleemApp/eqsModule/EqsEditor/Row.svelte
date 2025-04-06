@@ -19,7 +19,7 @@
     let open = false;
    
     // Compute if there are items in the sp array
-    $: hasItems = item?.itemExtra?.sp?.length > 0;
+    $: hasItems = item.sp?.length > 0;
 
 
 
@@ -33,11 +33,11 @@
 
 <!--New code  -->
 <span class='text-xs rounded-md'>Start</span>
-<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{item.itemExtra.startTime}</div>
+<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{item.startTime}</div>
 <!-- currentSlideStartTime -->
 <!-- currentSlideEndTime -->
 <span class='text-xs rounded-md'>End</span>
-<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{item.itemExtra.calcEndTime}</div>
+<div class="text-xs bg-gray-900 text-white m-1 mx-4 ">{item.calcEndTime}</div>
 
 <span class='text-xs rounded-md'>Duration</span>
                 <input 
@@ -46,8 +46,8 @@
                 class="text-xs bg-red-900 text-white text-center rounded-md" 
                 style="width:70px"
                 type='number' 
-                bind:value={item.itemExtra.endTime} 
-                on:change={() => setEqSlideLength(item.itemExtra.endTime)}
+                bind:value={item.endTime} 
+                on:change={() => setEqSlideLength(item.endTime)}
               /> 
 
 

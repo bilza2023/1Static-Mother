@@ -6,12 +6,16 @@
    export let currentItem=null;
    export let assets;
 
+   onMount(async()=>{
+    // debugger;
+   });
+
    </script>
    <div class="eq-display">
      {#if currentItem}  
        <div class="item-container">
-         {#if currentItem.itemExtra.sp.length > 0}    
-           {#each currentItem.itemExtra.sp as eq}  
+         {#if currentItem.sp.length > 0}    
+           {#each currentItem.sp as eq}  
              <ImgCodeTxt {eq}  {assets}/>         
            {/each}
          {/if}

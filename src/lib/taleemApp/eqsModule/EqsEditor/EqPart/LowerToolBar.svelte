@@ -24,15 +24,15 @@ export let delEq;
 <!-- //////////////////////////////////// -->
 <div  class="flex gap-1 bg-stone-800 text-white  text-xs p-1 rounded-sm">
 <button 
- class= {`${item.itemExtra.type == 'code' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
+ class= {`${item.type == 'code' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
 on:click={()=>setEqType(i,'code')}>{Icons.ADD}</button>
 
 <button 
-class= {`${item.itemExtra.type == 'text' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
+class= {`${item.type == 'text' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
 on:click={()=>setEqType(i,'text')}>{Icons.TEMPLATE}</button>
 
 <button 
-class= {`${item.itemExtra.type == 'hdg' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
+class= {`${item.type == 'hdg' ? 'bg-red-800' : 'bg-gray-500'} rounded-md`}
 on:click={()=>setEqType(i,'hdg')}>{Icons.BOOK}</button>
 </div>
 

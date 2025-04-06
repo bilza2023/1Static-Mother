@@ -1,8 +1,8 @@
 <script lang="ts">   
 import type {ISlide} from "../app/ISlide";
 import { onMount } from "svelte";
-  import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
-  import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
+import CanvasPlayer from '../CanvasModule/CanvasPlayer/CanvasPlayer.svelte';
+import EqPlayer from '../eqsModule/EqPlayer2/EqPlayer.svelte';
 import type {IAssets} from "../taleem-canvas";
 import SoundPlayer from "../app/SoundPlayer";
 import PlayerToolbar from "../app/PlayerToolbar.svelte";
@@ -30,11 +30,12 @@ $:{
 }
 /////////////////////////////////    
 onMount(async() => {
+  debugger;  
   pbs = new PBSSlides(slides);
   totalTime = pbs.getTotalPeriod();
   
  slides =  pbs.periodToStartEnd();
-// debugger;
+
    currentSlide = getCurentSlide(0,slides);
     
 });

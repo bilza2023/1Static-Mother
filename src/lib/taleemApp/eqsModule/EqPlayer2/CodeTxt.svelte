@@ -14,20 +14,20 @@
 </script>
 
 <div class="eq-display">
-  {#if eq.itemExtra.type == undefined || eq.itemExtra.type == 'code' || eq.itemExtra.type == ''}
-    <Katex>{eq.itemExtra.code}</Katex>
+  {#if eq.type == undefined || eq.type == 'code' || eq.type == ''}
+    <Katex>{eq.code}</Katex>
   {/if}
 
-  {#if eq.itemExtra.type == 'txt' || eq.itemExtra.type == 'text'}
-    <p class="text-class">{eq.itemExtra.code}</p>
+  {#if eq.type == 'txt' || eq.type == 'text'}
+    <p class="text-class">{eq.code}</p>
   {/if}
 
-  {#if eq.itemExtra.type == 'hdg' || eq.itemExtra.type == 'heading'}
-    <h1 class="heading">{eq.itemExtra.code}</h1>
+  {#if eq.type == 'hdg' || eq.type == 'heading'}
+    <h1 class="heading">{eq.code}</h1>
   {/if}
 
-  {#if eq.itemExtra.type == 'html'}
-    <div>{@html eq.itemExtra.code}</div>
+  {#if eq.type == 'html'}
+    <div>{@html eq.code}</div>
   {/if}
 </div>
 

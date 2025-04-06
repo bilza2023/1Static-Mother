@@ -17,43 +17,43 @@
     if (j <= 0) return;
     
     // Create a new array to trigger reactivity
-    item.itemExtra.sp = [
-      ...item.itemExtra.sp.slice(0, j-1),
-      item.itemExtra.sp[j],
-      item.itemExtra.sp[j-1],
-      ...item.itemExtra.sp.slice(j+1)
+    item.sp = [
+      ...item.sp.slice(0, j-1),
+      item.sp[j],
+      item.sp[j-1],
+      ...item.sp.slice(j+1)
     ];
   }
   
   function moveDown(j) {
-    if (j === item.itemExtra.sp.length - 1) return;
+    if (j === item.sp.length - 1) return;
     
     // Create a new array to trigger reactivity
-    item.itemExtra.sp = [
-      ...item.itemExtra.sp.slice(0, j),
-      item.itemExtra.sp[j+1],
-      item.itemExtra.sp[j],
-      ...item.itemExtra.sp.slice(j+2)
+    item.sp = [
+      ...item.sp.slice(0, j),
+      item.sp[j+1],
+      item.sp[j],
+      ...item.sp.slice(j+2)
     ];
   }
   
   function del(j) {
     // Create a new array to trigger reactivity
-    item.itemExtra.sp = [
-      ...item.itemExtra.sp.slice(0, j),
-      ...item.itemExtra.sp.slice(j+1)
+    item.sp = [
+      ...item.sp.slice(0, j),
+      ...item.sp.slice(j+1)
     ];
   }
   
   function updateTableData(j, data) {
-    item.itemExtra.sp[j].code = data;
+    item.sp[j].code = data;
   }
 </script>
 
 <Toolbar bind:item={item} />
 
 <div class="bg-green-800 p-2 m-2 rounded-md">
-  {#each item.itemExtra.sp as sp, j}
+  {#each item.sp as sp, j}
     
   {#if sp.type === 'code'}
   <div class="flex justify-center bg-stone-600 rounded-md w-8/12 mx-auto mb-4 mt-2 gap-1">

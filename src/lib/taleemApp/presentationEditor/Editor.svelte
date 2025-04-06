@@ -66,6 +66,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////
   onMount(async () => {
+   
     setInterval(gameloop, 300);
     if (slides.length > 0) {
       currentSlide = slides[currentSlideIndex];

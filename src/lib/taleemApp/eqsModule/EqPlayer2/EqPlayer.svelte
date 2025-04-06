@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import CodeTxt from './CodeTxt.svelte';
   import SidePanel from './sp/SidePanel.svelte';
-
   export let items: any[]; // Assuming 'items' is an array of objects
   export let assets: any; // Assuming 'assets' is an object
   export let currentTime: number = 0;
@@ -12,14 +12,16 @@
   };
 
 function isSelected(item){
-if(currentTime >= item.itemExtra.startTime   && currentTime < item.itemExtra.calcEndTime ){
+if(currentTime >= item.startTime   && currentTime < item.calcEndTime ){
   currentItem = item;
 return true;
 }else {return false;
   
 }
 }
-
+onMount(async()=>{
+// debugger;
+});
 
 </script>
 

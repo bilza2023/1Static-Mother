@@ -3,7 +3,7 @@
   import { Assets,type IAssets,loadImages} from "../../lib/taleemApp/taleem-canvas";
   import Player from "../../lib/taleemApp/presentationPlayer/Player.svelte";
   import { onMount } from "svelte";
- 
+ import {presentationData} from "./presentation";
   import getPresentationImages from "../../lib/taleemApp/app/getPresentationImages/getPresentationImages"
   import ProjectToolbar from "../../ProjectToolbar.svelte";
 //////////////////////////////
@@ -13,18 +13,18 @@
     let imagesUrl   = "/images/";//if needed take it out of onmount
 ////////////////////////////////      
       onMount(async () => {
-        // debugger
-        let presentationData = JSON.parse(localStorage.getItem("editorPresentation"));
-
-        // debugger;
+        // let presentationData = JSON.parse(localStorage.getItem("editorPresentation"));
+      
+        const presentation = presentationData[0];
+        slides = presentation.eqSlides;
     //////////////////////////////////////////////////
-    
-    const imagesFromSlides = getPresentationImages(presentationData);
+    // debugger;
+    const imagesFromSlides = getPresentationImages(slides);
       images = [...images,...imagesFromSlides]; //imp
     //////////////////////////////////////////////////
       const imagesMap = await loadImages(images,imagesUrl);
       assets = new Assets(imagesMap)
-      slides = presentationData;
+      
     });
 </script>
 <ProjectToolbar />

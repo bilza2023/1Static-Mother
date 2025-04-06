@@ -25,6 +25,18 @@
         comments: 'Examples of canvas slides',
         url : "canvas_slides_index"
       },
+      {
+        title: 'Database Editor',
+        image: 'magic.jpeg',
+        comments: 'Database Editor',
+        url : "db_editor"
+      },
+      {
+        title: 'Database Player',
+        image: 'canvas.jpeg',
+        comments: 'Database Player',
+        url : "db_player"
+      }
       // {
       //   title: 'Experimentation',
       //   image: 'exp.jpeg',

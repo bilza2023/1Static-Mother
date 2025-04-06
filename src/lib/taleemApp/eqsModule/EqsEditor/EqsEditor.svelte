@@ -25,9 +25,9 @@ function manageEqItems(){
 // debugger;
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        item.itemExtra.startTime = mainStartingTime;
-        item.itemExtra.calcEndTime = item.itemExtra.startTime + item.itemExtra.endTime;
-        mainStartingTime = item.itemExtra.calcEndTime;
+        item.startTime = mainStartingTime;
+        item.calcEndTime = item.startTime + item.endTime;
+        mainStartingTime = item.calcEndTime;
     }
 }
 

@@ -16,15 +16,15 @@ export let item;
  
  <div class="flex justify-centre   w-full p-0 m-1 gap-1 rounded-md ">
  
-{#if item.itemExtra.type == undefined || item.itemExtra.type == 'code' || item.itemExtra.type == ''}
+{#if item.type == undefined || item.type == 'code' || item.type == ''}
 <EqTypeCode {item} />
 {/if}
 
-{#if item.itemExtra.type == 'text' || item.itemExtra.type == 'txt'}
+{#if item.type == 'text' || item.type == 'txt'}
 <EqTypeText {item}/>
 {/if}
     
-{#if item.itemExtra.type == 'heading' || item.itemExtra.type == 'hdg'}
+{#if item.type == 'heading' || item.type == 'hdg'}
 <EqTypeHdg {item}/>
 {/if}
     
