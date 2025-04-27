@@ -1,5 +1,8 @@
+
 <script lang="ts">
-  //Since every thing is important so everything must be final.
+  //7-Apr-2025 --> Since every thing is important so everything must be final.
+  /////////////////////////////////////////
+  import {API_URL} from "$lib/config";
   import ajaxGet from "./ajaxGet";
   import ajaxPost from "./ajaxPost";
   import {Assets,type IAssets,loadImages,} from "$lib/taleemApp/taleem-canvas";
@@ -21,7 +24,7 @@
   onMount(async () => {
 
     const incomming = await ajaxGet(
-      "http://localhost:5000/read/cb03316d-4484-4c2d-9611-4eea48dc7e37"
+      `${API_URL}/presentation/read/cb03316d-4484-4c2d-9611-4eea48dc7e37`
     );
 
     if (incomming.ok) {
@@ -43,6 +46,7 @@
     }
 
   });
+
 
   async function save() {
     // debugger;
@@ -67,7 +71,7 @@
       }
     }
 
-   const result = await ajaxPost("http://localhost:5000/update",{
+   const result = await ajaxPost(`${API_URL}/presentation/update`,{
         "presentationId"   : presentation.id ,
         "presentationData" : presentation ,
         eqSlidesData,
@@ -78,6 +82,50 @@
     toast.push("saved!");
    }
   }
+  async function newPresentation() {
+    
+    let presentationData = {
+      tcode: "fbise9math",
+      chapter: 1,
+      exercise: "99.99",
+      filename: "thisissomegilename",
+      questionNo: 99,
+      part: 666,
+      name: "name001",
+      questionType: "free",
+      status: "final",
+      sortOrder: 0,
+      comments: "",
+      tags: "",
+    };
+    // let presentationData = {
+    // tcode: "==>newTcode",
+    // chapter: 1,
+    // exercise: "99.99",
+    // filename: "==>thisisanewname",
+    // questionNo: 22,
+    // part: 333,
+    // name: "==>somename",
+    // questionType: "free",
+    // status: "final",
+    // sortOrder: 0,
+    // comments: "=>sss",
+    // tags: "",
+    // };
+    
+   const result = await ajaxPost( `${API_URL}/create`,{
+    presentationData,
+    eqSlidesData:[],
+    canvasSlidesData:[],
+   })
+   if (result.ok) {
+    // debugger; 
+    toast.push("New Presentation Created!");
+  }else{
+     toast.push("Failed to create new presentation.");
+
+   }
+  }
 </script>
 
 <ProjectToolbar />
@@ -85,3 +133,7 @@
   <!-- The editor has images loaded in assets BUT "images" array is being sent for dropdown we can also use the images in the assets????   --ASS-I---->
   <Editor bind:slides {assets} {images} {save} {imagesDBList} />
 {/if}
+
+
+
+<button on:click={newPresentation}>New</button>

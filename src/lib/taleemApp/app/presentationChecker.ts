@@ -4,9 +4,6 @@ interface IMessage {
     type : "normal" | "critical";
     content:string;
 }
-
-////////////////////////////////////////////////////////
-
 ////////////////////////////////////////////////////////
 export default function presentationChecker(slides){
  let messages:IMessage[] = []

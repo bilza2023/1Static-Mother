@@ -5,7 +5,7 @@
     import  CoreItemsMap from "../../lib/taleemApp/taleem-canvas/core/CoreItemsMap";
     import { onMount } from "svelte";
     import Assets from "../../lib/taleemApp/taleem-canvas/core/assets/Assets"
-    import  loadImages from "../../lib/taleemApp/taleem-canvas/loadImages";
+    import loadImages from "../../lib/taleemApp/taleem-canvas/loadImages";
     import DrawCtx from "../../lib/taleemApp/taleem-canvas/core/DrawCtx";
     /////////////////////////////////////////////////////////////////
      let items = [];

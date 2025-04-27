@@ -29,7 +29,7 @@
   <NavBtn2 title='Log'    icon='🖨️'  clk={log}                                     />
   <NavBtn2 title='Sound'  icon='📢'  clk={()=>showSoundBar =!showSoundBar }        />
   <NavBtn2 title='Time'   icon='⏱️'  clk={()=>showTimeManager =!showTimeManager }  />
-  <NavAnchor title='Player' icon='🚀'  url="/presentation_player"  />
+  <NavAnchor title='Player' icon='🚀'  url="/player"  />
       
   </div> 
   
