@@ -3,7 +3,6 @@
 
 export default function periodToStartEndStyle(slides){
 
-    // const slides = JSON.parse(JSON.stringify(incommingSlides));
     let mainStartTime = 0;
 
 for (let index = 0; index < slides.length; index++) {
