@@ -1,6 +1,7 @@
 <script lang="ts">
   // Import necessary types and functions
   import type { ISlide } from "../app/ISlide";
+  import periodToStartEndStyle from "$lib/taleemApp/app/periodToStartEndStyle";
   import { onMount } from "svelte";
   import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
   import Toolbar from "./toolbar/Toolbar.svelte";
@@ -107,10 +108,18 @@
     }
   }
 
-  function setSlideDuration() {
-    if (currentSlide) {
-      currentSlide.endTime = currentTime - currentSlideStartTime;
-    }
+  function setSlideDuration(newDuration) {
+    debugger;
+    if (!currentSlide) return;
+
+    // 1. Change the selected slide's period
+    currentSlide.period = newDuration;
+    const editedSlides = periodToStartEndStyle(slides);
+    slides = [...editedSlides];
+    currentSlideStartTime = slides[currentSlideIndex].startTime;
+    currentSlideEndTime   = slides[currentSlideIndex].endTime;
+    
+ 
   }
 
   function setEqSlideLength() {
@@ -194,7 +203,7 @@
     {setSlideDuration}
     {currentSlideStartTime}
     {currentSlideType}
-    bind:endTime={currentSlide.endTime}
+    {currentSlideEndTime}
   />
 {/if}
 

@@ -28,6 +28,9 @@ onMount(async() => {
       assets = new Assets(imagesMap);
 });
 
+function rebuildSlideTimings(){
+
+}
 function save(){
   //--remove handles
   for (let i = 0; i < slides.length; i++) {
