@@ -27,14 +27,15 @@
 <SmallBtnToolbar clk={() => callback("image")} icon='🗺️' title="Image"/>
 <SmallBtnToolbar clk={() => callback("piechart")} icon='🍕' title="Pie"/>
     
-    </div>
+    <!-- </div> -->
 
-    <div class="innerDiv paddingRight">
+    <div class="flex border-2 border-gray-600 rounded-lg">
         <!-- <SmallBtnToolbar clk={()=>{}} icon='-' title=""/> -->
         <SmallBtnToolbar clk={clone} icon='🐑' title="Clone"/>
-        <SmallBtnToolbar clk={deleteFn} icon='🗑️' title="Delete" />
         <SmallBtnToolbar clk={log} icon='🖨️' title="Log" />
+        <SmallBtnToolbar clk={deleteFn} icon='🗑️' title="Delete" />
     </div>
+  </div>
 
 </div>
 

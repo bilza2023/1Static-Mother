@@ -8,15 +8,13 @@ interface IEqsItem {
     uuid: string;
     name: string;
     content: string;
+    sortOrder?: number;
     showAt: number | null;
-    hideAt: number | null;
-    itemExtra: {
-        startTime?: number;
-        endTime?: number;
-        code: string;
-        type: string;
-        sp: IEqSpItem[]; // You might want to create a specific interface for 'sp' if you know its structure
-    };
+    startTime?: number;
+    endTime?: number;
+    code: string;
+    type: string;
+    sp: IEqSpItem[]; 
 
 }
 

@@ -12,7 +12,7 @@
   };
 
 function isSelected(item){
-if(currentTime >= item.startTime   && currentTime < item.calcEndTime ){
+if(currentTime >= item.startTime   && currentTime < item.endTime ){
   currentItem = item;
 return true;
 }else {return false;

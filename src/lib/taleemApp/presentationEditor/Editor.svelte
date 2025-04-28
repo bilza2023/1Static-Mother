@@ -1,7 +1,5 @@
 <script lang="ts">
-  // Import necessary types and functions
   import type { ISlide } from "../app/ISlide";
-  import periodToStartEndStyle from "$lib/taleemApp/app/periodToStartEndStyle";
   import { onMount } from "svelte";
   import NewSlidesDlg from "./toolbar/NewSlidesDlg.svelte";
   import Toolbar from "./toolbar/Toolbar.svelte";
@@ -15,59 +13,53 @@
   import getSlidesListForPanel from "./getSlidesListForPanel";
   import type ISlideTypeAvailable from "./ISlideTypeAvailable";
   import SlideEditor from "./SlideEditor";
-  import {del,clone as cloneFn,moveDown as moveDownFn,moveUp as moveUpFn,} from "./slideEditFunctions";
+  import {del,clone as cloneFn,moveDown as moveDownFn,moveUp as moveUpFn} from "./slideEditFunctions";
+  import periodToStartEndStyle from "../app/periodToStartEndStyle";
   import PlayerToolbar from "../app/PlayerToolbar.svelte";
   import TimeManager from "./timeManager/TimeManager.svelte";
-
   // --- Props ---
   export let slides: ISlide[] = [];
   export let images: string[];
   export let imagesDBList: string[];
   export let save: () => void;
   export let assets: IAssets;
+  export let id;
   export let soundFileName = "/sounds/music.opus"; // Default sound file
-
   // --- Reactive Variables ---
   let currentSlide: ISlide | null = null;
   let currentSlideIndex = 0;
-  let currentSlideType: string = "canvas";
-  let currentSlideStartTime = 0;
-  let currentSlideEndTime = 0;
-  let currentSlideDuration = 0;
-  let interval: number | null = null;
-  let slidesList: ISlidesList[] = [];
+  /////////////////////////////////
   let totalTime = 0;
   let currentTime = 0;
+  let interval: number | null = null;
+  let slidesList: ISlidesList[] = [];
   let showSidePanel = true;
   let show = false;
   let showSoundBar = false;
   let showTimeManager = false;
   let soundPlayer = new SoundPlayer(soundFileName);
-
-  // --- Reactive Statements ---
+  // --- Reactive Statements --------------
   $: {
     if (currentSlide && slides) {
+      //updated start-end fields 
+      slides = periodToStartEndStyle(slides);
       totalTime = SlideEditor.getTotalPeriod(slides);
       slidesList = getSlidesListForPanel(slides, currentSlideIndex);
 
       if (currentSlideIndex > 0) {
-        currentSlideStartTime = SlideEditor.getSlideEndTime(
-          currentSlideIndex - 1,
-          slides
-        );
+        
+        
       } else {
-        currentSlideStartTime = 0;
+        
       }
 
-      currentSlideEndTime = currentSlideStartTime + currentSlide.endTime;
-      currentSlideType = currentSlide.type;
-      currentSlideDuration = currentSlideEndTime - currentSlideStartTime;
     }
   }
-
-////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
   onMount(async () => {
-   
+    // debugger;
+    slides = periodToStartEndStyle(slides);
+
     setInterval(gameloop, 300);
     if (slides.length > 0) {
       currentSlide = slides[currentSlideIndex];
@@ -75,7 +67,12 @@
       currentSlide = null;
     }
   });
-
+  function setSlideDuration() {
+    // debugger;
+    slides = periodToStartEndStyle(slides);  
+    slides = [...slides];
+    currentSlide = currentSlide;
+  }
   // --- Functions ---
   function log() {
     console.log("export const presentationData = " + JSON.stringify(slides));
@@ -95,7 +92,6 @@
     currentSlideIndex = index;
     currentSlide = slides[currentSlideIndex];
   }
-
   function addNew(slideType: ISlideTypeAvailable) {
     try {
       const newSlide = getNewSlide(slideType);
@@ -107,72 +103,49 @@
       console.error("Failed to add new slide:", error);
     }
   }
-
-  function setSlideDuration(newDuration) {
-    debugger;
-    if (!currentSlide) return;
-
-    // 1. Change the selected slide's period
-    currentSlide.period = newDuration;
-    const editedSlides = periodToStartEndStyle(slides);
-    slides = [...editedSlides];
-    currentSlideStartTime = slides[currentSlideIndex].startTime;
-    currentSlideEndTime   = slides[currentSlideIndex].endTime;
-    
- 
-  }
-
-  function setEqSlideLength() {
-    currentSlideEndTime = SlideEditor.getSlideEndTime(currentSlideIndex, slides);
-  }
-
   function clone() {
     cloneFn(currentSlideIndex, slides);
     next();
   }
-
   function moveUp() {
     moveUpFn(currentSlideIndex, slides);
     prev();
   }
-
   function moveDown() {
     moveDownFn(currentSlideIndex, slides);
     next();
   }
-
   function deleteFn() {
     del(currentSlideIndex, slides);
-    if(slides.length > 0){
+    if (slides.length > 0) {
       prev();
-    }else {
+    } else {
       slides = [];
       currentSlide = null;
       currentSlideIndex = null;
       slidesList = getSlidesListForPanel(slides, currentSlideIndex);
     }
   }
-
   function start() {
     interval = setInterval(gameloop, 20);
     soundPlayer.start();
     currentTime = soundPlayer.getCurrentTime();
   }
-
   function stop() {
     if (interval) clearInterval(interval);
     soundPlayer.stop();
     currentTime = 0;
   }
-  function paste(){
-    const incommingSlide =  JSON.parse( localStorage.getItem("canvas_slide_template") );
+  function paste() {
+    const incommingSlide = JSON.parse(
+      localStorage.getItem("canvas_slide_template")
+    );
     const slide = getNewSlide("canvas");
     slide.items = incommingSlide.items;
     slide.slideExtra = incommingSlide.slideExtra;
     slide.endTime = 10;
     slides.push(slide);
     currentSlide = slides[slides.length - 1];
-
   }
   function gameloop() {
     currentTime = parseInt(soundPlayer.getCurrentTime() / 1000);
@@ -186,6 +159,7 @@
   {save}
   {clone}
   {paste}
+  {id}
   {deleteFn}
   bind:showSidePanel
   bind:show
@@ -199,19 +173,14 @@
 
 {#if currentSlide && showTimeManager}
   <TimeManager
-    {currentTime}
     {setSlideDuration}
-    {currentSlideStartTime}
-    {currentSlideType}
-    {currentSlideEndTime}
+    currentSlide={currentSlide}
   />
 {/if}
 
 {#if show}
   <NewSlidesDlg {addNew} />
 {/if}
-
-
 
 <div class="flex-container">
   {#if showSidePanel}
@@ -221,7 +190,7 @@
   {/if}
 
   <div class="main-content">
-    {#if currentSlide }
+    {#if currentSlide}
       <div>
         {#if currentSlide.type === "canvas"}
           <CanvasEditor
@@ -235,9 +204,9 @@
         {#if currentSlide.type === "eqs"}
           <EqsEditor
             bind:items={currentSlide.items}
-            currentSlideStartTime={currentSlideStartTime}
+            currentSlideStartTime={currentSlide.startTime}
             {currentTime}
-            {setEqSlideLength}
+            {setSlideDuration}
             {imagesDBList}
           />
         {/if}

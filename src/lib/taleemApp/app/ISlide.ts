@@ -4,9 +4,8 @@ import type IEqsItem from "../eqsModule/IEqsItem";
 interface IBaseSlide {
     uuid: string;
     name: string;
-    period: number;
-    startTime: number; //they are calculated but they are here not in db
-    endTime: number; ////they are calculated but they are here not in db
+    startTime: number;
+    endTime: number;
     version: "basic";
     template: string;
 }

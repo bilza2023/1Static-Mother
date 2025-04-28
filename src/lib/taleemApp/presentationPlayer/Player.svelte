@@ -8,6 +8,8 @@ import SoundPlayer from "../app/SoundPlayer";
 import PlayerToolbar from "../app/PlayerToolbar.svelte";
 import getCurentSlide from "./getCurrentSlide";
 import PBSSlides from "../app/PBSSlides";
+import getPresentationTotalTime from "../app/getPresentationTotalTime";
+import periodToStartEndStyle from "../app/periodToStartEndStyle";
 ////////////////////////////--AS////////////////////////////////
     export let slides:ISlide[];
     export let assets:IAssets; //assets to have images loaded
@@ -30,12 +32,12 @@ $:{
 }
 /////////////////////////////////    
 onMount(async() => {
-  debugger;  
+    
   pbs = new PBSSlides(slides);
-  totalTime = pbs.getTotalPeriod();
-  
- slides =  pbs.periodToStartEnd();
-
+  totalTime = getPresentationTotalTime(slides);
+  slides = periodToStartEndStyle(slides);
+  // debugger;
+//  slides =  pbs.periodToStartEnd();
    currentSlide = getCurentSlide(0,slides);
     
 });

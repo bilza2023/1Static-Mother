@@ -39,16 +39,16 @@ static getCurrentItem(currentTime:number,slides){
     
     const totalPeriod = SlideEditor.getTotalPeriod(slides);
     if (currentTime > totalPeriod) {
-        return null; // Time is past the end of the system.
+        return null; 
     }
     /////////////////////////////////////////    
     let cumulativeTime = 0;
-//The real code
-for (let i = 0; i < slides.length; i++) {
+//The real code....
+  for (let i = 0; i < slides.length; i++) {
     const item = slides[i];
     if (currentTime >= cumulativeTime && currentTime < cumulativeTime + SlideEditor.getSlidePeriod(i,slides) ) { return item;}
     cumulativeTime += SlideEditor.getSlidePeriod(i,slides); // should be item.period
-}
+  }
 
     return null; // Should not reach here in normal operation.
 }

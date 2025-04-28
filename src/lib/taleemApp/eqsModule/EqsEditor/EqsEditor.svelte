@@ -14,7 +14,7 @@ import Row from './Row.svelte';
 // export let just items and currentTime which is required for Editor only
 export let items;
 export let currentTime=0; //current time if not given is zero ..correct ????
-export let setEqSlideLength;
+export let setSlideDuration;
 
 export let currentSlideStartTime;
 export let imagesDBList;
@@ -150,8 +150,8 @@ onMount(async() => {
     {moveUpEq} 
     {moveDownEq}
     {setEqType}
-{imagesDBList}
-    {setEqSlideLength}  
+    {imagesDBList}
+    {setSlideDuration}  
     />
   {/each}
   </div>
